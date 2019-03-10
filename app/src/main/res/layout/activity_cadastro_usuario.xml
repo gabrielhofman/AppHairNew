@@ -103,8 +103,6 @@
         android:id="@+id/navigation_view"
         app:menu="@menu/menu_lateral"
         app:headerLayout="@layout/drawer_header">
-
-
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

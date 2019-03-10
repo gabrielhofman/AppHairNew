@@ -11,4 +11,11 @@
         android:title="Cadastrar usuário"
         />
 
+    <item
+
+        android:id="@+id/novo_contato"
+        android:title="Cadastrar contato"
+        />
+
+
 </menu>

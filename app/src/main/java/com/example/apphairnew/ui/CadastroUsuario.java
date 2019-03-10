@@ -41,14 +41,10 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
 
         actionBar.setTitle("Cadastrar usuário");
-//        setSupportActionBar(toolbar);
 
 
-        //paodebatatas
 
-        //purecomqueijo
 
-        //teste3
     }
 
     @Override
@@ -70,6 +66,11 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
             case R.id.cadastrar_usuario:
                 Intent intent1 = new Intent(this, CadastroUsuario.class);
                 startActivity(intent1);
+                return true;
+
+            case R.id.novo_contato:
+                Intent intent2 = new Intent(this, NovoContato.class);
+                startActivity(intent2);
                 return true;
         }
 

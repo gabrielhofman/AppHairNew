@@ -80,6 +80,11 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
                 Intent intent1 = new Intent(this, CadastroUsuario.class);
                 startActivity(intent1);
                 return true;
+
+            case R.id.novo_contato:
+                Intent intent2 = new Intent(this, NovoContato.class);
+                startActivity(intent2);
+                return true;
         }
             return false;
         }
