@@ -1,6 +1,8 @@
 package com.example.apphairnew.ui;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -41,6 +43,8 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
 
         actionBar.setTitle("Cadastrar usuário");
+
+
 //        setSupportActionBar(toolbar);
 
 

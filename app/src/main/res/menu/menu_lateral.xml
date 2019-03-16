@@ -3,7 +3,8 @@
 
     <item
         android:id="@+id/login"
-        android:title="Login"/>
+        android:title="Login"
+        />
 
     <item
 

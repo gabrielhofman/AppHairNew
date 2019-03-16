@@ -29,67 +29,162 @@
         <TextView
             android:id="@+id/centralizador"
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="20dp"
             android:layout_centerHorizontal="true"
-            />
 
-
-        <EditText
-            android:id="@+id/campoNome"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:layout_centerHorizontal="true"
-            android:hint="Digite seu nome"
-            android:textSize="17dp"
-            android:layout_below="@id/centralizador"
             />
+        <TextView
+            android:id="@+id/labelContaUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Sobre sua conta:"
+            android:textSize="20dp"
+            android:textColorHint="@color/colorPrimary"
+            android:layout_below="@+id/centralizador"/>
+
 
         <EditText
             android:id="@+id/campoEmail"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Digite seu e-mail"
-            android:textSize="17dp"
-            android:layout_below="@id/campoNome"
+            android:textSize="20dp"
+            android:layout_below="@id/labelContaUsuario"
             />
 
         <EditText
             android:id="@+id/campoSenha"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Digite sua senha"
-            android:textSize="17dp"
+            android:textSize="20dp"
             android:layout_below="@id/campoEmail"
             />
 
-        <EditText
-            android:id="@+id/campoTelefone"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:layout_centerHorizontal="true"
-            android:hint="Digite seu telefone"
-            android:textSize="17dp"
-            android:layout_below="@id/campoSenha"
-            />
+
 
         <TextView
             android:id="@+id/espacoVazio1"
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="20dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/campoTelefone"
+            android:layout_below="@id/campoSenha"
             />
+
+
+        <TextView
+            android:id="@+id/labelSobreEstabelecimento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Sobre o estabelecimento:"
+            android:textSize="20dp"
+            android:textColorHint="@color/colorPrimary"
+            android:layout_below="@+id/espacoVazio1"/>
+
+
+        <EditText
+            android:id="@+id/campoNomeEstab"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:hint="Nome do estabelecimento"
+            android:textSize="20dp"
+            android:layout_below="@id/labelSobreEstabelecimento"
+            />
+
+        <EditText
+            android:id="@+id/campoDescEstab"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:hint="Descrição do estabelecimento"
+            android:textSize="20dp"
+            android:layout_below="@id/campoNomeEstab"
+            />
+
+        <TextView
+            android:id="@+id/espacoVazio3"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/campoDescEstab"
+            />
+
+
+        <TextView
+            android:id="@+id/labelEndereco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Endereço:"
+            android:textSize="20dp"
+            android:textColorHint="@color/colorPrimary"
+            android:layout_below="@+id/espacoVazio3"/>
+
+        <EditText
+            android:id="@+id/campoCEP"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:hint="CEP"
+            android:textSize="20dp"
+            android:layout_below="@id/labelEndereco"
+            />
+
+        <EditText
+            android:id="@+id/campoBairro"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:hint="Bairro"
+            android:textSize="20dp"
+            android:layout_below="@id/campoCEP"
+            />
+
+        <EditText
+            android:id="@+id/campoRua"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:hint="Rua"
+            android:textSize="20dp"
+            android:layout_below="@id/campoBairro"
+            />
+
+        <EditText
+            android:id="@+id/campoComplemento"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:hint="Complemento"
+            android:textSize="20dp"
+            android:layout_below="@id/campoRua"
+            />
+
+
+        <TextView
+            android:id="@+id/espacoVazio4"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/campoComplemento"
+            />
+
+
+
 
         <Button
             android:id="@+id/botaoCadastrar"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cadastrar-se"
-            android:textStyle="bold"
-            android:layout_below="@+id/espacoVazio1"
+            android:layout_below="@+id/espacoVazio4"
+            android:textSize="20dp"
+            android:layout_centerHorizontal="true"
             />
+
+
 
 
 
