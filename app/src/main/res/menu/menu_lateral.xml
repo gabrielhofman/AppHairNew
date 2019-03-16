@@ -10,5 +10,8 @@
         android:id="@+id/cadastrar_usuario"
         android:title="Cadastrar usuário"
         />
+    <item
+        android:id="@+id/contatos"
+        android:title="Contatos" />
 
 </menu>
