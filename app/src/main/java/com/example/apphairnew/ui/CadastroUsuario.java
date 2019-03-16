@@ -10,14 +10,23 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.apphairnew.R;
+import com.example.apphairnew.model.Usuario;
 
 public class CadastroUsuario extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private ActionBar actionBar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private Usuario usuario;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +54,15 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
 
 
 
+
     }
 
     @Override
     public void onClick(View v) {
 
     }
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
