@@ -93,11 +93,9 @@
         <TextView
             android:id="@+id/espacoVazio3"
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="51dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/botaoLogin"/>
-
-
 
 
 
