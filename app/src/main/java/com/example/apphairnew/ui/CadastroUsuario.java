@@ -1,8 +1,6 @@
 package com.example.apphairnew.ui;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -12,14 +10,23 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.apphairnew.R;
+import com.example.apphairnew.model.Usuario;
 
 public class CadastroUsuario extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private ActionBar actionBar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private Usuario usuario;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,20 +52,17 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         actionBar.setTitle("Cadastrar usuário");
 
 
-//        setSupportActionBar(toolbar);
 
 
-        //paodebatatas
 
-        //purecomqueijo
-
-        //teste3
     }
 
     @Override
     public void onClick(View v) {
 
     }
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -74,6 +78,11 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
             case R.id.cadastrar_usuario:
                 Intent intent1 = new Intent(this, CadastroUsuario.class);
                 startActivity(intent1);
+                return true;
+
+            case R.id.novo_contato:
+                Intent intent2 = new Intent(this, NovoContato.class);
+                startActivity(intent2);
                 return true;
         }
 
