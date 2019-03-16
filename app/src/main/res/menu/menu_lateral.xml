@@ -3,13 +3,17 @@
 
     <item
         android:id="@+id/login"
-        android:title="Login"/>
+        android:title="Login"
+        />
 
     <item
 
         android:id="@+id/cadastrar_usuario"
         android:title="Cadastrar usuário"
         />
+    <item
+        android:id="@+id/contatos"
+        android:title="Contatos" />
 
     <item
 

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.Login"
     android:id="@+id/drawer_layout"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <LinearLayout
         android:orientation="vertical"
@@ -25,11 +26,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/espacoVazio4"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            />
 
         <TextView
             android:id="@+id/centralizador"
             android:layout_width="50dp"
-            android:layout_height="10dp"
+            android:layout_height="60dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/logoHair"/>
 
@@ -40,61 +47,55 @@
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/logohair2"/>
+            android:src="@drawable/saloon"
+            android:layout_below="@id/espacoVazio4"/>
 
 
         <EditText
             android:id="@+id/campoEmail"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Email: "
-            android:textSize="17dp"
+            android:textSize="20dp"
             android:layout_below="@+id/centralizador"/>
 
         <EditText
             android:id="@+id/campoSenha"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/campoEmail"
             android:hint="Senha: "
-            android:textSize="17dp"
+            android:textSize="20dp"
             android:password="true"
             />
 
         <TextView
             android:id="@+id/espacoVazio2"
             android:layout_width="50dp"
-            android:layout_height="75dp"
+            android:layout_height="40dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/campoSenha"
             />
+
+
 
         <Button
             android:id="@+id/botaoLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="LOGIN"
+            android:text="Login"
+            android:textSize="20dp"
             android:layout_below="@+id/espacoVazio2"
             android:layout_centerHorizontal="true"/>
 
         <TextView
             android:id="@+id/espacoVazio3"
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="51dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/botaoLogin"/>
-
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#416BC1"
-            android:text="Login com Facebook"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:layout_below="@id/espacoVazio3"/>
 
 
 
