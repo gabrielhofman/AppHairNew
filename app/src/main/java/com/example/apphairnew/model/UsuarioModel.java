@@ -3,7 +3,7 @@ package com.example.apphairnew.model;
 public class UsuarioModel {
 
     private String usuario;
-    private String senha;
+    private String senha;//kkkk
 
     public String getUsuario() {
         return usuario;
