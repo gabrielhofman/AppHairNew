@@ -16,7 +16,10 @@ import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
-import com.example.apphairnew.model.Usuario;
+import com.example.apphairnew.model.EnderecoModel;
+import com.example.apphairnew.model.EstabModel;
+import com.example.apphairnew.model.ProfModel;
+import com.example.apphairnew.model.UsuarioModel;
 import com.example.apphairnew.web.ApiControler;
 
 public class CadastroUsuario extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
@@ -37,7 +40,11 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
     private ActionBar actionBar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private Usuario usuario;
+    private UsuarioModel usuarioModel;
+    private ProfModel profModel;
+    private EstabModel estabModel;
+    private EnderecoModel enderecoModel;
+
 
     private String email, senha, nomeEstab, descEstab, cep, bairro, rua, numero, complemento;
 
