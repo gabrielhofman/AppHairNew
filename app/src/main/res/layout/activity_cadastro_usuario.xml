@@ -153,13 +153,23 @@
             />
 
         <EditText
+            android:id="@+id/campoNumero"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:hint="Número"
+            android:textSize="20dp"
+            android:layout_below="@id/campoRua"
+            />
+
+        <EditText
             android:id="@+id/campoComplemento"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Complemento"
             android:textSize="20dp"
-            android:layout_below="@id/campoRua"
+            android:layout_below="@id/campoNumero"
             />
 
 
