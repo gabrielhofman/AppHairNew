@@ -3,7 +3,7 @@ package com.example.apphairnew.model;
 public class EstabModel {
 
     private String nomeEstab;
-    private String descEstab;//kkkkkkk
+    private String descEstab;//kkkkkkkk
 
     public String getNomeEstab() {
         return nomeEstab;

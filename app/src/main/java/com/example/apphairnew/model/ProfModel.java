@@ -10,7 +10,7 @@ public class ProfModel {
 
     public void setEmail(String email) {
         this.email = email;
-    }//kkkkkkk
+    }//kkkkkkkk
 
     public String getSenha() {
         return senha;
