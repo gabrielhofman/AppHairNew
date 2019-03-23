@@ -1,7 +1,6 @@
 package com.example.apphairnew.ui;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -15,19 +14,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.apphairnew.MainActivity;
 import com.example.apphairnew.R;
+import com.example.apphairnew.Service.ApiService;
+import com.example.apphairnew.model.LoginModel;
+import com.example.apphairnew.response.LoginResponse;
+import com.example.apphairnew.web.ApiControler;
 
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.PropertyInfo;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpResponseException;
-import org.ksoap2.transport.HttpTransportSE;
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Login extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
@@ -45,17 +40,11 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
     private NavigationView navigationView;
 
 
-    //webserivce
-//    public static String URL="http://localhost:63048/WebService1.asmx?WSDL";
-    //   public static String NAMESPACE="http://localhost:63048/";
-
-
-
-
-    // coisas teste
-
-
     private String email, senha;
+
+    private ApiService service = ApiControler.CreateController();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,64 +85,37 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
     public void onClick(View v) {
         email = campoEmail.getText().toString();
         senha = campoSenha.getText().toString();
+        if (email.isEmpty() || senha.isEmpty()) {
+            Toast.makeText(Login.this, "Digite e-mail e senha", Toast.LENGTH_LONG).show();
+        } else {
 
+            LoginModel loginModel = new LoginModel();
+            loginModel.setLogin(email);
+            loginModel.setSenha(senha);
 
-        Thread  nt= new Thread(){
+            service.Login(loginModel).enqueue(new Callback<LoginResponse>() {
+                @Override
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
-            @Override
-            public void run(){
-                 String res;
-                Toast.makeText(Login.this, "EU to aquix", Toast.LENGTH_LONG).show();
-                String URL = "http://wcfservice120190319081657.azurewebsites.net/WebService1.asmx";
-                String NAMESPACE = "http://apphair.com/";
-                String SOAP_ACTION_LOGIN = "http://apphair.com/Cadastro";
-                String METHOD_NAME_LOGIN = "Cadastro";
+                    String mensagem;
+                    if(response.body().isSuccess()){
+                        mensagem = "Login efetuado com sucesso!";
+                    }else{
+                        mensagem = "Usuário ou senha inválidos, tente novamente!";
+                    }
 
-                SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME_LOGIN);
-                request.addProperty("email", email);
-                request.addProperty("senha", senha);
+                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
 
-                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-                envelope.dotNet=true;
-
-                envelope.setOutputSoapObject(request);
-
-                HttpTransportSE transporte = new HttpTransportSE(URL);
-                res=null;
-
-                try
-                {
-                    transporte.call(SOAP_ACTION_LOGIN, envelope);
-                    SoapPrimitive resultado_xml = (SoapPrimitive) envelope.getResponse();
-                    res = resultado_xml.toString();
-                    Toast.makeText(Login.this, "EU to aqui", Toast.LENGTH_LONG).show();
-                } catch (HttpResponseException e) {
-                    e.printStackTrace();
-                    Toast.makeText(Login.this, "EU to aqui2", Toast.LENGTH_LONG).show();
-                } catch (XmlPullParserException e) {
-                    Toast.makeText(Login.this, "EU to aqui3", Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    Toast.makeText(Login.this, "EU to aqui4", Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
                 }
 
-                final String finalRes = res;
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(Login.this, "EU to aqui", Toast.LENGTH_LONG).show();
-                     //   Toast.makeText(Login.this, finalRes, Toast.LENGTH_LONG).show();
+                @Override
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(),"Houve um erro:"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                    t.printStackTrace();
+                }
+            });
 
-                    }
-                });
-
-
-            }
-
-
-
-        };
+        }
 
     }
 
@@ -185,4 +147,7 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
 
 
 
-}
+
+    }
+
+
