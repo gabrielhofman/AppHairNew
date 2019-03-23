@@ -15,14 +15,33 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.apphairnew.R;
+import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.model.Usuario;
+import com.example.apphairnew.web.ApiControler;
 
 public class CadastroUsuario extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
+    private EditText campoEmail;
+    private EditText campoSenha;
+    private EditText campoNomeEstab;
+    private EditText campoDescEstab;
+    private EditText campoCEP;
+    private EditText campoBairro;
+    private EditText campoRua;
+    private EditText campoNumero;
+    private EditText campoComplemento;
+
+
+
+    private Toolbar toolbar;
     private ActionBar actionBar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Usuario usuario;
+
+    private String email, senha, nomeEstab, descEstab, cep, bairro, rua, numero, complemento;
+
+    private ApiService service = ApiControler.CreateController();
 
 
 //teste
@@ -59,6 +78,21 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+        email = campoEmail.getText().toString();
+        senha = campoSenha.getText().toString();
+        nomeEstab = campoNomeEstab.getText().toString();
+        descEstab = campoDescEstab.getText().toString();
+        cep = campoCEP.getText().toString();
+        bairro = campoBairro.getText().toString();
+        rua = campoRua.getText().toString();
+        numero = campoNumero.getText().toString();
+        complemento = campoComplemento.getText().toString();
+
+        if (email.isEmpty() || senha.isEmpty() || nomeEstab.isEmpty() || descEstab.isEmpty() || cep.isEmpty() || bairro.isEmpty() || rua.isEmpty() || numero.isEmpty() || complemento.isEmpty()){
+            Toast.makeText(CadastroUsuario.this, "Complete todos os campos", Toast.LENGTH_LONG).show();
+        }else{
+
+        }
 
     }
 
