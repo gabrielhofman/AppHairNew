@@ -1,16 +1,15 @@
 package com.example.apphairnew.model;
 
-public class Usuario {
-
-    private String usuario;
+public class ProfModel {
+    private String email;
     private String senha;
 
-    public String getUsuario() {
-        return usuario;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {
