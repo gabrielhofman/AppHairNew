@@ -15,12 +15,8 @@ import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
-import com.example.apphairnew.model.EnderecoModel;
-import com.example.apphairnew.model.EstabModel;
 import com.example.apphairnew.model.ProfModel;
 import com.example.apphairnew.model.UsuarioModel;
-import com.example.apphairnew.response.CadEnderecoResponse;
-import com.example.apphairnew.response.CadEstabResponse;
 import com.example.apphairnew.response.CadProfResponse;
 import com.example.apphairnew.web.ApiControler;
 
@@ -48,8 +44,7 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
     private NavigationView navigationView;
     private UsuarioModel usuarioModel;
     private ProfModel profModel;
-    private EstabModel estabModel;
-    private EnderecoModel enderecoModel;
+
 
 
     private String email, senha, nomeEstab, descEstab, cep, bairro, logradouro, numero, complemento;
@@ -83,6 +78,17 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
 
         actionBar.setTitle("Cadastrar usuário");
 
+        //campoEmail = (EditText) findViewById(R.id.campoEmail);
+        campoEmail = (EditText) findViewById(R.id.campoEmail);
+        campoSenha = (EditText) findViewById(R.id.campoSenha);
+        campoNomeEstab = (EditText) findViewById(R.id.campoNomeEstab);
+        campoDescEstab = (EditText) findViewById(R.id.campoDescEstab);
+        campoCEP = (EditText) findViewById(R.id.campoCEP);
+        campoBairro = (EditText) findViewById(R.id.campoBairro);
+        campoLogradouro = (EditText) findViewById(R.id.campoRua);
+        campoNumero = (EditText) findViewById(R.id.campoNumero);
+        campoComplemento = (EditText) findViewById(R.id.campoComplemento);
+
 
 
 
@@ -106,8 +112,7 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         }else{
 
             ProfModel profModel = new ProfModel();
-            profModel.setEmail(email);
-            profModel.setSenha(senha);
+
 
             service.CadProf(profModel).enqueue(new Callback<CadProfResponse>() {
                 @Override
@@ -122,63 +127,6 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
 
                 @Override
                 public void onFailure(Call<CadProfResponse> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(),"Houve um erro:"+t.getMessage(),Toast.LENGTH_SHORT).show();
-                    t.printStackTrace();
-
-                }
-            });
-
-            //Cadastro de estabelecimento
-
-            EstabModel estabModel = new EstabModel();
-            estabModel.setNomeEstab(nomeEstab);
-            estabModel.setDescEstab(descEstab);
-
-            service.CadEstab(estabModel).enqueue(new Callback<CadEstabResponse>() {
-                @Override
-                public void onResponse(Call<CadEstabResponse> call, Response<CadEstabResponse> response) {
-                    String mensagem;
-                    if(response.body().isSuccess()){
-                        mensagem = "Cadastro de estabelecimento efetuado com sucesso";
-                    }else{
-                        mensagem = "Falha no cadastro de estabelecimento, tente novamente!";
-                    }
-                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onFailure(Call<CadEstabResponse> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(),"Houve um erro:"+t.getMessage(),Toast.LENGTH_SHORT).show();
-                    t.printStackTrace();
-
-                }
-            });
-
-            //Parte de endereço
-
-            EnderecoModel enderecoModel = new EnderecoModel();
-            enderecoModel.setCEP(cep);
-            enderecoModel.setBairro(bairro);
-            enderecoModel.setLogradouro(logradouro);
-            enderecoModel.setNumero(numero);
-            enderecoModel.setComplemento(complemento);
-
-            service.CadEndereco(enderecoModel).enqueue(new Callback<CadEnderecoResponse>() {
-                @Override
-                public void onResponse(Call<CadEnderecoResponse> call, Response<CadEnderecoResponse> response) {
-                    String mensagem;
-                    if(response.body().isSuccess()){
-                        mensagem = "Cadastro de endereço efetuado com sucesso";
-                    }else{
-                        mensagem = "Falha no cadastro de endereço, tente novamente";
-                    }
-
-                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
-
-                }
-
-                @Override
-                public void onFailure(Call<CadEnderecoResponse> call, Throwable t) {
                     Toast.makeText(getApplicationContext(),"Houve um erro:"+t.getMessage(),Toast.LENGTH_SHORT).show();
                     t.printStackTrace();
 
