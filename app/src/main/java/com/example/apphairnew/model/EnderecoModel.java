@@ -3,7 +3,7 @@ package com.example.apphairnew.model;
 public class EnderecoModel {
     private String logradouro;
     private String bairro;
-    private String complement;
+    private String complemento;
     private String numero;
     private String CEP;
 
@@ -23,12 +23,12 @@ public class EnderecoModel {
         this.bairro = bairro;
     }
 
-    public String getComplement() {
-        return complement;
+    public String getComplemento() {
+        return complemento;
     }
 
-    public void setComplement(String complement) {
-        this.complement = complement;
+    public void setComplemento(String complement) {
+        this.complemento = complement;
     }
 
     public String getNumero() {

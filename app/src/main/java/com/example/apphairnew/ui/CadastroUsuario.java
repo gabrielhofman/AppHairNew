@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,7 +19,14 @@ import com.example.apphairnew.model.EnderecoModel;
 import com.example.apphairnew.model.EstabModel;
 import com.example.apphairnew.model.ProfModel;
 import com.example.apphairnew.model.UsuarioModel;
+import com.example.apphairnew.response.CadEnderecoResponse;
+import com.example.apphairnew.response.CadEstabResponse;
+import com.example.apphairnew.response.CadProfResponse;
 import com.example.apphairnew.web.ApiControler;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CadastroUsuario extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -30,7 +36,7 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
     private EditText campoDescEstab;
     private EditText campoCEP;
     private EditText campoBairro;
-    private EditText campoRua;
+    private EditText campoLogradouro;
     private EditText campoNumero;
     private EditText campoComplemento;
 
@@ -46,7 +52,7 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
     private EnderecoModel enderecoModel;
 
 
-    private String email, senha, nomeEstab, descEstab, cep, bairro, rua, numero, complemento;
+    private String email, senha, nomeEstab, descEstab, cep, bairro, logradouro, numero, complemento;
 
     private ApiService service = ApiControler.CreateController();
 
@@ -91,13 +97,93 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         descEstab = campoDescEstab.getText().toString();
         cep = campoCEP.getText().toString();
         bairro = campoBairro.getText().toString();
-        rua = campoRua.getText().toString();
+        logradouro = campoLogradouro.getText().toString();
         numero = campoNumero.getText().toString();
         complemento = campoComplemento.getText().toString();
 
-        if (email.isEmpty() || senha.isEmpty() || nomeEstab.isEmpty() || descEstab.isEmpty() || cep.isEmpty() || bairro.isEmpty() || rua.isEmpty() || numero.isEmpty() || complemento.isEmpty()){
+        if (email.isEmpty() || senha.isEmpty() || nomeEstab.isEmpty() || descEstab.isEmpty() || cep.isEmpty() || bairro.isEmpty() || logradouro.isEmpty() || numero.isEmpty() || complemento.isEmpty()){
             Toast.makeText(CadastroUsuario.this, "Complete todos os campos", Toast.LENGTH_LONG).show();
         }else{
+
+            ProfModel profModel = new ProfModel();
+            profModel.setEmail(email);
+            profModel.setSenha(senha);
+
+            service.CadProf(profModel).enqueue(new Callback<CadProfResponse>() {
+                @Override
+                public void onResponse(Call<CadProfResponse> call, Response<CadProfResponse> response) {
+                    String mensagem;
+                    if(response.body().isSuccess()){
+                      mensagem = "Cadastro de profissional efetuado com sucesso";
+                    }else{
+                        mensagem = "Falha no cadastro de estabelecimento, tente novamente!";
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CadProfResponse> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(),"Houve um erro:"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                    t.printStackTrace();
+
+                }
+            });
+
+            //Cadastro de estabelecimento
+
+            EstabModel estabModel = new EstabModel();
+            estabModel.setNomeEstab(nomeEstab);
+            estabModel.setDescEstab(descEstab);
+
+            service.CadEstab(estabModel).enqueue(new Callback<CadEstabResponse>() {
+                @Override
+                public void onResponse(Call<CadEstabResponse> call, Response<CadEstabResponse> response) {
+                    String mensagem;
+                    if(response.body().isSuccess()){
+                        mensagem = "Cadastro de estabelecimento efetuado com sucesso";
+                    }else{
+                        mensagem = "Falha no cadastro de estabelecimento, tente novamente!";
+                    }
+                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call<CadEstabResponse> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(),"Houve um erro:"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                    t.printStackTrace();
+
+                }
+            });
+
+            //Parte de endereço
+
+            EnderecoModel enderecoModel = new EnderecoModel();
+            enderecoModel.setCEP(cep);
+            enderecoModel.setBairro(bairro);
+            enderecoModel.setLogradouro(logradouro);
+            enderecoModel.setNumero(numero);
+            enderecoModel.setComplemento(complemento);
+
+            service.CadEndereco(enderecoModel).enqueue(new Callback<CadEnderecoResponse>() {
+                @Override
+                public void onResponse(Call<CadEnderecoResponse> call, Response<CadEnderecoResponse> response) {
+                    String mensagem;
+                    if(response.body().isSuccess()){
+                        mensagem = "Cadastro de endereço efetuado com sucesso";
+                    }else{
+                        mensagem = "Falha no cadastro de endereço, tente novamente";
+                    }
+
+                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+
+                }
+
+                @Override
+                public void onFailure(Call<CadEnderecoResponse> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(),"Houve um erro:"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                    t.printStackTrace();
+
+                }
+            });
 
         }
 
