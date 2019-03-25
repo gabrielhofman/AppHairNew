@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.DashBoard"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/Widget.AppCompat.Toolbar"
+            android:id="@+id/toolbar"></android.support.v7.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/centralizador"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:id="@+id/labelBemVindo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Seja bem vindo!"
+                    android:textSize="20dp"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_below="@+id/centralizador"/>
+
+                <TextView
+                    android:id="@+id/espacoVazio1"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/labelBemVindo"/>
+
+
+
+                <Button
+                    android:id="@+id/botaoContasReceber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/contas_receber"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="8dp"
+                    android:maxWidth="60dp"
+                    android:maxHeight="90dp"
+                    android:text="Contas a receber"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+
+                    android:layout_below="@+id/espacoVazio1"/>
+
+                <TextView
+                    android:id="@+id/espacoVazio2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/botaoContasReceber"/>
+
+                <Button
+                    android:id="@+id/botaoContasPagar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/contas_receber"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="8dp"
+                    android:maxWidth="60dp"
+                    android:maxHeight="90dp"
+                    android:text="Contas a pagar"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:layout_below="@+id/espacoVazio2"/>
+
+                <TextView
+                    android:id="@+id/espacoVazio3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/botaoContasPagar"/>
+
+                <Button
+                    android:id="@+id/botaoAtendRealizados"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/contas_receber"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="8dp"
+                    android:maxWidth="60dp"
+                    android:maxHeight="90dp"
+                    android:text="Atendimentos realizados"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:layout_below="@+id/espacoVazio3"/>
+
+                <TextView
+                    android:id="@+id/espacoVazio4"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/botaoAtendRealizados"/>
+
+                <Button
+                    android:id="@+id/botaoAtendPendentes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/contas_receber"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="8dp"
+                    android:maxWidth="60dp"
+                    android:maxHeight="90dp"
+                    android:text="Atendimentos pendentes"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:layout_below="@+id/espacoVazio4"/>
+
+                <TextView
+                    android:id="@+id/espacoVazio5"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/botaoAtendPendentes"/>
+
+                <Button
+                    android:id="@+id/botaoMinVagos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/contas_receber"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="8dp"
+                    android:maxWidth="60dp"
+                    android:maxHeight="90dp"
+                    android:text="Minutos vagos de hoje"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:layout_below="@+id/espacoVazio5"/>
+
+                <TextView
+                    android:id="@+id/espacoVazio6"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/botaoMinVagos"/>
+
+                <Button
+                    android:id="@+id/botaoFluxoCaixa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/contas_receber"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="8dp"
+                    android:maxWidth="60dp"
+                    android:maxHeight="90dp"
+                    android:text="Fluxo de caixa"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:layout_below="@+id/espacoVazio6"/>
+
+
+
+
+
+
+
+            </RelativeLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:id="@+id/navigation_view"
+        app:menu="@menu/menu_lateral"
+        app:headerLayout="@layout/drawer_header">
+    </android.support.design.widget.NavigationView>
+
+
+
+</android.support.v4.widget.DrawerLayout>
