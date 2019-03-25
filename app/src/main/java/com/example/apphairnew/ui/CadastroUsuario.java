@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -90,7 +91,8 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         campoComplemento = (EditText) findViewById(R.id.campoComplemento);
 
 
-
+        Button botaoCadastro = (Button)findViewById(R.id.botaoCadastrar);
+        botaoCadastro.setOnClickListener(this);
 
 
     }
