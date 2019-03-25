@@ -14,7 +14,7 @@ public interface ApiService {
     @POST("auth/SignIn")
     Call<LoginResponse> Login(@Body LoginModel body);
 
-    @POST("auth/CadProf")
+    @POST("auth/CadastroProf")
     Call<CadProfResponse> CadProf(@Body ProfModel body);
 
 
