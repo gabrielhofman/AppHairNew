@@ -115,16 +115,29 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
 
             ProfModel profModel = new ProfModel();
 
+            profModel.setEmail(email);
+            profModel.setSenha(senha);
+            profModel.setNomeEstab(nomeEstab);
+            profModel.setDescEstab(descEstab);
+            profModel.setCEP(cep);
+            profModel.setBairro(bairro);
+            profModel.setLogradouro(logradouro);
+            profModel.setNumero(numero);
+            profModel.setComplemento(complemento);
+
+
 
             service.CadProf(profModel).enqueue(new Callback<CadProfResponse>() {
                 @Override
                 public void onResponse(Call<CadProfResponse> call, Response<CadProfResponse> response) {
                     String mensagem;
                     if(response.body().isSuccess()){
-                      mensagem = "Cadastro de profissional efetuado com sucesso";
+                      mensagem = "Cadastro efetuado com sucesso";
                     }else{
-                        mensagem = "Falha no cadastro de estabelecimento, tente novamente!";
+                        mensagem = "Falha no cadastro:   " + response.body().getMessage();
                     }
+
+                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
