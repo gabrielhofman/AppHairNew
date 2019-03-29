@@ -19,6 +19,7 @@ import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.model.ProfModel;
 import com.example.apphairnew.model.UsuarioModel;
 import com.example.apphairnew.response.CadProfResponse;
+import com.example.apphairnew.response.CepResponse;
 import com.example.apphairnew.web.ApiControler;
 
 import retrofit2.Call;
@@ -37,7 +38,10 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
     private EditText campoNumero;
     private EditText campoComplemento;
 
+    private Button botaoCep;
+    private Button botaoCadastro;
 
+    private String cepEnviar;
 
     private Toolbar toolbar;
     private ActionBar actionBar;
@@ -51,6 +55,8 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
     private String email, senha, nomeEstab, descEstab, cep, bairro, logradouro, numero, complemento;
 
     private ApiService service = ApiControler.CreateController();
+
+    private ApiService serviceCep = ApiControler.CreatecontrollerCep();
 
 
 //teste
@@ -92,13 +98,21 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
 
 
         Button botaoCadastro = (Button)findViewById(R.id.botaoCadastrar);
+        this.botaoCadastro = botaoCadastro;
         botaoCadastro.setOnClickListener(this);
 
+        Button botaoCep = (Button)findViewById(R.id.botaoCEP);
+        this.botaoCep = botaoCep;
+        botaoCep.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
+
+        if (v==botaoCadastro) {
+
+
         email = campoEmail.getText().toString();
         senha = campoSenha.getText().toString();
         nomeEstab = campoNomeEstab.getText().toString();
@@ -109,9 +123,9 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         numero = campoNumero.getText().toString();
         complemento = campoComplemento.getText().toString();
 
-        if (email.isEmpty() || senha.isEmpty() || nomeEstab.isEmpty() || descEstab.isEmpty() || cep.isEmpty() || bairro.isEmpty() || logradouro.isEmpty() || numero.isEmpty() || complemento.isEmpty()){
+        if (email.isEmpty() || senha.isEmpty() || nomeEstab.isEmpty() || descEstab.isEmpty() || cep.isEmpty() || bairro.isEmpty() || logradouro.isEmpty() || numero.isEmpty() || complemento.isEmpty()) {
             Toast.makeText(CadastroUsuario.this, "Complete todos os campos", Toast.LENGTH_LONG).show();
-        }else{
+        } else {
 
             ProfModel profModel = new ProfModel();
 
@@ -126,14 +140,13 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
             profModel.setComplemento(complemento);
 
 
-
             service.CadProf(profModel).enqueue(new Callback<CadProfResponse>() {
                 @Override
                 public void onResponse(Call<CadProfResponse> call, Response<CadProfResponse> response) {
                     String mensagem;
-                    if(response.body().isSuccess()){
-                      mensagem = "Cadastro efetuado com sucesso";
-                    }else{
+                    if (response.body().isSuccess()) {
+                        mensagem = "Cadastro efetuado com sucesso";
+                    } else {
                         mensagem = "Falha no cadastro:   " + response.body().getMessage();
                     }
 
@@ -142,14 +155,45 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
 
                 @Override
                 public void onFailure(Call<CadProfResponse> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(),"Houve um erro:"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
                     t.printStackTrace();
 
                 }
             });
 
+           }
         }
 
+        if(v==botaoCep)
+        {
+            cepEnviar = campoCEP.getText().toString();
+
+            serviceCep.getCEP(cepEnviar).enqueue(new Callback<CepResponse>() {
+                @Override
+                public void onResponse(Call<CepResponse> call, Response<CepResponse> response) {
+                    String teste;
+                    teste = response.body().getBairro();
+
+
+                    campoBairro.setText(response.body().getBairro());
+                    campoLogradouro.setText(response.body().getLogradouro());
+                    campoComplemento.setText(response.body().getComplemento());
+
+
+
+                    Toast.makeText(getApplicationContext(),teste,Toast.LENGTH_SHORT).show();;
+                }
+
+                @Override
+                public void onFailure(Call<CepResponse> call, Throwable t) {
+
+                    Toast.makeText(getApplicationContext(),"Houve um erro:"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+
+        }
     }
 
 

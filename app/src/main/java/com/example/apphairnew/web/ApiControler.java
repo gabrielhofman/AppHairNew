@@ -13,5 +13,17 @@ public class ApiControler {
                 .build();
 
         return retrofit.create(ApiService.class);
+
+
+    }
+
+    public static ApiService CreatecontrollerCep()
+    {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://viacep.com.br/ws/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(ApiService.class);
     }
 }

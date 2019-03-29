@@ -137,7 +137,7 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
                 return true;
 
             case R.id.novo_contato:
-                Intent intent2 = new Intent(this, NovoContato.class);
+                Intent intent2 = new Intent(this, TesteCep.class);
                 startActivity(intent2);
                 return true;
         }
