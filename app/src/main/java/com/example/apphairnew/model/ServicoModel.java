@@ -15,8 +15,8 @@ public class ServicoModel {
         this.nomeServico = nomeServico;
     }
 
-    public String getTempoServico() {
-        return tempoServico;
+    public String getTempoServico(String tempoServico) {
+        return this.tempoServico;
     }
 
     public void setTempoServico(String tempoServico) {
@@ -31,8 +31,8 @@ public class ServicoModel {
         this.descServico = descServico;
     }
 
-    public Float getPrecoServico() {
-        return precoServico;
+    public Float getPrecoServico(float precoServico) {
+        return this.precoServico;
     }
 
     public void setPrecoServico(Float precoServico) {

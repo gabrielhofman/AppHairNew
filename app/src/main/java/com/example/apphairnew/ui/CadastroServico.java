@@ -14,11 +14,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.model.ServicoModel;
+import com.example.apphairnew.response.CadServicoResponse;
 import com.example.apphairnew.web.ApiControler;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CadastroServico extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -119,6 +125,36 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
             tempoServico = spinnerTempoServico.getSelectedItem().toString();
 
             if (nomeServico.isEmpty() || descServico.isEmpty() || tempoServico.isEmpty()){
+                Toast.makeText(CadastroServico.this, "Complete todos os campos", Toast.LENGTH_LONG).show();
+            }else{
+
+                ServicoModel servicoModel = new ServicoModel();
+
+                servicoModel.setNomeServico(nomeServico);
+                servicoModel.setDescServico(descServico);
+                servicoModel.getPrecoServico(precoServico);
+                servicoModel.getTempoServico(tempoServico);
+
+                Toast.makeText(getApplicationContext(), tempoServico, Toast.LENGTH_SHORT).show();
+
+                service.CadServico(servicoModel).enqueue(new Callback<CadServicoResponse>() {
+                    @Override
+                    public void onResponse(Call<CadServicoResponse> call, Response<CadServicoResponse> response) {
+                        String mensagem;
+                        if (response.body().isSuccess()){
+                            mensagem = "Cadastro efetuado com sucesso";
+                        }else{
+                            mensagem = "Falha no cadastro"+ response.body().getMessage();
+                        }
+                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<CadServicoResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    }
+                });
 
             }
 
