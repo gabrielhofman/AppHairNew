@@ -119,6 +119,7 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
 
         if (v==botaoCadastro){
+
             nomeServico = campoNomeServico.getText().toString();
             descServico = campoDescServico.getText().toString();
             precoServico = Float.parseFloat(campoPrecoServico.getText().toString());
@@ -128,14 +129,17 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
                 Toast.makeText(CadastroServico.this, "Complete todos os campos", Toast.LENGTH_LONG).show();
             }else{
 
+
+
+
                 ServicoModel servicoModel = new ServicoModel();
 
                 servicoModel.setNomeServico(nomeServico);
                 servicoModel.setDescServico(descServico);
-                servicoModel.getPrecoServico(precoServico);
-                servicoModel.getTempoServico(tempoServico);
+                servicoModel.setPrecoServico(precoServico);
+                servicoModel.setTempoServico(tempoServico);
 
-                Toast.makeText(getApplicationContext(), tempoServico, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), servicoModel.getNomeServico() + descServico + precoServico + tempoServico, Toast.LENGTH_SHORT).show();
 
                 service.CadServico(servicoModel).enqueue(new Callback<CadServicoResponse>() {
                     @Override
