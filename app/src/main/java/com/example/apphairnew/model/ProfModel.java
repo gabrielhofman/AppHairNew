@@ -5,6 +5,8 @@ public class ProfModel {
     private String senha;
     private String nomeEstab;
     private String descEstab;
+    private String cidade;
+    private String uf;
     private String logradouro;
     private String bairro;
     private String complemento;
@@ -37,6 +39,22 @@ public class ProfModel {
 
     public String getDescEstab() {
         return descEstab;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 
     public void setDescEstab(String descEstab) {

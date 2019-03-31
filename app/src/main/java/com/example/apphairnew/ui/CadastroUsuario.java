@@ -33,6 +33,8 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
     private EditText campoNomeEstab;
     private EditText campoDescEstab;
     private EditText campoCEP;
+    private EditText campoCidade;
+    private EditText campoUF;
     private EditText campoBairro;
     private EditText campoLogradouro;
     private EditText campoNumero;
@@ -52,7 +54,7 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
 
 
 
-    private String email, senha, nomeEstab, descEstab, cep, bairro, logradouro, numero, complemento;
+    private String email, senha, nomeEstab, descEstab, cep, cidade, uf, bairro, logradouro, numero, complemento;
 
     private ApiService service = ApiControler.CreateController();
 
@@ -91,6 +93,8 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         campoNomeEstab = (EditText) findViewById(R.id.campoNomeEstab);
         campoDescEstab = (EditText) findViewById(R.id.campoDescEstab);
         campoCEP = (EditText) findViewById(R.id.campoCEP);
+        campoCidade = (EditText) findViewById(R.id.campoCidade);
+        campoUF = (EditText) findViewById(R.id.campoUF);
         campoBairro = (EditText) findViewById(R.id.campoBairro);
         campoLogradouro = (EditText) findViewById(R.id.campoRua);
         campoNumero = (EditText) findViewById(R.id.campoNumero);
@@ -118,12 +122,14 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         nomeEstab = campoNomeEstab.getText().toString();
         descEstab = campoDescEstab.getText().toString();
         cep = campoCEP.getText().toString();
+        cidade = campoCidade.getText().toString();
+        uf = campoUF.getText().toString();
         bairro = campoBairro.getText().toString();
         logradouro = campoLogradouro.getText().toString();
         numero = campoNumero.getText().toString();
         complemento = campoComplemento.getText().toString();
 
-        if (email.isEmpty() || senha.isEmpty() || nomeEstab.isEmpty() || descEstab.isEmpty() || cep.isEmpty() || bairro.isEmpty() || logradouro.isEmpty() || numero.isEmpty() || complemento.isEmpty()) {
+        if (email.isEmpty() || senha.isEmpty() || nomeEstab.isEmpty() || descEstab.isEmpty() || cep.isEmpty() || cidade.isEmpty() ||  uf.isEmpty() || bairro.isEmpty() || logradouro.isEmpty() || numero.isEmpty()) {
             Toast.makeText(CadastroUsuario.this, "Complete todos os campos", Toast.LENGTH_LONG).show();
         } else {
 
@@ -134,6 +140,8 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
             profModel.setNomeEstab(nomeEstab);
             profModel.setDescEstab(descEstab);
             profModel.setCEP(cep);
+            profModel.setCidade(cidade);
+            profModel.setUf(uf);
             profModel.setBairro(bairro);
             profModel.setLogradouro(logradouro);
             profModel.setNumero(numero);
@@ -174,7 +182,8 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
                     String teste;
                     teste = response.body().getBairro();
 
-
+                    campoUF.setText(response.body().getUf());
+                    campoCidade.setText(response.body().getLocalidade());
                     campoBairro.setText(response.body().getBairro());
                     campoLogradouro.setText(response.body().getLogradouro());
                     campoComplemento.setText(response.body().getComplemento());

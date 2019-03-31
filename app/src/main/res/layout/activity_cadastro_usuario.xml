@@ -137,6 +137,36 @@
             android:layout_below="@id/labelEndereco"
             />
 
+        <Button
+            android:id="@+id/botaoCEP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buscar CEP"
+            android:layout_below="@+id/campoCEP"
+            android:textSize="20dp"
+            android:layout_alignLeft="@id/campoCEP"
+            />
+
+
+        <EditText
+            android:id="@+id/campoCidade"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:hint="Cidade"
+            android:textSize="20dp"
+            android:layout_below="@id/botaoCEP"/>
+
+        <EditText
+            android:id="@+id/campoUF"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:hint="Estado"
+            android:textSize="20dp"
+            android:layout_below="@id/campoCidade"
+            />
+
         <EditText
             android:id="@+id/campoBairro"
             android:layout_width="300dp"
@@ -144,7 +174,7 @@
             android:layout_centerHorizontal="true"
             android:hint="Bairro"
             android:textSize="20dp"
-            android:layout_below="@id/campoCEP"
+            android:layout_below="@id/campoUF"
             />
 
         <EditText
@@ -200,15 +230,6 @@
             />
 
 
-        <Button
-            android:id="@+id/botaoCEP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Buscar CEP"
-            android:layout_below="@+id/botaoCadastrar"
-            android:textSize="20dp"
-            android:layout_centerHorizontal="true"
-            />
 
 
 
