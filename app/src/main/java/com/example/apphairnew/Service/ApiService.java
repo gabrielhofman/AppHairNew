@@ -1,8 +1,10 @@
 package com.example.apphairnew.Service;
 
+import com.example.apphairnew.model.ContatoModel;
 import com.example.apphairnew.model.LoginModel;
 import com.example.apphairnew.model.ProfModel;
 import com.example.apphairnew.model.ServicoModel;
+import com.example.apphairnew.response.CadContatoResponse;
 import com.example.apphairnew.response.CadProfResponse;
 import com.example.apphairnew.response.CadServicoResponse;
 import com.example.apphairnew.response.CepResponse;
@@ -21,6 +23,9 @@ public interface ApiService {
 
     @POST("auth/CadastroProf")
     Call<CadProfResponse> CadProf(@Body ProfModel body);
+
+    @POST("auth/CadastroContato")
+    Call<CadContatoResponse> CadContato(@Body ContatoModel body);
 
     @POST("auth/CadastroServico")
     Call<CadServicoResponse> CadServico(@Body ServicoModel body);
