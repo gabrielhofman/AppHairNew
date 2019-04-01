@@ -1,11 +1,23 @@
 <resources>
     <string name="app_name">AppHairNew</string>
-    
+
     <string-array name="tempoServicoItens">
         <item>30</item>
         <item>60</item>
         <item>90</item>
         <item>120</item>
 
+    </string-array>
+
+    <string-array name="sexoContato">
+        <item>Masculino</item>
+        <item>Feminino</item>
+    </string-array>
+
+    <string-array name="freqContato">
+        <item>A cada 30 dias</item>
+        <item>A cada 60 dias</item>
+        <item>A cada 90 dias</item>
+        <item>A cada 120 dias</item>
     </string-array>
 </resources>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.CadastroContato"
+    android:id="@+id/drawer_layout"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/Widget.AppCompat.Toolbar"
+            android:id="@+id/toolbar"></android.support.v7.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/centralizador"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"
+
+                    />
+
+                <TextView
+                    android:id="@+id/labelSobreContato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Sobre o contato:"
+                    android:textSize="20dp"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_below="@+id/centralizador"/>
+
+                <EditText
+                    android:id="@+id/campoNomeContato"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Digite o nome do contato"
+                    android:textSize="20dp"
+                    android:layout_below="@id/labelSobreContato"
+                    />
+
+                <EditText
+                    android:id="@+id/campoTelefoneContato"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Digite o telefone do contato"
+                    android:textSize="20dp"
+                    android:layout_below="@id/campoNomeContato"
+                    />
+                <EditText
+                    android:id="@+id/campoDataNascContato"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Digite a data de nascimento"
+                    android:textSize="20dp"
+                    android:layout_below="@id/campoTelefoneContato"
+                    />
+                <EditText
+                    android:id="@+id/campoObsContato"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Observaçoes do contato"
+                    android:textSize="20dp"
+                    android:layout_below="@id/campoDataNascContato"
+                    />
+
+                <TextView
+                    android:id="@+id/labelSexoContato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Sexo:"
+                    android:textSize="20dp"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_below="@+id/campoObsContato"
+                    android:layout_toLeftOf="@id/spinnerSexoContato"
+                    android:layout_centerHorizontal="true"/>
+
+                <Spinner
+                    android:id="@+id/spinnerSexoContato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/btn_dropdown"
+                    android:spinnerMode="dropdown"
+                    android:layout_below="@+id/campoObsContato"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:id="@+id/labelExpecFreqContato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Expectativa de frequência:"
+                    android:textSize="20dp"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_below="@+id/spinnerSexoContato"
+                    android:layout_toLeftOf="@id/spinnerExpecFreqContato"
+                    android:layout_centerHorizontal="true"/>
+
+                <Spinner
+                    android:id="@+id/spinnerExpecFreqContato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/btn_dropdown"
+                    android:spinnerMode="dropdown"
+                    android:layout_below="@+id/spinnerSexoContato"
+                    android:layout_centerHorizontal="true"/>
+
+                <ImageView
+                    android:id="@+id/fotoContato"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/saloon"
+                    android:layout_below="@id/spinnerExpecFreqContato"/>
+
+                <Button
+                    android:id="@+id/botaoTirarFoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tirar foto"
+                    android:textSize="20dp"
+                    android:layout_below="@+id/fotoContato"/>
+
+                <Button
+                    android:id="@+id/botaoCarregarFoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Carregar foto"
+                    android:textSize="20dp"
+                    android:layout_below="@+id/fotoContato"
+                    android:layout_toRightOf="@id/botaoTirarFoto"/>
+
+                <Button
+                    android:id="@+id/botaoCadastrarContato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salvar contato"
+                    android:textSize="20dp"
+                    android:layout_below="@+id/botaoCarregarFoto"
+                    android:layout_centerHorizontal="true"/>
+                <Button
+                    android:id="@+id/botaoCancelarContato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Calcelar contato"
+                    android:textSize="20dp"
+                    android:layout_below="@+id/botaoCadastrarContato"
+                    android:layout_centerHorizontal="true"/>
+
+
+
+
+
+
+            </RelativeLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:id="@+id/navigation_view"
+        app:menu="@menu/menu_lateral"
+        app:headerLayout="@layout/drawer_header">
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>
