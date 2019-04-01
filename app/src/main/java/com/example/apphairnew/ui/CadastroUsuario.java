@@ -129,7 +129,7 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
             if(!validacao.isValidEmail(email))
             {
                 campoEmail.setError("Email inválido");
-                 validaEmail = true;
+                 validaEmail = true;  // sdasdasdasd
             }
 
 
