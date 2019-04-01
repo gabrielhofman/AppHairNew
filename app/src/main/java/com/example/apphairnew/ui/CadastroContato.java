@@ -125,7 +125,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
                 return true;
         }
 
-        return false;
+        return false;//
     }
 
     @Override
