@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
+import com.example.apphairnew.Util.MaskEditUtil;
+import com.example.apphairnew.Util.Validacao;
 import com.example.apphairnew.model.ProfModel;
 import com.example.apphairnew.model.UsuarioModel;
 import com.example.apphairnew.response.CadProfResponse;
@@ -101,6 +103,9 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         campoComplemento = (EditText) findViewById(R.id.campoComplemento);
 
 
+        campoCEP.addTextChangedListener(MaskEditUtil.mask(campoCEP, MaskEditUtil.FORMAT_CEP));
+
+
         Button botaoCadastro = (Button)findViewById(R.id.botaoCadastrar);
         this.botaoCadastro = botaoCadastro;
         botaoCadastro.setOnClickListener(this);
@@ -115,10 +120,21 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
 
         if (v==botaoCadastro) {
-
+            boolean validaEmail=false;
 
         email = campoEmail.getText().toString();
-        senha = campoSenha.getText().toString();
+
+            Validacao validacao = new Validacao();
+
+            if(validacao.isValidEmail(email))
+            {
+                campoEmail.setError("Email inválido");
+                 validaEmail = true;
+            }
+
+
+
+            senha = campoSenha.getText().toString();
         nomeEstab = campoNomeEstab.getText().toString();
         descEstab = campoDescEstab.getText().toString();
         cep = campoCEP.getText().toString();
@@ -129,8 +145,8 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         numero = campoNumero.getText().toString();
         complemento = campoComplemento.getText().toString();
 
-        if (email.isEmpty() || senha.isEmpty() || nomeEstab.isEmpty() || descEstab.isEmpty() || cep.isEmpty() || cidade.isEmpty() ||  uf.isEmpty() || bairro.isEmpty() || logradouro.isEmpty() || numero.isEmpty()) {
-            Toast.makeText(CadastroUsuario.this, "Complete todos os campos", Toast.LENGTH_LONG).show();
+        if (email.isEmpty() || senha.isEmpty() || nomeEstab.isEmpty() || descEstab.isEmpty() || cep.isEmpty() || cidade.isEmpty() ||  uf.isEmpty() || bairro.isEmpty() || logradouro.isEmpty() || numero.isEmpty() || validaEmail) {
+            Toast.makeText(CadastroUsuario.this, "Complete todos os campos corretamente", Toast.LENGTH_LONG).show();
         } else {
 
             ProfModel profModel = new ProfModel();
@@ -146,6 +162,8 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
             profModel.setLogradouro(logradouro);
             profModel.setNumero(numero);
             profModel.setComplemento(complemento);
+
+
 
 
             service.CadProf(profModel).enqueue(new Callback<CadProfResponse>() {

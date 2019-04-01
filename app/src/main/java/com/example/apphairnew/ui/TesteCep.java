@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
+import com.example.apphairnew.Util.MaskEditUtil;
 import com.example.apphairnew.response.CepResponse;
 import com.example.apphairnew.web.ApiControler;
 
@@ -67,10 +68,16 @@ public class TesteCep extends AppCompatActivity implements  NavigationView.OnNav
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
 
         actionBar.setTitle("CEP");
+     //   editTextCpf.addTextChangedListener(MaskEditUtil.mask(editTextCpf, MaskEditUtil.FORMAT_CPF));
+
 
 
         campoTeste1 = (EditText) findViewById(R.id.campoTeste1);
         campoTeste2 = (EditText) findViewById(R.id.campoTeste2);
+
+
+
+       // campoTeste1.addTextChangedListener(MaskEditUtil.mask(campoTeste1, MaskEditUtil.FORMAT_CPF));
 
         Button botaoBuscar = (Button) findViewById(R.id.botaoTeste);
         botaoBuscar.setOnClickListener(this);
