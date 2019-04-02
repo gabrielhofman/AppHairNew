@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
+import com.example.apphairnew.Util.MaskEditUtil;
 import com.example.apphairnew.model.ContatoModel;
 import com.example.apphairnew.response.CadContatoResponse;
 import com.example.apphairnew.web.ApiControler;
@@ -30,7 +31,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
 
     private EditText campoNomeContato;
     private EditText campoTelContato;
-    private EditText campoDataNascContado;
+    private EditText campoDataNascContato;
     private EditText campoObsContato;
     private Spinner spinnerSexoContato;
     private Spinner spinnerExpecFreqContato;
@@ -75,6 +76,18 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
 
         campoNomeContato = (EditText) findViewById(R.id.campoNomeContato);
         campoTelContato = (EditText) findViewById(R.id.campoTelefoneContato);
+        campoDataNascContato = (EditText)findViewById(R.id.campoDataNascContato);
+        campoObsContato = (EditText)findViewById(R.id.campoObsContato) ;
+        spinnerSexoContato = (Spinner)findViewById(R.id.spinnerSexoContato) ;
+        spinnerExpecFreqContato = (Spinner)findViewById(R.id.spinnerExpecFreqContato);
+
+
+
+
+        campoTelContato.addTextChangedListener(MaskEditUtil.mask(campoTelContato, MaskEditUtil.FORMAT_FONE));
+        campoDataNascContato.addTextChangedListener(MaskEditUtil.mask(campoDataNascContato,MaskEditUtil.FORMAT_DATE));
+
+
 
         ArrayAdapter<CharSequence> adapterSexo = ArrayAdapter.createFromResource(this,
                 R.array.sexoContato, R.layout.support_simple_spinner_dropdown_item);
@@ -133,10 +146,10 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
 
         if (v==botaoCadastroContato){
 
-        }else{
+
             nomeContato = campoNomeContato.getText().toString();
             telContato = campoTelContato.getText().toString();
-            nascContato = campoDataNascContado.getText().toString();
+            nascContato = campoDataNascContato.getText().toString();
             obsContato = campoObsContato.getText().toString();
             sexoContato = spinnerSexoContato.getSelectedItem().toString();
             freqContato = spinnerExpecFreqContato.getSelectedItem().toString();
@@ -151,6 +164,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
                 contatoModel.setDataNascCont(nascContato);
                 contatoModel.setSexoContato(sexoContato);
                 contatoModel.setExpFreqContato(freqContato);
+                contatoModel.setObsContato(obsContato);
 
                 Toast.makeText(getApplicationContext(), sexoContato, Toast.LENGTH_SHORT).show();
 

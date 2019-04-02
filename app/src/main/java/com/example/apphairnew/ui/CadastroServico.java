@@ -107,7 +107,7 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
                 return true;
 
             case R.id.novo_contato:
-                Intent intent2 = new Intent(this, NovoContato.class);
+                Intent intent2 = new Intent(this, CadastroContato.class);
                 startActivity(intent2);
                 return true;
         }

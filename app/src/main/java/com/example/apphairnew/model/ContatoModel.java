@@ -5,7 +5,7 @@ public class ContatoModel {
     private String nomeContato;
     private String telContato;
     private String dataNascCont;
-    private String obsContado;
+    private String obsContato;
     private String sexoContato;
     private String expFreqContato;
 
@@ -33,12 +33,12 @@ public class ContatoModel {
         this.dataNascCont = dataNascCont;
     }
 
-    public String getObsContado() {
-        return obsContado;
+    public String getObsContato() {
+        return obsContato;
     }
 
-    public void setObsContado(String obsContado) {
-        this.obsContado = obsContado;
+    public void setObsContato(String obsContato) {
+        this.obsContato = obsContato;
     }
 
     public String getSexoContato() {
