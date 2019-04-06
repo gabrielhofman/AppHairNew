@@ -7,6 +7,7 @@
     tools:context=".ui.Login"
     android:id="@+id/drawer_layout"
     android:orientation="vertical"
+    android:background="@color/white"
     >
 
     <LinearLayout
@@ -29,7 +30,7 @@
         <TextView
             android:id="@+id/espacoVazio4"
             android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:layout_centerHorizontal="true"
             />
 
@@ -44,8 +45,8 @@
 
         <ImageView
             android:id="@+id/logoHair"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:src="@drawable/saloon"
             android:layout_below="@id/espacoVazio4"/>
@@ -57,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Email: "
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_below="@+id/centralizador"/>
 
         <EditText
@@ -67,33 +68,45 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/campoEmail"
             android:hint="Senha: "
-            android:textSize="20dp"
+            android:textSize="18dp"
+
             android:password="true"
             />
+
+        <TextView
+            android:id="@+id/labelCriarConta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:hint="Crie uma nova conta"
+            android:textColorHint="@color/colorPrimary"
+            android:layout_below="@id/campoSenha"
+            />
+
 
         <TextView
             android:id="@+id/espacoVazio2"
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/campoSenha"
+            android:layout_below="@id/labelCriarConta"
             />
-
 
 
         <Button
             android:id="@+id/botaoLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
-            android:textSize="20dp"
             android:layout_below="@+id/espacoVazio2"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:text="Login"
+            android:textSize="15dp"
+            android:theme="@style/AppTheme.Button" />
 
         <TextView
             android:id="@+id/espacoVazio3"
             android:layout_width="50dp"
-            android:layout_height="51dp"
+            android:layout_height="50dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/botaoLogin"/>
 

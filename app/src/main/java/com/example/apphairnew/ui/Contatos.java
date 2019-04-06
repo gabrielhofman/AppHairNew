@@ -45,6 +45,8 @@ public class Contatos extends AppCompatActivity implements View.OnClickListener,
         actionBar.setTitle("Contatos");
         setSupportActionBar(toolbar);
 
+        //Referencia ao RecycleView
+       // lstListaContatos = (RecyclerView)findViewById(R.id.)
 
 
     }

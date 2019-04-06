@@ -27,8 +27,13 @@ public interface ApiService {
     @POST("auth/CadastroContato")
     Call<CadContatoResponse> CadContato(@Body ContatoModel body);
 
+    //@POST("auth/ListaContato")
+   // Call<ListaContatoResponse> ListaContato(@Body ContatoModel body);
+
     @POST("auth/CadastroServico")
     Call<CadServicoResponse> CadServico(@Body ServicoModel body);
+
+
 
     @GET("{CEP}/json")
     Call<CepResponse> getCEP(@Path("CEP") String CEP);
