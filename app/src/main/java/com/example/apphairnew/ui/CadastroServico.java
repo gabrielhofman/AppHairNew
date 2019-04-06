@@ -160,8 +160,8 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
                 });
             }
 
-                });
+
 
             }
         }
-    }}
+    }
