@@ -37,5 +37,5 @@ public class ServicoModel {
 
     public void setPrecoServico(Float precoServico) {
         this.precoServico = precoServico;
-    }
+    } //
 }

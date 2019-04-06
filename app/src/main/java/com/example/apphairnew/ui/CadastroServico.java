@@ -141,25 +141,26 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
 
                 Toast.makeText(getApplicationContext(), servicoModel.getNomeServico() + descServico + precoServico + tempoServico, Toast.LENGTH_SHORT).show();
 
-               // service.CadServico(servicoModel).enqueue(new Callback<CadServicoResponse>() {
-                 //   @Override
-                   // public void onResponse(Call<CadServicoResponse> call, Response<CadServicoResponse> response) {
-                     //   String mensagem;
-                       // if (response.body().isSuccess()){
-                         //   mensagem = "Cadastro efetuado com sucesso";
-                        //}else{
-                          //  mensagem = "Falha no cadastro"+ response.body().getMessage();
-                        //}
-                        //Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
-                    //}
-
-                    //@Override
-                    //public void onFailure(Call<CadServicoResponse> call, Throwable t) {
-                      //  Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        //t.printStackTrace();
+                service.CadServico(servicoModel).enqueue(new Callback<CadServicoResponse>() {
+                    @Override
+                    public void onResponse(Call<CadServicoResponse> call, Response<CadServicoResponse> response) {
+                        String mensagem;
+                        if (response.body().isSuccess()) {
+                            mensagem = "Cadastro efetuado com sucesso";
+                        } else {
+                            mensagem = "Falha no cadastro" + response.body().getMessage();
+                        }
+                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
                     }
 
+                    @Override
+                    public void onFailure(Call<CadServicoResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    }
 
+                });
+            }
 
 
         }

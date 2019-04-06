@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.CadastroContato"></activity>
+        <activity android:name=".ui.ServicoListaTeste"></activity>
+        <activity android:name=".ui.CadastroContato" />
         <activity android:name=".ui.CadastroServico">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.TesteCep" />
-        <activity android:name=".ui.DashBoard"></activity>
+        <activity android:name=".ui.DashBoard" />
         <activity android:name=".ui.NovoContato" />
         <activity android:name=".ui.CadastroUsuario" />
         <activity android:name=".MainActivity" />
