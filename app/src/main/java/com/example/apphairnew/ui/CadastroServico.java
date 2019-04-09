@@ -97,7 +97,7 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
 
         switch (menuItem.getItemId()){
             case R.id.login:
-                Intent intent = new Intent(this, TesteCep.class);
+                Intent intent = new Intent(this, ServicoListaTeste.class);
                 startActivity(intent);
                 return true;
 

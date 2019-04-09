@@ -165,7 +165,6 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
 
 
 
-
             service.CadProf(profModel).enqueue(new Callback<CadProfResponse>() {
                 @Override
                 public void onResponse(Call<CadProfResponse> call, Response<CadProfResponse> response) {

@@ -8,6 +8,7 @@ import com.example.apphairnew.response.CadContatoResponse;
 import com.example.apphairnew.response.CadProfResponse;
 import com.example.apphairnew.response.CadServicoResponse;
 import com.example.apphairnew.response.CepResponse;
+import com.example.apphairnew.response.GetServicoResponse;
 import com.example.apphairnew.response.LoginResponse;
 
 import retrofit2.Call;
@@ -32,6 +33,9 @@ public interface ApiService {
 
     @GET("{CEP}/json")
     Call<CepResponse> getCEP(@Path("CEP") String CEP);
+
+    @GET("auth/GetServico/{usuario}")
+        Call<GetServicoResponse> getServico(@Path("usuario") int usuario);
 
 
 

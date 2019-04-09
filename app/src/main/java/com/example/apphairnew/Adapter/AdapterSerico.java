@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.model.ServicoModel;
@@ -14,17 +16,24 @@ import java.util.Collections;
 import java.util.List;
 
 public class AdapterSerico extends RecyclerView.Adapter<AdapterSerico.ViewHolder> {
-    List<ServicoModel> servicoModels = Collections.emptyList();
+
+    itemClicadoListener itemClicado;
+    List<ServicoModel> servicoModels;
     private LayoutInflater inflater;
     private Context context;
+
+
 
 
     public AdapterSerico(List<ServicoModel>servicoModel, Context context){
         this.servicoModels = servicoModel;
         this.inflater = LayoutInflater.from(context);
         this.context =context;
+
     }
 
+
+    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         // View view = inflater.inflate(R.layout.row_lista_produto, parent, false);
@@ -39,8 +48,23 @@ public class AdapterSerico extends RecyclerView.Adapter<AdapterSerico.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int i) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
+       //DataSetProduto dataSetProduto = dataSetProdutos.get(position);
+        //        try{
+        //            Picasso.with(context).load(dataSetProduto.getImagemProduto().getUrl()).into(holder.imagemProduto);
+        //
+        //        }catch(Exception e){
+        //            holder.imagemProduto.setImageDrawable(null);
+        //        }
+        //
+        //        holder.textoProduto.setText(dataSetProduto.getDescricaoProduto());
+        //        holder.textoValor.setText(String.valueOf(dataSetProduto.getPrecoProduto()));
+        //        holder.titulo.setText(dataSetProduto.getNomeProduto());
+
+
+        ServicoModel servicoModel = servicoModels.get(position);
+        holder.nomeServico.setText(servicoModel.getNomeServico());
 
     }
 
@@ -48,18 +72,51 @@ public class AdapterSerico extends RecyclerView.Adapter<AdapterSerico.ViewHolder
 
     @Override
     public int getItemCount() {
-        return 0;
+        return servicoModels.size();
+
     }
+
+
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+        TextView nomeServico;
+
+
         public ViewHolder(View itemView) {
             super(itemView);
+
+            nomeServico =itemView.findViewById(R.id.nome_servico);
+            itemView.setOnClickListener(this);
+
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
+            if(itemClicado != null)
+            {
+                itemClicado.noItemClicado(view, getAdapterPosition());
+            }
+
+
 
         }
+
+
+    }
+
+    public void setItemClicado(itemClicadoListener itemClicado) {
+        this.itemClicado = itemClicado;
+    }
+
+    public interface itemClicadoListener{
+        void noItemClicado(View view, int position);
+
+    }
+
+    public ServicoModel getItem(int position ) {
+        return servicoModels.get(position);
     }
 }
