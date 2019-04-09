@@ -1,6 +1,9 @@
 package com.example.apphairnew.model;
 
+import com.google.gson.annotations.JsonAdapter;
+
 public class ContatoModel {
+
 
     private String nomeContato;
     private String telContato;

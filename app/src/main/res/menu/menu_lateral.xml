@@ -5,9 +5,11 @@
         android:id="@+id/login"
         android:title="Login"
         />
-
     <item
-
+        android:id="@+id/dashboard"
+        android:title="Dashboard"
+        />
+    <item
         android:id="@+id/cadastrar_usuario"
         android:title="Cadastrar usuário"
         />
@@ -16,9 +18,20 @@
         android:title="Contatos" />
 
     <item
-
         android:id="@+id/novo_contato"
         android:title="Cadastrar contato"
+        />
+    <item
+        android:id="@+id/cadastro_servico"
+        android:title="Cadastrar serviço"
+        />
+    <item
+        android:id="@+id/servicos"
+        android:title="Serviços"
+        />
+    <item
+        android:id="@+id/fluxo_caixa"
+        android:title="Fluxo de caixa"
         />
 
 

@@ -5,200 +5,330 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.DashBoard"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white">
 
 
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            android:theme="@style/Widget.AppCompat.Toolbar"
-            android:id="@+id/toolbar"></android.support.v7.widget.Toolbar>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <RelativeLayout
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/Widget.AppCompat.Toolbar"
+        android:id="@+id/toolbar"></android.support.v7.widget.Toolbar>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:clipToPadding="false"
+        android:gravity="center"
+        >
+
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="160dp"
+                android:layout_height="190dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:background="@drawable/circulodash"
+                        android:src="@drawable/money_10dp"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:text="Contas a receber"/>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_margin="10dp"
+                        android:background="@color/lightGrey">
+                    </View>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:text="R$ 200,00"/>
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="160dp"
+            android:layout_height="190dp"
+            android:layout_margin="10dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circulodash"
+                    android:padding="10dp"
+                    android:src="@drawable/money_10dp" />
 
                 <TextView
-                    android:id="@+id/centralizador"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
-                    android:layout_centerHorizontal="true"/>
-
-                <TextView
-                    android:id="@+id/labelBemVindo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Seja bem vindo!"
-                    android:textSize="20dp"
-                    android:textColorHint="@color/colorPrimary"
-                    android:layout_below="@+id/centralizador"/>
-
-                <TextView
-                    android:id="@+id/espacoVazio1"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/labelBemVindo"/>
-
-
-
-                <Button
-                    android:id="@+id/botaoContasReceber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:drawableLeft="@drawable/calculadora"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:paddingTop="8dp"
-                    android:maxWidth="60dp"
-                    android:maxHeight="100dp"
+                    android:layout_marginTop="10dp"
                     android:text="Contas a receber"
-                    android:textAlignment="viewStart"
-                    android:textColor="#000000"
+                    android:textStyle="bold" />
 
-                    android:layout_below="@+id/espacoVazio1"/>
-
-                <TextView
-                    android:id="@+id/espacoVazio2"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/botaoContasReceber"/>
-
-                <Button
-                    android:id="@+id/botaoContasPagar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:drawableLeft="@drawable/cheque"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:paddingTop="8dp"
-                    android:maxWidth="60dp"
-                    android:maxHeight="100dp"
-                    android:text="Contas a pagar"
-                    android:textAlignment="viewStart"
-                    android:textColor="#000000"
-                    android:layout_below="@+id/espacoVazio2"/>
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/lightGrey"></View>
 
                 <TextView
-                    android:id="@+id/espacoVazio3"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/botaoContasPagar"/>
-
-                <Button
-                    android:id="@+id/botaoAtendRealizados"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:drawableLeft="@drawable/check"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:paddingTop="8dp"
-                    android:maxWidth="60dp"
-                    android:maxHeight="100dp"
-                    android:text="Atendimentos realizados"
-                    android:textAlignment="viewStart"
-                    android:textColor="#000000"
-                    android:layout_below="@+id/espacoVazio3"/>
+                    android:layout_marginTop="10dp"
+                    android:text="R$ 200,00"
+                    android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/espacoVazio4"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/botaoAtendRealizados"/>
-
-                <Button
-                    android:id="@+id/botaoAtendPendentes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:drawableLeft="@drawable/money"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:paddingTop="8dp"
-                    android:maxWidth="60dp"
-                    android:maxHeight="100dp"
-                    android:text="Atendimentos pendentes"
-                    android:textAlignment="viewStart"
-                    android:textColor="#000000"
-                    android:layout_below="@+id/espacoVazio4"/>
-
-                <TextView
-                    android:id="@+id/espacoVazio5"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/botaoAtendPendentes"/>
-
-                <Button
-                    android:id="@+id/botaoMinVagos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:drawableLeft="@drawable/deal_116481"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:paddingTop="8dp"
-                    android:maxWidth="60dp"
-                    android:maxHeight="100dp"
-                    android:text="Minutos vagos de hoje"
-                    android:textAlignment="viewStart"
-                    android:textColor="#000000"
-                    android:layout_below="@+id/espacoVazio5"/>
-
-                <TextView
-                    android:id="@+id/espacoVazio6"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/botaoMinVagos"/>
-
-                <Button
-                    android:id="@+id/botaoFluxoCaixa"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:drawableLeft="@drawable/estatistica"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:paddingTop="8dp"
-                    android:maxWidth="60dp"
-                    android:maxHeight="100dp"
-                    android:text="Fluxo de caixa"
-                    android:textAlignment="viewStart"
-                    android:textColor="#000000"
-                    android:layout_below="@+id/espacoVazio6"/>
+            </LinearLayout>
 
 
+        </android.support.v7.widget.CardView>
 
-
-
-
-
-            </RelativeLayout>
-        </ScrollView>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:clipToPadding="false"
+        android:gravity="center"
+        >
+
+        <android.support.v7.widget.CardView
+            android:layout_width="160dp"
+            android:layout_height="190dp"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circulodash"
+                    android:src="@drawable/money_10dp"
+                    android:padding="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:text="Contas a receber"/>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/lightGrey">
+                </View>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:text="R$ 200,00"/>
+
+            </LinearLayout>
+
+
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="160dp"
+            android:layout_height="190dp"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circulodash"
+                    android:padding="10dp"
+                    android:src="@drawable/money_10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Contas a receber"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/lightGrey"></View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="R$ 200,00"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:clipToPadding="false"
+        android:gravity="center"
+        >
+
+        <android.support.v7.widget.CardView
+            android:layout_width="160dp"
+            android:layout_height="190dp"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circulodash"
+                    android:src="@drawable/money_10dp"
+                    android:padding="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:text="Contas a receber"/>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/lightGrey">
+                </View>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:text="R$ 200,00"/>
+
+            </LinearLayout>
+
+
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="160dp"
+            android:layout_height="190dp"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circulodash"
+                    android:padding="10dp"
+                    android:src="@drawable/money_10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Contas a receber"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/lightGrey"></View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="R$ 200,00"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+
+    </LinearLayout>
+
+
 
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
@@ -208,7 +338,5 @@
         app:menu="@menu/menu_lateral"
         app:headerLayout="@layout/drawer_header">
     </android.support.design.widget.NavigationView>
-
-
-
 </android.support.v4.widget.DrawerLayout>
+

@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Sobre sua conta:"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColorHint="@color/colorPrimary"
             android:layout_below="@+id/centralizador"/>
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Digite seu e-mail"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_below="@id/labelContaUsuario"
             android:inputType="textEmailAddress"
             />
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Digite sua senha"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_below="@id/campoEmail"
             android:inputType="textPassword"
 
@@ -71,10 +71,11 @@
 
 
 
+
         <TextView
             android:id="@+id/espacoVazio1"
             android:layout_width="50dp"
-            android:layout_height="20dp"
+            android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/campoSenha"
             />
@@ -85,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Sobre o estabelecimento:"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColorHint="@color/colorPrimary"
             android:layout_below="@+id/espacoVazio1"/>
 
@@ -96,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Nome do estabelecimento"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_below="@id/labelSobreEstabelecimento"
             />
 
@@ -106,14 +107,14 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Descrição do estabelecimento"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_below="@id/campoNomeEstab"
             />
 
         <TextView
             android:id="@+id/espacoVazio3"
             android:layout_width="50dp"
-            android:layout_height="20dp"
+            android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/campoDescEstab"
             />
@@ -124,7 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Endereço:"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColorHint="@color/colorPrimary"
             android:layout_below="@+id/espacoVazio3"/>
 
@@ -134,7 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="CEP"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_below="@id/labelEndereco"
             />
 
@@ -143,9 +144,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Buscar CEP"
-            android:layout_below="@+id/campoCEP"
-            android:textSize="20dp"
-            android:layout_alignLeft="@id/campoCEP"
+            android:layout_below="@+id/labelEndereco"
+            android:layout_alignRight="@id/campoCEP"
+            android:theme="@style/AppTheme.Button"
             />
 
 
@@ -155,8 +156,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Cidade"
-            android:textSize="20dp"
-            android:layout_below="@id/botaoCEP"/>
+            android:textSize="18dp"
+            android:layout_below="@id/campoCEP"/>
 
         <EditText
             android:id="@+id/campoUF"
@@ -164,7 +165,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Estado"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_below="@id/campoCidade"
             />
 
@@ -174,7 +175,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Bairro"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_below="@id/campoUF"
             />
 
@@ -184,7 +185,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Rua"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_below="@id/campoBairro"
             />
 
@@ -194,7 +195,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Número"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_below="@id/campoRua"
             />
 
@@ -204,7 +205,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Complemento"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_below="@id/campoNumero"
             />
 
@@ -226,8 +227,9 @@
             android:layout_height="wrap_content"
             android:text="Cadastrar-se"
             android:layout_below="@+id/espacoVazio4"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_centerHorizontal="true"
+            android:theme="@style/AppTheme.Button"
             />
 
 

@@ -45,6 +45,8 @@ public class Contatos extends AppCompatActivity implements View.OnClickListener,
         actionBar.setTitle("Contatos");
         setSupportActionBar(toolbar);
 
+        //Referencia ao RecycleView
+       // lstListaContatos = (RecyclerView)findViewById(R.id.)
 
 
     }
@@ -65,15 +67,31 @@ public class Contatos extends AppCompatActivity implements View.OnClickListener,
                 startActivity(intent);
                 return true;
 
+            case R.id.dashboard:
+                Intent intent3 = new Intent(this,DashBoard.class);
+                startActivity(intent3);
+                return true;
+
             case R.id.cadastrar_usuario:
                 Intent intent1 = new Intent(this, CadastroUsuario.class);
                 startActivity(intent1);
                 return true;
 
-            case R.id.contatos:
-                Intent intent2 = new Intent(this, Contatos.class);
+            case R.id.novo_contato:
+                Intent intent2 = new Intent(this, CadastroContato.class);
                 startActivity(intent2);
                 return true;
+
+            case R.id.contatos:
+                Intent intent4 = new Intent(this, Contatos.class);
+                startActivity(intent4);
+                return true;
+
+            case R.id.cadastro_servico:
+                Intent intent5 = new Intent(this, CadastroServico.class);
+                startActivity(intent5);
+                return true;
+
 
         }
 
