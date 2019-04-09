@@ -1,6 +1,7 @@
 package com.example.apphairnew.Service;
 
 import com.example.apphairnew.model.ContatoModel;
+import com.example.apphairnew.model.HorarioModel;
 import com.example.apphairnew.model.LoginModel;
 import com.example.apphairnew.model.ProfModel;
 import com.example.apphairnew.model.ServicoModel;
@@ -8,6 +9,7 @@ import com.example.apphairnew.response.CadContatoResponse;
 import com.example.apphairnew.response.CadProfResponse;
 import com.example.apphairnew.response.CadServicoResponse;
 import com.example.apphairnew.response.CepResponse;
+import com.example.apphairnew.response.HorarioResponse;
 import com.example.apphairnew.response.LoginResponse;
 
 import retrofit2.Call;
@@ -32,6 +34,9 @@ public interface ApiService {
 
     @POST("auth/CadastroServico")
     Call<CadServicoResponse> CadServico(@Body ServicoModel body);
+
+    @POST("auth/MarcarHorario")
+    Call<HorarioResponse> MarcarHorario(@Body HorarioModel body);
 
 
 
