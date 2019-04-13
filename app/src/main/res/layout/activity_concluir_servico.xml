@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CadastroServico"
-    android:id="@+id/cadastro_servico"
-    android:orientation="vertical">
+    tools:context=".ui.ConcluirServico"
+    android:id="@+id/concluirServico">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,13 +27,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
                 <TextView
                     android:id="@+id/centralizador"
                     android:layout_width="50dp"
                     android:layout_height="20dp"
                     android:layout_centerHorizontal="true"
 
+                    />
+                <TextView
+                    android:id="@+id/labelSobreCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Sobre o cliente:"
+                    android:textSize="18dp"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_below="@+id/centralizador"/>
+
+
+                <TextView
+                    android:id="@+id/labelNomeContato"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Nome do cliente"
+                    android:textSize="18dp"
+                    android:layout_below="@id/labelSobreCliente"
+                    android:inputType="textPersonName"
+                    />
+
+                <TextView
+                    android:id="@+id/espacoVazio1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/labelNomeContato"
                     />
 
                 <TextView
@@ -44,95 +70,96 @@
                     android:hint="Sobre o serviço:"
                     android:textSize="18dp"
                     android:textColorHint="@color/colorPrimary"
-                    android:layout_below="@+id/centralizador"/>
-
-
-                <EditText
-                    android:id="@+id/campoNomeServico"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:hint="Digite o nome do serviço"
-                    android:textSize="18dp"
-                    android:layout_below="@id/labelSobreServico"
-                    />
-
-                <EditText
-                    android:id="@+id/campoDescServico"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:hint="Digite uma descrição para o serviço"
-                    android:textSize="18dp"
-                    android:layout_below="@id/campoNomeServico"
-                    />
-
-                <EditText
-                    android:id="@+id/campoPrecoServico"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:hint="Digite o preço do serviço"
-                    android:textSize="18dp"
-                    android:layout_below="@id/campoDescServico"
-                    />
-
-                <TextView
-                    android:id="@+id/espacoVazio1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@id/campoPrecoServico"
-                    />
-
-                <TextView
-                    android:id="@+id/labelTempoServico"
-                    android:layout_width="220dp"
-                    android:layout_height="wrap_content"
-                    android:hint="Tempo padrão do serviço:"
-                    android:textSize="18dp"
-                    android:textColorHint="@color/colorPrimary"
                     android:layout_below="@+id/espacoVazio1"/>
 
-                <Spinner
-                    android:id="@+id/spinnerTempoServico"
-                    android:layout_width="140dp"
+                <TextView
+                    android:id="@+id/labelNomeServico"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:spinnerMode="dropdown"
-                    android:layout_below="@+id/espacoVazio1"
-                    android:layout_toRightOf="@+id/labelTempoServico"/>
+                    android:layout_centerHorizontal="true"
+                    android:hint="Nome do serviço"
+                    android:textSize="18dp"
+                    android:layout_below="@id/labelSobreServico"
+                    android:inputType="textPersonName"
+                    />
 
                 <TextView
                     android:id="@+id/espacoVazio2"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@id/spinnerTempoServico"
+                    android:layout_below="@id/labelNomeServico"
                     />
 
+                <TextView
+                    android:id="@+id/labelSobrePagamento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Condições de pagamento:"
+                    android:textSize="18dp"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_below="@+id/espacoVazio2"/>
+
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@+id/labelSobrePagamento"
+                    android:id="@+id/rbFormaPagamento"
+                    >
+                    <RadioButton android:id="@+id/radio_vista"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A vista"
+                        />
+                    <RadioButton android:id="@+id/radio_prazo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A prazo"
+                        />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/labelPrazoDias"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Prazo em 30 dias"
+                    android:textSize="18dp"
+                    android:layout_below="@id/rbFormaPagamento"
+                    android:inputType="textPersonName"
+                    />
+                <TextView
+                    android:id="@+id/espacoVazio3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/labelPrazoDias"
+                    />
                 <Button
-                    android:id="@+id/botaoCadastrarServico"
+                    android:id="@+id/botaoConcluirHorario"
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
-                    android:text="Cadastrar serviço"
-                    android:layout_below="@+id/espacoVazio2"
+                    android:text="Concluir serviço"
+                    android:layout_below="@+id/espacoVazio3"
                     android:textSize="18dp"
                     android:layout_centerHorizontal="true"
                     android:theme="@style/AppTheme.Button"
                     />
 
-
                 <Button
-                    android:id="@+id/botaoCancelarServico"
+                    android:id="@+id/botaoCancelarHorario"
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:text="Cancelar serviço"
-                    android:layout_below="@+id/botaoCadastrarServico"
+                    android:layout_below="@+id/botaoConcluirHorario"
                     android:textSize="18dp"
                     android:layout_centerHorizontal="true"
                     android:theme="@style/AppTheme.Button"
                     />
+
+
+
 
             </RelativeLayout>
         </ScrollView>

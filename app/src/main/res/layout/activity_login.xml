@@ -100,7 +100,7 @@
             android:layout_below="@+id/espacoVazio2"
             android:layout_centerHorizontal="true"
             android:text="Login"
-            android:textSize="15dp"
+            android:textSize="18dp"
             android:theme="@style/AppTheme.Button" />
 
         <TextView

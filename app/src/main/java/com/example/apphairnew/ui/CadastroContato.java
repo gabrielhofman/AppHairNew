@@ -174,25 +174,25 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
 
                 Toast.makeText(getApplicationContext(), freqContato, Toast.LENGTH_SHORT).show();
 
-               // service.CadContato(contatoModel).enqueue(new Callback<CadContatoResponse>() {
-                  //  @Override
-                   // public void onResponse(Call<CadContatoResponse> call, Response<CadContatoResponse> response) {
-                     //   String mensagem;
-                      //   if (response.body().isSuccess()){
-                      //   mensagem = "Cadastro efetuado com sucesso";
-                      //   }else{
-                      //   mensagem = "Falha no cadastro"+ response.body().getMessage();
-                        // }
-                        // Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                service.CadContato(contatoModel).enqueue(new Callback<CadContatoResponse>() {
+                    @Override
+                    public void onResponse(Call<CadContatoResponse> call, Response<CadContatoResponse> response) {
+                        String mensagem;
+                         if (response.body().isSuccess()){
+                         mensagem = "Cadastro efetuado com sucesso";
+                         }else{
+                         mensagem = "Falha no cadastro"+ response.body().getMessage();
+                         }
+                         Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
 
-                  //  }
+                    }
 
-                  //  @Override
-                   // public void onFailure(Call<CadContatoResponse> call, Throwable t) {
-                  //      Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                  //      t.printStackTrace();
-                   // }
-              //  });
+                    @Override
+                    public void onFailure(Call<CadContatoResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    }
+                });
 
 
 

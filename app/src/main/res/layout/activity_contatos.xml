@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.Contatos"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/contatos"
     android:orientation="vertical">
 
     <LinearLayout
@@ -40,46 +40,50 @@
 
             <EditText
                 android:id="@+id/campoBusca"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:hint="Buscar por"
-                android:textSize="20dp"
+                android:hint="Buscar por: "
+                android:textSize="18dp"
                 android:layout_below="@id/centralizador"
                 />
             <Button
                 android:id="@+id/botaoAbrirCadastro"
-                android:layout_width="match_parent"
+                android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:text="Abrir cadastro"
-                android:textStyle="bold"
-                android:layout_below="@id/campoBusca"/>
+                android:layout_below="@id/campoBusca"
+                android:theme="@style/AppTheme.Button"
+                android:layout_centerHorizontal="true"/>
 
             <Button
                 android:id="@+id/botaoGaleriaFotos"
-                android:layout_width="match_parent"
+                android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:text="Abrir galeria de fotos"
-                android:textStyle="bold"
                 android:layout_below="@+id/botaoAbrirCadastro"
+                android:theme="@style/AppTheme.Button"
+                android:layout_centerHorizontal="true"
                 />
 
             <Button
                 android:id="@+id/botaoMarcarHorario"
-                android:layout_width="match_parent"
+                android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:text="Marcar horário"
-                android:textStyle="bold"
                 android:layout_below="@id/botaoGaleriaFotos"
+                android:theme="@style/AppTheme.Button"
+                android:layout_centerHorizontal="true"
                 />
 
             <Button
                 android:id="@+id/botaoExcluirContato"
-                android:layout_width="match_parent"
+                android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:text="Excluir contato"
-                android:textStyle="bold"
-                android:layout_below="@id/botaoMarcarHorario"/>
+                android:layout_below="@id/botaoMarcarHorario"
+                android:theme="@style/AppTheme.Button"
+                android:layout_centerHorizontal="true"/>
 
 
 
