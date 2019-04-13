@@ -89,7 +89,7 @@
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/labelCriarConta"
+            android:layout_below="@+id/labelCriarConta"
             />
 
 

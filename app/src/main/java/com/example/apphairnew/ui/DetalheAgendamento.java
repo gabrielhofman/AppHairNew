@@ -98,6 +98,8 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
                 startActivity(intent);
                 return true;
 
+
+
             case R.id.dashboard:
                 Intent intent3 = new Intent(this, DashBoard.class);
                 startActivity(intent3);
@@ -122,6 +124,8 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
                 Intent intent5 = new Intent(this, CadastroServico.class);
                 startActivity(intent5);
                 return true;
+
+
 
         }
         return false;

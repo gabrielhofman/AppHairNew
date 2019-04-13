@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.model.ServicoModel;
+import com.example.apphairnew.response.GetServicoResponse2;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,14 +19,14 @@ import java.util.List;
 public class AdapterSerico extends RecyclerView.Adapter<AdapterSerico.ViewHolder> {
 
     itemClicadoListener itemClicado;
-    List<ServicoModel> servicoModels;
+    List<GetServicoResponse2> servicoModels;
     private LayoutInflater inflater;
     private Context context;
 
 
 
 
-    public AdapterSerico(List<ServicoModel>servicoModel, Context context){
+    public AdapterSerico(List<GetServicoResponse2>servicoModel, Context context){
         this.servicoModels = servicoModel;
         this.inflater = LayoutInflater.from(context);
         this.context =context;
@@ -63,8 +64,8 @@ public class AdapterSerico extends RecyclerView.Adapter<AdapterSerico.ViewHolder
         //        holder.titulo.setText(dataSetProduto.getNomeProduto());
 
 
-        ServicoModel servicoModel = servicoModels.get(position);
-        holder.nomeServico.setText(servicoModel.getNomeServico());
+        GetServicoResponse2 servicoModel = servicoModels.get(   position);
+        holder.nomeServico.setText(servicoModel.getDescServico());
 
     }
 
@@ -116,7 +117,7 @@ public class AdapterSerico extends RecyclerView.Adapter<AdapterSerico.ViewHolder
 
     }
 
-    public ServicoModel getItem(int position ) {
+    public GetServicoResponse2 getItem(int position ) {
         return servicoModels.get(position);
     }
 }

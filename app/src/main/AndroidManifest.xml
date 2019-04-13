@@ -12,11 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.DetalheAgendamento">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.ServicoListaTeste" />
         <activity android:name=".ui.CadastroContato" />
@@ -28,7 +24,11 @@
         <activity android:name=".ui.NovoContato" />
         <activity android:name=".ui.CadastroUsuario" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ui.Login" />
+        <activity android:name=".ui.Login"> <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
     </application>
 
 </manifest>

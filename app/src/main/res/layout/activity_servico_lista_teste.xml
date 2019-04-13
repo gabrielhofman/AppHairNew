@@ -22,6 +22,12 @@
             android:id="@+id/toolbar"></android.support.v7.widget.Toolbar>
 
 
+        <Button
+            android:id="@+id/gerar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="gerar"/>
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"

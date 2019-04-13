@@ -153,6 +153,11 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
                 startActivity(intent5);
                 return true;
 
+            case R.id.fluxo_caixa:
+                Intent intent6 = new Intent(this, ServicoListaTeste.class);
+                startActivity(intent6);
+                return true;
+
 
         }
         return false;

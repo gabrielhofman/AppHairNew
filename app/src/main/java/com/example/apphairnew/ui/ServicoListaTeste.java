@@ -1,5 +1,6 @@
 package com.example.apphairnew.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -39,13 +41,14 @@ public class ServicoListaTeste extends AppCompatActivity implements View.OnClick
     private NavigationView navigationView;
 
 
+    private Button gerar;
     private RecyclerView recyclerView;
-    private AdapterSerico adapterSerico;
+    private static AdapterSerico adapterSerico;
     private LinearLayoutManager linearLayoutManager;
 
 
 
-
+        public static Context contexto;
 
 
 
@@ -54,8 +57,23 @@ public class ServicoListaTeste extends AppCompatActivity implements View.OnClick
 
     private ArrayList<ServicoModel> modelos = new ArrayList<>();
 
-    private ArrayList<ServicoModel> modelos2 = new ArrayList<>();
+    private ArrayList<GetServicoResponse2> modelos2 = new ArrayList<>();
 
+    private List<ServicoModel> modelos3;
+
+    public static List<GetServicoResponse2> teste = new ArrayList<>();
+
+    public List<GetServicoResponse2> getTeste() {
+        return teste;
+    }
+
+    public void setTeste(List<GetServicoResponse2> teste) {
+        this.teste = teste;
+    }
+
+
+
+     private List<GetServicoResponse2> teste2;
 
     private ApiService service = ApiControler.CreateController();
 
@@ -87,10 +105,29 @@ public class ServicoListaTeste extends AppCompatActivity implements View.OnClick
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
+
+        gerar = (Button) findViewById(R.id.gerar);
+        gerar.setOnClickListener(this);
 //
 
 
+        this.contexto = getApplicationContext();
+
         ServicoModel serv1 = new ServicoModel();
+
+        GetServicoResponse2  serv3= new GetServicoResponse2();
+
+        serv3.setNomeServico("batata2222");
+
+        GetServicoResponse2  serv4= new GetServicoResponse2();
+
+        serv4.setNomeServico("PURE");
+
+
+        this.modelos2.add(serv3);
+       this.modelos2.add(serv4);
+
+
 
         serv1.setNomeServico("adobe");
 
@@ -110,41 +147,71 @@ public class ServicoListaTeste extends AppCompatActivity implements View.OnClick
 
 
 
+     //
 
 
-
-        int usuario = 1;
+        final int usuario = 1;
        // service.getServico(usuario).enqueue(new Callback<List<GetServicoResponse2>>);
 
 
 
-
-        service.getServico(usuario).enqueue(new Callback<GetServicoResponse>() {
+        service.getServico(usuario).enqueue(new Callback<List<GetServicoResponse2>>() {
             @Override
-            public void onResponse(Call<GetServicoResponse> call, Response<GetServicoResponse> response) {
-                String teste;
-         //      modelos2.addAll(response.body().getServicos());
+            public void onResponse(Call<List<GetServicoResponse2>> call, Response<List<GetServicoResponse2>> response) {
+                // modelos2.addAll(response.body().getServicos());
+                //  modelos3.addAll(response.body().addAll(response));
+
+                //List<ServicoModel> teste = response.body().get(teste);
 
 
+               teste = response.body();
+
+           //    setTeste(teste);
+
+               // modelos2 = response.body();
 
                 Toast.makeText(getApplicationContext(), "AQUI", Toast.LENGTH_SHORT).show();
+
+
+
+              //  adapterSerico = new AdapterSerico(modelos2,contexto);
+
+
+                GerarTela();
             }
 
             @Override
-            public void onFailure(Call<GetServicoResponse> call, Throwable t) {
+            public void onFailure(Call<List<GetServicoResponse2>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
                 t.printStackTrace();
             }
+
         });
 
-        adapterSerico = new AdapterSerico(this.modelos2,this);
+
+
+
+        if(teste.isEmpty()){
+              Toast.makeText(getApplicationContext(), "vazio", Toast.LENGTH_SHORT).show();
+        }else{
+                Toast.makeText(getApplicationContext(), "cheio", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
+
+
+    }
+
+    public void GerarTela()
+    {
+        adapterSerico = new AdapterSerico(teste,this);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setAdapter(adapterSerico);
         recyclerView.setLayoutManager(linearLayoutManager);
+
         adapterSerico.setItemClicado(this);
-
-    //    Toast.makeText(getApplicationContext(), , Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
@@ -173,11 +240,34 @@ public class ServicoListaTeste extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
+        if(teste.isEmpty()){
+            Toast.makeText(getApplicationContext(), "vazio", Toast.LENGTH_SHORT).show();
 
+        }else{
+            Toast.makeText(getApplicationContext(), "cheio", Toast.LENGTH_SHORT).show();
+
+        }
+
+
+
+
+
+
+        //   adapterSerico = new AdapterSerico(modelos2,contexto);
+        //     adapterSerico = new AdapterSerico(modelos2,getApplicationContext());
+
+
+        //    Toast.makeText(getApplicationContext(), , Toast.LENGTH_SHORT).show();
+
+        //adapterSerico = new AdapterSerico(modelos2,getApplicationContext());
     }
 
     @Override
     public void noItemClicado(View view, int position) {
 
+
+        GetServicoResponse2 servico = new GetServicoResponse2();
+        servico = adapterSerico.getItem(position);
+        Toast.makeText(getApplicationContext(), servico.getDescServico(), Toast.LENGTH_SHORT).show();
     }
 }
