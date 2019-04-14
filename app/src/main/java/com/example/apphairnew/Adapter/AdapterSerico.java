@@ -1,19 +1,15 @@
 package com.example.apphairnew.Adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.apphairnew.R;
-import com.example.apphairnew.model.ServicoModel;
 import com.example.apphairnew.response.GetServicoResponse2;
 
-import java.util.Collections;
 import java.util.List;
 
 public class AdapterSerico extends RecyclerView.Adapter<AdapterSerico.ViewHolder> {
@@ -65,7 +61,7 @@ public class AdapterSerico extends RecyclerView.Adapter<AdapterSerico.ViewHolder
 
 
         GetServicoResponse2 servicoModel = servicoModels.get(   position);
-        holder.nomeServico.setText(servicoModel.getDescServico());
+        holder.nomeServico.setText(String.valueOf(servicoModel.getNomeServico()));
 
     }
 

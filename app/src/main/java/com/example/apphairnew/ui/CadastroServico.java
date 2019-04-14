@@ -20,6 +20,7 @@ import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.model.ServicoModel;
 import com.example.apphairnew.response.CadServicoResponse;
+import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.web.ApiControler;
 
 import retrofit2.Call;
@@ -37,6 +38,7 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
     private Button botaoCadastro;
     private Button botaoCancelar;
 
+
     private Toolbar toolbar;
     private ActionBar actionBar;
     private DrawerLayout drawerLayout;
@@ -47,7 +49,11 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
     private String tempoServico;
     private float precoServico;
 
+    private boolean alterando;
+
     private ApiService service = ApiControler.CreateController();
+
+    private  GetServicoResponse2 serv;
 
 
     @Override
@@ -89,6 +95,20 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
         Button botaoCancelar = (Button)findViewById(R.id.botaoCancelarServico);
         this.botaoCancelar = botaoCancelar;
         botaoCancelar.setOnClickListener(this);
+
+        serv = (GetServicoResponse2)getIntent().getSerializableExtra("serv");
+
+
+        if(serv != null) {
+            campoNomeServico.setText(serv.getDescServico());
+            campoDescServico.setText(serv.getNomeServico());
+            campoPrecoServico.setText(String.valueOf(serv.getPrecoServico()));
+            this.alterando = true;
+
+        }else
+        {
+            this.alterando = false;
+        }
     }
 
     @Override
@@ -125,21 +145,21 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
             precoServico = Float.parseFloat(campoPrecoServico.getText().toString());
             tempoServico = spinnerTempoServico.getSelectedItem().toString();
 
-            if (nomeServico.isEmpty() || descServico.isEmpty() || tempoServico.isEmpty()) {
-                Toast.makeText(CadastroServico.this, "Complete todos os campos", Toast.LENGTH_LONG).show();
-            } else {
+            ServicoModel servicoModel = new ServicoModel();
+            int usuario = 1;
 
+            servicoModel.setIdServico(serv.idServico);
+                       servicoModel.setNomeServico(nomeServico);
+            servicoModel.setDescServico(descServico);
+            servicoModel.setPrecoServico(precoServico);
+            servicoModel.setTempoServico(tempoServico);
 
-                ServicoModel servicoModel = new ServicoModel();
+            if (alterando) {
 
-                servicoModel.setNomeServico(nomeServico);
-                servicoModel.setDescServico(descServico);
-                servicoModel.setPrecoServico(precoServico);
-                servicoModel.setTempoServico(tempoServico);
 
                 Toast.makeText(getApplicationContext(), servicoModel.getNomeServico() + descServico + precoServico + tempoServico, Toast.LENGTH_SHORT).show();
 
-                service.CadServico(servicoModel).enqueue(new Callback<CadServicoResponse>() {
+                service.AltServico(servicoModel).enqueue(new Callback<CadServicoResponse>() {
                     @Override
                     public void onResponse(Call<CadServicoResponse> call, Response<CadServicoResponse> response) {
                         String mensagem;
@@ -149,6 +169,7 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
                             mensagem = "Falha no cadastro" + response.body().getMessage();
                         }
                         Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
@@ -156,12 +177,41 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
                         Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
                         t.printStackTrace();
                     }
-
                 });
+
+            } else {
+                if (nomeServico.isEmpty() || descServico.isEmpty() || tempoServico.isEmpty()) {
+                    Toast.makeText(CadastroServico.this, "Complete todos os campos", Toast.LENGTH_LONG).show();
+                } else {
+
+
+
+
+                    Toast.makeText(getApplicationContext(), servicoModel.getNomeServico() + descServico + precoServico + tempoServico, Toast.LENGTH_SHORT).show();
+
+                    service.CadServico(servicoModel).enqueue(new Callback<CadServicoResponse>() {
+                        @Override
+                        public void onResponse(Call<CadServicoResponse> call, Response<CadServicoResponse> response) {
+                            String mensagem;
+                            if (response.body().isSuccess()) {
+                                mensagem = "Cadastro efetuado com sucesso";
+                            } else {
+                                mensagem = "Falha no cadastro" + response.body().getMessage();
+                            }
+                            Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<CadServicoResponse> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            t.printStackTrace();
+                        }
+
+                    });
+                }
+
+
             }
-
-
-
-            }
+        }
         }
     }

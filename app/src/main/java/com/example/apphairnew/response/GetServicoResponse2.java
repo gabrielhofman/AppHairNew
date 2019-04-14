@@ -1,12 +1,22 @@
 package com.example.apphairnew.response;
 
-public class GetServicoResponse2 {
+import java.io.Serializable;
 
+public class GetServicoResponse2 implements Serializable {
+
+    public int idServico;
     public String nomeServico;
-    public String tempoServico;
+    public float tempoServico;
     public String descServico;
     public float precoServico;
 
+    public int getIdServico() {
+        return idServico;
+    }
+
+    public void setIdServico(int id) {
+        this.idServico = id;
+    }
 
     public String getNomeServico() {
         return nomeServico;
@@ -16,11 +26,11 @@ public class GetServicoResponse2 {
         this.nomeServico = nomeServico;
     }
 
-    public String getTempoServico() {
+    public float getTempoServico() {
         return tempoServico;
     }
 
-    public void setTempoServico(String tempoServico) {
+    public void setTempoServico(float tempoServico) {
         this.tempoServico = tempoServico;
     }
 

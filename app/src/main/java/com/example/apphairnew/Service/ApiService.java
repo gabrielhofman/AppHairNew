@@ -9,7 +9,6 @@ import com.example.apphairnew.response.CadContatoResponse;
 import com.example.apphairnew.response.CadProfResponse;
 import com.example.apphairnew.response.CadServicoResponse;
 import com.example.apphairnew.response.CepResponse;
-import com.example.apphairnew.response.GetServicoResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.response.HorarioResponse;
 import com.example.apphairnew.response.LoginResponse;
@@ -45,5 +44,13 @@ public interface ApiService {
 
     @POST("auth/MarcarHorario")
     Call<HorarioResponse> MarcarHorario(@Body HorarioModel body);
+
+    @POST("auth/AlterarServico")
+    Call<CadServicoResponse> AltServico(@Body ServicoModel body);
+
+
+
+
+
 
 }
