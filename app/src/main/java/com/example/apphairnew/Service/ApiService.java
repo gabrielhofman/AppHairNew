@@ -1,10 +1,14 @@
 package com.example.apphairnew.Service;
 
 import com.example.apphairnew.model.ContatoModel;
+import com.example.apphairnew.model.CtsPagarModel;
+import com.example.apphairnew.model.CtsReceberModel;
 import com.example.apphairnew.model.HorarioModel;
 import com.example.apphairnew.model.LoginModel;
 import com.example.apphairnew.model.ProfModel;
 import com.example.apphairnew.model.ServicoModel;
+import com.example.apphairnew.response.AddCtsPagarResponse;
+import com.example.apphairnew.response.AddCtsReceberResponde;
 import com.example.apphairnew.response.CadContatoResponse;
 import com.example.apphairnew.response.CadProfResponse;
 import com.example.apphairnew.response.CadServicoResponse;
@@ -38,6 +42,12 @@ public interface ApiService {
 
     @GET("{CEP}/json")
     Call<CepResponse> getCEP(@Path("CEP") String CEP);
+
+    @POST("auth/AddCtsReceber")
+    Call<AddCtsReceberResponde> AddCtsReceb(@Body CtsReceberModel body);
+
+    @POST("auth/AddCtsPagar")
+    Call<AddCtsPagarResponse> AddCtsPagar(@Body CtsPagarModel body);
 
 
     @GET("auth/GetServico/{usuario}")

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AddContasReceber">
+    tools:context=".ui.LiqContasReceb">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,25 +74,7 @@
                     android:layout_below="@id/labelValores"
                     />
 
-                <TextView
-                    android:id="@+id/labelNomeContato"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Contato:"
-                    android:textSize="18dp"
-                    android:textColorHint="@color/colorPrimary"
-                    android:layout_below="@+id/campoValores"/>
 
-
-                <EditText
-                    android:id="@+id/campoNomeContato"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:hint="Digite o nome do contato"
-                    android:textSize="18dp"
-                    android:layout_below="@id/labelNomeContato"
-                    />
 
                 <TextView
                     android:id="@+id/labelObservacao"
@@ -101,7 +83,7 @@
                     android:hint="Sobre:"
                     android:textSize="18dp"
                     android:textColorHint="@color/colorPrimary"
-                    android:layout_below="@+id/campoNomeContato"/>
+                    android:layout_below="@+id/campoValores"/>
 
                 <EditText
                     android:id="@+id/campoObservacao"
@@ -110,7 +92,7 @@
                     android:layout_centerHorizontal="true"
                     android:hint="Digite uma observação"
                     android:textSize="18dp"
-                    android:layout_below="@id/campoNomeContato"
+                    android:layout_below="@id/labelObservacao"
                     />
 
                 <TextView
@@ -143,7 +125,6 @@
                     android:layout_centerHorizontal="true"
                     android:theme="@style/AppTheme.Button"
                     />
-
 
             </RelativeLayout>
         </ScrollView>
