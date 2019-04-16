@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AddContasReceber">
+    tools:context=".ui.AddContasPagar">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -122,10 +122,10 @@
                     />
 
                 <Button
-                    android:id="@+id/botaoCadastrarReceb"
+                    android:id="@+id/botaoCadastrarPag"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:text="Cadastrar conta a receber"
+                    android:text="Adicionar conta para pagar"
                     android:layout_below="@+id/espacoVazio1"
                     android:textSize="18dp"
                     android:layout_centerHorizontal="true"
@@ -134,11 +134,11 @@
 
 
                 <Button
-                    android:id="@+id/botaoCancelarReceb"
+                    android:id="@+id/botaoCancelarPag"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:text="Cancelar conta a receber"
-                    android:layout_below="@+id/botaoCadastrarReceb"
+                    android:text="Cancelar conta para pagar"
+                    android:layout_below="@+id/botaoCadastrarPag"
                     android:textSize="18dp"
                     android:layout_centerHorizontal="true"
                     android:theme="@style/AppTheme.Button"
