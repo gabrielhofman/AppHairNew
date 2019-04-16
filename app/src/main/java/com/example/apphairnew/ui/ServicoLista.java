@@ -159,7 +159,7 @@ public class ServicoLista extends AppCompatActivity implements View.OnClickListe
 
 
 
-        Intent intent5 = new Intent(this, CadastroServico.class); // testeeee
+        Intent intent5 = new Intent(this, CadastroServico.class); // testeeeekjnk
 
 
         intent5.putExtra("serv",servico);
