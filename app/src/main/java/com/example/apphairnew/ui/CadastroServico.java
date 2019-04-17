@@ -117,8 +117,13 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
 
         switch (menuItem.getItemId()){
             case R.id.login:
-                Intent intent = new Intent(this, ServicoListaTeste.class);
+                Intent intent = new Intent(this, Login.class);
                 startActivity(intent);
+                return true;
+
+            case R.id.dashboard:
+                Intent intent3 = new Intent(this,DashBoard.class);
+                startActivity(intent3);
                 return true;
 
             case R.id.cadastrar_usuario:
@@ -130,9 +135,20 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
                 Intent intent2 = new Intent(this, CadastroContato.class);
                 startActivity(intent2);
                 return true;
+
+            case R.id.lista_contato:
+                Intent intent4 = new Intent(this, ContatoLista.class);
+                startActivity(intent4);
+                return true;
+
+            case R.id.cadastro_servico:
+                Intent intent5 = new Intent(this, CadastroServico.class);
+                startActivity(intent5);
+                return true;
+
         }
 
-        return false;
+        return false;//
     }
 
     @Override

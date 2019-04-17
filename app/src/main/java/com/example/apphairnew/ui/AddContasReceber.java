@@ -110,8 +110,8 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
                 startActivity(intent2);
                 return true;
 
-            case R.id.contatos:
-                Intent intent4 = new Intent(this, Contatos.class);
+            case R.id.lista_contato:
+                Intent intent4 = new Intent(this, ContatoLista.class);
                 startActivity(intent4);
                 return true;
 

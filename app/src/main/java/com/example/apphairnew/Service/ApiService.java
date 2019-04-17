@@ -4,6 +4,8 @@ import com.example.apphairnew.model.ContatoModel;
 import com.example.apphairnew.model.CtsPagarModel;
 import com.example.apphairnew.model.CtsReceberModel;
 import com.example.apphairnew.model.HorarioModel;
+import com.example.apphairnew.model.LiqPagarModel;
+import com.example.apphairnew.model.LiqRecebModel;
 import com.example.apphairnew.model.LoginModel;
 import com.example.apphairnew.model.ProfModel;
 import com.example.apphairnew.model.ServicoModel;
@@ -15,6 +17,8 @@ import com.example.apphairnew.response.CadServicoResponse;
 import com.example.apphairnew.response.CepResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.response.HorarioResponse;
+import com.example.apphairnew.response.LiqCtsPagarResponse;
+import com.example.apphairnew.response.LiqCtsRecebResponse;
 import com.example.apphairnew.response.LoginResponse;
 
 import java.util.List;
@@ -48,6 +52,11 @@ public interface ApiService {
     @POST("auth/AddCtsPagar")
     Call<AddCtsPagarResponse> AddCtsPagar(@Body CtsPagarModel body);
 
+    @POST("auth/LiqCtsReceber")
+    Call<LiqCtsRecebResponse> LiqCtsReceb(@Body LiqRecebModel body);
+
+    @POST("auth/LiqCtsPagar")
+    Call<LiqCtsPagarResponse> LiqCtsPagar(@Body LiqPagarModel body);
 
     @GET("auth/GetServico/{usuario}")
     Call <List<GetServicoResponse2>> getServico(@Path("usuario") int usuario);

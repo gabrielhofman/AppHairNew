@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.LiqContasPagar">
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/Widget.AppCompat.Toolbar"
+        android:id="@+id/toolbar"></android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/centralizador"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_centerHorizontal="true"
+
+                />
+
+            <TextView
+                android:id="@+id/labelDataVencimento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Vencimento:"
+                android:textSize="18dp"
+                android:textColorHint="@color/colorPrimary"
+                android:layout_below="@+id/centralizador"/>
+
+
+            <EditText
+                android:id="@+id/campoDataVencimento"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:hint="Digite a data de vencimento"
+                android:textSize="18dp"
+                android:layout_below="@id/labelDataVencimento"
+                />
+            <TextView
+                android:id="@+id/labelValores"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Valor:"
+                android:textSize="18dp"
+                android:textColorHint="@color/colorPrimary"
+                android:layout_below="@+id/campoDataVencimento"/>
+
+
+            <EditText
+                android:id="@+id/campoValores"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:hint="Digite o valor"
+                android:textSize="18dp"
+                android:layout_below="@id/labelValores"
+                />
+
+
+
+            <TextView
+                android:id="@+id/labelObservacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Sobre:"
+                android:textSize="18dp"
+                android:textColorHint="@color/colorPrimary"
+                android:layout_below="@+id/campoValores"/>
+
+            <EditText
+                android:id="@+id/campoObservacao"
+                android:layout_width="300dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:hint="Digite uma observação"
+                android:textSize="18dp"
+                android:layout_below="@id/labelObservacao"
+                />
+
+            <TextView
+                android:id="@+id/espacoVazio1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/campoObservacao"
+                />
+
+            <Button
+                android:id="@+id/botaoCadastrarLiqPagar"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="Cadastrar conta a pagar"
+                android:layout_below="@+id/espacoVazio1"
+                android:textSize="18dp"
+                android:layout_centerHorizontal="true"
+                android:theme="@style/AppTheme.Button"
+                />
+
+
+            <Button
+                android:id="@+id/botaoCancelarLiqPagar"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="Cancelar conta a pagar"
+                android:layout_below="@+id/botaoCadastrarLiqPagar"
+                android:textSize="18dp"
+                android:layout_centerHorizontal="true"
+                android:theme="@style/AppTheme.Button"
+                />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>
+
+<android.support.design.widget.NavigationView
+android:layout_width="wrap_content"
+android:layout_height="match_parent"
+android:layout_gravity="start"
+android:id="@+id/navigation_view"
+app:menu="@menu/menu_lateral"
+app:headerLayout="@layout/drawer_header">
+</android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>

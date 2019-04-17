@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.LiqContasReceb"></activity>
+        <activity android:name=".ui.ContatoLista"></activity>
+        <activity android:name=".ui.LiqContasPagar" />
+        <activity android:name=".ui.LiqContasReceb" />
         <activity android:name=".ui.AddContasPagar" />
         <activity android:name=".ui.DetalheAgendamento" />
         <activity android:name=".ui.ServicoListaTeste" />

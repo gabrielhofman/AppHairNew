@@ -1,16 +1,16 @@
-package com.example.apphairnew.model;
+package com.example.apphairnew.response;
 
-import com.google.gson.annotations.JsonAdapter;
+import java.io.Serializable;
 
-public class ContatoModel {
+public class GetContatoResponse implements Serializable {
 
-    private int id;
-    private String nomeContato;
-    private String telContato;
-    private String dataNascCont;
-    private String obsContato;
-    private String sexoContato;
-    private String expFreqContato;
+    public int id;
+    public String nomeContato;
+    public String telContato;
+    public String dataNascCont;
+    public String obsContato;
+    public String sexoContato;
+    public String expFreqContato;
 
     public int getId() {
         return id;

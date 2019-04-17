@@ -20,4 +20,5 @@
         <item>A cada 90 dias</item>
         <item>A cada 120 dias</item>
     </string-array>
+    <string name="title_activity_liq_contas_pagar">LiqContasPagar</string>
 </resources>

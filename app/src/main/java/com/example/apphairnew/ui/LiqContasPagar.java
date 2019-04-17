@@ -16,36 +16,37 @@ import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
-import com.example.apphairnew.model.LiqRecebModel;
-import com.example.apphairnew.response.LiqCtsRecebResponse;
+import com.example.apphairnew.model.LiqPagarModel;
+import com.example.apphairnew.response.LiqCtsPagarResponse;
 import com.example.apphairnew.web.ApiControler;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LiqContasReceb extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class LiqContasPagar extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+
     private EditText campoVencimento;
     private EditText campoValor;
     private EditText campoObservacao;
 
-    private Button botaoCadastroLiqRec;
-    private Button botaoCancelaLiqRec;
+    private Button botaoCadastroLiqPag;
+    private Button botaoCancelaLiqPag;
 
     private Toolbar toolbar;
     private ActionBar actionBar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private LiqContasReceb liqContasReceb;
-    private LiqRecebModel liqRecebModel;
+    private LiqPagarModel liqPagarModel;
 
-    private String liqRecebVencimento, liqRecebObservacao;
-    private Float liqRecebValor;
+    private String liqPagarVencimento, liqPagarObservacao;
+    private Float liqPagarValor;
     private ApiService service = ApiControler.CreateController();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_liq_contas_receb);
+        setContentView(R.layout.activity_liq_contas_pagar);
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         drawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
@@ -63,19 +64,19 @@ public class LiqContasReceb extends AppCompatActivity implements View.OnClickLis
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
 
-        actionBar.setTitle("Liquidar contas a receber");
+        actionBar.setTitle("Liquidar contas a pagar");
 
         campoVencimento = (EditText) findViewById(R.id.campoDataVencimento);
         campoValor = (EditText) findViewById(R.id.campoValores);
         campoObservacao = (EditText) findViewById(R.id.campoObservacao);
 
-        Button botaoCadastroReceb = (Button)findViewById(R.id.botaoCadastrarReceb);
-        this.botaoCadastroLiqRec = botaoCadastroLiqRec;
-        botaoCadastroLiqRec.setOnClickListener(this);
+        Button botaoCadastroLiqPag = (Button)findViewById(R.id.botaoCadastrarLiqPagar);
+        this.botaoCadastroLiqPag = botaoCadastroLiqPag;
+        botaoCadastroLiqPag.setOnClickListener(this);
 
-        Button botaoCancelaLiqRec = (Button)findViewById(R.id.botaoCancelarReceb);
-        this.botaoCancelaLiqRec = botaoCancelaLiqRec;
-        botaoCancelaLiqRec.setOnClickListener(this);
+        Button botaoCancelaLiqPag = (Button)findViewById(R.id.botaoCancelarLiqPagar);
+        this.botaoCancelaLiqPag = botaoCancelaLiqPag;
+        botaoCancelaLiqPag.setOnClickListener(this);
 
     }
 
@@ -120,49 +121,42 @@ public class LiqContasReceb extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        if(v==botaoCadastroLiqPag){
+            liqPagarVencimento = campoVencimento.getText().toString();
+            liqPagarValor = Float.valueOf(campoValor.getText().toString());
+            liqPagarObservacao = campoObservacao.getText().toString();
 
-        if(v==botaoCadastroLiqRec){
-            liqRecebVencimento = campoVencimento.getText().toString();
-            liqRecebValor = Float.valueOf(campoValor.getText().toString());
-            liqRecebObservacao = campoObservacao.getText().toString();
+            if (liqPagarVencimento.isEmpty() || liqPagarObservacao.isEmpty()){
+                Toast.makeText(LiqContasPagar.this, "Complete todos os campos corretamente", Toast.LENGTH_LONG).show();
+            }else{
 
-            if(liqRecebVencimento.isEmpty() || liqRecebObservacao.isEmpty()){
-                Toast.makeText(LiqContasReceb.this, "Complete todos os campos corretamente", Toast.LENGTH_LONG).show();
-            } else {
+            LiqPagarModel liqPagarModel = new LiqPagarModel();
 
-                LiqRecebModel liqRecebModel = new LiqRecebModel();
+            liqPagarModel.setLiqPagarVencimento(liqPagarVencimento);
+            liqPagarModel.setLiqPagarValor(liqPagarValor);
+            liqPagarModel.setLiqPagarObservacao(liqPagarObservacao);
 
-                liqRecebModel.setLiqRecebVencimento(liqRecebVencimento);
-                liqRecebModel.setLiqRecebValor(liqRecebValor);
-                liqRecebModel.setLiqRecebObservacao(liqRecebObservacao);
-
-                service.LiqCtsReceb(liqRecebModel).enqueue(new Callback<LiqCtsRecebResponse>() {
-                    @Override
-                    public void onResponse(Call<LiqCtsRecebResponse> call, Response<LiqCtsRecebResponse> response) {
-                        String mensagem;
-                        if (response.body().isSuccess()) {
-                            mensagem = "Cadastro efetuado com sucesso";
-                        } else {
-                            mensagem = "Falha no cadastro:   " + response.body().getMessage();
-                        }
-
-                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
-
+            service.LiqCtsPagar(liqPagarModel).enqueue(new Callback<LiqCtsPagarResponse>() {
+                @Override
+                public void onResponse(Call<LiqCtsPagarResponse> call, Response<LiqCtsPagarResponse> response) {
+                    String mensagem;
+                    if (response.body().isSuccess()) {
+                        mensagem = "Cadastro efetuado com sucesso";
+                    } else {
+                        mensagem = "Falha no cadastro:   " + response.body().getMessage();
                     }
 
-                    @Override
-                    public void onFailure(Call<LiqCtsRecebResponse> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        t.printStackTrace();
-                    }
-                });
+                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
 
-            }
+                }
 
+                @Override
+                public void onFailure(Call<LiqCtsPagarResponse> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    t.printStackTrace();
+                }
+            });
         }
 
     }
-}
-
-
-
+}}
