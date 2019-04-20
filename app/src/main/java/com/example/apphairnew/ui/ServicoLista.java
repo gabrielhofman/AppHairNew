@@ -151,6 +151,11 @@ public class ServicoLista extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent5);
                 return true;
 
+            case R.id.fluxo_caixa:
+                Intent intent6 = new Intent(this, ServicoLista.class);
+                startActivity(intent6);
+                return true;
+
         }
 
         return false;//

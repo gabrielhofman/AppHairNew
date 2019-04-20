@@ -1,6 +1,6 @@
 package com.example.apphairnew.response;
 
-public class AddCtsReceberResponde {
+public class AddCtsReceberResponse {
 
     private boolean success;
     private String message;

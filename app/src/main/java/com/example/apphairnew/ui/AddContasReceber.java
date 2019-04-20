@@ -16,9 +16,12 @@ import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
+import com.example.apphairnew.Util.MaskEditUtil;
 import com.example.apphairnew.model.CtsReceberModel;
-import com.example.apphairnew.response.AddCtsReceberResponde;
+import com.example.apphairnew.response.AddCtsReceberResponse;
 import com.example.apphairnew.web.ApiControler;
+
+import java.math.BigDecimal;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,7 +44,8 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
     private CtsReceberModel ctsReceberModel;
 
     private String recebVencimento, recebNomeContato, recebObservacao;
-    private Float recebValor;
+    //private Float recebValor;
+    private BigDecimal recebValor = new BigDecimal("0,1");
     private ApiService service = ApiControler.CreateController();
     private ApiService serviceCep = ApiControler.CreatecontrollerCep();
 
@@ -74,6 +78,8 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
         campoValor = (EditText) findViewById(R.id.campoValores);
         campoNomeContato = (EditText) findViewById(R.id.campoNomeContato);
         campoObservacao = (EditText) findViewById(R.id.campoObservacao);
+
+        campoVencimento.addTextChangedListener(MaskEditUtil.mask(campoVencimento, MaskEditUtil.FORMAT_DATE));
 
         Button botaoCadastroReceb = (Button)findViewById(R.id.botaoCadastrarReceb);
         this.botaoCadastroReceb = botaoCadastroReceb;
@@ -130,7 +136,8 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
         if (v==botaoCadastroReceb){
 
             recebVencimento = campoVencimento.getText().toString();
-            recebValor = Float.valueOf(campoValor.getText().toString());
+            //recebValor = Float.valueOf(campoValor.getText().toString());
+            recebValor = (BigDecimal) BigDecimal.valueOf(Long.parseLong(campoValor.getText().toString()))
             recebNomeContato = campoNomeContato.getText().toString();
             recebObservacao = campoObservacao.getText().toString();
 
@@ -144,9 +151,31 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
                 ctsReceberModel.setRecebNomeContato(recebNomeContato);
                 ctsReceberModel.setRecebObservacao(recebObservacao);
 
-                service.AddCtsReceb(ctsReceberModel).enqueue(new Callback<AddCtsReceberResponde>() {
+
+                service.AddCtsReceb(ctsReceberModel).enqueue(new Callback<AddCtsReceberResponse>() {
                     @Override
-                    public void onResponse(Call<AddCtsReceberResponde> call, Response<AddCtsReceberResponde> response) {
+                    public void onResponse(Call<AddCtsReceberResponse> call, Response<AddCtsReceberResponse> response) {
+                        String mensagem;
+
+
+                        if (response.body().isSuccess()) {
+                            mensagem = "Cadastro efetuado com sucesso";
+                        } else {
+                            mensagem = "Falha no cadastro:   " + response.body().getMessage();
+                        }
+                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddCtsReceberResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    }
+                });
+
+              /*  service.AddCtsReceb(ctsReceberModel).enqueue(new Callback<AddCtsReceberResponse>() {
+                    @Override
+                    public void onResponse(Call<AddCtsReceberResponse> call, Response<AddCtsReceberResponse> response) {
                         String mensagem;
                         if (response.body().isSuccess()) {
                             mensagem = "Cadastro efetuado com sucesso";
@@ -159,11 +188,11 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
                     }
 
                     @Override
-                    public void onFailure(Call<AddCtsReceberResponde> call, Throwable t) {
+                    public void onFailure(Call<AddCtsReceberResponse> call, Throwable t) {
                         Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
                         t.printStackTrace();
                     }
-                });
+                }); */
 
             }
             }

@@ -146,6 +146,11 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent5);
                 return true;
 
+            case R.id.fluxo_caixa:
+                Intent intent6 = new Intent(this, ServicoLista.class);
+                startActivity(intent6);
+                return true;
+
         }
 
         return false;//
@@ -164,7 +169,7 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
             ServicoModel servicoModel = new ServicoModel();
             int usuario = 1;
 
-            servicoModel.setIdServico(serv.idServico);
+
                        servicoModel.setNomeServico(nomeServico);
             servicoModel.setDescServico(descServico);
             servicoModel.setPrecoServico(precoServico);
@@ -172,7 +177,7 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
 
             if (alterando) {
 
-
+                servicoModel.setIdServico(serv.idServico);
                 Toast.makeText(getApplicationContext(), servicoModel.getNomeServico() + descServico + precoServico + tempoServico, Toast.LENGTH_SHORT).show();
 
                 service.AltServico(servicoModel).enqueue(new Callback<CadServicoResponse>() {

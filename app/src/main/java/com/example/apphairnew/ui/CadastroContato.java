@@ -75,6 +75,11 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
 
         campoNomeContato = (EditText) findViewById(R.id.campoNomeContato);
         campoTelContato = (EditText) findViewById(R.id.campoTelefoneContato);
+
+
+        campoDataNascContado = (EditText)findViewById(R.id.campoDataNascContato);
+        campoObsContato = (EditText)findViewById(R.id.campoObsContato) ;
+
         spinnerSexoContato = (Spinner) findViewById(R.id.spinnerSexoContato);
         spinnerExpecFreqContato = (Spinner) findViewById(R.id.spinnerExpecFreqContato);
 
@@ -151,7 +156,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
 
         if (v==botaoCadastroContato){
 
-        }else{
+
             nomeContato = campoNomeContato.getText().toString();
             telContato = campoTelContato.getText().toString();
             nascContato = campoDataNascContado.getText().toString();

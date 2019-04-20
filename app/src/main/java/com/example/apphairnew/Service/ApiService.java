@@ -10,7 +10,7 @@ import com.example.apphairnew.model.LoginModel;
 import com.example.apphairnew.model.ProfModel;
 import com.example.apphairnew.model.ServicoModel;
 import com.example.apphairnew.response.AddCtsPagarResponse;
-import com.example.apphairnew.response.AddCtsReceberResponde;
+import com.example.apphairnew.response.AddCtsReceberResponse;
 import com.example.apphairnew.response.CadContatoResponse;
 import com.example.apphairnew.response.CadProfResponse;
 import com.example.apphairnew.response.CadServicoResponse;
@@ -47,7 +47,7 @@ public interface ApiService {
     Call<CepResponse> getCEP(@Path("CEP") String CEP);
 
     @POST("auth/AddCtsReceber")
-    Call<AddCtsReceberResponde> AddCtsReceb(@Body CtsReceberModel body);
+    Call<AddCtsReceberResponse> AddCtsReceb(@Body CtsReceberModel body);
 
     @POST("auth/AddCtsPagar")
     Call<AddCtsPagarResponse> AddCtsPagar(@Body CtsPagarModel body);

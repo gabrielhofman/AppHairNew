@@ -2,6 +2,7 @@ package com.example.apphairnew.model;
 
 public class CtsPagarModel {
 
+    private  int idCp;
     private String pagarVencimento;
     private Float pagaralor;
     private String pagarNomeContato;
