@@ -59,10 +59,15 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
 
             pagarValor = itemView.findViewById(R.id.labelValorPagarLst);
             pagarVencimento = itemView.findViewById(R.id.labelDataPagarLst);
+
+            itemView.setOnClickListener(this);
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
+            if(itemClicado != null){
+                itemClicado.noItemClicado(view, getAdapterPosition());
+            }
 
         }
     }
@@ -77,6 +82,6 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
     }
 
     public GetCtsPagarResponse getItem(int position ) {
-        return ctsPagarResponses.get(position);
+        return ctsPagarModels.get(position);
     }
 }
