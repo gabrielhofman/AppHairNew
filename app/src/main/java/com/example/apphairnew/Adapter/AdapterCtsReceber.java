@@ -22,7 +22,7 @@ public class AdapterCtsReceber extends RecyclerView.Adapter<AdapterCtsReceber.Vi
 
     public AdapterCtsReceber(List<GetCtsReceberResponse> ctsReceberModel, Context context) {
         this.ctsReceberModels = ctsReceberModel;
-        this.inflater = inflater;
+        this.inflater = LayoutInflater.from(context);
         this.context = context;
     }
 

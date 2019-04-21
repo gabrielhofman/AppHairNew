@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        >
+
+        <TextView
+            android:id="@+id/labelValorPagarLst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="R$ XXXX,XX"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/espacoVazio1"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/labelValorPagarLst"
+            />
+
+        <TextView
+            android:id="@+id/labelDataPagarLst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="XX/XX/XXXX"
+            android:textSize="18dp"
+            android:layout_below="@+id/espacoVazio1"/>
+
+        <Button
+            android:id="@+id/botaoOpcao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/labelDataPagarLst"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp"
+            android:textSize="18dp"
+            android:theme="@style/AppTheme.Button" />
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

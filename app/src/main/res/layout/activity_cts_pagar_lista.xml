@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.CtsPagarLista"
+    android:id="@+id/lista_cts_pagar"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/Widget.AppCompat.Toolbar"
+            android:id="@+id/toolbar"></android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rltvId">
+
+
+            <Button
+                android:id="@+id/botaoCadastrarNovoCtsPagar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:layout_centerHorizontal="true"
+                android:theme="@style/AppTheme.Button"
+                android:text="Cadastrar conta para pagar"/>
+
+            <EditText
+                android:id="@+id/campoBuscaLstPagar"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:hint="Buscar por: "
+                android:textSize="18dp"
+                android:layout_below="@id/botaoCadastrarNovoCtsPagar"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/campoBuscaLstPagar">
+
+            </android.support.v7.widget.RecyclerView>
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>

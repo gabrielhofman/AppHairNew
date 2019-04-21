@@ -1,6 +1,8 @@
 package com.example.apphairnew.response;
 
-public class GetCtsReceberResponse {
+import java.io.Serializable;
+
+public class GetCtsReceberResponse implements Serializable {
 
     public int idCr;
     public String recebVencimento;
