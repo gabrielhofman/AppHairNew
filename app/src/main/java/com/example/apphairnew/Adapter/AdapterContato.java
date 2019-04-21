@@ -41,6 +41,7 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ViewHold
 
         GetContatoResponse contatoModel = contatoModels.get(position);
         holder.nomeContato.setText(String.valueOf(contatoModel.getNomeContato()));
+        holder.telContado.setText(String.valueOf(contatoModel.getTelContato()));
 
     }
 
@@ -57,9 +58,10 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            nomeContato = itemView.findViewById(R.id.campoNomeContato);
-            telContado = itemView.findViewById(R.id.campoTelefoneContato);
+            nomeContato = itemView.findViewById(R.id.labelNomeContato);
+            telContado = itemView.findViewById(R.id.labelTelefoneContato);
 
+            itemView.setOnClickListener(this);
 
 
 
@@ -70,6 +72,7 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ViewHold
             if(itemClicado != null)
             {
                 itemClicado.noItemClicado(view, getAdapterPosition());
+
             }
 
         }

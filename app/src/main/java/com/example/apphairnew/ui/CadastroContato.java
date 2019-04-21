@@ -20,6 +20,7 @@ import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.model.ContatoModel;
 import com.example.apphairnew.response.CadContatoResponse;
+import com.example.apphairnew.response.GetContatoResponse;
 import com.example.apphairnew.web.ApiControler;
 
 import retrofit2.Call;
@@ -31,8 +32,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
     private EditText campoNomeContato;
     private EditText campoTelContato;
     private EditText campoDataNascContado;
-    private EditText campoObsContato;
-    private Spinner spinnerSexoContato;
+      private Spinner spinnerSexoContato;
     private Spinner spinnerExpecFreqContato;
 
     private Button botaoTirarFoto;
@@ -46,9 +46,12 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
     private NavigationView navigationView;
     private ContatoModel contatoModel;
 
-    private String nomeContato, telContato, nascContato, obsContato, sexoContato, freqContato;
+    private String nomeContato, telContato, nascContato,  sexoContato, freqContato;
 
     private ApiService service = ApiControler.CreateController();
+
+    private GetContatoResponse contato;
+    private boolean alterando;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +81,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
 
 
         campoDataNascContado = (EditText)findViewById(R.id.campoDataNascContato);
-        campoObsContato = (EditText)findViewById(R.id.campoObsContato) ;
+
 
         spinnerSexoContato = (Spinner) findViewById(R.id.spinnerSexoContato);
         spinnerExpecFreqContato = (Spinner) findViewById(R.id.spinnerExpecFreqContato);
@@ -108,6 +111,21 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
         botaoCancelarContato.setOnClickListener(this);
 
 
+        //serv = (GetServicoResponse2)getIntent().getSerializableExtra("serv");
+        contato = (GetContatoResponse)getIntent().getSerializableExtra("contato");
+
+        if(contato != null)
+        {
+            campoNomeContato.setText(contato.getNomeContato());
+            campoTelContato.setText(contato.getTelContato());
+            campoDataNascContado.setText(contato.getDataNascCont());
+            this.alterando = true;
+
+
+
+        }else{
+            this.alterando = false;
+        }
 
     }
 
@@ -154,41 +172,76 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
 
-        if (v==botaoCadastroContato){
 
+
+
+        if (v==botaoCadastroContato){
 
             nomeContato = campoNomeContato.getText().toString();
             telContato = campoTelContato.getText().toString();
             nascContato = campoDataNascContado.getText().toString();
-            obsContato = campoObsContato.getText().toString();
-            sexoContato = spinnerSexoContato.getSelectedItem().toString();
+             sexoContato = spinnerSexoContato.getSelectedItem().toString();
             freqContato = spinnerExpecFreqContato.getSelectedItem().toString();
 
-            if(nomeContato.isEmpty() || telContato.isEmpty() || nascContato.isEmpty() || obsContato.isEmpty() || sexoContato.isEmpty() || freqContato.isEmpty()){
+            if(nomeContato.isEmpty() || telContato.isEmpty() || nascContato.isEmpty() || sexoContato.isEmpty() || freqContato.isEmpty()){
                 Toast.makeText(CadastroContato.this, "Complete todos os campos", Toast.LENGTH_LONG).show();
 
-            }else{
+            }else {
                 ContatoModel contatoModel = new ContatoModel();
+
                 contatoModel.setNomeContato(nomeContato);
                 contatoModel.setTelContato(telContato);
                 contatoModel.setDataNascCont(nascContato);
                 contatoModel.setSexoContato(sexoContato);
                 contatoModel.setExpFreqContato(freqContato);
 
-                Toast.makeText(getApplicationContext(), sexoContato, Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(getApplicationContext(), freqContato, Toast.LENGTH_SHORT).show();
+
+                if(alterando){
+
+                    contatoModel.setId(this.contato.getId());
+                    //service.AltContato(ContatoModel).enqueue(Call<CadContatoResponse>);
+                    service.AltContato(contatoModel).enqueue(new Callback<CadContatoResponse>() {
+                        @Override
+                        public void onResponse(Call<CadContatoResponse> call, Response<CadContatoResponse> response) {
+                            String mensagem;
+                            if (response.body().isSuccess()){
+                                mensagem = "Alteração concluida com sucesso";
+                                Intent intent = new Intent(getApplicationContext(), ContatoLista.class);
+                                startActivity(intent);
+
+
+
+                            }else{
+                                mensagem = "Falha no cadastro"+ response.body().getMessage();
+                            }
+                            Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<CadContatoResponse> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            t.printStackTrace();
+                        }
+                    });
+
+
+
+                }else{
 
                 service.CadContato(contatoModel).enqueue(new Callback<CadContatoResponse>() {
                     @Override
                     public void onResponse(Call<CadContatoResponse> call, Response<CadContatoResponse> response) {
                         String mensagem;
-                         if (response.body().isSuccess()){
-                         mensagem = "Cadastro efetuado com sucesso";
-                         }else{
-                         mensagem = "Falha no cadastro"+ response.body().getMessage();
-                         }
-                         Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                        if (response.body().isSuccess()){
+                            mensagem = "Cadastro efetuado com sucesso";
+                            Intent intent = new Intent(getApplicationContext(), ContatoLista.class);
+                            startActivity(intent);
+                        }else{
+                            mensagem = "Falha no cadastro"+ response.body().getMessage();
+                        }
+                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -199,9 +252,17 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
                     }
                 });
 
-
-
             }
+
+
+
+
+
+
+
+
+
+        }
         }
 
     }

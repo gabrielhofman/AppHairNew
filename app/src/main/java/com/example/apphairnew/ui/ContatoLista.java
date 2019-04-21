@@ -158,6 +158,8 @@ public class ContatoLista extends AppCompatActivity implements View.OnClickListe
         contato = adapterContato.getItem(position);
         Toast.makeText(getApplicationContext(), String.valueOf(contato.getId()), Toast.LENGTH_SHORT).show();
 
+
+
         Intent intent2 = new Intent(this,CadastroContato.class);
 
         intent2.putExtra("contato", contato);

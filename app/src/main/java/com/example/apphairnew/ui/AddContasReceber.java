@@ -45,7 +45,8 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
 
     private String recebVencimento, recebNomeContato, recebObservacao;
     //private Float recebValor;
-    private BigDecimal recebValor = new BigDecimal("0,1");
+    private BigDecimal recebValor;
+
     private ApiService service = ApiControler.CreateController();
     private ApiService serviceCep = ApiControler.CreatecontrollerCep();
 
@@ -80,6 +81,7 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
         campoObservacao = (EditText) findViewById(R.id.campoObservacao);
 
         campoVencimento.addTextChangedListener(MaskEditUtil.mask(campoVencimento, MaskEditUtil.FORMAT_DATE));
+      //  campoValor.addTextChangedListener(MaskEditUtil.mask(campoValor, MaskEditUtil.FORMAT_VALOR));
 
         Button botaoCadastroReceb = (Button)findViewById(R.id.botaoCadastrarReceb);
         this.botaoCadastroReceb = botaoCadastroReceb;
@@ -137,7 +139,7 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
 
             recebVencimento = campoVencimento.getText().toString();
             //recebValor = Float.valueOf(campoValor.getText().toString());
-            recebValor = (BigDecimal) BigDecimal.valueOf(Long.parseLong(campoValor.getText().toString()))
+            recebValor = new BigDecimal(campoValor.getText().toString());
             recebNomeContato = campoNomeContato.getText().toString();
             recebObservacao = campoObservacao.getText().toString();
 
@@ -147,7 +149,7 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
                 CtsReceberModel ctsReceberModel = new CtsReceberModel();
 
                 ctsReceberModel.setRecebVencimento(recebVencimento);
-                ctsReceberModel.setRecebValor(recebValor);
+               // ctsReceberModel.setRecebValor(recebValor);
                 ctsReceberModel.setRecebNomeContato(recebNomeContato);
                 ctsReceberModel.setRecebObservacao(recebObservacao);
 

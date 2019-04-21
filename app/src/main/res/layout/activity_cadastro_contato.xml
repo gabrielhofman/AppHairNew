@@ -73,15 +73,7 @@
                     android:textSize="18dp"
                     android:layout_below="@id/campoTelefoneContato"
                     />
-                <EditText
-                    android:id="@+id/campoObsContato"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:hint="Observaçoes do contato"
-                    android:textSize="18dp"
-                    android:layout_below="@id/campoDataNascContato"
-                    />
+
 
 
                 <TextView
@@ -91,7 +83,7 @@
                     android:hint="Selecione o sexo:"
                     android:textSize="18dp"
                     android:textColorHint="@color/colorPrimary"
-                    android:layout_below="@+id/campoObsContato"/>
+                    android:layout_below="@+id/campoDataNascContato"/>
 
                 <Spinner
                     android:id="@+id/spinnerSexoContato"
@@ -99,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/btn_dropdown"
                     android:spinnerMode="dropdown"
-                    android:layout_below="@+id/campoObsContato"
+                    android:layout_below="@+id/campoDataNascContato"
                     android:layout_toRightOf="@id/labelSexoContato"/>
 
                 <TextView

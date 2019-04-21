@@ -154,7 +154,7 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
                 return true;
 
             case R.id.fluxo_caixa:
-                Intent intent6 = new Intent(this, AddContasReceber.class);
+                Intent intent6 = new Intent(this, ContatoLista.class);
                 startActivity(intent6);
                 return true;
 
