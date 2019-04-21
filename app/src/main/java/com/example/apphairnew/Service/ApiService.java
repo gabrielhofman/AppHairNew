@@ -15,6 +15,8 @@ import com.example.apphairnew.response.CadContatoResponse;
 import com.example.apphairnew.response.CadProfResponse;
 import com.example.apphairnew.response.CadServicoResponse;
 import com.example.apphairnew.response.CepResponse;
+import com.example.apphairnew.response.GetContatoResponse;
+import com.example.apphairnew.response.GetCtsReceberResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.response.HorarioResponse;
 import com.example.apphairnew.response.LiqCtsPagarResponse;
@@ -60,6 +62,12 @@ public interface ApiService {
 
     @GET("auth/GetServico/{usuario}")
     Call <List<GetServicoResponse2>> getServico(@Path("usuario") int usuario);
+
+    @GET("auth/GetContato/{usuario}")
+    Call <List<GetContatoResponse>> getContato(@Path("usuario") int usuario);
+
+    @GET("auth/GetCtsReceber/{usuario}")
+    Call <List<GetCtsReceberResponse>> getCtsReceber(@Path("usuario") int usuario);
 
     @POST("auth/MarcarHorario")
     Call<HorarioResponse> MarcarHorario(@Body HorarioModel body);
