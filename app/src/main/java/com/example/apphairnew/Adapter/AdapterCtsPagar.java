@@ -84,4 +84,4 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
     public GetCtsPagarResponse getItem(int position ) {
         return ctsPagarModels.get(position);
     }
-}
+}//maoe

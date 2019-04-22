@@ -47,6 +47,6 @@ public class GetCtsPagarResponse implements Serializable {
     }
 
     public void setPagarObservacao(String pagarObservacao) {
-        this.pagarObservacao = pagarObservacao;
+        this.pagarObservacao = pagarObservacao;//maoe
     }
 }
