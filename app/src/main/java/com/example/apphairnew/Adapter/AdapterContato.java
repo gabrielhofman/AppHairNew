@@ -63,7 +63,7 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ViewHold
 
             itemView.setOnClickListener(this);
 
-
+//novo
 
         }
 
