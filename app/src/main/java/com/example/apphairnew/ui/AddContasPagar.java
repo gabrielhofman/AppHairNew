@@ -18,6 +18,7 @@ import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.model.CtsPagarModel;
 import com.example.apphairnew.response.AddCtsPagarResponse;
+import com.example.apphairnew.response.GetCtsPagarResponse;
 import com.example.apphairnew.web.ApiControler;
 
 import retrofit2.Call;
@@ -44,6 +45,12 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
     private String pagarVencimento, pagarNomeContato, pagarObservacao;
     private Double pagarValor;
     private ApiService service = ApiControler.CreateController();
+
+
+    private boolean alterando;
+
+
+    private GetCtsPagarResponse resp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +87,23 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
         Button botaoCancelarPagar = (Button)findViewById(R.id.botaoCancelarPag);
         this.botaoCancelarPagar = botaoCancelarPagar;
         botaoCancelarPagar.setOnClickListener(this);
+
+        resp = (GetCtsPagarResponse)getIntent().getSerializableExtra("ctsPagar");
+
+
+        if(resp != null){
+
+            campoVencimento.setText(resp.pagarVencimento);
+            campoNomeContato.setText(resp.pagarNomeContato);
+          //  campoValor.setText(String.valueOf(campoValor));
+            campoValor.setText(resp.pagarValor.toString());
+            campoObservacao.setText(resp.pagarObservacao);
+            this.alterando = true;
+
+        }else
+        {
+            this.alterando =false;
+        }
 
     }
 
@@ -125,6 +149,8 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
 
+
+
         if (v==botaoCadastroPagar){
             pagarVencimento = campoVencimento.getText().toString();
             pagarValor = Double.valueOf(campoValor.getText().toString());
@@ -133,14 +159,45 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(AddContasPagar.this, pagarValor.toString(), Toast.LENGTH_LONG).show();
             if(pagarVencimento.isEmpty() || pagarNomeContato.isEmpty() || pagarObservacao.isEmpty()){
                 Toast.makeText(AddContasPagar.this, "Complete todos os campos corretamente", Toast.LENGTH_LONG).show();
-            } else {
+            }
+            CtsPagarModel  ctsPagarModel = new CtsPagarModel();
 
-                CtsPagarModel  ctsPagarModel = new CtsPagarModel();
+            ctsPagarModel.setPagarVencimento(pagarVencimento);
+            ctsPagarModel.setPagarValor(pagarValor);
+            ctsPagarModel.setPagarNomeContato(pagarNomeContato);
+            ctsPagarModel.setPagarObservacao(pagarObservacao);
 
-                ctsPagarModel.setPagarVencimento(pagarVencimento);
-                ctsPagarModel.setPagarValor(pagarValor);
-                ctsPagarModel.setPagarNomeContato(pagarNomeContato);
-                ctsPagarModel.setPagarObservacao(pagarObservacao);
+
+            if(alterando){
+                ctsPagarModel.setIdCp(resp.idCp);
+
+                service.AltCP(ctsPagarModel).enqueue(new Callback<AddCtsPagarResponse>() {
+                    @Override
+                    public void onResponse(Call<AddCtsPagarResponse> call, Response<AddCtsPagarResponse> response) {
+                        String mensagem;
+                        if (response.body().isSuccess()) {
+                            mensagem = "Cadastro efetuado com sucesso";
+                            Intent intent = new Intent(getApplicationContext(), CtsPagarLista.class);
+                            startActivity(intent);
+                        } else {
+                            mensagem = "Falha no cadastro:   " + response.body().getMessage();
+
+                        }
+
+                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddCtsPagarResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    }
+                });
+            }
+
+            else {
+
+
 
                 service.AddCtsPagar(ctsPagarModel).enqueue(new Callback<AddCtsPagarResponse>() {
                     @Override
@@ -148,6 +205,8 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
                         String mensagem;
                         if (response.body().isSuccess()) {
                             mensagem = "Cadastro efetuado com sucesso";
+                            Intent intent = new Intent(getApplicationContext(), CtsPagarLista.class);
+                            startActivity(intent);
                         } else {
                             mensagem = "Falha no cadastro:   " + response.body().getMessage();
                         }

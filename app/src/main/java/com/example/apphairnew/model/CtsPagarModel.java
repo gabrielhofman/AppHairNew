@@ -3,6 +3,15 @@ package com.example.apphairnew.model;
 public class CtsPagarModel {
 
     private  int idCp;
+
+    public int getIdCp() {
+        return idCp;
+    }
+
+    public void setIdCp(int idCp) {
+        this.idCp = idCp;
+    }
+
     private String pagarVencimento;
     private double pagarValor;
     private String pagarNomeContato;

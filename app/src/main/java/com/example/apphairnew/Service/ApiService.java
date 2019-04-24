@@ -79,6 +79,9 @@ public interface ApiService {
     @POST("auth/AlterarServico")
     Call<CadServicoResponse> AltServico(@Body ServicoModel body);
 
+    @POST("auth/AlterarCP")
+    Call<AddCtsPagarResponse> AltCP(@Body CtsPagarModel body);
+
     @POST("auth/AlterarContato")
     Call<CadContatoResponse> AltContato(@Body ContatoModel body);
 

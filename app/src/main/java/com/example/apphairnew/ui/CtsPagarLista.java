@@ -72,7 +72,8 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        botaoCadastrarNovoCtsPagar  = (Button)findViewById(R.id.botaoCadastrarContato);
+        botaoCadastrarNovoCtsPagar  = (Button)findViewById(R.id.botaoCadastrarNovoCtsPagar);
+        botaoCadastrarNovoCtsPagar.setOnClickListener(this);
 
         final int usuario = 1;//oi
 
