@@ -124,19 +124,40 @@ public class ContatoLista extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent1);
                 return true;
 
-            case R.id.novo_contato:
-                Intent intent2 = new Intent(this, CadastroContato.class);
+            case R.id.listar_contatos:
+                Intent intent2 = new Intent(this, ContatoLista.class);
                 startActivity(intent2);
                 return true;
 
-            case R.id.lista_contato:
-                Intent intent4 = new Intent(this, ContatoLista.class);
+            case R.id.novo_contato:
+                Intent intent4 = new Intent(this, CadastroContato.class);
                 startActivity(intent4);
                 return true;
 
-            case R.id.cadastro_servico:
+            case R.id.cadastrar_servico:
                 Intent intent5 = new Intent(this, CadastroServico.class);
                 startActivity(intent5);
+                return true;
+
+            case R.id.listar_servicos:
+                Intent intent6 = new Intent(this, ServicoLista.class);
+                startActivity(intent6);
+                return true;
+
+            case R.id.lista_contas_receber:
+                Intent intent7 = new Intent(this, CtsReceberLista.class);
+                startActivity(intent7);
+                return true;
+
+            case R.id.lista_contas_pagar:
+                Intent intent8 = new Intent(this, CtsPagarLista.class);
+                startActivity(intent8);
+                return true;
+
+
+            case R.id.fluxo_caixa:
+                Intent intent9 = new Intent(this, CtsReceberLista.class);
+                startActivity(intent9);
                 return true;
 
         }

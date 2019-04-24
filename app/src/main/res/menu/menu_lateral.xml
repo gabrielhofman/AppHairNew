@@ -14,21 +14,31 @@
         android:title="Cadastrar usuário"
         />
     <item
-        android:id="@+id/contatos"
-        android:title="Contatos" />
+        android:id="@+id/listar_contatos"
+        android:title="Listar Contatos" />
 
     <item
         android:id="@+id/novo_contato"
-        android:title="Cadastrar contato"
+        android:title="Cadastrar Contatos"
         />
     <item
-        android:id="@+id/cadastro_servico"
-        android:title="Cadastrar serviço"
+        android:id="@+id/cadastrar_servico"
+        android:title="Cadastrar Serviço"
         />
     <item
-        android:id="@+id/servicos"
-        android:title="Serviços"
+        android:id="@+id/listar_servicos"
+        android:title="Listar Serviços"
         />
+
+    <item
+        android:id="@+id/lista_contas_receber"
+        android:title="Listar Contas a Receber"
+        />
+    <item
+        android:id="@+id/lista_contas_pagar"
+        android:title="Listar Contas a Pagar"
+        />
+
     <item
         android:id="@+id/fluxo_caixa"
         android:title="Fluxo de caixa"
