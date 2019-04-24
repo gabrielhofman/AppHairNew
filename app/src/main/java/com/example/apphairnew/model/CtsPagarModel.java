@@ -4,7 +4,7 @@ public class CtsPagarModel {
 
     private  int idCp;
     private String pagarVencimento;
-    private Float pagaralor;
+    private double pagarValor;
     private String pagarNomeContato;
     private String pagarObservacao;
 
@@ -16,12 +16,12 @@ public class CtsPagarModel {
         this.pagarVencimento = pagarVencimento;
     }
 
-    public Float getPagaralor() {
-        return pagaralor;
+    public double getPagarValor() {
+        return pagarValor;
     }
 
-    public void setPagaralor(Float pagaralor) {
-        this.pagaralor = pagaralor;
+    public void setPagarValor(double pagarValor) {
+        this.pagarValor = pagarValor;
     }
 
     public String getPagarNomeContato() {

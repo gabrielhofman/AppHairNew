@@ -70,7 +70,7 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
         actionBar.setTitle("Contas a pagar");
 
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_contato);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         botaoCadastrarNovoCtsPagar  = (Button)findViewById(R.id.botaoCadastrarContato);
 
@@ -81,6 +81,12 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
             public void onResponse(Call<List<GetCtsPagarResponse>> call, Response<List<GetCtsPagarResponse>> response) {
                 teste = response.body();
                 GerarTela();
+                if(teste != null)
+                {
+                    Toast.makeText(getApplicationContext(), "NÃO TA NULO", Toast.LENGTH_LONG).show();
+                } else{
+                    Toast.makeText(getApplicationContext(), "Ta nulo", Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
@@ -141,10 +147,6 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
                 startActivity(intent7);
                 return true;
 
-            case R.id.add_contas_pagar:
-                Intent intent8 = new Intent(this, AddContasPagar.class);
-                startActivity(intent8);
-                return true;
 
         }
 

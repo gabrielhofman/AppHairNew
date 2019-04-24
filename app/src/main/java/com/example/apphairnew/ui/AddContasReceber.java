@@ -45,7 +45,7 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
 
     private String recebVencimento, recebNomeContato, recebObservacao;
     //private Float recebValor;
-    private BigDecimal recebValor;
+    private Double recebValor;
 
     private ApiService service = ApiControler.CreateController();
     private ApiService serviceCep = ApiControler.CreatecontrollerCep();
@@ -138,8 +138,8 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
         if (v==botaoCadastroReceb){
 
             recebVencimento = campoVencimento.getText().toString();
-            //recebValor = Float.valueOf(campoValor.getText().toString());
-            recebValor = new BigDecimal(campoValor.getText().toString());
+            recebValor = Double.valueOf(campoValor.getText().toString());
+       //     recebValor = new BigDecimal(campoValor.getText().toString());
             recebNomeContato = campoNomeContato.getText().toString();
             recebObservacao = campoObservacao.getText().toString();
 
@@ -149,7 +149,7 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
                 CtsReceberModel ctsReceberModel = new CtsReceberModel();
 
                 ctsReceberModel.setRecebVencimento(recebVencimento);
-               // ctsReceberModel.setRecebValor(recebValor);
+                ctsReceberModel.setRecebValor(recebValor);
                 ctsReceberModel.setRecebNomeContato(recebNomeContato);
                 ctsReceberModel.setRecebObservacao(recebObservacao);
 

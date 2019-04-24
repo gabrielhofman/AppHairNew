@@ -42,7 +42,7 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
     private CtsPagarModel ctsPagarModel;
 
     private String pagarVencimento, pagarNomeContato, pagarObservacao;
-    private Float pagarValor;
+    private Double pagarValor;
     private ApiService service = ApiControler.CreateController();
 
     @Override
@@ -127,10 +127,10 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
 
         if (v==botaoCadastroPagar){
             pagarVencimento = campoVencimento.getText().toString();
-            pagarValor = Float.valueOf(campoValor.getText().toString());
+            pagarValor = Double.valueOf(campoValor.getText().toString());
             pagarNomeContato = campoNomeContato.getText().toString();
             pagarObservacao = campoObservacao.getText().toString();
-
+            Toast.makeText(AddContasPagar.this, pagarValor.toString(), Toast.LENGTH_LONG).show();
             if(pagarVencimento.isEmpty() || pagarNomeContato.isEmpty() || pagarObservacao.isEmpty()){
                 Toast.makeText(AddContasPagar.this, "Complete todos os campos corretamente", Toast.LENGTH_LONG).show();
             } else {
@@ -138,7 +138,7 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
                 CtsPagarModel  ctsPagarModel = new CtsPagarModel();
 
                 ctsPagarModel.setPagarVencimento(pagarVencimento);
-                ctsPagarModel.setPagaralor(pagarValor);
+                ctsPagarModel.setPagarValor(pagarValor);
                 ctsPagarModel.setPagarNomeContato(pagarNomeContato);
                 ctsPagarModel.setPagarObservacao(pagarObservacao);
 

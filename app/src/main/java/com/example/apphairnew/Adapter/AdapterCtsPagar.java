@@ -11,8 +11,6 @@ import android.widget.TextView;
 import com.example.apphairnew.R;
 import com.example.apphairnew.response.GetCtsPagarResponse;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHolder> {
@@ -39,7 +37,7 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
     public void onBindViewHolder(@NonNull AdapterCtsPagar.ViewHolder holder, int position) {
 
         GetCtsPagarResponse ctsPagarModel = ctsPagarModels.get(position);
-        holder.pagarValor.setText(String.valueOf(ctsPagarModel.getPagaralor()));
+        holder.pagarValor.setText(String.valueOf(ctsPagarModel.getPagarValor()));
         holder.pagarVencimento.setText(String.valueOf(ctsPagarModel.getPagarVencimento()));
 
     }

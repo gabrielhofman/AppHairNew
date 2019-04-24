@@ -4,7 +4,7 @@ public class CtsReceberModel {
 
     private int idCr;
     private String recebVencimento;
-    private Float recebValor;
+    private double recebValor;
     private String recebNomeContato;
     private String recebObservacao;
 
@@ -16,11 +16,11 @@ public class CtsReceberModel {
         this.recebVencimento = recebVencimento;
     }
 
-    public Float getRecebValor() {
+    public double getRecebValor() {
         return recebValor;
     }
 
-    public void setRecebValor(Float recebValor) {
+    public void setRecebValor(double recebValor) {
         this.recebValor = recebValor;
     }
 

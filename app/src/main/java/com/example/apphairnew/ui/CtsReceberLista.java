@@ -53,14 +53,16 @@ public class CtsReceberLista extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cts_receber_lista);
 
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view) ;
         drawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
 
-        //  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
+
+
 
         navigationView.setNavigationItemSelectedListener(this);
 
