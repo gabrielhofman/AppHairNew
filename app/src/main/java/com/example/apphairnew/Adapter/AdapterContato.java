@@ -13,6 +13,7 @@ import com.example.apphairnew.response.GetContatoResponse;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ViewHolder> {
@@ -76,6 +77,8 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ViewHold
             }
 
         }
+
+
     }
 
     public void setItemClicado(itemClicadoListener itemClicado) {
@@ -89,6 +92,12 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ViewHold
     public GetContatoResponse getItem(int position){
         return contatoModels.get(position);
     }
+
+   public void updateList(List<GetContatoResponse> newList){
+        contatoModels = new ArrayList<>();
+        contatoModels.addAll(newList);
+        notifyDataSetChanged();
+   }
 
 }
 

@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -35,7 +36,7 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
     private ActionBar actionBar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private Button botaoCadastrarNovoCtsPagar;
+    private TextView botaoCadastrarNovoCtsPagar;
 
 
     private RecyclerView recyclerView;
@@ -72,8 +73,8 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        botaoCadastrarNovoCtsPagar  = (Button)findViewById(R.id.botaoCadastrarNovoCtsPagar);
-        botaoCadastrarNovoCtsPagar.setOnClickListener(this);
+        botaoCadastrarNovoCtsPagar  = (TextView) findViewById(R.id.txtOpcao);
+        //botaoCadastrarNovoCtsPagar.setOnClickListener(adapterCtsPagar.onMenu);
 
         final int usuario = 1;//oi
 
@@ -110,7 +111,7 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        drawerLayout.closeDrawers();
+        //drawerLayout.closeDrawers();
 
         switch (menuItem.getItemId()){
             case R.id.login:
@@ -175,6 +176,8 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
 
         Intent intent8 = new Intent(this, AddContasPagar.class);
         startActivity(intent8);
+
+
 
     }
 

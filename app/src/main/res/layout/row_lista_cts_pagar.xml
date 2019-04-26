@@ -36,15 +36,15 @@
             android:textSize="18dp"
             android:layout_below="@+id/espacoVazio1"/>
 
-        <Button
-            android:id="@+id/botaoOpcao"
+        <TextView
+            android:id="@+id/txtOpcao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
+            android:text="Opções"
             android:layout_below="@+id/labelDataPagarLst"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_arrow_drop_down_black_24dp"
-            android:textSize="18dp"
-            android:theme="@style/AppTheme.Button" />
+            android:textSize="18dp" />
 
 
     </LinearLayout>

@@ -13,8 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.apphairnew.Adapter.AdapterAgenda;
 import com.example.apphairnew.Adapter.AdapterContato;
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
@@ -28,17 +30,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ContatoLista extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, AdapterContato.itemClicadoListener {
+//SearchView.OnQueryTextListener
+public class ContatoLista extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, AdapterContato.itemClicadoListener, SearchView.OnQueryTextListener {
 
     private Toolbar toolbar;
     private ActionBar actionBar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Button botaoCadastrarContato;
+    private SearchView campoBuscaContato;
 
 
     private RecyclerView recyclerView;
-    private  AdapterContato adapterContato;
+    private AdapterContato adapterContato;
     private LinearLayoutManager linearLayoutManager;
 
     public List<GetContatoResponse> teste = new ArrayList<>();
@@ -70,7 +74,8 @@ public class ContatoLista extends AppCompatActivity implements View.OnClickListe
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_contato);
-
+        campoBuscaContato = (SearchView) findViewById(R.id.campoBuscaContato);
+        campoBuscaContato.setOnQueryTextListener(this);
         botaoCadastrarContato  = (Button)findViewById(R.id.botaoCadastrarContato);
 
         final int usuario = 1;//oi
@@ -91,6 +96,9 @@ public class ContatoLista extends AppCompatActivity implements View.OnClickListe
         });
 // novo
 
+
+
+
     }
 
 
@@ -106,7 +114,7 @@ public class ContatoLista extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        drawerLayout.closeDrawers();
+        //drawerLayout.closeDrawers();
 
         switch (menuItem.getItemId()){
             case R.id.login:
@@ -188,5 +196,33 @@ public class ContatoLista extends AppCompatActivity implements View.OnClickListe
 
 
 
+    }
+
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    //https://www.youtube.com/watch?v=qzbvDJqXeJs
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        GetContatoResponse getContatoResponse = new GetContatoResponse();
+
+        String userInput = newText.toLowerCase();
+        List<GetContatoResponse> newList = new ArrayList<>();
+
+        for (GetContatoResponse contato:teste){
+
+            if(contato.getNomeContato().contains(userInput) || contato.getTelContato().contains(userInput))
+                    {
+                newList.add(contato);
+            }
+        }
+
+        adapterContato.updateList(newList);
+
+        return true;
     }
 }

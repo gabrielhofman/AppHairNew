@@ -120,7 +120,7 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
 
-        drawerLayout.closeDrawers();
+        //drawerLayout.closeDrawers();
 
         switch (item.getItemId()) {
             case R.id.login:
