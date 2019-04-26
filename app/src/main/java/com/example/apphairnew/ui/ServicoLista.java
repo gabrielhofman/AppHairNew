@@ -118,7 +118,7 @@ public class ServicoLista extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        drawerLayout.closeDrawers();
+        //drawerLayout.closeDrawers();
 
         switch (menuItem.getItemId()){
             case R.id.login:

@@ -90,7 +90,7 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        drawerLayout.closeDrawers();
+        //drawerLayout.closeDrawers();
 
         switch (menuItem.getItemId()) {
             case R.id.login:

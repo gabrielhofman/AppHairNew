@@ -109,7 +109,7 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        drawerLayout.closeDrawers();
+       // drawerLayout.closeDrawers();
 
         switch (menuItem.getItemId()){
             case R.id.login:

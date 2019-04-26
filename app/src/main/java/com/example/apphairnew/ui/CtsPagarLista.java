@@ -110,7 +110,7 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        drawerLayout.closeDrawers();
+//        drawerLayout.closeDrawers();
 
         switch (menuItem.getItemId()){
             case R.id.login:
