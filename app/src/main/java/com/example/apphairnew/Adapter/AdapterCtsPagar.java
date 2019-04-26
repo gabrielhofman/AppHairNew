@@ -4,9 +4,12 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.response.GetCtsPagarResponse;
@@ -34,11 +37,32 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterCtsPagar.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final AdapterCtsPagar.ViewHolder holder, int position) {
 
         GetCtsPagarResponse ctsPagarModel = ctsPagarModels.get(position);
         holder.pagarValor.setText(String.valueOf(ctsPagarModel.getPagarValor()));
         holder.pagarVencimento.setText(String.valueOf(ctsPagarModel.getPagarVencimento()));
+        holder.opcoesMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(context, holder.opcoesMenu);
+                popupMenu.inflate(R.menu.op_menu_cts_pag);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.menu_item_apagar:
+                                Toast.makeText(context, "Apagado", Toast.LENGTH_LONG).show();
+                                break;
+
+
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
 
     }
 
@@ -51,13 +75,14 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
 
         TextView pagarValor;
         TextView pagarVencimento;
+        TextView opcoesMenu;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             pagarValor = itemView.findViewById(R.id.labelValorPagarLst);
             pagarVencimento = itemView.findViewById(R.id.labelDataPagarLst);
-
+            opcoesMenu = itemView.findViewById(R.id.txtOpcao);
             itemView.setOnClickListener(this);
         }
 

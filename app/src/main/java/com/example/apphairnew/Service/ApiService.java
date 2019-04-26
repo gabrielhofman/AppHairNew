@@ -18,6 +18,7 @@ import com.example.apphairnew.response.CepResponse;
 import com.example.apphairnew.response.GetContatoResponse;
 import com.example.apphairnew.response.GetCtsPagarResponse;
 import com.example.apphairnew.response.GetCtsReceberResponse;
+import com.example.apphairnew.response.GetHorarioResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.response.HorarioResponse;
 import com.example.apphairnew.response.LiqCtsPagarResponse;
@@ -60,6 +61,9 @@ public interface ApiService {
 
     @POST("auth/LiqCtsPagar")
     Call<LiqCtsPagarResponse> LiqCtsPagar(@Body LiqPagarModel body);
+
+    @GET("auth/GetAgenda/{usuario}")
+    Call <List<GetHorarioResponse>> getAgenda(@Path("usuario") int usuario);
 
     @GET("auth/GetServico/{usuario}")
     Call <List<GetServicoResponse2>> getServico(@Path("usuario") int usuario);

@@ -7,17 +7,29 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.apphairnew.Adapter.AdapterAgenda;
+import com.example.apphairnew.Adapter.AdapterContato;
 import com.example.apphairnew.R;
+import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.model.HorarioModel;
+import com.example.apphairnew.response.GetHorarioResponse;
+import com.example.apphairnew.web.ApiControler;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Agenda extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class Agenda extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, AdapterAgenda.itemClicadoListener {
 
     private Toolbar toolbar;
     private ActionBar actionBar;
@@ -27,11 +39,14 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
 
 
     private RecyclerView recyclerView;
+    private AdapterAgenda adapterAgenda;
+    private LinearLayoutManager linearLayoutManager;
+
+    public List<GetHorarioResponse> teste = new ArrayList<>();
+
+    private ApiService service = ApiControler.CreateController();
 
 
-    private HorarioModel horarioModel = new HorarioModel();
-
-    private ArrayList<HorarioModel> horarioModels = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +69,42 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
 
-        actionBar.setTitle("Minha agenda");
+        actionBar.setTitle("Contatos");
 
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_agenda);
 
+        final int usuario = 1;
+
+        service.getAgenda(usuario).enqueue(new Callback<List<GetHorarioResponse>>() {
+            @Override
+            public void onResponse(Call<List<GetHorarioResponse>> call, Response<List<GetHorarioResponse>> response) {
+                teste = response.body();
+                GerarTela();
+            }
+
+            @Override
+            public void onFailure(Call<List<GetHorarioResponse>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void GerarTela()
+    {
+        adapterAgenda = new AdapterAgenda(teste,this);
+        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setAdapter(adapterAgenda);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        adapterAgenda.setItemClicado(this);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-        drawerLayout.closeDrawers();
+        //drawerLayout.closeDrawers();
 
         switch (menuItem.getItemId()){
             case R.id.login:
@@ -97,12 +137,35 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
                 startActivity(intent5);
                 return true;
 
+            case R.id.agenda:
+                Intent intent9 = new Intent(this, Agenda.class);
+                startActivity(intent9);
+                return true;
+
+
         }
-        return false;
+
+        return false;//
     }
 
     @Override
     public void onClick(View v) {
+        Intent intent9 = new Intent(this, Agenda.class);
+        startActivity(intent9);
 
+    }
+
+
+    @Override
+    public void noItemClicado(View view, int position) {
+        GetHorarioResponse horario;
+        horario = adapterAgenda.getItem(position);
+        Toast.makeText(getApplicationContext(), String.valueOf(horario.getIdHorario()), Toast.LENGTH_SHORT).show();
+
+
+        Intent intent9 = new Intent(this, Agenda.class);
+
+        intent9.putExtra("horario", horario);
+        startActivity(intent9);
     }
 }
