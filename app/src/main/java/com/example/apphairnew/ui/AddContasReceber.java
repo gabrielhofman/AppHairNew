@@ -19,6 +19,7 @@ import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.Util.MaskEditUtil;
 import com.example.apphairnew.model.CtsReceberModel;
 import com.example.apphairnew.response.AddCtsReceberResponse;
+import com.example.apphairnew.response.GetCtsReceberResponse;
 import com.example.apphairnew.web.ApiControler;
 
 import java.math.BigDecimal;
@@ -49,6 +50,11 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
 
     private ApiService service = ApiControler.CreateController();
     private ApiService serviceCep = ApiControler.CreatecontrollerCep();
+
+
+    private boolean alterando;
+
+    private GetCtsReceberResponse resp;
 
 
 
@@ -90,6 +96,26 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
         Button botaoCancelarReceb = (Button)findViewById(R.id.botaoCancelarReceb);
         this.botaoCancelaReceb = botaoCancelarReceb;
         botaoCancelarReceb.setOnClickListener(this);
+
+
+        resp = (GetCtsReceberResponse)getIntent().getSerializableExtra("ctsReceb");
+
+        if(resp != null)
+        {
+
+            campoVencimento.setText(resp.recebVencimento);
+            campoNomeContato.setText(resp.recebNomeContato);
+            campoValor.setText(resp.recebValor.toString());
+            campoObservacao.setText(resp.recebObservacao);
+            botaoCadastroReceb.setText("Alterar Contas a Receber");
+        }else
+               {
+
+                    this.alterando =false;
+                }
+
+
+
 
     }
 
@@ -155,12 +181,15 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
+        if(v==botaoCancelaReceb){
+            Intent intent = new Intent(this, CtsReceberLista.class);
+            startActivity(intent);
+        }
 
         if (v==botaoCadastroReceb){
 
             recebVencimento = campoVencimento.getText().toString();
             recebValor = Double.valueOf(campoValor.getText().toString());
-       //     recebValor = new BigDecimal(campoValor.getText().toString());
             recebNomeContato = campoNomeContato.getText().toString();
             recebObservacao = campoObservacao.getText().toString();
 
@@ -174,6 +203,38 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
                 ctsReceberModel.setRecebNomeContato(recebNomeContato);
                 ctsReceberModel.setRecebObservacao(recebObservacao);
 
+                if(alterando)
+                {
+                    ctsReceberModel.setIdCr(resp.idCr);
+                    //service.AltCP(ctsPagarModel).enqueue(new Callback<AddCtsPagarResponse>()
+
+                    service.AltCR(ctsReceberModel).enqueue(new Callback<AddCtsReceberResponse>() {
+                        @Override
+                        public void onResponse(Call<AddCtsReceberResponse> call, Response<AddCtsReceberResponse> response) {
+                            String mensagem;
+                            if (response.body().isSuccess()) {
+                                mensagem = "Cadastro efetuado com sucesso";
+                                Intent intent = new Intent(getApplicationContext(), CtsReceberLista.class);
+                                startActivity(intent);
+                            } else {
+                                mensagem = "Falha no cadastro:   " + response.body().getMessage();
+
+                            }
+
+                            Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<AddCtsReceberResponse> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            t.printStackTrace();
+                        }
+
+                    });
+                }else {
+
+
+
 
                 service.AddCtsReceb(ctsReceberModel).enqueue(new Callback<AddCtsReceberResponse>() {
                     @Override
@@ -183,6 +244,8 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
 
                         if (response.body().isSuccess()) {
                             mensagem = "Cadastro efetuado com sucesso";
+                            Intent intent = new Intent(getApplicationContext(), CtsReceberLista.class);
+                            startActivity(intent);
                         } else {
                             mensagem = "Falha no cadastro:   " + response.body().getMessage();
                         }
@@ -196,26 +259,8 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
                     }
                 });
 
-              /*  service.AddCtsReceb(ctsReceberModel).enqueue(new Callback<AddCtsReceberResponse>() {
-                    @Override
-                    public void onResponse(Call<AddCtsReceberResponse> call, Response<AddCtsReceberResponse> response) {
-                        String mensagem;
-                        if (response.body().isSuccess()) {
-                            mensagem = "Cadastro efetuado com sucesso";
-                        } else {
-                            mensagem = "Falha no cadastro:   " + response.body().getMessage();
-                        }
+                }
 
-                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<AddCtsReceberResponse> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        t.printStackTrace();
-                    }
-                }); */
 
             }
             }

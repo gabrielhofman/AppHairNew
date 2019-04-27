@@ -59,6 +59,7 @@ public class AdapterCtsReceber extends RecyclerView.Adapter<AdapterCtsReceber.Vi
 
             recebValor=itemView.findViewById(R.id.labelValorRecebLst);
             recebVencimento=itemView.findViewById(R.id.labelDataRecebLst);
+            itemView.setOnClickListener(this);
         }
 
         @Override

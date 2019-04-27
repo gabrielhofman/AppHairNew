@@ -1,5 +1,6 @@
 package com.example.apphairnew.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.example.apphairnew.Adapter.AdapterCtsPagar;
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
+import com.example.apphairnew.response.AddCtsPagarResponse;
 import com.example.apphairnew.response.GetCtsPagarResponse;
 import com.example.apphairnew.web.ApiControler;
 
@@ -37,6 +39,7 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private TextView botaoCadastrarNovoCtsPagar;
+    private Context context;
 
 
     private RecyclerView recyclerView;
@@ -69,34 +72,17 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
 
         actionBar.setTitle("Contas a pagar");
-
+        botaoCadastrarNovoCtsPagar = (Button)findViewById(R.id.botaoCadastrarNovoCtsPagar);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+     //   botaoCadastrarNovoCtsPagar  = (TextView) findViewById(R.id.txtOpcao);
+      //  botaoCadastrarNovoCtsPagar.setOnClickListener(adapterCtsPagar.onMenu);
+        botaoCadastrarNovoCtsPagar.setOnClickListener(this);
 
-        botaoCadastrarNovoCtsPagar  = (TextView) findViewById(R.id.txtOpcao);
-        //botaoCadastrarNovoCtsPagar.setOnClickListener(adapterCtsPagar.onMenu);
+        CarregarTela();
 
-        final int usuario = 1;//oi
+        this.context = getApplicationContext();
 
-        service.getCtsPagar(usuario).enqueue(new Callback<List<GetCtsPagarResponse>>() {
-            @Override
-            public void onResponse(Call<List<GetCtsPagarResponse>> call, Response<List<GetCtsPagarResponse>> response) {
-                teste = response.body();
-                GerarTela();
-                if(teste != null)
-                {
-                    Toast.makeText(getApplicationContext(), "NÃO TA NULO", Toast.LENGTH_LONG).show();
-                } else{
-                    Toast.makeText(getApplicationContext(), "Ta nulo", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<GetCtsPagarResponse>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
-                t.printStackTrace();
-            }
-        });
     }
 
     public void GerarTela()
@@ -107,6 +93,45 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
         recyclerView.setLayoutManager(linearLayoutManager);
 
         adapterCtsPagar.setItemClicado(this);
+    }
+
+    public void ExcluirItem(int cpId){
+        service.ExcluirContato(cpId).enqueue(new Callback<AddCtsPagarResponse>() {
+            @Override
+            public void onResponse(Call<AddCtsPagarResponse> call, Response<AddCtsPagarResponse> response) {
+//                Toast.makeText(context, "Apagado com sucesso" , Toast.LENGTH_LONG).show();
+              //  CarregarTela();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<AddCtsPagarResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
+                t.printStackTrace();
+            }
+        });
+    }
+
+
+
+    public void CarregarTela()
+    {
+        final int usuario = 1;//oi
+        service.getCtsPagar(usuario).enqueue(new Callback<List<GetCtsPagarResponse>>() {
+            @Override
+            public void onResponse(Call<List<GetCtsPagarResponse>> call, Response<List<GetCtsPagarResponse>> response) {
+                teste = response.body();
+                GerarTela();
+
+            }
+
+            @Override
+            public void onFailure(Call<List<GetCtsPagarResponse>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
+                t.printStackTrace();
+            }
+        });
     }
 
     @Override

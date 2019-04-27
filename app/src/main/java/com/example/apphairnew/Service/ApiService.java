@@ -86,10 +86,16 @@ public interface ApiService {
     @POST("auth/AlterarCP")
     Call<AddCtsPagarResponse> AltCP(@Body CtsPagarModel body);
 
+    @POST("auth/AlterarCR")
+    Call<AddCtsReceberResponse> AltCR(@Body CtsReceberModel body);
+
     @POST("auth/AlterarContato")
     Call<CadContatoResponse> AltContato(@Body ContatoModel body);
 
 
+
+    @GET("auth/ExcluirCP/{cpId}")
+    Call<AddCtsPagarResponse> ExcluirContato(@Path("cpId") int cpId);
 
 
 

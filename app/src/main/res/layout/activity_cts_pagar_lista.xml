@@ -34,7 +34,7 @@
                 android:textSize="18dp"
                 android:layout_centerHorizontal="true"
                 android:theme="@style/AppTheme.Button"
-                android:text="Cadastrar conta para pagar"/>
+                android:text="Cadastrar Contas a Receber"/>
 
             <EditText
                 android:id="@+id/campoBuscaLstPagar"

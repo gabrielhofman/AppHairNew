@@ -177,8 +177,8 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
             pagarValor = Double.valueOf(campoValor.getText().toString());
             pagarNomeContato = campoNomeContato.getText().toString();
             pagarObservacao = campoObservacao.getText().toString();
-            Toast.makeText(AddContasPagar.this, pagarValor.toString(), Toast.LENGTH_LONG).show();
-            if(pagarVencimento.isEmpty() || pagarNomeContato.isEmpty() || pagarObservacao.isEmpty()){
+
+                      if(pagarVencimento.isEmpty() || pagarNomeContato.isEmpty() || pagarObservacao.isEmpty()){
                 Toast.makeText(AddContasPagar.this, "Complete todos os campos corretamente", Toast.LENGTH_LONG).show();
             }
             CtsPagarModel  ctsPagarModel = new CtsPagarModel();

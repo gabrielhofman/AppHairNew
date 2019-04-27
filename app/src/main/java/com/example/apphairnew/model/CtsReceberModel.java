@@ -3,6 +3,15 @@ package com.example.apphairnew.model;
 public class CtsReceberModel {
 
     private int idCr;
+
+    public int getIdCr() {
+        return idCr;
+    }
+
+    public void setIdCr(int idCr) {
+        this.idCr = idCr;
+    }
+
     private String recebVencimento;
     private double recebValor;
     private String recebNomeContato;

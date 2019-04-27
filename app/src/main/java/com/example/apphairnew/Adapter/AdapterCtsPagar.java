@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.apphairnew.R;
+import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.response.GetCtsPagarResponse;
+import com.example.apphairnew.ui.CtsPagarLista;
+import com.example.apphairnew.web.ApiControler;
 
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
     List<GetCtsPagarResponse> ctsPagarModels;
     private LayoutInflater inflater;
     private Context context;
+    private ApiService service = ApiControler.CreateController();
 
     public AdapterCtsPagar(List<GetCtsPagarResponse> ctsPagarModel, Context context) {
         this.ctsPagarModels = ctsPagarModel;
@@ -37,11 +40,13 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final AdapterCtsPagar.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final AdapterCtsPagar.ViewHolder holder, final int position) {
 
-        GetCtsPagarResponse ctsPagarModel = ctsPagarModels.get(position);
+        final GetCtsPagarResponse ctsPagarModel = ctsPagarModels.get(position);
+
         holder.pagarValor.setText(String.valueOf(ctsPagarModel.getPagarValor()));
         holder.pagarVencimento.setText(String.valueOf(ctsPagarModel.getPagarVencimento()));
+
         holder.opcoesMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,8 +57,15 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()){
                             case R.id.menu_item_apagar:
-                                Toast.makeText(context, "Apagado", Toast.LENGTH_LONG).show();
+
+
+                                CtsPagarLista recarrega = new CtsPagarLista();
+                                recarrega.ExcluirItem(ctsPagarModel.getIdCp());
+
+
+                              //  Toast.makeText(context, "Apagado" + position, Toast.LENGTH_LONG).show();
                                 break;
+
 
 
                         }
@@ -65,6 +77,8 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
         });
 
     }
+
+
 
     @Override
     public int getItemCount() {
