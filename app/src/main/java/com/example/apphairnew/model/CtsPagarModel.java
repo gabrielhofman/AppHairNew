@@ -40,7 +40,7 @@ public class CtsPagarModel {
     public void setPagarNomeContato(String pagarNomeContato) {
         this.pagarNomeContato = pagarNomeContato;
     }
-
+//
     public String getPagarObservacao() {
         return pagarObservacao;
     }
