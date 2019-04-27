@@ -27,7 +27,7 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
         this.inflater = LayoutInflater.from(context);
         this.context = context;
     }
-
+//
     @NonNull
     @Override
     public AdapterCtsPagar.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
