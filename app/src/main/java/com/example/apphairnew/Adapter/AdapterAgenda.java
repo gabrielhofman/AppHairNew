@@ -38,7 +38,8 @@ public class AdapterAgenda extends RecyclerView.Adapter<AdapterAgenda.ViewHolder
 
         GetHorarioResponse horarioModel = horarioModels.get(position);
         holder.horaInicio.setText(String.valueOf(horarioModel.getHoraInicio()));
- //       holder.nomeContato.setText(String.valueOf(horarioModel.getContato()));
+        holder.horaFim.setText(String.valueOf(horarioModel.getHoraFim()));
+   //    holder.nomeContato.setText(String.valueOf(horarioModel.getContato()));
  //       holder.nomeServico.setText(String.valueOf(horarioModel.getServico()));
     }
 
@@ -50,6 +51,7 @@ public class AdapterAgenda extends RecyclerView.Adapter<AdapterAgenda.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView horaInicio;
+        TextView horaFim;
         TextView nomeContato;
         TextView nomeServico;
 
@@ -57,6 +59,7 @@ public class AdapterAgenda extends RecyclerView.Adapter<AdapterAgenda.ViewHolder
             super(itemView);
 
             horaInicio = itemView.findViewById(R.id.labelHorarioInicio);
+            horaFim = itemView.findViewById(R.id.labelHorarioFim);
             nomeContato = itemView.findViewById(R.id.labelNomeContato);
             nomeServico = itemView.findViewById(R.id.labelNomeServico);
 
