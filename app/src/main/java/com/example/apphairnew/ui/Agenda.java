@@ -15,10 +15,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.apphairnew.Adapter.AdapterAgenda;
-import com.example.apphairnew.Adapter.AdapterContato;
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
-import com.example.apphairnew.model.HorarioModel;
 import com.example.apphairnew.response.GetHorarioResponse;
 import com.example.apphairnew.web.ApiControler;
 
@@ -54,7 +52,7 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
         setContentView(R.layout.activity_agenda);
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        drawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         //  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -69,7 +67,7 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
 
-        actionBar.setTitle("Contatos");
+        actionBar.setTitle("Agenda");
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_agenda);
@@ -80,6 +78,7 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
             @Override
             public void onResponse(Call<List<GetHorarioResponse>> call, Response<List<GetHorarioResponse>> response) {
                 teste = response.body();
+
                 GerarTela();
             }
 
@@ -87,6 +86,8 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
             public void onFailure(Call<List<GetHorarioResponse>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
                 t.printStackTrace();
+
+
             }
         });
     }
@@ -160,10 +161,10 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
     public void noItemClicado(View view, int position) {
         GetHorarioResponse horario;
         horario = adapterAgenda.getItem(position);
-        Toast.makeText(getApplicationContext(), String.valueOf(horario.getIdHorario()), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), String.valueOf(horario.getIdAgenda()), Toast.LENGTH_SHORT).show();
 
 
-        Intent intent9 = new Intent(this, Agenda.class);
+        Intent intent9 = new Intent(this, DetalheAgendamento.class);
 
         intent9.putExtra("horario", horario);
         startActivity(intent9);

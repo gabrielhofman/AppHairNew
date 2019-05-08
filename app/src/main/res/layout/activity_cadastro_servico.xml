@@ -94,21 +94,14 @@
                     android:textColorHint="@color/colorPrimary"
                     android:layout_below="@+id/espacoVazio1"/>
 
-                <Spinner
-                    android:id="@+id/spinnerTempoServico"
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:spinnerMode="dropdown"
-                    android:layout_below="@+id/espacoVazio1"
-                    android:layout_toRightOf="@+id/labelTempoServico"/>
+
 
                 <TextView
                     android:id="@+id/espacoVazio2"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@id/spinnerTempoServico"
+                    android:layout_below="@id/labelTempoServico"
                     />
 
                 <Button

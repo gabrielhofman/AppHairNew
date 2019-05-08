@@ -32,7 +32,7 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
     private EditText campoNomeServico;
     private EditText campoDescServico;
     private EditText campoPrecoServico;
-    private Spinner spinnerTempoServico;
+
 
 
     private Button botaoCadastro;
@@ -46,8 +46,7 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
     private ServicoModel servicoModel;
 
     private String nomeServico, descServico;
-    private String tempoServico;
-    private float precoServico;
+    private double precoServico;
 
     private boolean alterando;
 
@@ -82,11 +81,9 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
         campoNomeServico = (EditText) findViewById(R.id.campoNomeServico);
         campoDescServico = (EditText) findViewById(R.id.campoDescServico);
         campoPrecoServico = (EditText) findViewById(R.id.campoPrecoServico);
-        spinnerTempoServico = (Spinner) findViewById(R.id.spinnerTempoServico);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.tempoServicoItens, R.layout.support_simple_spinner_dropdown_item);
-        spinnerTempoServico.setAdapter(adapter);
+
+
 
         Button botaoCadastro = (Button)findViewById(R.id.botaoCadastrarServico);
         this.botaoCadastro = botaoCadastro;
@@ -163,22 +160,24 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
 
             nomeServico = campoNomeServico.getText().toString();
             descServico = campoDescServico.getText().toString();
-            precoServico = Float.parseFloat(campoPrecoServico.getText().toString());
-            tempoServico = spinnerTempoServico.getSelectedItem().toString();
+            precoServico = Double.valueOf(campoPrecoServico.getText().toString());
+
+
+
 
             ServicoModel servicoModel = new ServicoModel();
             int usuario = 1;
 
 
-                       servicoModel.setNomeServico(nomeServico);
+            servicoModel.setNomeServico(nomeServico);
             servicoModel.setDescServico(descServico);
             servicoModel.setPrecoServico(precoServico);
-            servicoModel.setTempoServico(tempoServico);
+
 
             if (alterando) {
 
                 servicoModel.setIdServico(serv.idServico);
-                Toast.makeText(getApplicationContext(), servicoModel.getNomeServico() + descServico + precoServico + tempoServico, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), servicoModel.getNomeServico() + descServico + precoServico , Toast.LENGTH_SHORT).show();
 
                 service.AltServico(servicoModel).enqueue(new Callback<CadServicoResponse>() {
                     @Override
@@ -201,14 +200,14 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
                 });
 
             } else {
-                if (nomeServico.isEmpty() || descServico.isEmpty() || tempoServico.isEmpty()) {
+                if (nomeServico.isEmpty() || descServico.isEmpty()) {
                     Toast.makeText(CadastroServico.this, "Complete todos os campos", Toast.LENGTH_LONG).show();
                 } else {
 
 
 
 
-                    Toast.makeText(getApplicationContext(), servicoModel.getNomeServico() + descServico + precoServico + tempoServico, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), servicoModel.getNomeServico() + descServico + precoServico , Toast.LENGTH_SHORT).show();
 
                     service.CadServico(servicoModel).enqueue(new Callback<CadServicoResponse>() {
                         @Override

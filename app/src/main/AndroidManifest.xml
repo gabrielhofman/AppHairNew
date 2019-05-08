@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.CtsPagarLista"></activity>
+        <activity android:name=".ui.ListaHorario"></activity>
+        <activity android:name=".ui.PesquisaServico" />
+        <activity android:name=".ui.PesquisaContato" />
+        <activity android:name=".ui.CtsPagarLista" />
         <activity android:name=".ui.AreaTeste" />
         <activity android:name=".ui.CtsReceberLista" />
         <activity android:name=".ui.TesteFragment" />
@@ -26,6 +29,7 @@
         <activity android:name=".ui.CadastroContato" />
         <activity android:name=".ui.CadastroServico" />
         <activity android:name=".ui.TesteCep" />
+        <activity android:name=".ui.Agenda" />
         <activity android:name=".ui.DashBoard" />
         <activity android:name=".ui.NovoContato" />
         <activity android:name=".ui.CadastroUsuario" />

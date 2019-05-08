@@ -6,9 +6,9 @@ public class ServicoModel {
 
     private int idServico;
     private String nomeServico;
-    private String tempoServico;
+ //   private String tempoServico;
     private String descServico;
-    private Float precoServico;
+    private double precoServico;
 
     public int getIdServico() {
         return idServico;
@@ -26,15 +26,7 @@ public class ServicoModel {
         this.nomeServico = nomeServico;
     }
 
-    public String getTempoServico(String tempoServico) {
-        return this.tempoServico;
-    }
-
-    public void setTempoServico(String tempoServico) {
-        this.tempoServico = tempoServico;
-    }
-
-    public String getDescServico() {
+       public String getDescServico() {
         return descServico;
     }
 
@@ -42,11 +34,11 @@ public class ServicoModel {
         this.descServico = descServico;
     }
 
-    public Float getPrecoServico(float precoServico) {
+    public double getPrecoServico(double precoServico) {
         return this.precoServico;
     }
 
-    public void setPrecoServico(Float precoServico) {
+    public void setPrecoServico(double precoServico) {
         this.precoServico = precoServico;
     } //
 }

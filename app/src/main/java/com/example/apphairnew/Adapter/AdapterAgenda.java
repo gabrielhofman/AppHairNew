@@ -9,10 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.apphairnew.R;
-import com.example.apphairnew.model.HorarioModel;
 import com.example.apphairnew.response.GetHorarioResponse;
 
-import java.util.Collections;
 import java.util.List;
 
 public class AdapterAgenda extends RecyclerView.Adapter<AdapterAgenda.ViewHolder>{
@@ -21,8 +19,8 @@ public class AdapterAgenda extends RecyclerView.Adapter<AdapterAgenda.ViewHolder
     private LayoutInflater inflater;
     private Context context;
 
-    public AdapterAgenda(List<GetHorarioResponse> horarioModel, Context context) {
-        this.horarioModels = horarioModel;
+    public AdapterAgenda(List<GetHorarioResponse> horarioModels, Context context) {
+        this.horarioModels = horarioModels;
         this.inflater = inflater.from(context);
         this.context = context;
     }
@@ -40,8 +38,8 @@ public class AdapterAgenda extends RecyclerView.Adapter<AdapterAgenda.ViewHolder
 
         GetHorarioResponse horarioModel = horarioModels.get(position);
         holder.horaInicio.setText(String.valueOf(horarioModel.getHoraInicio()));
-        holder.nomeContato.setText(String.valueOf(horarioModel.getNomeContato()));
-        holder.nomeServico.setText(String.valueOf(horarioModel.getNomeServico()));
+ //       holder.nomeContato.setText(String.valueOf(horarioModel.getContato()));
+ //       holder.nomeServico.setText(String.valueOf(horarioModel.getServico()));
     }
 
     @Override

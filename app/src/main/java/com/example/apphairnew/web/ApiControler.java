@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiControler {
     public static ApiService CreateController(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.13:5000/api/")
+                .baseUrl("http://192.168.0.5:5000/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

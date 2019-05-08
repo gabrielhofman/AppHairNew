@@ -4,27 +4,38 @@ import java.io.Serializable;
 
 public class GetHorarioResponse implements Serializable {
 
-    public int idHorario;
-    public String nomeContato;
+    public int idAgenda;
+    public String contato;
+
+    public String getDataAgenda() {
+        return dataAgenda;
+    }
+
+    public void setDataAgenda(String dataAgenda) {
+        this.dataAgenda = dataAgenda;
+    }
+
+    public String dataAgenda;
     public String horaInicio;
     public String horaFim;
-    public String nomeServico;
-    public Float precoServico;
+    public int servico;
+    public double precoServico;
 
-    public int getIdHorario() {
-        return idHorario;
+
+    public int getIdAgenda() {
+        return idAgenda;
     }
 
-    public void setIdHorario(int idHorario) {
-        this.idHorario = idHorario;
+    public void setIdAgenda(int idAgenda) {
+        this.idAgenda = idAgenda;
     }
 
-    public String getNomeContato() {
-        return nomeContato;
+    public String getContato() {
+        return contato;
     }
 
-    public void setNomeContato(String nomeContato) {
-        this.nomeContato = nomeContato;
+    public void setContato(String contato) {
+        this.contato = contato;
     }
 
     public String getHoraInicio() {
@@ -43,19 +54,19 @@ public class GetHorarioResponse implements Serializable {
         this.horaFim = horaFim;
     }
 
-    public String getNomeServico() {
-        return nomeServico;
+    public int getServico() {
+        return servico;
     }
 
-    public void setNomeServico(String nomeServico) {
-        this.nomeServico = nomeServico;
+    public void setServico(int servico) {
+        this.servico = servico;
     }
 
-    public Float getPrecoServico() {
+    public double getPrecoServico() {
         return precoServico;
     }
 
-    public void setPrecoServico(Float precoServico) {
+    public void setPrecoServico(double precoServico) {
         this.precoServico = precoServico;
     }
 }

@@ -1,19 +1,23 @@
 package com.example.apphairnew.model;
 
+import java.util.Date;
+
 public class HorarioModel {
 
-    private String nomeContato;
+    private int contato;
+    private String dataAgenda;
     private String horaInicio;
     private String horaFim;
-    private String nomeServico;
-    private Float precoServico;
+    private int servico;
+    private double precoServico;
 
-    public String getNomeContato() {
-        return nomeContato;
+
+    public int getContato() {
+        return contato;
     }
 
-    public void setNomeContato(String nomeContato) {
-        this.nomeContato = nomeContato;
+    public void setContato(int contato) {
+        this.contato = contato;
     }
 
     public String getHoraInicio() {
@@ -32,19 +36,28 @@ public class HorarioModel {
         this.horaFim = horaFim;
     }
 
-    public String getNomeServico() {
-        return nomeServico;
+    public int getServico() {
+        return servico;
     }
 
-    public void setNomeServico(String nomeServico) {
-        this.nomeServico = nomeServico;
+    public void setServico(int servico) {
+        this.servico = servico;
     }
 
-    public Float getPrecoServico() {
+    public double getPrecoServico() {
         return precoServico;
     }
 
-    public void setPrecoServico(Float precoServico) {
+    public void setPrecoServico(double precoServico) {
         this.precoServico = precoServico;
+    }
+
+
+    public String getDataAgenda() {
+        return dataAgenda;
+    }
+
+    public void setDataAgenda(String dataAgenda) {
+        this.dataAgenda = dataAgenda;
     }
 }

@@ -35,6 +35,21 @@
         android:layout_centerHorizontal="true"
 
         />
+
+
+
+        <Button
+            android:id="@+id/botaoBucarContato"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:text="Buscar Contato"
+            android:layout_below="@id/labelSobreCliente"
+            android:theme="@style/AppTheme.Button"
+            android:layout_centerHorizontal="true"/>
+
+
+
+
         <TextView
             android:id="@+id/labelSobreCliente"
             android:layout_width="wrap_content"
@@ -45,23 +60,28 @@
             android:layout_below="@+id/centralizador"/>
 
 
-        <EditText
-            android:id="@+id/campoNomeContato"
-            android:layout_width="300dp"
+        <TextView
+            android:id="@+id/nome_contato"
+            android:text="aehooooooooooo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:hint="Digite o nome do cliente"
-            android:textSize="18dp"
-            android:layout_below="@id/labelSobreCliente"
-            android:inputType="textPersonName"
+            android:layout_toRightOf="@+id/labelSobreCliente"
+            android:layout_alignBottom="@+id/labelSobreCliente"
             />
+
+
+
+
+
+
+
 
         <TextView
             android:id="@+id/espacoVazio1"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/campoNomeContato"
+            android:layout_below="@id/labelSobreCliente"
             />
 
         <TextView
@@ -73,6 +93,37 @@
         android:textColorHint="@color/colorPrimary"
         android:layout_below="@+id/espacoVazio1"/>
 
+
+        <TextView
+            android:id="@+id/nome_servico"
+            android:text="aehooooooooooo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/labelSobreServico"
+            android:layout_alignBottom="@+id/labelSobreServico"
+            />
+
+        <Button
+            android:id="@+id/botaoBuscarServico"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:text="Buscar Servico"
+            android:layout_below="@id/labelSobreServico"
+            android:theme="@style/AppTheme.Button"
+            android:layout_centerHorizontal="true"/>
+
+
+
+        <EditText
+            android:id="@+id/campoDataAgenda"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:hint="Data da agenda:"
+            android:textSize="18dp"
+            android:layout_below="@id/botaoBuscarServico"
+            />
+
         <EditText
         android:id="@+id/campoHoraInicio"
         android:layout_width="300dp"
@@ -80,7 +131,7 @@
         android:layout_centerHorizontal="true"
         android:hint="Hora de início: XX:XX"
         android:textSize="18dp"
-        android:layout_below="@id/labelSobreServico"
+        android:layout_below="@id/campoDataAgenda"
         />
 
         <EditText
@@ -92,15 +143,7 @@
             android:textSize="18dp"
             android:layout_below="@id/campoHoraInicio"
             />
-        <EditText
-            android:id="@+id/campoTipoServico"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:hint="Pesquise o serviço a ser feito"
-            android:textSize="18dp"
-            android:layout_below="@id/campoHoraFim"
-            />
+
         <EditText
             android:id="@+id/campoPrecoServico"
             android:layout_width="300dp"
@@ -108,7 +151,7 @@
             android:layout_centerHorizontal="true"
             android:hint="Valor: R$00,00"
             android:textSize="18dp"
-            android:layout_below="@id/campoTipoServico"
+            android:layout_below="@id/campoHoraFim"
             />
         <TextView
             android:id="@+id/espacoVazio2"
