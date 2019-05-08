@@ -170,7 +170,7 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
 
 
             case R.id.fluxo_caixa:
-                Intent intent9 = new Intent(this, Agenda.class);
+                Intent intent9 = new Intent(this, DetalheAgendamento.class);
                 startActivity(intent9);
                 return true;
 

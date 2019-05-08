@@ -22,6 +22,7 @@ import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.Util.MaskEditUtil;
 import com.example.apphairnew.model.HorarioModel;
 import com.example.apphairnew.response.GetContatoResponse;
+import com.example.apphairnew.response.GetHorarioResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.response.HorarioResponse;
 import com.example.apphairnew.web.ApiControler;
@@ -71,6 +72,10 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
 
     private GetContatoResponse contatoResponse;
     private GetServicoResponse2 servicoResponse2;
+
+
+    private GetHorarioResponse horario;
+    private boolean alterando;
 
     private ApiService service = ApiControler.CreateController();
 
@@ -126,6 +131,9 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
         this.botaoBuscarServico.setOnClickListener(this);
 
 
+
+
+        //  contato = (GetContatoResponse)getIntent().getSerializableExtra("contato");
 
 
 
@@ -201,10 +209,10 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
 
         if (v==botaoSalvarHorario){
             dataAgenda = campoDataAgenda.getText().toString();
-            contato = Integer.parseInt(campoNomeContato.getText().toString());
+
             horaInicio = campoHoraInicio.getText().toString();
             horaFim = campoHoraFim.getText().toString();
-            servico = Integer.parseInt(campoNomeServico.getText().toString());
+
             precoServico =  Double.valueOf(campoPrecoServico.getText().toString());
 
             final HorarioModel horarioModel = new HorarioModel();
@@ -267,11 +275,12 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
                 contatoResponse = (GetContatoResponse) data.getSerializableExtra("contato");
 
                 nomeContatoFinal.setText(contatoResponse.getNomeContato());
+                this.contato = contatoResponse.getId();
 
             }
                 if(resultCode == RESULT_CANCELED)
                 {
-                    nomeContatoFinal.setText("aehoo2");
+                    nomeContatoFinal.setText("erro");
                 }
 
             }
@@ -281,12 +290,14 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
                  servicoResponse2 = (GetServicoResponse2) data.getSerializableExtra("servico");
 
                  nomeServicoFinal.setText(servicoResponse2.getNomeServico());
-                // campoPrecoServico.setText(servicoResponse2.getPrecoServico());
+
+                 this.servico = servicoResponse2.getIdServico();
 
              }
              if(resultCode == RESULT_CANCELED)
              {
-                 nomeServicoFinal.setText("aehoo2");
+                 nomeServicoFinal.setText("erro");
+
 
              }
 

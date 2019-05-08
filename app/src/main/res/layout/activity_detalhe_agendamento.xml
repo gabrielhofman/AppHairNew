@@ -62,7 +62,7 @@
 
         <TextView
             android:id="@+id/nome_contato"
-            android:text="aehooooooooooo"
+            android:text="xxxxxxxxxxxx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/labelSobreCliente"
@@ -96,7 +96,7 @@
 
         <TextView
             android:id="@+id/nome_servico"
-            android:text="aehooooooooooo"
+            android:text="xxxxxxxxxxxx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/labelSobreServico"
