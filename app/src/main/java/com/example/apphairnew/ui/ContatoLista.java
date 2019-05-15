@@ -40,7 +40,7 @@ public class ContatoLista extends AppCompatActivity implements View.OnClickListe
     private Button botaoCadastrarContato;
     private SearchView campoBuscaContato;
 
-//aa
+//aaa
     private RecyclerView recyclerView;
     private AdapterContato adapterContato;
     private LinearLayoutManager linearLayoutManager;
