@@ -20,8 +20,10 @@ import android.widget.Toast;
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.Util.MaskEditUtil;
+import com.example.apphairnew.model.GetAgendaDetalhe;
 import com.example.apphairnew.model.HorarioModel;
 import com.example.apphairnew.response.GetContatoResponse;
+import com.example.apphairnew.response.GetDetalheAgendaResponse;
 import com.example.apphairnew.response.GetHorarioResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.response.HorarioResponse;
@@ -66,15 +68,17 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
     private NavigationView navigationView;
 
     private String  horaInicio, horaFim,  dataAgenda;
-    private int contato, servico;
+    private int contato =0, servico =0;
     private double precoServico;
 
 
     private GetContatoResponse contatoResponse;
     private GetServicoResponse2 servicoResponse2;
+    private GetAgendaDetalhe modelDetalhe;
 
 
-    private GetHorarioResponse horario;
+    private GetHorarioResponse detalhe;
+
     private boolean alterando;
 
     private ApiService service = ApiControler.CreateController();
@@ -135,6 +139,66 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
 
         //  contato = (GetContatoResponse)getIntent().getSerializableExtra("contato");
 
+        detalhe = (GetHorarioResponse)getIntent().getSerializableExtra("horario") ;
+
+
+        this.modelDetalhe = new GetAgendaDetalhe();
+
+        this.modelDetalhe.contato = detalhe.getContato();
+        this.modelDetalhe.servico = detalhe.getServico();
+
+
+
+
+        if(detalhe != null)
+        {
+
+            // campoHoraInicio = (EditText) findViewById(R.id.campoHoraInicio);
+            //        campoHoraFim = (EditText) findViewById(R.id.campoHoraFim);
+            //        campoPrecoServico = (EditText) findViewById(R.id.campoPrecoServico);
+            //        campoDataAgenda = (EditText) findViewById(R.id.campoDataAgenda);
+
+
+            campoHoraInicio.setText(detalhe.horaInicio);
+            campoHoraFim.setText(detalhe.horaFim);
+            campoDataAgenda.setText(detalhe.dataAgenda);
+            campoPrecoServico.setText(String.valueOf(detalhe.precoServico));
+
+
+            Toast.makeText(getApplicationContext(),  "Contato:  " + detalhe.dataAgenda, Toast.LENGTH_SHORT).show();
+
+            service.GetDetalhe(modelDetalhe).enqueue(new Callback<GetDetalheAgendaResponse>() {
+                @Override
+                public void onResponse(Call<GetDetalheAgendaResponse> call, Response<GetDetalheAgendaResponse> response) {
+
+                //    Toast.makeText(getApplicationContext(),  "Contato:  " + response.body().contato, Toast.LENGTH_SHORT).show();
+
+
+                    //nomeContatoFinal.setText(contatoResponse.getNomeContato());
+                    //
+                    //nomeServicoFinal.setText(servicoResponse2.getNomeServico());
+
+                    nomeContatoFinal.setText(response.body().contato);
+                    nomeServicoFinal.setText(response.body().servico);
+
+
+
+                }
+
+                @Override
+                public void onFailure(Call<GetDetalheAgendaResponse> call, Throwable t) {
+
+                }
+            });
+
+
+
+
+            alterando = true;
+        }else
+        {
+            alterando = false;
+        }
 
 
 
@@ -194,6 +258,12 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
     }
     @Override
     public void onClick(View v) {
+        if(v== botaoConcluirHorario)
+        {
+            Intent intent = new Intent(this, ConcluirServico.class);
+            intent.putExtra("detalhe", detalhe);
+            startActivity(intent);
+        }
 
         if(v== botaoBuscarContato){
             Intent intent = new Intent(this, PesquisaContato.class);
@@ -206,6 +276,37 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
             Intent intent = new Intent(this, PesquisaServico.class);
             startActivityForResult(intent, 2);
         }
+        if(v == botaoCancelarHorario)
+        {
+            final HorarioModel horarioModel = new HorarioModel();
+            horarioModel.setIdAgenda(detalhe.getIdAgenda());
+            //service.AltHorario(horarioModel).enqueue(new Callback<HorarioResponse>()
+            service.LimpHorario(horarioModel).enqueue(new Callback<HorarioResponse>() {
+
+                @Override
+                public void onResponse(Call<HorarioResponse> call, Response<HorarioResponse> response) {
+                    String mensagem;
+                    if (response.body().isSuccess()) {
+                        mensagem = "Serviço Cancelado com Sucesso ";
+
+                    } else {
+                        mensagem = "Falha no cadastro:   " + response.body().getMessage();
+                    }
+                    Intent intent5 = new Intent(getApplicationContext(), Agenda.class);
+                    startActivity(intent5);
+                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+
+                }
+
+                @Override
+                public void onFailure(Call<HorarioResponse> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    t.printStackTrace();
+
+                }
+            });
+
+        }
 
         if (v==botaoSalvarHorario){
             dataAgenda = campoDataAgenda.getText().toString();
@@ -216,6 +317,59 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
             precoServico =  Double.valueOf(campoPrecoServico.getText().toString());
 
             final HorarioModel horarioModel = new HorarioModel();
+
+            if(alterando)
+            {
+                horarioModel.setIdAgenda(detalhe.getIdAgenda());
+                horarioModel.setDataAgenda(dataAgenda);
+                if(contato == 0)
+                {
+                    horarioModel.setContato(modelDetalhe.getContato());
+                } else
+                {
+                    horarioModel.setContato(contato);
+                }
+                if(servico == 0 ){
+                    horarioModel.setServico(modelDetalhe.getServico());
+                } else {
+                    horarioModel.setServico(servico);
+                }
+
+
+                horarioModel.setDataAgenda(dataAgenda);
+                horarioModel.setHoraInicio(horaInicio);
+                horarioModel.setHoraFim(horaFim);
+
+                horarioModel.setPrecoServico(precoServico);
+
+                service.AltHorario(horarioModel).enqueue(new Callback<HorarioResponse>() {
+                    @Override
+                    public void onResponse(Call<HorarioResponse> call, Response<HorarioResponse> response) {
+                        String mensagem;
+                        if (response.body().isSuccess()) {
+                            mensagem = "Cadastro efetuado com sucesso";
+
+                        } else {
+                            mensagem = "Falha no cadastro:   " + response.body().getMessage();
+                        }
+                        Intent intent5 = new Intent(getApplicationContext(), Agenda.class);
+                        startActivity(intent5);
+                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<HorarioResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    }
+                });
+
+
+            }else {
+
+
+
+
             horarioModel.setDataAgenda(dataAgenda);
             horarioModel.setContato(contato);
             horarioModel.setDataAgenda(dataAgenda);
@@ -224,18 +378,6 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
             horarioModel.setServico(servico);
             horarioModel.setPrecoServico(precoServico);
 
-
-
-            String inicio = horaInicio.replaceAll(":", "");
-            String fim = horaFim.replaceAll(":", "");
-
-            int inicioNum = Integer.parseInt(inicio);
-            int fimNum = Integer.parseInt(fim);
-
-
-           if(inicioNum > fimNum){
-               Toast.makeText(getApplicationContext(),  "Horario de incial deve ser maior que horario de final da agenda", Toast.LENGTH_SHORT).show();
-           }
 
 
 
@@ -263,6 +405,8 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
 
     }
 
+    }
+
 
 
     @Override
@@ -280,7 +424,7 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
             }
                 if(resultCode == RESULT_CANCELED)
                 {
-                    nomeContatoFinal.setText("erro");
+                    nomeContatoFinal.setText("Não selecionado");
                 }
 
             }
@@ -296,7 +440,7 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
              }
              if(resultCode == RESULT_CANCELED)
              {
-                 nomeServicoFinal.setText("erro");
+                 nomeServicoFinal.setText("Não selecionado");
 
 
              }

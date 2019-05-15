@@ -28,17 +28,20 @@
                 android:layout_centerHorizontal="true"
                 />
 
-            <EditText
-                android:id="@+id/campoData"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:hint="Escolha o dia: "
-                android:textSize="18dp"
-                android:layout_below="@id/centralizador"
-                />
 
-            <android.support.v7.widget.RecyclerView
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Clique para Selecionar Data: "
+            android:id="@+id/tvDate"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/centralizador"
+            android:textSize="30dp"/>
+
+
+        <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view_agenda"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

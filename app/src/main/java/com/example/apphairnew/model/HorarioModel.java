@@ -4,6 +4,15 @@ import java.util.Date;
 
 public class HorarioModel {
 
+    public int getIdAgenda() {
+        return idAgenda;
+    }
+
+    public void setIdAgenda(int idAgenda) {
+        this.idAgenda = idAgenda;
+    }
+
+    private int idAgenda;
     private int contato;
     private String dataAgenda;
     private String horaInicio;

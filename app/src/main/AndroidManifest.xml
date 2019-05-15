@@ -30,6 +30,7 @@
         <activity android:name=".ui.CadastroServico" />
         <activity android:name=".ui.TesteCep" />
         <activity android:name=".ui.Agenda" />
+        <activity android:name=".ui.ConcluirServico" />
         <activity android:name=".ui.DashBoard" />
         <activity android:name=".ui.NovoContato" />
         <activity android:name=".ui.CadastroUsuario" />

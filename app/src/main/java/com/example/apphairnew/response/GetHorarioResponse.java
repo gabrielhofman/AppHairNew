@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class GetHorarioResponse implements Serializable {
 
     public int idAgenda;
-    public String contato;
+    public int contato;
 
     public String getDataAgenda() {
         return dataAgenda;
@@ -22,6 +22,7 @@ public class GetHorarioResponse implements Serializable {
     public double precoServico;
 
 
+
     public int getIdAgenda() {
         return idAgenda;
     }
@@ -30,11 +31,11 @@ public class GetHorarioResponse implements Serializable {
         this.idAgenda = idAgenda;
     }
 
-    public String getContato() {
+    public int getContato() {
         return contato;
     }
 
-    public void setContato(String contato) {
+    public void setContato(int contato) {
         this.contato = contato;
     }
 

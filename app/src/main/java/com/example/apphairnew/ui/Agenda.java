@@ -1,6 +1,9 @@
 package com.example.apphairnew.ui;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +15,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apphairnew.Adapter.AdapterAgenda;
@@ -21,6 +26,7 @@ import com.example.apphairnew.response.GetHorarioResponse;
 import com.example.apphairnew.web.ApiControler;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -43,6 +49,14 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
     public List<GetHorarioResponse> teste = new ArrayList<>();
 
     private ApiService service = ApiControler.CreateController();
+
+
+    private static final String TAG = "MainActivity";
+
+    private TextView mDisplayDate;
+
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
+
 
 
 
@@ -72,14 +86,63 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_agenda);
 
+
+
+
+
+
+
+
+
+
+        mDisplayDate = (TextView) findViewById(R.id.tvDate);
+
+        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                int month = cal.get(Calendar.MONTH);
+                int year = cal.get(Calendar.YEAR);
+
+                DatePickerDialog dialog = new DatePickerDialog(Agenda.this,
+                        android.R.style.Theme_Holo_Dialog_MinWidth,
+                        mDateSetListener,
+                        year, month, day );
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                month = month + 1;
+                Toast.makeText(getApplicationContext(),"data" + dayOfMonth + month + year,Toast.LENGTH_SHORT).show();
+                String data = (month + "-" + dayOfMonth + "-" + year);
+            
+                BuscarAgenda(data);
+
+            }
+        };
+
+
+
+    }
+
+    public void BuscarAgenda(String data)
+    {
         final int usuario = 1;
 
-        service.getAgenda(usuario).enqueue(new Callback<List<GetHorarioResponse>>() {
+        service.getAgenda(usuario, data).enqueue(new Callback<List<GetHorarioResponse>>() {
             @Override
             public void onResponse(Call<List<GetHorarioResponse>> call, Response<List<GetHorarioResponse>> response) {
                 teste = response.body();
+                //     Toast.makeText(getApplicationContext(), , Toast.LENGTH_LONG).show();
 
                 GerarTela();
+
             }
 
             @Override
@@ -94,6 +157,8 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
 
     public void GerarTela()
     {
+
+
         adapterAgenda = new AdapterAgenda(teste,this);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setAdapter(adapterAgenda);
