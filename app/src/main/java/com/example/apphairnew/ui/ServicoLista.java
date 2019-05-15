@@ -42,7 +42,7 @@ public class ServicoLista extends AppCompatActivity implements View.OnClickListe
     private LinearLayoutManager linearLayoutManager;
 
 
-
+//aa
     public  List<GetServicoResponse2> teste = new ArrayList<>();
 
 
