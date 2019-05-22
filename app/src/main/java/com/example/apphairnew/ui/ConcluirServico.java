@@ -19,8 +19,10 @@ import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
+import com.example.apphairnew.model.CtsReceberModel;
 import com.example.apphairnew.model.FluxoModel;
 import com.example.apphairnew.model.GetAgendaDetalhe;
+import com.example.apphairnew.response.AddCtsReceberResponse;
 import com.example.apphairnew.response.AddFluxoResponse;
 import com.example.apphairnew.response.GetDetalheAgendaResponse;
 import com.example.apphairnew.response.GetHorarioResponse;
@@ -48,6 +50,7 @@ public class ConcluirServico extends AppCompatActivity implements View.OnClickLi
     private ApiService service = ApiControler.CreateController();
 
     private FluxoModel fluxoModel;
+    private CtsReceberModel receberModel;
     private AddFluxoResponse fluxoResponse;
     private GetHorarioResponse horarioResponse;
 
@@ -215,7 +218,13 @@ public class ConcluirServico extends AppCompatActivity implements View.OnClickLi
             fluxoModel.setMovFluxo("E");
 
 
+            receberModel = new CtsReceberModel();
+            receberModel.setRecebVencimento(horarioResponse.getDataAgenda());
+            receberModel.setRecebValor(horarioResponse.getPrecoServico());
+            receberModel.setRecebNomeContato("teste");
 
+
+    /*
 
             service.CadFluxo(fluxoModel).enqueue(new Callback<AddFluxoResponse>() {
                 @Override
@@ -252,6 +261,35 @@ public class ConcluirServico extends AppCompatActivity implements View.OnClickLi
             int teste = grupo.getCheckedRadioButtonId();
             radioBtn = (RadioButton) findViewById(teste);
             Toast.makeText(getApplicationContext(), "funcionando:" + radioBtn.getText() , Toast.LENGTH_LONG).show();
+
+            */
+
+
+
+                service.AddCtsRecebAgenda(receberModel).enqueue(new Callback<AddCtsReceberResponse>() {
+                    @Override
+                    public void onResponse(Call<AddCtsReceberResponse> call, Response<AddCtsReceberResponse> response) {
+                        String mensagem;
+                        if (response.body().isSuccess()) {
+                            mensagem = "Cadastro efetuado com sucesso";
+                        } else {
+                            mensagem = "Falha no cadastro" + response.body().getMessage();
+                        }
+
+                        Intent intent = new Intent(getApplicationContext(), Agenda.class);
+                        startActivity(intent);
+                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddCtsReceberResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+
+                    }
+                });
+
+
         }
 
     }

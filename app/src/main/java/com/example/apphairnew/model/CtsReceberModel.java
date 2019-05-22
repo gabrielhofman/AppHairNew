@@ -17,6 +17,7 @@ public class CtsReceberModel {
     private String recebNomeContato;
     private String recebObservacao;
 
+
     public String getRecebVencimento() {
         return recebVencimento;
     }
