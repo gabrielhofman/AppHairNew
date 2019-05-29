@@ -9,6 +9,7 @@ public class FluxoModel {
     private int agendaFluxo;
     private String dataFluxo;
     private int usuarioFluxo;
+    private int idAgenda;
 
 
     public int getIdFluxo() {
@@ -57,5 +58,13 @@ public class FluxoModel {
 
     public void setUsuarioFluxo(int usuarioFluxo) {
         this.usuarioFluxo = usuarioFluxo;
+    }
+
+    public int getIdAgenda() {
+        return idAgenda;
+    }
+
+    public void setIdAgenda(int idAgenda) {
+        this.idAgenda = idAgenda;
     }
 }

@@ -14,9 +14,27 @@ public class CtsReceberModel {
 
     private String recebVencimento;
     private double recebValor;
-    private String recebNomeContato;
+    private int recebContato;
     private String recebObservacao;
+    private String tipoPgto;
+    private String condPgto;
+    private int idAgenda;
 
+    public String getTipoPgto() {
+        return tipoPgto;
+    }
+
+    public void setTipoPgto(String tipoPgto) {
+        this.tipoPgto = tipoPgto;
+    }
+
+    public String getCondPgto() {
+        return condPgto;
+    }
+
+    public void setCondPgto(String condPgto) {
+        this.condPgto = condPgto;
+    }
 
     public String getRecebVencimento() {
         return recebVencimento;
@@ -34,12 +52,12 @@ public class CtsReceberModel {
         this.recebValor = recebValor;
     }
 
-    public String getRecebNomeContato() {
-        return recebNomeContato;
+    public int getRecebContato() {
+        return recebContato;
     }
 
-    public void setRecebNomeContato(String recebNomeContato) {
-        this.recebNomeContato = recebNomeContato;
+    public void setRecebContato(int recebContato) {
+        this.recebContato = recebContato;
     }
 
     public String getRecebObservacao() {
@@ -48,5 +66,13 @@ public class CtsReceberModel {
 
     public void setRecebObservacao(String recebObservacao) {
         this.recebObservacao = recebObservacao;
+    }
+
+    public int getIdAgenda() {
+        return idAgenda;
+    }
+
+    public void setIdAgenda(int idAgenda) {
+        this.idAgenda = idAgenda;
     }
 }

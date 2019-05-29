@@ -108,11 +108,18 @@ public interface ApiService {
     @GET("auth/ExcluirCP/{cpId}")
     Call<AddCtsPagarResponse> ExcluirContato(@Path("cpId") int cpId);
 
+
+    @GET("auth/ExcluirCR/{crId}")
+    Call<AddCtsReceberResponse> ExcluirCR(@Path("crId") int crId);
+
     @POST("auth/AdicionarFluxo")
     Call<AddFluxoResponse> CadFluxo(@Body FluxoModel body);
 
     @POST("auth/AddCtsReceberAgenda")
     Call<AddCtsReceberResponse> AddCtsRecebAgenda(@Body CtsReceberModel body);
+
+    @GET("auth/GetAgendaOfertada/{usuario}")
+    Call <List<GetHorarioResponse>> getAgendaOfertada(@Path("usuario") int usuario);
 
 
 

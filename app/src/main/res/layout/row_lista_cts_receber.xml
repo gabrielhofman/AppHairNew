@@ -37,15 +37,7 @@
             android:textSize="18dp"
             android:layout_below="@+id/espacoVazio1"/>
 
-        <Button
-            android:id="@+id/botaoOpcao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/labelDataRecebLst"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_arrow_drop_down_black_24dp"
-            android:textSize="18dp"
-            android:theme="@style/AppTheme.Button" />
+
 
 
     </LinearLayout>

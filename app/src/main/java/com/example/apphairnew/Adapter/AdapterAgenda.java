@@ -98,18 +98,36 @@ public class AdapterAgenda extends RecyclerView.Adapter<AdapterAgenda.ViewHolder
 
 
 
-        if(horarioModel.getContato() == 1) {
-            holder.dataAgenda.setTextColor(Color.GREEN);
-            holder.horaInicio.setTextColor(Color.GREEN);
-            holder.horaFim.setTextColor(Color.GREEN);
-            holder.nomeContato.setTextColor(Color.GREEN);
-
-        }else
+        if(horarioModel.getStatusAgenda().equals("A"))   // AGENDADA
         {
             holder.dataAgenda.setTextColor(Color.RED);
             holder.horaInicio.setTextColor(Color.RED);
             holder.horaFim.setTextColor(Color.RED);
             holder.nomeContato.setTextColor(Color.RED);
+        }
+
+        if(horarioModel.getStatusAgenda().equals("D"))  //DISPONIVEL
+        {
+            holder.dataAgenda.setTextColor(Color.GREEN);
+            holder.horaInicio.setTextColor(Color.GREEN);
+            holder.horaFim.setTextColor(Color.GREEN);
+            holder.nomeContato.setTextColor(Color.GREEN);
+
+        }
+        if(horarioModel.getStatusAgenda().equals("O"))  //OFERTADA
+        {
+            holder.dataAgenda.setTextColor(Color.BLUE);
+            holder.horaInicio.setTextColor(Color.BLUE);
+            holder.horaFim.setTextColor(Color.BLUE);
+            holder.nomeContato.setTextColor(Color.BLUE);
+
+        }
+        if(horarioModel.getStatusAgenda().equals("F"))  //FECHADA
+        {
+            holder.dataAgenda.setTextColor(Color.GRAY);
+            holder.horaInicio.setTextColor(Color.GRAY);
+            holder.horaFim.setTextColor(Color.GRAY);
+            holder.nomeContato.setTextColor(Color.GRAY);
 
         }
     }

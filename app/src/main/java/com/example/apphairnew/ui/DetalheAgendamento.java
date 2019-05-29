@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,7 +50,7 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
     private TextView nomeContatoFinal;
     private TextView nomeServicoFinal;
 
-
+    private CheckBox checkOfertar;
 
 
     private LinearLayoutManager linearLayoutManager;
@@ -109,6 +110,9 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
         campoHoraFim = (EditText) findViewById(R.id.campoHoraFim);
         campoPrecoServico = (EditText) findViewById(R.id.campoPrecoServico);
         campoDataAgenda = (EditText) findViewById(R.id.campoDataAgenda);
+        checkOfertar = (CheckBox) findViewById(R.id.checkOfertar);
+        checkOfertar.setOnClickListener(this);
+
 
         campoDataAgenda.addTextChangedListener(MaskEditUtil.mask(campoDataAgenda, MaskEditUtil.FORMAT_DATE));
         campoHoraInicio.addTextChangedListener(MaskEditUtil.mask(campoHoraInicio, MaskEditUtil.FORMAT_HOUR));
@@ -131,6 +135,8 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
         this.botaoBuscarContato.setOnClickListener(this);
 
 
+
+
         this.botaoBuscarServico = (Button)findViewById(R.id.botaoBuscarServico);
         this.botaoBuscarServico.setOnClickListener(this);
 
@@ -142,11 +148,33 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
         detalhe = (GetHorarioResponse)getIntent().getSerializableExtra("horario") ;
 
 
+
+
         this.modelDetalhe = new GetAgendaDetalhe();
 
         this.modelDetalhe.contato = detalhe.getContato();
         this.modelDetalhe.servico = detalhe.getServico();
 
+
+
+
+        if(detalhe.getStatusAgenda().equals("F") )
+        {
+            checkOfertar.setVisibility(View.GONE);
+            botaoCalcelarHorario.setVisibility(View.GONE);
+            botaoConcluirHorario.setVisibility(View.GONE);
+        }
+
+        if(detalhe.getStatusAgenda().equals("O"))
+        {
+            botaoCalcelarHorario.setVisibility(View.GONE);
+            botaoConcluirHorario.setVisibility(View.GONE);
+            checkOfertar.setChecked(true);
+        }
+        if(detalhe.getStatusAgenda().equals("A"))
+        {
+            checkOfertar.setVisibility(View.GONE);
+        }
 
 
 
@@ -165,7 +193,7 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
             campoPrecoServico.setText(String.valueOf(detalhe.precoServico));
 
 
-            Toast.makeText(getApplicationContext(),  "Contato:  " + detalhe.dataAgenda, Toast.LENGTH_SHORT).show();
+      //      Toast.makeText(getApplicationContext(),  "Contato:  " + detalhe.dataAgenda, Toast.LENGTH_SHORT).show();
 
             service.GetDetalhe(modelDetalhe).enqueue(new Callback<GetDetalheAgendaResponse>() {
                 @Override
@@ -260,6 +288,8 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         if(v== botaoConcluirHorario)
         {
+
+
             Intent intent = new Intent(this, ConcluirServico.class);
             intent.putExtra("detalhe", detalhe);
             startActivity(intent);
@@ -316,7 +346,21 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
 
             precoServico =  Double.valueOf(campoPrecoServico.getText().toString());
 
+
+
+
             final HorarioModel horarioModel = new HorarioModel();
+
+            if(checkOfertar.isChecked())
+            {
+                horarioModel.setStatusAgenda("O");
+            }else
+            {
+                if(detalhe.getStatusAgenda().equals("O"))
+                {
+                    horarioModel.setStatusAgenda("D");
+                }
+            }
 
             if(alterando)
             {

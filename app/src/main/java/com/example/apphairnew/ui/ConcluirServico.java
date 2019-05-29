@@ -11,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -36,8 +35,10 @@ public class ConcluirServico extends AppCompatActivity implements View.OnClickLi
 
     private TextView cliente;
     private TextView serivico;
-    private RadioGroup grupo;
-    private RadioButton radioBtn;
+    private RadioGroup grupoParcela;
+    private RadioGroup grupoForma;
+    private RadioButton radioBtnForma;
+    private RadioButton radioBtnParcela;
 
     private Button concluir;
     private Button cancelar;
@@ -96,7 +97,8 @@ public class ConcluirServico extends AppCompatActivity implements View.OnClickLi
         //    private Button concluir;
         //    private Button cancelar;
 
-        grupo = (RadioGroup) findViewById(R.id.rbFormaPagamento);
+        grupoParcela = (RadioGroup) findViewById(R.id.rbParcelaPagamento);
+        grupoForma = (RadioGroup) findViewById(R.id.rbFormaPagamento) ;
         cliente = (TextView) findViewById(R.id.labelNomeContato);
         serivico = (TextView) findViewById(R.id.labelNomeServico);
 
@@ -107,7 +109,6 @@ public class ConcluirServico extends AppCompatActivity implements View.OnClickLi
         cancelar.setOnClickListener(this);
 
 
-        //detalhe = (GetHorarioResponse)getIntent().getSerializableExtra("horario") ;
 
         this.horarioResponse = (GetHorarioResponse)getIntent().getSerializableExtra("detalhe");
 
@@ -209,6 +210,8 @@ public class ConcluirServico extends AppCompatActivity implements View.OnClickLi
 
         if(v == concluir)
         {
+
+
             fluxoModel = new FluxoModel();
 
             fluxoModel.setDataFluxo(horarioResponse.getDataAgenda());
@@ -216,55 +219,70 @@ public class ConcluirServico extends AppCompatActivity implements View.OnClickLi
             fluxoModel.setUsuarioFluxo(1);
             fluxoModel.setAgendaFluxo(horarioResponse.getIdAgenda());
             fluxoModel.setMovFluxo("E");
+            fluxoModel.setIdAgenda(horarioResponse.getIdAgenda());
 
 
             receberModel = new CtsReceberModel();
             receberModel.setRecebVencimento(horarioResponse.getDataAgenda());
             receberModel.setRecebValor(horarioResponse.getPrecoServico());
-            receberModel.setRecebNomeContato("teste");
+            receberModel.setRecebContato(horarioResponse.contato);
+            receberModel.setIdAgenda(horarioResponse.getIdAgenda());
 
 
-    /*
 
-            service.CadFluxo(fluxoModel).enqueue(new Callback<AddFluxoResponse>() {
-                @Override
-                public void onResponse(Call<AddFluxoResponse> call, Response<AddFluxoResponse> response) {
-                    String mensagem;
-                    if (response.body().isSuccess()) {
-                        mensagem = "Cadastro efetuado com sucesso";
-                    } else {
-                        mensagem = "Falha no cadastro" + response.body().getMessage();
+            int idParcela = grupoParcela.getCheckedRadioButtonId();
+            radioBtnParcela = (RadioButton) findViewById(idParcela) ;
+
+            int idForma = grupoForma.getCheckedRadioButtonId();
+            radioBtnForma = (RadioButton) findViewById(idForma);
+
+            String escolha = (String) radioBtnForma.getText();
+            String escolha2 = (String) radioBtnParcela.getText();
+
+
+            receberModel.setTipoPgto(escolha);
+            receberModel.setCondPgto(escolha2);
+
+
+           // Toast.makeText(getApplicationContext(), escolha + escolha2, Toast.LENGTH_SHORT).show();
+
+
+
+
+
+
+
+
+            if((escolha.equals( "Carteira")  && escolha2.equals("A vista")) ||escolha.equals( "Cartão Débito") )
+            {
+
+
+                service.CadFluxo(fluxoModel).enqueue(new Callback<AddFluxoResponse>() {
+                    @Override
+                    public void onResponse(Call<AddFluxoResponse> call, Response<AddFluxoResponse> response) {
+                        String mensagem;
+                        if (response.body().isSuccess()) {
+                            mensagem = "Cadastro efetuado com sucesso";
+                        } else {
+                            mensagem = "Falha no cadastro" + response.body().getMessage();
+                        }
+
+
+                        Intent intent = new Intent(getApplicationContext(), Agenda.class);
+                        startActivity(intent);
+                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
                     }
 
+                    @Override
+                    public void onFailure(Call<AddFluxoResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
 
-                    Intent intent = new Intent(getApplicationContext(), Agenda.class);
-                    startActivity(intent);
-                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
-                }
+                    }
+                });
+            } else
 
-                @Override
-                public void onFailure(Call<AddFluxoResponse> call, Throwable t) {
-                   Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                    t.printStackTrace();
-
-                }
-            });
-
-
-
-
-
-
-            //service.CadServico(servicoModel).enqueue(new Callback<CadServicoResponse>() {
-
-
-            int teste = grupo.getCheckedRadioButtonId();
-            radioBtn = (RadioButton) findViewById(teste);
-            Toast.makeText(getApplicationContext(), "funcionando:" + radioBtn.getText() , Toast.LENGTH_LONG).show();
-
-            */
-
-
+            {
 
                 service.AddCtsRecebAgenda(receberModel).enqueue(new Callback<AddCtsReceberResponse>() {
                     @Override
@@ -288,6 +306,11 @@ public class ConcluirServico extends AppCompatActivity implements View.OnClickLi
 
                     }
                 });
+            }
+
+
+
+
 
 
         }

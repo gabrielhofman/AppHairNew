@@ -21,10 +21,17 @@
             android:theme="@style/Widget.AppCompat.Toolbar"
             android:id="@+id/toolbar"></android.support.v7.widget.Toolbar>
 
+        <Button
+            android:id="@+id/botao_ofertadas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Buscar Agendas Ofetadas"/>
+
             <TextView
                 android:id="@+id/centralizador"
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="10dp"
                 android:layout_centerHorizontal="true"
                 />
 

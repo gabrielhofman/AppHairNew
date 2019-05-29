@@ -37,13 +37,43 @@
                     />
 
                 <TextView
+                    android:id="@+id/labelNomeContato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Contato:"
+                    android:textSize="18dp"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_below="@+id/centralizador"/>
+
+
+                <Button
+                    android:id="@+id/botaoNomeContato"
+                    android:layout_width="270dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="Buscar Contato"
+                    android:layout_below="@id/labelNomeContato"
+                    />
+
+
+                <TextView
+                    android:id="@+id/campoNomeContato"
+                    android:text="xxxxxxxxxxxx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/labelNomeContato"
+                    android:textSize="18dp"
+                    android:layout_alignBottom="@+id/labelNomeContato"
+                    />
+
+                <TextView
                     android:id="@+id/labelDataVencimento"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="Vencimento:"
                     android:textSize="18dp"
                     android:textColorHint="@color/colorPrimary"
-                    android:layout_below="@+id/centralizador"/>
+                    android:layout_below="@+id/botaoNomeContato"/>
 
 
                 <EditText
@@ -75,51 +105,16 @@
                     android:layout_below="@id/labelValores"
                     />
 
-                <TextView
-                    android:id="@+id/labelNomeContato"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Contato:"
-                    android:textSize="18dp"
-                    android:textColorHint="@color/colorPrimary"
-                    android:layout_below="@+id/campoValores"/>
 
 
-                <EditText
-                    android:id="@+id/campoNomeContato"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:hint="Digite o nome do contato"
-                    android:textSize="18dp"
-                    android:layout_below="@id/labelNomeContato"
-                    />
 
-                <TextView
-                    android:id="@+id/labelObservacao"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Sobre:"
-                    android:textSize="18dp"
-                    android:textColorHint="@color/colorPrimary"
-                    android:layout_below="@+id/campoNomeContato"/>
-
-                <EditText
-                    android:id="@+id/campoObservacao"
-                    android:layout_width="300dp"
-                    android:layout_height="100dp"
-                    android:layout_centerHorizontal="true"
-                    android:hint="Digite uma observação"
-                    android:textSize="18dp"
-                    android:layout_below="@id/campoNomeContato"
-                    />
 
                 <TextView
                     android:id="@+id/espacoVazio1"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@id/campoObservacao"
+                    android:layout_below="@id/campoValores"
                     />
 
                 <Button
@@ -133,13 +128,23 @@
                     android:theme="@style/AppTheme.Button"
                     />
 
-
                 <Button
-                    android:id="@+id/botaoCancelarReceb"
+                    android:id="@+id/botaoLiquidarReceb"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:text="Cancelar conta a receber"
+                    android:text="Liquidar Contas a Receber"
                     android:layout_below="@+id/botaoCadastrarReceb"
+                    android:textSize="18dp"
+                    android:layout_centerHorizontal="true"
+                    android:theme="@style/AppTheme.Button"
+                    />
+
+                <Button
+                    android:id="@+id/botaoExcluirReceb"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:text="Excluir conta a receber"
+                    android:layout_below="@+id/botaoLiquidarReceb"
                     android:textSize="18dp"
                     android:layout_centerHorizontal="true"
                     android:theme="@style/AppTheme.Button"

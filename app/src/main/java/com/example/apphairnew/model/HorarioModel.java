@@ -19,6 +19,17 @@ public class HorarioModel {
     private String horaFim;
     private int servico;
     private double precoServico;
+    private String statusAgenda;
+
+    public String getStatusAgenda() {
+        return statusAgenda;
+    }
+
+    public void setStatusAgenda(String statusAgenda) {
+        this.statusAgenda = statusAgenda;
+    }
+
+
 
 
     public int getContato() {

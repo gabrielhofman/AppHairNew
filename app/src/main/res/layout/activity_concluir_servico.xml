@@ -107,34 +107,81 @@
                     android:layout_below="@+id/labelSobrePagamento"
                     android:id="@+id/rbFormaPagamento"
                     >
-                    <RadioButton android:id="@+id/radio_vista"
+
+                    <RadioButton android:id="@+id/radio_carteira"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Carteira"
+                        />
+                    <RadioButton android:id="@+id/radio_cartao_debito"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cartão Débito"
+                        />
+                    <RadioButton android:id="@+id/radio_cartao_credito"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cartão Crédito"
+                        />
+                </RadioGroup>
+                <TextView
+                    android:id="@+id/labelSobreParcelamento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Defina as parcelas:"
+                    android:textSize="18dp"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_below="@+id/rbFormaPagamento"/>
+
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@+id/labelSobreParcelamento"
+                    android:id="@+id/rbParcelaPagamento"
+                    >
+                    <RadioButton android:id="@+id/dias_vista"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="A vista"
                         />
-                    <RadioButton android:id="@+id/radio_prazo"
+                    <RadioButton android:id="@+id/dias_7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="A prazo"
+                        android:text="7 dias"
                         />
+
+                    <RadioButton android:id="@+id/dias_7_14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="7/14 dias"
+                        />
+
+                    <RadioButton android:id="@+id/dias_30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="30 dias"
+                        />
+
+                    <RadioButton android:id="@+id/dias_30_60"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="30/ 60 dias"
+                        />
+
+
                 </RadioGroup>
 
-                <TextView
-                    android:id="@+id/labelPrazoDias"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:hint="Prazo em 30 dias"
-                    android:textSize="18dp"
-                    android:layout_below="@id/rbFormaPagamento"
-                    android:inputType="textPersonName"
-                    />
+
+
+
+
                 <TextView
                     android:id="@+id/espacoVazio3"
                     android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_height="5dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@id/labelPrazoDias"
+                    android:layout_below="@id/rbParcelaPagamento"
                     />
                 <Button
                     android:id="@+id/botaoConcluirHorario"

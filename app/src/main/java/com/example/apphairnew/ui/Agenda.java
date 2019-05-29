@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +55,7 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
     private static final String TAG = "MainActivity";
 
     private TextView mDisplayDate;
+    private Button botaoOfertada;
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
@@ -93,7 +95,8 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
 
 
 
-
+        botaoOfertada = (Button) findViewById(R.id.botao_ofertadas);
+        botaoOfertada.setOnClickListener(this);
 
         mDisplayDate = (TextView) findViewById(R.id.tvDate);
 
@@ -153,6 +156,25 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
 
             }
         });
+    }
+    public void BuscarAgendasOfertadas()
+    {
+        final int usuario = 1;
+
+        service.getAgendaOfertada(usuario).enqueue(new Callback<List<GetHorarioResponse>>() {
+            @Override
+            public void onResponse(Call<List<GetHorarioResponse>> call, Response<List<GetHorarioResponse>> response) {
+                teste = response.body();
+                GerarTela();
+            }
+
+            @Override
+            public void onFailure(Call<List<GetHorarioResponse>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
+                t.printStackTrace();
+            }
+        });
+
     }
 
     public void GerarTela()
@@ -216,8 +238,14 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
 
     @Override
     public void onClick(View v) {
-        Intent intent9 = new Intent(this, Agenda.class);
-        startActivity(intent9);
+        if(v== botaoOfertada)
+        {
+            BuscarAgendasOfertadas();
+
+        }else {
+            Intent intent9 = new Intent(this, Agenda.class);
+            startActivity(intent9);
+        }
 
     }
 

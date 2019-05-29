@@ -20,6 +20,18 @@ public class GetHorarioResponse implements Serializable {
     public String horaFim;
     public int servico;
     public double precoServico;
+    public String statusAgenda;
+
+
+    public String getStatusAgenda() {
+        return statusAgenda;
+    }
+
+    public void setStatusAgenda(String statusAgenda) {
+        this.statusAgenda = statusAgenda;
+    }
+
+
 
 
 

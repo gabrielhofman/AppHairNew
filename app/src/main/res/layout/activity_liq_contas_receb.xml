@@ -80,7 +80,7 @@
                     android:id="@+id/labelObservacao"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Sobre:"
+                    android:hint="Sobrea:"
                     android:textSize="18dp"
                     android:textColorHint="@color/colorPrimary"
                     android:layout_below="@+id/campoValores"/>

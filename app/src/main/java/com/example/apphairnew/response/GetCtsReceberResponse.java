@@ -7,7 +7,7 @@ public class GetCtsReceberResponse implements Serializable {
     public int idCr;
     public String recebVencimento;
     public Float recebValor;
-    public String recebNomeContato;
+    public int recebContato;
     public String recebObservacao;
 
     public int getIdCr() {
@@ -34,12 +34,12 @@ public class GetCtsReceberResponse implements Serializable {
         this.recebValor = recebValor;
     }
 
-    public String getRecebNomeContato() {
-        return recebNomeContato;
+    public int getRecebContato(int recebContato) {
+        return this.recebContato;
     }
 
-    public void setRecebNomeContato(String recebNomeContato) {
-        this.recebNomeContato = recebNomeContato;
+    public void setRecebContato(int recebContato) {
+        this.recebContato = recebContato;
     }
 
     public String getRecebObservacao() {
