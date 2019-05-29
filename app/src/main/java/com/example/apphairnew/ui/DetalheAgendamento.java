@@ -165,7 +165,7 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
             botaoConcluirHorario.setVisibility(View.GONE);
             botaoSalvarHorario.setVisibility(View.GONE);
         }
-
+//
         if(detalhe.getStatusAgenda().equals("O"))
         {
             botaoCalcelarHorario.setVisibility(View.GONE);
