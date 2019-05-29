@@ -163,6 +163,7 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
             checkOfertar.setVisibility(View.GONE);
             botaoCalcelarHorario.setVisibility(View.GONE);
             botaoConcluirHorario.setVisibility(View.GONE);
+            botaoSalvarHorario.setVisibility(View.GONE);
         }
 
         if(detalhe.getStatusAgenda().equals("O"))
@@ -354,16 +355,25 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
             if(checkOfertar.isChecked())
             {
                 horarioModel.setStatusAgenda("O");
-            }else
-            {
-                if(detalhe.getStatusAgenda().equals("O"))
-                {
+            }else {
+                if (detalhe.getStatusAgenda().equals("O")) {
                     horarioModel.setStatusAgenda("D");
+                } else {
+                    if (detalhe.getStatusAgenda().equals("D") || detalhe.getStatusAgenda().equals("A")) {
+                        horarioModel.setStatusAgenda("A");
+                    }
                 }
             }
 
             if(alterando)
             {
+
+
+
+
+
+
+
                 horarioModel.setIdAgenda(detalhe.getIdAgenda());
                 horarioModel.setDataAgenda(dataAgenda);
                 if(contato == 0)
