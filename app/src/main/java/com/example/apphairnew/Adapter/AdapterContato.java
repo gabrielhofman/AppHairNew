@@ -63,7 +63,7 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ViewHold
         holder.fotoContato.setImageBitmap(decodedByte);
         holder.nomeContato.setText(String.valueOf(contatoModel.getNomeContato()));
         holder.telContado.setText(String.valueOf(contatoModel.getTelContato()));
-        holder.opcoesMenuContato.setOnClickListener(new View.OnClickListener() {
+    /*    holder.opcoesMenuContato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(context, holder.opcoesMenuContato);
@@ -84,7 +84,7 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ViewHold
                 });
                 popupMenu.show();
             }
-        });
+        }); */
     }
 
     @Override

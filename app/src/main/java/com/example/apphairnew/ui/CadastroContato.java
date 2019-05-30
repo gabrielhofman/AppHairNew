@@ -28,7 +28,7 @@ import com.example.apphairnew.model.ContatoModel;
 import com.example.apphairnew.response.CadContatoResponse;
 import com.example.apphairnew.response.GetContatoResponse;
 import com.example.apphairnew.web.ApiControler;
-import com.kosalgeek.android.imagebase64encoder.ImageBase64;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;

@@ -99,20 +99,6 @@ public class ContatoLista extends AppCompatActivity implements View.OnClickListe
         adapterContato.setItemClicado(this);
     }
 
-    public void ExcluirItem(int id){
-      service.ExcluirContato(id).enqueue(new Callback<CadContatoResponse>(){
-        @Override
-      public void onResponse(Call<CadContatoResponse> call, Response<CadContatoResponse> response) {
-//ff
-              }
-
-           @Override
-          public void onFailure(Call<CadContatoResponse> call, Throwable t) {
-            Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
-          t.printStackTrace();
-     }
-    });
-    }
 
 
 
