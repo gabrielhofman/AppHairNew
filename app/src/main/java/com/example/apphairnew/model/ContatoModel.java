@@ -1,5 +1,9 @@
 package com.example.apphairnew.model;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.widget.ImageView;
+
 import com.google.gson.annotations.JsonAdapter;
 
 public class ContatoModel {
@@ -11,6 +15,7 @@ public class ContatoModel {
     private String obsContato;
     private String sexoContato;
     private String expFreqContato;
+    private String bmFotoContato;
 
     public int getId() {
         return id;
@@ -66,5 +71,13 @@ public class ContatoModel {
 
     public void setExpFreqContato(String expFreqContato) {
         this.expFreqContato = expFreqContato;
+    }
+
+    public String getFotoContato() {
+        return bmFotoContato;
+    }
+
+    public void setFotoContato(String bmFotoContato) {
+        this.bmFotoContato = bmFotoContato;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.apphairnew.response;
 
+import android.widget.ImageView;
+
 import java.io.Serializable;
 
 public class GetContatoResponse implements Serializable {
@@ -11,6 +13,8 @@ public class GetContatoResponse implements Serializable {
     public String obsContato;
     public String sexoContato;
     public String expFreqContato;
+    public String bmFotoContato;
+
 
     public int getId() {
         return id;
@@ -66,5 +70,13 @@ public class GetContatoResponse implements Serializable {
 
     public void setExpFreqContato(String expFreqContato) {
         this.expFreqContato = expFreqContato;
+    }
+
+    public String getFotoContato() {
+        return bmFotoContato;
+    }
+
+    public void setFotoContato(String fotoContato) {
+        this.bmFotoContato = fotoContato;
     }
 }

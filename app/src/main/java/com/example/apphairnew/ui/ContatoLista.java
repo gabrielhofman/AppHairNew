@@ -1,5 +1,6 @@
 package com.example.apphairnew.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -20,6 +21,7 @@ import com.example.apphairnew.Adapter.AdapterAgenda;
 import com.example.apphairnew.Adapter.AdapterContato;
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
+import com.example.apphairnew.response.CadContatoResponse;
 import com.example.apphairnew.response.GetContatoResponse;
 import com.example.apphairnew.web.ApiControler;
 
@@ -39,8 +41,9 @@ public class ContatoLista extends AppCompatActivity implements View.OnClickListe
     private NavigationView navigationView;
     private Button botaoCadastrarContato;
     private SearchView campoBuscaContato;
+    private Context context;
 
-//aaa
+    //aaa
     private RecyclerView recyclerView;
     private AdapterContato adapterContato;
     private LinearLayoutManager linearLayoutManager;
@@ -78,25 +81,9 @@ public class ContatoLista extends AppCompatActivity implements View.OnClickListe
         campoBuscaContato.setOnQueryTextListener(this);
         botaoCadastrarContato  = (Button)findViewById(R.id.botaoCadastrarContato);
 
-        final int usuario = 1;//oi
-
-        service.getContato(usuario).enqueue(new Callback<List<GetContatoResponse>>() {
-            @Override
-            public void onResponse(Call<List<GetContatoResponse>> call, Response<List<GetContatoResponse>> response) {
-                teste = response.body();
-                    GerarTela();
-
-            }
-
-            @Override
-            public void onFailure(Call<List<GetContatoResponse>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
-                t.printStackTrace();
-            }
-        });
+        CarregarTela();
+        this.context = getApplicationContext();
 // novo
-
-
 
 
     }
@@ -110,6 +97,42 @@ public class ContatoLista extends AppCompatActivity implements View.OnClickListe
         recyclerView.setLayoutManager(linearLayoutManager);
 
         adapterContato.setItemClicado(this);
+    }
+
+    public void ExcluirItem(int id){
+      service.ExcluirContato(id).enqueue(new Callback<CadContatoResponse>(){
+        @Override
+      public void onResponse(Call<CadContatoResponse> call, Response<CadContatoResponse> response) {
+
+              }
+
+           @Override
+          public void onFailure(Call<CadContatoResponse> call, Throwable t) {
+            Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
+          t.printStackTrace();
+     }
+    });
+    }
+
+
+
+    public void CarregarTela(){
+        final int usuario = 1;//oi
+
+        service.getContato(usuario).enqueue(new Callback<List<GetContatoResponse>>() {
+            @Override
+            public void onResponse(Call<List<GetContatoResponse>> call, Response<List<GetContatoResponse>> response) {
+                teste = response.body();
+                GerarTela();
+
+            }
+
+            @Override
+            public void onFailure(Call<List<GetContatoResponse>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
+                t.printStackTrace();
+            }
+        });
     }
 
     @Override
@@ -218,7 +241,7 @@ public class ContatoLista extends AppCompatActivity implements View.OnClickListe
         for (GetContatoResponse contato:teste){
 
             if(contato.getNomeContato().contains(userInput) || contato.getTelContato().contains(userInput))
-                    {
+            {
                 newList.add(contato);
             }
         }

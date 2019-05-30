@@ -1,6 +1,10 @@
 package com.example.apphairnew.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -8,11 +12,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,6 +28,12 @@ import com.example.apphairnew.model.ContatoModel;
 import com.example.apphairnew.response.CadContatoResponse;
 import com.example.apphairnew.response.GetContatoResponse;
 import com.example.apphairnew.web.ApiControler;
+import com.kosalgeek.android.imagebase64encoder.ImageBase64;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,8 +44,13 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
     private EditText campoNomeContato;
     private EditText campoTelContato;
     private EditText campoDataNascContado;
-      private Spinner spinnerSexoContato;
+    private Spinner spinnerSexoContato;
     private Spinner spinnerExpecFreqContato;
+
+    private ImageView fotoContato;
+    private String bmFotoContato;
+    private static final int PICK_IMAGE = 100;
+    Uri fotoUri;
 
     private Button botaoTirarFoto;
     private Button botaoCarregarFoto;
@@ -94,13 +111,20 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
                 R.array.freqContato, R.layout.support_simple_spinner_dropdown_item);
         spinnerExpecFreqContato.setAdapter(adapterFreq);
 
+        fotoContato = (ImageView) findViewById(R.id.fotoContato);
+
         Button botaoTirarFoto = (Button)findViewById(R.id.botaoTirarFoto);
         this.botaoTirarFoto = botaoTirarFoto;
         botaoTirarFoto.setOnClickListener(this);
 
         Button botaoCarregarFoto = (Button)findViewById(R.id.botaoCarregarFoto);
         this.botaoCarregarFoto = botaoCarregarFoto;
-        botaoCarregarFoto.setOnClickListener(this);
+        botaoCarregarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirGaleria();
+            }
+        });
 
         Button botaoCadastroContato = (Button)findViewById(R.id.botaoCadastrarContato);
         this.botaoCadastroContato = botaoCadastroContato;
@@ -200,8 +224,26 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
             nomeContato = campoNomeContato.getText().toString();
             telContato = campoTelContato.getText().toString();
             nascContato = campoDataNascContado.getText().toString();
-             sexoContato = spinnerSexoContato.getSelectedItem().toString();
+            sexoContato = spinnerSexoContato.getSelectedItem().toString();
             freqContato = spinnerExpecFreqContato.getSelectedItem().toString();
+
+            //bmFotoContato=((BitmapDrawable)fotoContato.getDrawable()).getBitmap();
+
+            // try {
+            //  bmFotoContato =  MediaStore.Images.Media.getBitmap(this.getContentResolver(), fotoUri);
+            //  } catch (IOException e) {
+            //  e.printStackTrace();
+            // }
+
+            //BitmapDrawable drawable = (BitmapDrawable) fotoContato.getDrawable();
+            //   bmFotoContato = drawable.getBitmap();
+
+            BitmapDrawable drawable = (BitmapDrawable) fotoContato.getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG,0,bos);
+            byte[] bb = bos.toByteArray();
+            bmFotoContato = Base64.encodeToString(bb,1);
 
             if(nomeContato.isEmpty() || telContato.isEmpty() || nascContato.isEmpty() || sexoContato.isEmpty() || freqContato.isEmpty()){
                 Toast.makeText(CadastroContato.this, "Complete todos os campos", Toast.LENGTH_LONG).show();
@@ -214,6 +256,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
                 contatoModel.setDataNascCont(nascContato);
                 contatoModel.setSexoContato(sexoContato);
                 contatoModel.setExpFreqContato(freqContato);
+                contatoModel.setFotoContato(bmFotoContato);
 
 
 
@@ -250,40 +293,109 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
 
                 }else{
 
-                service.CadContato(contatoModel).enqueue(new Callback<CadContatoResponse>() {
-                    @Override
-                    public void onResponse(Call<CadContatoResponse> call, Response<CadContatoResponse> response) {
-                        String mensagem;
-                        if (response.body().isSuccess()){
-                            mensagem = "Cadastro efetuado com sucesso";
-                            Intent intent = new Intent(getApplicationContext(), ContatoLista.class);
-                            startActivity(intent);
-                        }else{
-                            mensagem = "Falha no cadastro"+ response.body().getMessage();
+                    service.CadContato(contatoModel).enqueue(new Callback<CadContatoResponse>() {
+                        @Override
+                        public void onResponse(Call<CadContatoResponse> call, Response<CadContatoResponse> response) {
+                            String mensagem;
+                            if (response.body().isSuccess()){
+                                mensagem = "Cadastro efetuado com sucesso" + bmFotoContato;
+                                Intent intent = new Intent(getApplicationContext(), ContatoLista.class);
+                                startActivity(intent);
+                            }else{
+                                mensagem = "Falha no cadastro"+ bmFotoContato + response.body().getMessage();
+                            }
+                            Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+
                         }
-                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
 
-                    }
 
-                    @Override
-                    public void onFailure(Call<CadContatoResponse> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        t.printStackTrace();
-                    }
-                });
+
+                        @Override
+                        public void onFailure(Call<CadContatoResponse> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            t.printStackTrace();
+                        }
+                    });
+
+                    //  service.CadFotoContato(contatoModel).enqueue(new Callback<CadContatoResponse>() {
+                    //    @Override
+                    //   public void onResponse(Call<CadContatoResponse> call, Response<CadContatoResponse> response) {
+                    //     String mensagem;
+                    //    if (response.body().isSuccess()){
+                    //        mensagem = "Cadastro efetuado com sucesso" + bmFotoContato;
+                    //      Intent intent = new Intent(getApplicationContext(), ContatoLista.class);
+                    //       startActivity(intent);
+                    //    }else{
+                    //        mensagem = "Falha no cadastro"+ bmFotoContato;
+                    //   }
+                    //    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                    // }
+
+                    //   @Override
+                    //  public void onFailure(Call<CadContatoResponse> call, Throwable t) {
+                    //     Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    t.printStackTrace();
+
+                    // }
+                    //});
+
+                }
+
+
+
+
+
+
+
+
 
             }
-
-
-
-
-
-
-
-
-
-        }
         }
 
     }
+
+    public void abrirGaleria(){
+        Intent galeria = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(galeria, PICK_IMAGE);
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+            fotoUri = data.getData();
+            fotoContato.setImageURI(fotoUri);
+
+        }
+    }
+
+    public void converteImagem(){
+
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
