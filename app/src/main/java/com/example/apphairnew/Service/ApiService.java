@@ -25,6 +25,7 @@ import com.example.apphairnew.response.GetDetalheAgendaResponse;
 import com.example.apphairnew.response.GetFluxoCaixaResponse;
 import com.example.apphairnew.response.GetHorarioResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
+import com.example.apphairnew.response.GetTotalFluxoResponse;
 import com.example.apphairnew.response.HorarioResponse;
 import com.example.apphairnew.response.LiqCtsPagarResponse;
 import com.example.apphairnew.response.LiqCtsRecebResponse;
@@ -125,8 +126,11 @@ public interface ApiService {
     @GET("auth/GetAgendaOfertada/{usuario}")
     Call <List<GetHorarioResponse>> getAgendaOfertada(@Path("usuario") int usuario);
 
-    @GET("auth/GetFluxoCaixa/{usuario}")
-    Call <List<GetFluxoCaixaResponse>> getFluxoCaixa(@Path("usuario") int usuario);
+    @GET("auth/GetFluxoCaixa/{usuario}/{modelo}")
+    Call <List<GetFluxoCaixaResponse>> getFluxoCaixa(@Path("usuario") int usuario, @Path("modelo") int modelo);
+
+    @GET("auth/GetTotalFluxoCaixa/{usuario}/{modelo}")
+    Call <GetTotalFluxoResponse> getTotalFluxo(@Path("usuario") int usuario, @Path("modelo") int modelo);
 
 
 

@@ -98,12 +98,31 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="400dp"
                 android:layout_below="@+id/espaco_vazio1">
 
             </android.support.v7.widget.RecyclerView>
 
 
+            <TextView
+                android:id="@+id/label_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total no Período: "
+                android:textSize="22dp"
+
+                android:layout_below="@+id/recycler_view"
+                />
+
+
+            <TextView
+                android:id="@+id/label_valor_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                android:layout_alignParentRight="true"
+
+                android:layout_below="@+id/recycler_view"/>
 
 
 
@@ -121,5 +140,8 @@
 
 
     </android.support.design.widget.NavigationView>
+
+
+
 
 </android.support.v4.widget.DrawerLayout>

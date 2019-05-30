@@ -1,6 +1,7 @@
 package com.example.apphairnew.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class AdapterFluxoCaixa extends RecyclerView.Adapter<AdapterFluxoCaixa.ViewHolder> {
 
-    AdapterFluxoCaixa.itemClicadoListener itemClicado;
+    itemClicadoListener itemClicado;
     List<GetFluxoCaixaResponse> fluxoCaixas;
     private LayoutInflater inflater;
     private Context context;
@@ -45,12 +46,24 @@ public class AdapterFluxoCaixa extends RecyclerView.Adapter<AdapterFluxoCaixa.Vi
         GetFluxoCaixaResponse fluxoCaixa = fluxoCaixas.get(position);
         holder.fluxoValor.setText(String.valueOf(fluxoCaixa.getValorFluxo()));
         holder.fluxoData.setText(fluxoCaixa.getDataFluxo());
+        if(fluxoCaixa.getValorFluxo() < 0)
+        {
+            // holder.nomeContato.setTextColor(Color.RED);
+            holder.fluxoValor.setTextColor(Color.RED);
+            holder.fluxoData.setTextColor(Color.RED);
+
+        }else
+        {
+            holder.fluxoValor.setTextColor(Color.GREEN);
+            holder.fluxoData.setTextColor(Color.GREEN);
+        }
+
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return  fluxoCaixas.size();
     }
 
 

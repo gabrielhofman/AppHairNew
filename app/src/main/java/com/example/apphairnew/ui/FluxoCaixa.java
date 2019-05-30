@@ -13,12 +13,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apphairnew.Adapter.AdapterFluxoCaixa;
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.response.GetFluxoCaixaResponse;
+import com.example.apphairnew.response.GetTotalFluxoResponse;
 import com.example.apphairnew.web.ApiControler;
 
 import java.util.ArrayList;
@@ -41,6 +43,9 @@ public class FluxoCaixa extends AppCompatActivity implements View.OnClickListene
     private Button botaoFluxo30dias;
     private Button botaoFluxoTodosDias;
 
+    private TextView labelValorTotal;
+
+
     private RecyclerView recyclerView;
     private AdapterFluxoCaixa adapterFluxoCaixa;
     private LinearLayoutManager linearLayoutManager;
@@ -48,6 +53,7 @@ public class FluxoCaixa extends AppCompatActivity implements View.OnClickListene
 
 
     public List<GetFluxoCaixaResponse> teste = new ArrayList<>();
+    public GetTotalFluxoResponse getTotalFluxoResponse = new GetTotalFluxoResponse();
 
     private ApiService service = ApiControler.CreateController();
 
@@ -91,7 +97,13 @@ public class FluxoCaixa extends AppCompatActivity implements View.OnClickListene
         this.botaoFluxoTodosDias.setOnClickListener(this);
 
 
+        this.labelValorTotal = (TextView)findViewById(R.id.label_valor_total) ;
+
+
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+
 
 
     }
@@ -176,13 +188,11 @@ public class FluxoCaixa extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
+
         if(view==botaoFluxo1dia)
-        {
-            final int usuario = 1;
-
-
-
-            service.getFluxoCaixa(usuario).enqueue(new Callback<List<GetFluxoCaixaResponse>>() {
+        {final int usuario = 1;
+            int modelo = 1;
+            service.getFluxoCaixa(usuario,modelo).enqueue(new Callback<List<GetFluxoCaixaResponse>>() {
                 @Override
                 public void onResponse(Call<List<GetFluxoCaixaResponse>> call, Response<List<GetFluxoCaixaResponse>> response) {
                     teste = response.body();
@@ -195,6 +205,129 @@ public class FluxoCaixa extends AppCompatActivity implements View.OnClickListene
                     t.printStackTrace();
                 }
             });
+
+            service.getTotalFluxo(usuario,modelo).enqueue(new Callback<GetTotalFluxoResponse>() {
+                @Override
+                public void onResponse(Call<GetTotalFluxoResponse> call, Response<GetTotalFluxoResponse> response) {
+                    getTotalFluxoResponse = response.body();
+                    labelValorTotal.setText(String.valueOf(getTotalFluxoResponse.getTotalFluxo()));
+                }
+
+                @Override
+                public void onFailure(Call<GetTotalFluxoResponse> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Houve um erro: "+t.getMessage(), Toast.LENGTH_LONG).show();
+                    t.printStackTrace();
+
+                }
+            });
+        }
+
+        if(view==botaoFluxo7dias)
+        {final int usuario = 1;
+            int modelo = 2;
+            service.getFluxoCaixa(usuario,modelo).enqueue(new Callback<List<GetFluxoCaixaResponse>>() {
+                @Override
+                public void onResponse(Call<List<GetFluxoCaixaResponse>> call, Response<List<GetFluxoCaixaResponse>> response) {
+                    teste = response.body();
+                    GerarTela();
+                }
+
+                @Override
+                public void onFailure(Call<List<GetFluxoCaixaResponse>> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Houve um erro: "+t.getMessage(), Toast.LENGTH_LONG).show();
+                    t.printStackTrace();
+                }
+            });
+
+            service.getTotalFluxo(usuario,modelo).enqueue(new Callback<GetTotalFluxoResponse>() {
+                @Override
+                public void onResponse(Call<GetTotalFluxoResponse> call, Response<GetTotalFluxoResponse> response) {
+                    getTotalFluxoResponse = response.body();
+                    labelValorTotal.setText(String.valueOf(getTotalFluxoResponse.getTotalFluxo()));
+                }
+
+                @Override
+                public void onFailure(Call<GetTotalFluxoResponse> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Houve um erro: "+t.getMessage(), Toast.LENGTH_LONG).show();
+                    t.printStackTrace();
+
+                }
+            });
+        }
+
+        if(view==botaoFluxo30dias)
+        {final int usuario = 1;
+            int modelo = 3;
+            service.getFluxoCaixa(usuario,modelo).enqueue(new Callback<List<GetFluxoCaixaResponse>>() {
+                @Override
+                public void onResponse(Call<List<GetFluxoCaixaResponse>> call, Response<List<GetFluxoCaixaResponse>> response) {
+                    teste = response.body();
+                    GerarTela();
+                }
+
+                @Override
+                public void onFailure(Call<List<GetFluxoCaixaResponse>> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Houve um erro: "+t.getMessage(), Toast.LENGTH_LONG).show();
+                    t.printStackTrace();
+                }
+            });
+
+            service.getTotalFluxo(usuario,modelo).enqueue(new Callback<GetTotalFluxoResponse>() {
+                @Override
+                public void onResponse(Call<GetTotalFluxoResponse> call, Response<GetTotalFluxoResponse> response) {
+                    getTotalFluxoResponse = response.body();
+                    labelValorTotal.setText(String.valueOf(getTotalFluxoResponse.getTotalFluxo()));
+                }
+
+                @Override
+                public void onFailure(Call<GetTotalFluxoResponse> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Houve um erro: "+t.getMessage(), Toast.LENGTH_LONG).show();
+                    t.printStackTrace();
+
+                }
+            });
+        }
+
+
+
+
+
+        if(view==botaoFluxoTodosDias)
+        {
+
+            final int usuario = 1;
+            int modelo = 4;
+            service.getFluxoCaixa(usuario,modelo).enqueue(new Callback<List<GetFluxoCaixaResponse>>() {
+                @Override
+                public void onResponse(Call<List<GetFluxoCaixaResponse>> call, Response<List<GetFluxoCaixaResponse>> response) {
+                    teste = response.body();
+                    GerarTela();
+                }
+
+                @Override
+                public void onFailure(Call<List<GetFluxoCaixaResponse>> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Houve um erro: "+t.getMessage(), Toast.LENGTH_LONG).show();
+                    t.printStackTrace();
+                }
+            });
+
+
+
+            service.getTotalFluxo(usuario,modelo).enqueue(new Callback<GetTotalFluxoResponse>() {
+                @Override
+                public void onResponse(Call<GetTotalFluxoResponse> call, Response<GetTotalFluxoResponse> response) {
+                    getTotalFluxoResponse = response.body();
+                    labelValorTotal.setText(String.valueOf(getTotalFluxoResponse.getTotalFluxo()));
+                }
+
+                @Override
+                public void onFailure(Call<GetTotalFluxoResponse> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Houve um erro: "+t.getMessage(), Toast.LENGTH_LONG).show();
+                    t.printStackTrace();
+
+                }
+            });
+
 
         }
 
