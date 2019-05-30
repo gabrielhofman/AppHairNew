@@ -99,7 +99,7 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ViewHold
         TextView telContado;
         TextView opcoesMenuContato;
 
-
+//f
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 

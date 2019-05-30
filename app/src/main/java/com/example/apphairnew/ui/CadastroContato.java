@@ -258,7 +258,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
                 contatoModel.setExpFreqContato(freqContato);
                 contatoModel.setFotoContato(bmFotoContato);
 
-
+//g
 
                 if(alterando){
 

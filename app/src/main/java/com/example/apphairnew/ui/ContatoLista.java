@@ -103,7 +103,7 @@ public class ContatoLista extends AppCompatActivity implements View.OnClickListe
       service.ExcluirContato(id).enqueue(new Callback<CadContatoResponse>(){
         @Override
       public void onResponse(Call<CadContatoResponse> call, Response<CadContatoResponse> response) {
-
+//ff
               }
 
            @Override

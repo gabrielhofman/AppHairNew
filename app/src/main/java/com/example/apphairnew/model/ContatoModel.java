@@ -15,7 +15,7 @@ public class ContatoModel {
     private String obsContato;
     private String sexoContato;
     private String expFreqContato;
-    private String bmFotoContato;
+    private String bmFotoContato; //f
 
     public int getId() {
         return id;

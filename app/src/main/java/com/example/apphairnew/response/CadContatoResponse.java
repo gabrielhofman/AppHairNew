@@ -20,6 +20,6 @@ public class CadContatoResponse {
     public void setMessage(String message) {
         this.message = message;
     }
-    //aa
+    //aa b
 
 }
