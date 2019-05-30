@@ -75,7 +75,9 @@
                     android:hint="Digite o preço do serviço"
                     android:textSize="18dp"
                     android:layout_below="@id/campoDescServico"
+                    android:inputType="numberDecimal"
                     />
+
 
                 <TextView
                     android:id="@+id/espacoVazio1"

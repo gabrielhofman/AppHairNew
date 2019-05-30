@@ -2,6 +2,7 @@ package com.example.apphairnew.ui;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -12,13 +13,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
+import com.example.apphairnew.Util.MaskEditUtil;
 import com.example.apphairnew.model.CtsPagarModel;
+import com.example.apphairnew.model.FluxoModel;
+import com.example.apphairnew.model.GetAgendaDetalhe;
 import com.example.apphairnew.response.AddCtsPagarResponse;
+import com.example.apphairnew.response.AddCtsReceberResponse;
+import com.example.apphairnew.response.AddFluxoResponse;
+import com.example.apphairnew.response.GetContatoResponse;
 import com.example.apphairnew.response.GetCtsPagarResponse;
+import com.example.apphairnew.response.GetDetalheAgendaResponse;
 import com.example.apphairnew.web.ApiControler;
 
 import retrofit2.Call;
@@ -30,24 +39,34 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
 
     private EditText campoVencimento;
     private EditText campoValor;
-    private EditText campoNomeContato;
-    private EditText campoObservacao;
+    private TextView campoNomeContato;
+
+
+    private GetAgendaDetalhe modelDetalhe;
+    private GetContatoResponse contatoResponse;
+
 
     private Button botaoCadastroPagar;
     private Button botaoCancelarPagar;
+    private Button botaoLiquidarPagar;
+    private Button botaoNomeContato;
 
     private Toolbar toolbar;
     private ActionBar actionBar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private CtsPagarModel ctsPagarModel;
+    private FluxoModel fluxoModel;
 
-    private String pagarVencimento, pagarNomeContato, pagarObservacao;
+    private String pagarVencimento;
+    private int pagarContato;
     private Double pagarValor;
     private ApiService service = ApiControler.CreateController();
 
 
     private boolean alterando;
+
+    private int contato =0, servico =0;
 
 
     private GetCtsPagarResponse resp;
@@ -76,9 +95,11 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
         actionBar.setTitle("Adicionar contas a pagar");
 
         campoVencimento = (EditText) findViewById(R.id.campoDataVencimento);
+        campoVencimento.addTextChangedListener(MaskEditUtil.mask(campoVencimento, MaskEditUtil.FORMAT_DATE));
+
         campoValor = (EditText) findViewById(R.id.campoValores);
-        campoNomeContato = (EditText) findViewById(R.id.campoNomeContato);
-        campoObservacao = (EditText) findViewById(R.id.campoObservacao);
+        campoNomeContato = (TextView) findViewById(R.id.campoNomeContato);
+
 
         Button botaoCadastroPagar = (Button)findViewById(R.id.botaoCadastrarPag);
         this.botaoCadastroPagar = botaoCadastroPagar;
@@ -88,17 +109,50 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
         this.botaoCancelarPagar = botaoCancelarPagar;
         botaoCancelarPagar.setOnClickListener(this);
 
+        Button botaoNomeContato = (Button)findViewById(R.id.botaoNomeContato);
+        this.botaoNomeContato = botaoNomeContato;
+        botaoNomeContato.setOnClickListener(this);
+
+        Button botaoLiquidarPagar = (Button)findViewById(R.id.botaoLiquidarPagar) ;
+        this.botaoLiquidarPagar = botaoLiquidarPagar;
+        botaoLiquidarPagar.setOnClickListener(this);
+
         resp = (GetCtsPagarResponse)getIntent().getSerializableExtra("ctsPagar");
+
+
+        if(resp == null)
+        {
+            botaoLiquidarPagar.setVisibility(View.GONE);
+            botaoCancelarPagar.setVisibility(View.GONE);
+        }
 
 
         if(resp != null){
 
+            botaoCadastroPagar.setText("Alterar Contas à Pagar");
             campoVencimento.setText(resp.pagarVencimento);
-            campoNomeContato.setText(resp.pagarNomeContato);
+
           //  campoValor.setText(String.valueOf(campoValor));
             campoValor.setText(resp.pagarValor.toString());
-            campoObservacao.setText(resp.pagarObservacao);
+
+            this.modelDetalhe = new GetAgendaDetalhe();
+            this.modelDetalhe.setContato(resp.getPagarContato());
+            this.modelDetalhe.setServico(1);
+
             this.alterando = true;
+
+            service.GetDetalhe(modelDetalhe).enqueue(new Callback<GetDetalheAgendaResponse>() {
+                @Override
+                public void onResponse(Call<GetDetalheAgendaResponse> call, Response<GetDetalheAgendaResponse> response) {
+                    Toast.makeText(AddContasPagar.this, "Contato: " + response.body().contato, Toast.LENGTH_LONG).show();
+                    campoNomeContato.setText(response.body().contato);
+                }
+
+                @Override
+                public void onFailure(Call<GetDetalheAgendaResponse> call, Throwable t) {
+
+                }
+            });
 
         }else
         {
@@ -169,28 +223,113 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        if(v==botaoNomeContato){
+            Intent intent = new Intent(this, PesquisaContato.class);
+            startActivityForResult(intent, 1);
+
+
+        }
+
+        if(v==botaoLiquidarPagar)
+        {
+            fluxoModel = new FluxoModel();
+            fluxoModel.setMovFluxo("S");
+            fluxoModel.setUsuarioFluxo(1);
+            fluxoModel.setDataFluxo(campoVencimento.getText().toString());
+            fluxoModel.setValorFluxo(Double.valueOf(campoValor.getText().toString()));
+
+            service.CadFluxo(fluxoModel).enqueue(new Callback<AddFluxoResponse>() {
+                @Override
+                public void onResponse(Call<AddFluxoResponse> call, Response<AddFluxoResponse> response) {
+
+                }
+
+                @Override
+                public void onFailure(Call<AddFluxoResponse> call, Throwable t) {
+
+                }
+            });
+
+            service.ExcluirCP(resp.idCp).enqueue(new Callback<AddCtsReceberResponse>() {
+                @Override
+                public void onResponse(Call<AddCtsReceberResponse> call, Response<AddCtsReceberResponse> response) {
+                    String mensagem;
+                    if (response.body().isSuccess()) {
+                        mensagem = "Registro pago com sucesso.";
+                    } else {
+                        mensagem = "Falhou" + response.body().getMessage();
+                    }
+
+                    Intent intent = new Intent(getApplicationContext(), CtsPagarLista.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call<AddCtsReceberResponse> call, Throwable t) {
+
+                }
+            });
+
+
+
+        }
+
+        if(v== botaoCancelarPagar)
+        {
+            service.ExcluirCP(resp.idCp).enqueue(new Callback<AddCtsReceberResponse>() {
+                @Override
+                public void onResponse(Call<AddCtsReceberResponse> call, Response<AddCtsReceberResponse> response) {
+                    String mensagem;
+                                        if (response.body().isSuccess()) {
+                                            mensagem = "Sucesso na Exclusão do Contas a Pagar";
+                                        } else {
+                                            mensagem = "Falhou" + response.body().getMessage();
+                                        }
+
+                    Intent intent = new Intent(getApplicationContext(), CtsPagarLista.class);
+                                        startActivity(intent);
+                                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call<AddCtsReceberResponse> call, Throwable t) {
+
+                }
+            });
+
+        }
 
 
 
         if (v==botaoCadastroPagar){
             pagarVencimento = campoVencimento.getText().toString();
             pagarValor = Double.valueOf(campoValor.getText().toString());
-            pagarNomeContato = campoNomeContato.getText().toString();
-            pagarObservacao = campoObservacao.getText().toString();
+            pagarContato = contato;
 
-                      if(pagarVencimento.isEmpty() || pagarNomeContato.isEmpty() || pagarObservacao.isEmpty()){
+                      if(pagarVencimento.isEmpty()){
                 Toast.makeText(AddContasPagar.this, "Complete todos os campos corretamente", Toast.LENGTH_LONG).show();
             }
             CtsPagarModel  ctsPagarModel = new CtsPagarModel();
 
             ctsPagarModel.setPagarVencimento(pagarVencimento);
             ctsPagarModel.setPagarValor(pagarValor);
-            ctsPagarModel.setPagarNomeContato(pagarNomeContato);
-            ctsPagarModel.setPagarObservacao(pagarObservacao);
+            ctsPagarModel.setPagarContato(pagarContato);
 
 
             if(alterando){
                 ctsPagarModel.setIdCp(resp.idCp);
+
+
+                if(contato==0)
+                {
+                    ctsPagarModel.setPagarContato(resp.pagarContato);
+
+                }else
+                {
+                    ctsPagarModel.setPagarContato(pagarContato);
+                }
+
 
                 service.AltCP(ctsPagarModel).enqueue(new Callback<AddCtsPagarResponse>() {
                     @Override
@@ -248,4 +387,27 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
         }
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK) {
+
+                contatoResponse = (GetContatoResponse) data.getSerializableExtra("contato");
+
+                campoNomeContato.setText(contatoResponse.getNomeContato());
+                this.contato = contatoResponse.getId();
+
+            }
+            if(resultCode == RESULT_CANCELED)
+            {
+                //      nomeContatoFinal.setText("Não selecionado");
+            }
+
+        }
+
+
+    }
+
 }

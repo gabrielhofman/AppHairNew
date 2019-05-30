@@ -7,8 +7,7 @@ public class GetCtsPagarResponse implements Serializable {
     public int idCp;
     public String pagarVencimento;
     public Float pagarValor;
-    public String pagarNomeContato;
-    public String pagarObservacao;
+    public int pagarContato;
 
     public int getIdCp() {
         return idCp;
@@ -34,19 +33,13 @@ public class GetCtsPagarResponse implements Serializable {
         this.pagarValor = pagarValor;
     }
 
-    public String getPagarNomeContato() {
-        return pagarNomeContato;
+    public int getPagarContato() {
+        return pagarContato;
     }
 
-    public void setPagarNomeContato(String pagarNomeContato) {
-        this.pagarNomeContato = pagarNomeContato;
+    public void setPagarContato(int pagarContato) {
+        this.pagarContato = pagarContato;
     }
 
-    public String getPagarObservacao() {
-        return pagarObservacao;
-    }
 
-    public void setPagarObservacao(String pagarObservacao) {
-        this.pagarObservacao = pagarObservacao;//maoe
-    }
 }

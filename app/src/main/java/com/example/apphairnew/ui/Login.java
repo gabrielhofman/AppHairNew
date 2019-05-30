@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
+import com.example.apphairnew.model.FluxoModel;
 import com.example.apphairnew.model.LoginModel;
 import com.example.apphairnew.response.LoginResponse;
 import com.example.apphairnew.web.ApiControler;
@@ -170,7 +171,7 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
 
 
             case R.id.fluxo_caixa:
-                Intent intent9 = new Intent(this, Agenda.class);
+                Intent intent9 = new Intent(this, FluxoCaixa.class);
                 startActivity(intent9);
                 return true;
 

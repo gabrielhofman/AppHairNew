@@ -38,7 +38,7 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
 
     private EditText campoVencimento;
     private EditText campoValor;
-    private EditText campoObservacao;
+
     private TextView campoNomeContato;
 
     private Button botaoCadastroReceb;
@@ -101,7 +101,7 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
         campoVencimento = (EditText) findViewById(R.id.campoDataVencimento);
         campoValor = (EditText) findViewById(R.id.campoValores);
         campoNomeContato = (TextView) findViewById(R.id.campoNomeContato);
-        campoObservacao = (EditText) findViewById(R.id.campoObservacao);
+
 
         campoVencimento.addTextChangedListener(MaskEditUtil.mask(campoVencimento, MaskEditUtil.FORMAT_DATE));
       //  campoValor.addTextChangedListener(MaskEditUtil.mask(campoValor, MaskEditUtil.FORMAT_VALOR));
@@ -140,7 +140,7 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
             campoValor.setText(resp.recebValor.toString());
             botaoCadastroReceb.setText("Alterar Contas a Receber");
 
-            botaoExcluirReceb.setVisibility(View.GONE);
+
 
 
             this.modelDetalhe = new GetAgendaDetalhe();
