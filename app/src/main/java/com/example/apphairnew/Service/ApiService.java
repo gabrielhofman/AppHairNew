@@ -22,6 +22,7 @@ import com.example.apphairnew.response.GetContatoResponse;
 import com.example.apphairnew.response.GetCtsPagarResponse;
 import com.example.apphairnew.response.GetCtsReceberResponse;
 import com.example.apphairnew.response.GetDetalheAgendaResponse;
+import com.example.apphairnew.response.GetFluxoCaixaResponse;
 import com.example.apphairnew.response.GetHorarioResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.response.HorarioResponse;
@@ -112,6 +113,9 @@ public interface ApiService {
     @GET("auth/ExcluirCR/{crId}")
     Call<AddCtsReceberResponse> ExcluirCR(@Path("crId") int crId);
 
+    @GET("auth/ExcluirCP/{cpId}")
+    Call<AddCtsReceberResponse> ExcluirCP(@Path("cpId") int cpId);
+
     @POST("auth/AdicionarFluxo")
     Call<AddFluxoResponse> CadFluxo(@Body FluxoModel body);
 
@@ -120,6 +124,9 @@ public interface ApiService {
 
     @GET("auth/GetAgendaOfertada/{usuario}")
     Call <List<GetHorarioResponse>> getAgendaOfertada(@Path("usuario") int usuario);
+
+    @GET("auth/GetFluxoCaixa/{usuario}")
+    Call <List<GetFluxoCaixaResponse>> getFluxoCaixa(@Path("usuario") int usuario);
 
 
 

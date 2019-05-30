@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
+import com.example.apphairnew.Util.MaskEditUtil;
 import com.example.apphairnew.model.ServicoModel;
 import com.example.apphairnew.response.CadServicoResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
@@ -81,6 +82,9 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
         campoNomeServico = (EditText) findViewById(R.id.campoNomeServico);
         campoDescServico = (EditText) findViewById(R.id.campoDescServico);
         campoPrecoServico = (EditText) findViewById(R.id.campoPrecoServico);
+
+
+       campoPrecoServico.addTextChangedListener(MaskEditUtil.mask(campoPrecoServico, MaskEditUtil.FORMAT_VALOR));
 
 
 
