@@ -36,5 +36,5 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
 
     testCompile 'junit:junit:4.12'
-    compile files('libs/ksoap2.jar')
+    compile files('libs/ksoap2.jar','libs/ImageBase64Encoder.jar')
 }

@@ -85,14 +85,26 @@
                     android:textColorHint="@color/colorPrimary"
                     android:layout_below="@+id/campoDataNascContato"/>
 
-                <Spinner
-                    android:id="@+id/spinnerSexoContato"
-                    android:layout_width="140dp"
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:spinnerMode="dropdown"
-                    android:layout_below="@+id/campoDataNascContato"
-                    android:layout_toRightOf="@id/labelSexoContato"/>
+                    android:orientation="vertical"
+                    android:layout_below="@+id/labelSexoContato"
+                    android:id="@+id/rbSexoContato"
+                    >
+
+                    <RadioButton android:id="@+id/radio_masculino"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Masculino"
+                        />
+                    <RadioButton android:id="@+id/radio_feminino"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Feminino"
+                        />
+
+                </RadioGroup>
 
                 <TextView
                     android:id="@+id/labelExpecFreqContato"
@@ -101,23 +113,46 @@
                     android:hint="Expectativa de frequência:"
                     android:textSize="18dp"
                     android:textColorHint="@color/colorPrimary"
-                    android:layout_below="@+id/spinnerSexoContato"/>
+                    android:layout_below="@+id/rbSexoContato"/>
 
-                <Spinner
-                    android:id="@+id/spinnerExpecFreqContato"
-                    android:layout_width="140dp"
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:spinnerMode="dropdown"
-                    android:layout_below="@+id/spinnerSexoContato"
-                    android:layout_toRightOf="@id/labelExpecFreqContato"/>
+                    android:orientation="vertical"
+                    android:layout_below="@+id/labelExpecFreqContato"
+                    android:id="@+id/rbExpFrequencia"
+                    >
+
+                    <RadioButton android:id="@+id/radio_30_dias"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="30 dias"
+                        />
+                    <RadioButton android:id="@+id/radio_60_dias"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="60 dias"
+                        />
+                    <RadioButton android:id="@+id/radio_90_dias"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="90 dias"
+                        />
+                    <RadioButton android:id="@+id/radio_120_dias"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="120 dias"
+                        />
+
+
+                </RadioGroup>
 
                 <TextView
                     android:id="@+id/espacoVazio1"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@id/spinnerSexoContato"
+                    android:layout_below="@id/rbExpFrequencia"
                     />
 
                 <TextView

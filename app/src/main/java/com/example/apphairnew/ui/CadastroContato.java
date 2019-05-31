@@ -2,6 +2,7 @@ package com.example.apphairnew.ui;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -19,11 +20,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
+import com.example.apphairnew.Util.MaskEditUtil;
 import com.example.apphairnew.model.ContatoModel;
 import com.example.apphairnew.response.CadContatoResponse;
 import com.example.apphairnew.response.GetContatoResponse;
@@ -44,8 +48,14 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
     private EditText campoNomeContato;
     private EditText campoTelContato;
     private EditText campoDataNascContado;
-    private Spinner spinnerSexoContato;
-    private Spinner spinnerExpecFreqContato;
+   // private Spinner spinnerSexoContato;
+
+    private RadioGroup rbSexoContato;
+    private RadioGroup rbFreqContato;
+    private RadioButton radioBtnSexo;
+    private RadioButton radioBtnFreqContato;
+
+    //private Spinner spinnerExpecFreqContato;
 
     private ImageView fotoContato;
     private String bmFotoContato;
@@ -100,22 +110,30 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
         campoDataNascContado = (EditText)findViewById(R.id.campoDataNascContato);
 
 
-        spinnerSexoContato = (Spinner) findViewById(R.id.spinnerSexoContato);
-        spinnerExpecFreqContato = (Spinner) findViewById(R.id.spinnerExpecFreqContato);
+        rbSexoContato = (RadioGroup) findViewById(R.id.rbSexoContato) ;
+        rbFreqContato = (RadioGroup) findViewById(R.id.rbExpFrequencia) ;
 
-        ArrayAdapter<CharSequence> adapterSexo = ArrayAdapter.createFromResource(this,
-                R.array.sexoContato, R.layout.support_simple_spinner_dropdown_item);
-        spinnerSexoContato.setAdapter(adapterSexo);
+        //ArrayAdapter<CharSequence> adapterSexo = ArrayAdapter.createFromResource(this,
+          //      R.array.sexoContato, R.layout.support_simple_spinner_dropdown_item);
+        //spinnerSexoContato.setAdapter(adapterSexo);
 
-        ArrayAdapter<CharSequence> adapterFreq = ArrayAdapter.createFromResource(this,
-                R.array.freqContato, R.layout.support_simple_spinner_dropdown_item);
-        spinnerExpecFreqContato.setAdapter(adapterFreq);
+        //ArrayAdapter<CharSequence> adapterFreq = ArrayAdapter.createFromResource(this,
+          //      R.array.freqContato, R.layout.support_simple_spinner_dropdown_item);
+        //spinnerExpecFreqContato.setAdapter(adapterFreq);
 
         fotoContato = (ImageView) findViewById(R.id.fotoContato);
 
+        campoDataNascContado.addTextChangedListener(MaskEditUtil.mask(campoDataNascContado, MaskEditUtil.FORMAT_DATE));
+        campoTelContato.addTextChangedListener(MaskEditUtil.mask(campoTelContato, MaskEditUtil.FORMAT_FONE));
+
         Button botaoTirarFoto = (Button)findViewById(R.id.botaoTirarFoto);
         this.botaoTirarFoto = botaoTirarFoto;
-        botaoTirarFoto.setOnClickListener(this);
+        botaoTirarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tirarFoto();
+            }
+        });
 
         Button botaoCarregarFoto = (Button)findViewById(R.id.botaoCarregarFoto);
         this.botaoCarregarFoto = botaoCarregarFoto;
@@ -143,6 +161,40 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
             campoNomeContato.setText(contato.getNomeContato());
             campoTelContato.setText(contato.getTelContato());
             campoDataNascContado.setText(contato.getDataNascCont());
+
+           // int idSexo = rbSexoContato.getCheckedRadioButtonId();
+            //radioBtnSexo = (RadioButton) findViewById(idSexo);
+            //String escolhaSexo = (String) radioBtnSexo.getText();
+            //contato.getSexoContato();
+            //String sexoDefault = "Feminino";
+            if(contato.getSexoContato().equals("Feminino")){
+                //radioBtnSexo.findViewById(R.id.radio_feminino).setChecked
+                rbSexoContato.check(R.id.radio_feminino);
+                Toast.makeText(CadastroContato.this, contato.getSexoContato(), Toast.LENGTH_LONG).show();
+
+            }else{
+                rbSexoContato.check(R.id.radio_masculino);
+                Toast.makeText(CadastroContato.this, contato.getSexoContato(), Toast.LENGTH_LONG).show();
+            }
+
+            //radioBtnSexo.setChecked(Boolean.parseBoolean(contato.getSexoContato()));
+            //String freqDefault = "30 dias";
+            if(contato.getExpFreqContato().equals("30 dias")){
+                rbFreqContato.check(R.id.radio_30_dias);
+            }else if(contato.getExpFreqContato().equals("60 dias")){
+                rbFreqContato.check(R.id.radio_60_dias);
+            }else if(contato.getExpFreqContato().equals("90 dias")){
+                rbFreqContato.check(R.id.radio_90_dias);
+            }else{
+                rbFreqContato.check(R.id.radio_120_dias);
+            }
+
+
+            byte[] decodedString = Base64.decode(contato.getFotoContato(), Base64.DEFAULT);
+            // System.out.println(contatoModel.getFotoContato());
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            fotoContato.setImageBitmap(decodedByte);
+
             this.alterando = true;
 
 
@@ -224,8 +276,19 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
             nomeContato = campoNomeContato.getText().toString();
             telContato = campoTelContato.getText().toString();
             nascContato = campoDataNascContado.getText().toString();
-            sexoContato = spinnerSexoContato.getSelectedItem().toString();
-            freqContato = spinnerExpecFreqContato.getSelectedItem().toString();
+
+            int idSexo = rbSexoContato.getCheckedRadioButtonId();
+            radioBtnSexo = (RadioButton) findViewById(idSexo);
+            String escolhaSexo = (String) radioBtnSexo.getText();
+
+            int idFreq = rbFreqContato.getCheckedRadioButtonId();
+            radioBtnFreqContato = (RadioButton) findViewById(idFreq);
+            String escolhaFreq = (String) radioBtnFreqContato.getText();
+
+
+            //receberModel.setTipoPgto(escolha);
+            //sexoContato = rbSexoContato.get().toString();
+            //freqContato = spinnerExpecFreqContato.getSelectedItem().toString();
 
             //bmFotoContato=((BitmapDrawable)fotoContato.getDrawable()).getBitmap();
 
@@ -245,7 +308,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
             byte[] bb = bos.toByteArray();
             bmFotoContato = Base64.encodeToString(bb,1);
 
-            if(nomeContato.isEmpty() || telContato.isEmpty() || nascContato.isEmpty() || sexoContato.isEmpty() || freqContato.isEmpty()){
+            if(nomeContato.isEmpty() || telContato.isEmpty() || nascContato.isEmpty()){
                 Toast.makeText(CadastroContato.this, "Complete todos os campos", Toast.LENGTH_LONG).show();
 
             }else {
@@ -254,9 +317,10 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
                 contatoModel.setNomeContato(nomeContato);
                 contatoModel.setTelContato(telContato);
                 contatoModel.setDataNascCont(nascContato);
-                contatoModel.setSexoContato(sexoContato);
-                contatoModel.setExpFreqContato(freqContato);
+                contatoModel.setSexoContato(escolhaSexo);
+                contatoModel.setExpFreqContato(escolhaFreq);
                 contatoModel.setFotoContato(bmFotoContato);
+
 
 //g
 
@@ -298,11 +362,11 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
                         public void onResponse(Call<CadContatoResponse> call, Response<CadContatoResponse> response) {
                             String mensagem;
                             if (response.body().isSuccess()){
-                                mensagem = "Cadastro efetuado com sucesso" + bmFotoContato;
+                                mensagem = "Cadastro efetuado com sucesso";
                                 Intent intent = new Intent(getApplicationContext(), ContatoLista.class);
                                 startActivity(intent);
                             }else{
-                                mensagem = "Falha no cadastro"+ bmFotoContato + response.body().getMessage();
+                                mensagem = "Falha no cadastro" + response.body().getMessage();
                             }
                             Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
 
@@ -354,26 +418,47 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
 
     }
 
+    public void tirarFoto(){
+        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(camera,1);
+
+
+
+    }
+
     public void abrirGaleria(){
         Intent galeria = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(galeria, PICK_IMAGE);
 
+
     }
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             fotoUri = data.getData();
             fotoContato.setImageURI(fotoUri);
+            if(fotoUri == null) {
+                Toast.makeText(getApplicationContext(), "Nulaço", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getApplicationContext(), "VEIO ALGO", Toast.LENGTH_SHORT).show();
+            }
 
+        } else {
+            if (resultCode == RESULT_OK && requestCode == 1) {
+                Bitmap fototemp = (Bitmap) data.getExtras().get("data");
+                fotoContato.setImageBitmap(fototemp);
+                if(fotoUri == null) {
+                    Toast.makeText(getApplicationContext(), "Nulaço", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "VEIO ALGO", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
-    }
 
-    public void converteImagem(){
 
-    }
 
-}
+    }}
 
 
 
