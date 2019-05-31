@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.apphairnew.R;
 import com.example.apphairnew.response.GetCtsReceberResponse;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 public class AdapterCtsReceber extends RecyclerView.Adapter<AdapterCtsReceber.ViewHolder> {
@@ -40,7 +41,9 @@ public class AdapterCtsReceber extends RecyclerView.Adapter<AdapterCtsReceber.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         GetCtsReceberResponse ctsReceberModel = ctsReceberModels.get(position);
-        holder.recebValor.setText(String.valueOf(ctsReceberModel.getRecebValor()));
+        NumberFormat formatado = NumberFormat.getInstance();
+        formatado.setMinimumFractionDigits(2);
+        holder.recebValor.setText(String.valueOf(formatado.format(ctsReceberModel.getRecebValor())));
         holder.recebVencimento.setText(String.valueOf(ctsReceberModel.getRecebVencimento()));
     }
 

@@ -57,6 +57,8 @@ public class FluxoCaixa extends AppCompatActivity implements View.OnClickListene
 
     private ApiService service = ApiControler.CreateController();
 
+    private String cifrao = "R$ ";
+
 
 
     @Override
@@ -210,7 +212,7 @@ public class FluxoCaixa extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public void onResponse(Call<GetTotalFluxoResponse> call, Response<GetTotalFluxoResponse> response) {
                     getTotalFluxoResponse = response.body();
-                    labelValorTotal.setText(String.valueOf(getTotalFluxoResponse.getTotalFluxo()));
+                    labelValorTotal.setText(cifrao + String.valueOf(getTotalFluxoResponse.getTotalFluxo()));
                 }
 
                 @Override
@@ -243,7 +245,7 @@ public class FluxoCaixa extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public void onResponse(Call<GetTotalFluxoResponse> call, Response<GetTotalFluxoResponse> response) {
                     getTotalFluxoResponse = response.body();
-                    labelValorTotal.setText(String.valueOf(getTotalFluxoResponse.getTotalFluxo()));
+                    labelValorTotal.setText(cifrao + String.valueOf(getTotalFluxoResponse.getTotalFluxo()));
                 }
 
                 @Override
@@ -276,7 +278,7 @@ public class FluxoCaixa extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public void onResponse(Call<GetTotalFluxoResponse> call, Response<GetTotalFluxoResponse> response) {
                     getTotalFluxoResponse = response.body();
-                    labelValorTotal.setText(String.valueOf(getTotalFluxoResponse.getTotalFluxo()));
+                    labelValorTotal.setText(cifrao + String.valueOf(getTotalFluxoResponse.getTotalFluxo()));
                 }
 
                 @Override
@@ -317,7 +319,7 @@ public class FluxoCaixa extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public void onResponse(Call<GetTotalFluxoResponse> call, Response<GetTotalFluxoResponse> response) {
                     getTotalFluxoResponse = response.body();
-                    labelValorTotal.setText(String.valueOf(getTotalFluxoResponse.getTotalFluxo()));
+                    labelValorTotal.setText( cifrao + String.valueOf(getTotalFluxoResponse.getTotalFluxo()));
                 }
 
                 @Override

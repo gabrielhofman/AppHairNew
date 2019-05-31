@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.Util.MaskEditUtil;
+import com.example.apphairnew.Util.MoneyTextWatcher;
 import com.example.apphairnew.model.CtsReceberModel;
 import com.example.apphairnew.model.FluxoModel;
 import com.example.apphairnew.model.GetAgendaDetalhe;
@@ -29,6 +30,9 @@ import com.example.apphairnew.response.GetContatoResponse;
 import com.example.apphairnew.response.GetCtsReceberResponse;
 import com.example.apphairnew.response.GetDetalheAgendaResponse;
 import com.example.apphairnew.web.ApiControler;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -99,7 +103,9 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
         actionBar.setTitle("Adicionar contas a receber");
 
         campoVencimento = (EditText) findViewById(R.id.campoDataVencimento);
+        Locale mLocale = new Locale("pt","BR");
         campoValor = (EditText) findViewById(R.id.campoValores);
+        campoValor.addTextChangedListener(new MoneyTextWatcher(campoValor, mLocale));
         campoNomeContato = (TextView) findViewById(R.id.campoNomeContato);
 
 
@@ -137,7 +143,9 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
         {
 
             campoVencimento.setText(resp.recebVencimento);
-            campoValor.setText(resp.recebValor.toString());
+            NumberFormat formatado = NumberFormat.getInstance();
+            formatado.setMinimumFractionDigits(2);
+            campoValor.setText(formatado.format(resp.recebValor));
             botaoCadastroReceb.setText("Alterar Contas a Receber");
 
 
@@ -293,7 +301,7 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
             fluxoModel.setMovFluxo("E");
             fluxoModel.setUsuarioFluxo(1);
             fluxoModel.setDataFluxo(campoVencimento.getText().toString());;
-            fluxoModel.setValorFluxo(Double.valueOf(campoValor.getText().toString()));
+            fluxoModel.setValorFluxo(Double.valueOf(campoValor.getText().toString().replace("R$","").replace(".","").replace(",",".")));
 
 
             service.CadFluxo(fluxoModel).enqueue(new Callback<AddFluxoResponse>() {
@@ -335,7 +343,7 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
         if (v==botaoCadastroReceb){
 
             recebVencimento = campoVencimento.getText().toString();
-            recebValor = Double.valueOf(campoValor.getText().toString());
+            recebValor = Double.valueOf(campoValor.getText().toString().replace("R$","").replace(".","").replace(",","."));
             recebContato = contato;
 
 

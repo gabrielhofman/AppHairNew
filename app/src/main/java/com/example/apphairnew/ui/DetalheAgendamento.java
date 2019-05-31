@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.Util.MaskEditUtil;
+import com.example.apphairnew.Util.MoneyTextWatcher;
 import com.example.apphairnew.model.GetAgendaDetalhe;
 import com.example.apphairnew.model.HorarioModel;
 import com.example.apphairnew.response.GetContatoResponse;
@@ -30,8 +31,10 @@ import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.response.HorarioResponse;
 import com.example.apphairnew.web.ApiControler;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -109,6 +112,8 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
         campoHoraInicio = (EditText) findViewById(R.id.campoHoraInicio);
         campoHoraFim = (EditText) findViewById(R.id.campoHoraFim);
         campoPrecoServico = (EditText) findViewById(R.id.campoPrecoServico);
+        Locale mLocale = new Locale("pt","BR");
+        campoPrecoServico.addTextChangedListener(new MoneyTextWatcher(campoPrecoServico, mLocale));
         campoDataAgenda = (EditText) findViewById(R.id.campoDataAgenda);
         checkOfertar = (CheckBox) findViewById(R.id.checkOfertar);
         checkOfertar.setOnClickListener(this);
@@ -191,7 +196,10 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
             campoHoraInicio.setText(detalhe.horaInicio);
             campoHoraFim.setText(detalhe.horaFim);
             campoDataAgenda.setText(detalhe.dataAgenda);
-            campoPrecoServico.setText(String.valueOf(detalhe.precoServico));
+
+            NumberFormat formatado = NumberFormat.getInstance();
+            formatado.setMinimumFractionDigits(2);
+            campoPrecoServico.setText(String.valueOf(formatado.format(detalhe.precoServico)));
 
 
       //      Toast.makeText(getApplicationContext(),  "Contato:  " + detalhe.dataAgenda, Toast.LENGTH_SHORT).show();
@@ -345,7 +353,7 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
             horaInicio = campoHoraInicio.getText().toString();
             horaFim = campoHoraFim.getText().toString();
 
-            precoServico =  Double.valueOf(campoPrecoServico.getText().toString());
+            precoServico =  Double.valueOf(campoPrecoServico.getText().toString().replace("R$","").replace(".","").replace(",","."));
 
 
 

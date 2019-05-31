@@ -16,6 +16,7 @@ import com.example.apphairnew.response.GetCtsPagarResponse;
 import com.example.apphairnew.ui.CtsPagarLista;
 import com.example.apphairnew.web.ApiControler;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHolder> {
@@ -43,8 +44,9 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
     public void onBindViewHolder(@NonNull final AdapterCtsPagar.ViewHolder holder, final int position) {
 
         final GetCtsPagarResponse ctsPagarModel = ctsPagarModels.get(position);
-
-        holder.pagarValor.setText(String.valueOf(ctsPagarModel.getPagarValor()));
+        NumberFormat formatado = NumberFormat.getInstance();
+        formatado.setMinimumFractionDigits(2);
+        holder.pagarValor.setText(String.valueOf(formatado.format(ctsPagarModel.getPagarValor())));
         holder.pagarVencimento.setText(String.valueOf(ctsPagarModel.getPagarVencimento()));
 
         holder.opcoesMenu.setOnClickListener(new View.OnClickListener() {

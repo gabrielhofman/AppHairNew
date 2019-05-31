@@ -18,7 +18,10 @@ import com.example.apphairnew.response.CadProfResponse;
 import com.example.apphairnew.response.CadServicoResponse;
 import com.example.apphairnew.response.CepResponse;
 import com.example.apphairnew.model.GetAgendaDetalhe;
+import com.example.apphairnew.response.GetAgendaTotalResponse;
 import com.example.apphairnew.response.GetContatoResponse;
+import com.example.apphairnew.response.GetCpTotal;
+import com.example.apphairnew.response.GetCrTotal;
 import com.example.apphairnew.response.GetCtsPagarResponse;
 import com.example.apphairnew.response.GetCtsReceberResponse;
 import com.example.apphairnew.response.GetDetalheAgendaResponse;
@@ -131,6 +134,29 @@ public interface ApiService {
 
     @GET("auth/GetTotalFluxoCaixa/{usuario}/{modelo}")
     Call <GetTotalFluxoResponse> getTotalFluxo(@Path("usuario") int usuario, @Path("modelo") int modelo);
+
+    @GET("auth/GetTotalCR/{usuario}")
+    Call <GetCrTotal> getTotalCr(@Path("usuario") int usuario);
+
+    @GET("auth/GetTotalCP/{usuario}")
+    Call <GetCpTotal> getTotalCp(@Path("usuario") int usuario);
+
+    @GET("auth/GetTotalAgendaOfertada/{usuario}")
+    Call <GetAgendaTotalResponse> getTotalAgendaOfertada(@Path("usuario") int usuario);
+
+    @GET("auth/GetTotalAgendaLivre/{usuario}")
+    Call <GetAgendaTotalResponse> getTotalAgendaLivre(@Path("usuario") int usuario);
+
+    @GET("auth/GetTotalAgendaAgendado/{usuario}")
+    Call <GetAgendaTotalResponse> getTotalAgendaAgendado(@Path("usuario") int usuario);
+
+    @GET("auth/ExcluirServico/{servId}")
+    Call<CadServicoResponse> ExcluirServico(@Path("servId") int servId);
+
+
+
+
+
 
 
 

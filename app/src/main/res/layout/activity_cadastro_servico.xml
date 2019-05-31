@@ -87,15 +87,6 @@
                     android:layout_below="@id/campoPrecoServico"
                     />
 
-                <TextView
-                    android:id="@+id/labelTempoServico"
-                    android:layout_width="220dp"
-                    android:layout_height="wrap_content"
-                    android:hint="Tempo padrão do serviço:"
-                    android:textSize="18dp"
-                    android:textColorHint="@color/colorPrimary"
-                    android:layout_below="@+id/espacoVazio1"/>
-
 
 
                 <TextView
@@ -103,7 +94,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@id/labelTempoServico"
+                    android:layout_below="@id/espacoVazio1"
                     />
 
                 <Button
@@ -122,7 +113,7 @@
                     android:id="@+id/botaoCancelarServico"
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
-                    android:text="Cancelar serviço"
+                    android:text="Excluir Serviço"
                     android:layout_below="@+id/botaoCadastrarServico"
                     android:textSize="18dp"
                     android:layout_centerHorizontal="true"
