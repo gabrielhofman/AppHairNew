@@ -26,8 +26,8 @@
 
         <TextView
             android:id="@+id/centralizador"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_centerHorizontal="true"
             />
 
@@ -41,50 +41,14 @@
             android:textSize="18dp"
             android:layout_below="@id/centralizador"
             />
-        <Button
-            android:id="@+id/botaoAbrirCadastro"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:text="Abrir cadastro"
-            android:layout_below="@id/campoBuscaContato"
-            android:theme="@style/AppTheme.Button"
-            android:layout_centerHorizontal="true"/>
 
-        <Button
-            android:id="@+id/botaoGaleriaFotos"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:text="Abrir galeria de fotos"
-            android:layout_below="@+id/botaoAbrirCadastro"
-            android:theme="@style/AppTheme.Button"
-            android:layout_centerHorizontal="true"
-            />
-
-        <Button
-            android:id="@+id/botaoMarcarHorario"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:text="Marcar horário"
-            android:layout_below="@id/botaoGaleriaFotos"
-            android:theme="@style/AppTheme.Button"
-            android:layout_centerHorizontal="true"
-            />
-
-        <Button
-            android:id="@+id/botaoExcluirContato"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:text="Excluir contato"
-            android:layout_below="@id/botaoMarcarHorario"
-            android:theme="@style/AppTheme.Button"
-            android:layout_centerHorizontal="true"/>
 
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_contato"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/botaoExcluirContato">
+            android:layout_below="@id/campoBuscaContato">
 
         </android.support.v7.widget.RecyclerView>
         </RelativeLayout>

@@ -106,7 +106,7 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ViewHold
             fotoContato = itemView.findViewById(R.id.fotoContato);
             nomeContato = itemView.findViewById(R.id.labelNomeContato);
             telContado = itemView.findViewById(R.id.labelTelefoneContato);
-            opcoesMenuContato = itemView.findViewById(R.id.txtOpcaoContato);
+            //opcoesMenuContato = itemView.findViewById(R.id.txtOpcaoContato);
             itemView.setOnClickListener(this);
 
 

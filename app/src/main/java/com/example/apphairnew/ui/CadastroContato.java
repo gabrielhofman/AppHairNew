@@ -1,5 +1,6 @@
 package com.example.apphairnew.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -49,6 +50,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
     private EditText campoTelContato;
     private EditText campoDataNascContado;
    // private Spinner spinnerSexoContato;
+   private Context context;
 
     private RadioGroup rbSexoContato;
     private RadioGroup rbFreqContato;
@@ -113,13 +115,6 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
         rbSexoContato = (RadioGroup) findViewById(R.id.rbSexoContato) ;
         rbFreqContato = (RadioGroup) findViewById(R.id.rbExpFrequencia) ;
 
-        //ArrayAdapter<CharSequence> adapterSexo = ArrayAdapter.createFromResource(this,
-          //      R.array.sexoContato, R.layout.support_simple_spinner_dropdown_item);
-        //spinnerSexoContato.setAdapter(adapterSexo);
-
-        //ArrayAdapter<CharSequence> adapterFreq = ArrayAdapter.createFromResource(this,
-          //      R.array.freqContato, R.layout.support_simple_spinner_dropdown_item);
-        //spinnerExpecFreqContato.setAdapter(adapterFreq);
 
         fotoContato = (ImageView) findViewById(R.id.fotoContato);
 
@@ -141,6 +136,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onClick(View v) {
                 abrirGaleria();
+
             }
         });
 
@@ -150,7 +146,13 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
 
         Button botaoCancelarContato = (Button)findViewById(R.id.botaoCancelarContato);
         this.botaoCancelarContato = botaoCancelarContato;
-        botaoCancelarContato.setOnClickListener(this);
+        botaoCancelarContato.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                excluirContato(contato.getId());
+
+            }
+        });
 
 
         //serv = (GetServicoResponse2)getIntent().getSerializableExtra("serv");
@@ -286,20 +288,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
             String escolhaFreq = (String) radioBtnFreqContato.getText();
 
 
-            //receberModel.setTipoPgto(escolha);
-            //sexoContato = rbSexoContato.get().toString();
-            //freqContato = spinnerExpecFreqContato.getSelectedItem().toString();
 
-            //bmFotoContato=((BitmapDrawable)fotoContato.getDrawable()).getBitmap();
-
-            // try {
-            //  bmFotoContato =  MediaStore.Images.Media.getBitmap(this.getContentResolver(), fotoUri);
-            //  } catch (IOException e) {
-            //  e.printStackTrace();
-            // }
-
-            //BitmapDrawable drawable = (BitmapDrawable) fotoContato.getDrawable();
-            //   bmFotoContato = drawable.getBitmap();
 
             BitmapDrawable drawable = (BitmapDrawable) fotoContato.getDrawable();
             Bitmap bitmap = drawable.getBitmap();
@@ -325,6 +314,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
 //g
 
                 if(alterando){
+
 
                     contatoModel.setId(this.contato.getId());
                     //service.AltContato(ContatoModel).enqueue(Call<CadContatoResponse>);
@@ -355,7 +345,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
 
 
 
-                }else{
+                }else {
 
                     service.CadContato(contatoModel).enqueue(new Callback<CadContatoResponse>() {
                         @Override
@@ -380,6 +370,8 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
                             t.printStackTrace();
                         }
                     });
+
+
 
                     //  service.CadFotoContato(contatoModel).enqueue(new Callback<CadContatoResponse>() {
                     //    @Override
@@ -418,6 +410,23 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
 
     }
 
+    public void excluirContato(int id) {
+        //service.ExcluirContato(id).enqueue(new Callback<CadContatoResponse>() {
+           service.ExcluirContato(id).enqueue(new Callback<CadContatoResponse>() {
+               @Override
+               public void onResponse(Call<CadContatoResponse> call, Response<CadContatoResponse> response) {
+
+               }
+
+               @Override
+               public void onFailure(Call<CadContatoResponse> call, Throwable t) {
+
+               }
+           });
+
+        Intent intent = new Intent(this, ContatoLista.class);
+        startActivity(intent);
+    }
     public void tirarFoto(){
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(camera,1);
@@ -432,6 +441,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
 
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -458,7 +468,8 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
 
 
 
-    }}
+    }
+}
 
 
 

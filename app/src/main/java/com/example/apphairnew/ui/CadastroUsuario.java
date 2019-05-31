@@ -1,6 +1,10 @@
 package com.example.apphairnew.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -8,10 +12,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.apphairnew.R;
@@ -22,7 +28,10 @@ import com.example.apphairnew.model.ProfModel;
 import com.example.apphairnew.model.UsuarioModel;
 import com.example.apphairnew.response.CadProfResponse;
 import com.example.apphairnew.response.CepResponse;
+import com.example.apphairnew.response.GetProfResponse;
 import com.example.apphairnew.web.ApiControler;
+
+import java.io.ByteArrayOutputStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,8 +51,15 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
     private EditText campoNumero;
     private EditText campoComplemento;
 
+    private ImageView fotoProfissional;
+    private String bmFotoProfissional;
+    private static final int PICK_IMAGE = 100;
+    Uri fotoUri;
+
     private Button botaoCep;
     private Button botaoCadastro;
+    private Button botaoTirarFoto;
+    private Button botaoCarregarFoto;
 
     private String cepEnviar;
 
@@ -54,6 +70,8 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
     private UsuarioModel usuarioModel;
     private ProfModel profModel;
 
+    private GetProfResponse profissional;
+
 
 
     private String email, senha, nomeEstab, descEstab, cep, cidade, uf, bairro, logradouro, numero, complemento;
@@ -61,6 +79,8 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
     private ApiService service = ApiControler.CreateController();
 
     private ApiService serviceCep = ApiControler.CreatecontrollerCep();
+
+    private boolean alterando;
 
 
 //teste
@@ -101,7 +121,7 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         campoLogradouro = (EditText) findViewById(R.id.campoRua);
         campoNumero = (EditText) findViewById(R.id.campoNumero);
         campoComplemento = (EditText) findViewById(R.id.campoComplemento);
-
+        fotoProfissional = (ImageView) findViewById(R.id.fotoUsuario);
 
         campoCEP.addTextChangedListener(MaskEditUtil.mask(campoCEP, MaskEditUtil.FORMAT_CEP));
 
@@ -113,6 +133,25 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         Button botaoCep = (Button)findViewById(R.id.botaoCEP);
         this.botaoCep = botaoCep;
         botaoCep.setOnClickListener(this);
+
+        Button botaoTirarFoto = (Button)findViewById(R.id.botaoTirarFotoUsuario);
+        this.botaoTirarFoto = botaoTirarFoto;
+        botaoTirarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tirarFoto();
+            }
+        });
+
+        Button botaoCarregarFoto = (Button)findViewById(R.id.botaoCarregarFotousuario);
+        this.botaoCarregarFoto = botaoCarregarFoto;
+        botaoCarregarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirGaleria();
+
+            }
+        });
 
     }
 
@@ -132,8 +171,6 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
                  validaEmail = true;  // sdasdasdasd
             }
 
-
-
             senha = campoSenha.getText().toString();
         nomeEstab = campoNomeEstab.getText().toString();
         descEstab = campoDescEstab.getText().toString();
@@ -144,6 +181,12 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         logradouro = campoLogradouro.getText().toString();
         numero = campoNumero.getText().toString();
         complemento = campoComplemento.getText().toString();
+            BitmapDrawable drawable = (BitmapDrawable) fotoProfissional.getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG,0,bos);
+            byte[] bb = bos.toByteArray();
+            bmFotoProfissional = Base64.encodeToString(bb,1);
 
         if (email.isEmpty() || senha.isEmpty() || nomeEstab.isEmpty() || descEstab.isEmpty() || cep.isEmpty() || cidade.isEmpty() ||  uf.isEmpty() || bairro.isEmpty() || logradouro.isEmpty() || numero.isEmpty() || validaEmail) {
             Toast.makeText(CadastroUsuario.this, "Complete todos os campos corretamente", Toast.LENGTH_LONG).show();
@@ -162,6 +205,7 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
             profModel.setLogradouro(logradouro);
             profModel.setNumero(numero);
             profModel.setComplemento(complemento);
+            profModel.setBmFotoProfissional(bmFotoProfissional);
 
 
 
@@ -220,6 +264,9 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
 
 
         }
+
+
+
     }
 
 
@@ -284,5 +331,48 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         }
 
         return false;
+    }
+
+    public void tirarFoto(){
+        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(camera,1);
+
+
+
+    }
+
+    public void abrirGaleria(){
+        Intent galeria = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(galeria, PICK_IMAGE);
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+            fotoUri = data.getData();
+            fotoProfissional.setImageURI(fotoUri);
+            if(fotoUri == null) {
+                Toast.makeText(getApplicationContext(), "Nulaço", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getApplicationContext(), "VEIO ALGO", Toast.LENGTH_SHORT).show();
+            }
+
+        } else {
+            if (resultCode == RESULT_OK && requestCode == 1) {
+                Bitmap fototemp = (Bitmap) data.getExtras().get("data");
+                fotoProfissional.setImageBitmap(fototemp);
+                if(fotoUri == null) {
+                    Toast.makeText(getApplicationContext(), "Nulaço", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "VEIO ALGO", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+
+
     }
 }

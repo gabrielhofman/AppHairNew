@@ -236,7 +236,7 @@
                     android:id="@+id/botaoCancelarContato"
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
-                    android:text="Calcelar contato"
+                    android:text="Excluir contato"
                     android:textSize="18dp"
                     android:layout_below="@+id/botaoCadastrarContato"
                     android:layout_centerHorizontal="true"

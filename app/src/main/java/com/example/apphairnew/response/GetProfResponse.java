@@ -1,19 +1,22 @@
-package com.example.apphairnew.model;
+package com.example.apphairnew.response;
 
-public class ProfModel {
-    private int prof_id;
-    private String email;
-    private String senha;
-    private String nomeEstab;
-    private String descEstab;
-    private String cidade;
-    private String uf;
-    private String logradouro;
-    private String bairro;
-    private String complemento;
-    private String numero;
-    private String CEP;
-    private String bmFotoProfissional;
+import java.io.Serializable;
+
+public class GetProfResponse implements Serializable {
+
+    public int prof_id;
+    public String email;
+    public String senha;
+    public String nomeEstab;
+    public String descEstab;
+    public String cidade;
+    public String uf;
+    public String logradouro;
+    public String bairro;
+    public String complemento;
+    public String numero;
+    public String CEP;
+    public String bmFotoProfissional;
 
     public int getProf_id() {
         return prof_id;
@@ -21,14 +24,6 @@ public class ProfModel {
 
     public void setProf_id(int prof_id) {
         this.prof_id = prof_id;
-    }
-
-    public String getBmFotoProfissional() {
-        return bmFotoProfissional;
-    }
-
-    public void setBmFotoProfissional(String bmFotoProfissional) {
-        this.bmFotoProfissional = bmFotoProfissional;
     }
 
     public String getEmail() {
@@ -59,6 +54,10 @@ public class ProfModel {
         return descEstab;
     }
 
+    public void setDescEstab(String descEstab) {
+        this.descEstab = descEstab;
+    }
+
     public String getCidade() {
         return cidade;
     }
@@ -73,10 +72,6 @@ public class ProfModel {
 
     public void setUf(String uf) {
         this.uf = uf;
-    }
-
-    public void setDescEstab(String descEstab) {
-        this.descEstab = descEstab;
     }
 
     public String getLogradouro() {
@@ -117,5 +112,13 @@ public class ProfModel {
 
     public void setCEP(String CEP) {
         this.CEP = CEP;
+    }
+
+    public String getBmFotoProfissional() {
+        return bmFotoProfissional;
+    }
+
+    public void setBmFotoProfissional(String bmFotoProfissional) {
+        this.bmFotoProfissional = bmFotoProfissional;
     }
 }
