@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.Util.MaskEditUtil;
+import com.example.apphairnew.Util.MoneyTextWatcher;
 import com.example.apphairnew.model.CtsPagarModel;
 import com.example.apphairnew.model.FluxoModel;
 import com.example.apphairnew.model.GetAgendaDetalhe;
@@ -29,6 +30,8 @@ import com.example.apphairnew.response.GetContatoResponse;
 import com.example.apphairnew.response.GetCtsPagarResponse;
 import com.example.apphairnew.response.GetDetalheAgendaResponse;
 import com.example.apphairnew.web.ApiControler;
+
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -98,6 +101,10 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
         campoVencimento.addTextChangedListener(MaskEditUtil.mask(campoVencimento, MaskEditUtil.FORMAT_DATE));
 
         campoValor = (EditText) findViewById(R.id.campoValores);
+        Locale mLocale = new Locale("pt","BR");
+        campoValor.addTextChangedListener(new MoneyTextWatcher(campoValor, mLocale));
+
+
         campoNomeContato = (TextView) findViewById(R.id.campoNomeContato);
 
 
@@ -236,7 +243,7 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
             fluxoModel.setMovFluxo("S");
             fluxoModel.setUsuarioFluxo(1);
             fluxoModel.setDataFluxo(campoVencimento.getText().toString());
-            fluxoModel.setValorFluxo(Double.valueOf(campoValor.getText().toString()));
+            fluxoModel.setValorFluxo(Double.valueOf(campoValor.getText().toString().replace("R$","").replace(".","").replace(",",".")));
 
             service.CadFluxo(fluxoModel).enqueue(new Callback<AddFluxoResponse>() {
                 @Override
@@ -304,7 +311,7 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
 
         if (v==botaoCadastroPagar){
             pagarVencimento = campoVencimento.getText().toString();
-            pagarValor = Double.valueOf(campoValor.getText().toString());
+            pagarValor = Double.valueOf(campoValor.getText().toString().replace("R$","").replace(".","").replace(",","."));
             pagarContato = contato;
 
                       if(pagarVencimento.isEmpty()){

@@ -19,10 +19,13 @@ import android.widget.Toast;
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.Util.MaskEditUtil;
+import com.example.apphairnew.Util.MoneyTextWatcher;
 import com.example.apphairnew.model.ServicoModel;
 import com.example.apphairnew.response.CadServicoResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.web.ApiControler;
+
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -84,9 +87,10 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
         campoPrecoServico = (EditText) findViewById(R.id.campoPrecoServico);
 
 
-       campoPrecoServico.addTextChangedListener(MaskEditUtil.mask(campoPrecoServico, MaskEditUtil.FORMAT_VALOR));
 
 
+        Locale mLocale = new Locale("pt","BR");
+        campoPrecoServico.addTextChangedListener(new MoneyTextWatcher(campoPrecoServico, mLocale));
 
 
         Button botaoCadastro = (Button)findViewById(R.id.botaoCadastrarServico);
@@ -104,10 +108,12 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
             campoNomeServico.setText(serv.getDescServico());
             campoDescServico.setText(serv.getNomeServico());
             campoPrecoServico.setText(String.valueOf(serv.getPrecoServico()));
+            botaoCadastro.setText("Alterar Serviço");
             this.alterando = true;
 
         }else
         {
+            botaoCancelar.setVisibility(View.GONE);
             this.alterando = false;
         }
     }
@@ -160,11 +166,39 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
 
+        if(v==botaoCancelar)
+        {
+
+            service.ExcluirServico(serv.idServico).enqueue(new Callback<CadServicoResponse>() {
+                @Override
+                public void onResponse(Call<CadServicoResponse> call, Response<CadServicoResponse> response) {
+                    String mensagem;
+                    if (response.body().isSuccess()) {
+                        mensagem = "Exclusão realizada com sucesso";
+                        Intent intent = new Intent(getApplicationContext(), ServicoLista.class);
+                        startActivity(intent);
+                    } else {
+                        mensagem = "Falha no cadastro" + response.body().getMessage();
+                    }
+                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+
+                }
+
+                @Override
+                public void onFailure(Call<CadServicoResponse> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    t.printStackTrace();
+                }
+            });
+
+        }
+
         if (v == botaoCadastro) {
 
             nomeServico = campoNomeServico.getText().toString();
             descServico = campoDescServico.getText().toString();
-            precoServico = Double.valueOf(campoPrecoServico.getText().toString());
+
+            precoServico = Double.valueOf(campoPrecoServico.getText().toString().replace("R$","").replace(".","").replace(",","."));
 
 
 
@@ -180,6 +214,7 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
 
             if (alterando) {
 
+
                 servicoModel.setIdServico(serv.idServico);
                 Toast.makeText(getApplicationContext(), servicoModel.getNomeServico() + descServico + precoServico , Toast.LENGTH_SHORT).show();
 
@@ -188,7 +223,11 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
                     public void onResponse(Call<CadServicoResponse> call, Response<CadServicoResponse> response) {
                         String mensagem;
                         if (response.body().isSuccess()) {
-                            mensagem = "Cadastro efetuado com sucesso";
+                            mensagem = "Alteração realizada com sucesso";
+                            Intent intent = new Intent(getApplicationContext(), ServicoLista.class);
+                            startActivity(intent);
+
+
                         } else {
                             mensagem = "Falha no cadastro" + response.body().getMessage();
                         }
@@ -219,6 +258,8 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
                             String mensagem;
                             if (response.body().isSuccess()) {
                                 mensagem = "Cadastro efetuado com sucesso";
+                                Intent intent = new Intent(getApplicationContext(), ServicoLista.class);
+                                startActivity(intent);
                             } else {
                                 mensagem = "Falha no cadastro" + response.body().getMessage();
                             }

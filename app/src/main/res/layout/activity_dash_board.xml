@@ -9,6 +9,8 @@
     android:id="@+id/dashboard"
     android:background="@color/white">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,8 +26,17 @@
         android:theme="@style/Widget.AppCompat.Toolbar"
         android:id="@+id/toolbar"></android.support.v7.widget.Toolbar>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,6 +54,7 @@
                 android:layout_margin="10dp">
 
                 <LinearLayout
+                    android:id="@+id/contas_receber"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -69,11 +81,12 @@
                         android:background="@color/lightGrey">
                     </View>
                     <TextView
+                        android:id="@+id/valor_cr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_marginTop="10dp"
-                        android:text="R$ 200,00"/>
+                        android:text="xxxx"/>
 
                 </LinearLayout>
 
@@ -88,6 +101,7 @@
             android:layout_margin="10dp">
 
             <LinearLayout
+                android:id="@+id/fluxo_caixa"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -98,13 +112,119 @@
                     android:layout_height="64dp"
                     android:background="@drawable/circulodash"
                     android:padding="10dp"
-                    android:src="@drawable/money_10dp" />
+                    android:src="@drawable/calculadora" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Contas a receber"
+                    android:text="Fluxo Caixa: "
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/lightGrey"></View>
+
+
+
+                <TextView
+                    android:id="@+id/valor_fluxo_caixa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="xxxx"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:clipToPadding="false"
+        android:gravity="center"
+        >
+
+        <android.support.v7.widget.CardView
+            android:layout_width="160dp"
+            android:layout_height="190dp"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:id="@+id/contas_pagar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circulodash"
+                    android:src="@drawable/cheque"
+                    android:padding="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:text="Contas a pagar"/>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/lightGrey">
+                </View>
+                <TextView
+                    android:id="@+id/valor_cp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:text="xxx"/>
+
+            </LinearLayout>
+
+
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="160dp"
+            android:layout_height="190dp"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:id="@+id/horas_ofertadas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circulodash"
+                    android:padding="10dp"
+                    android:src="@drawable/deal_116481" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Horas Ofertadas"
                     android:textStyle="bold" />
 
                 <View
@@ -114,10 +234,11 @@
                     android:background="@color/lightGrey"></View>
 
                 <TextView
+                    android:id="@+id/total_ofertadas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="R$ 200,00"
+                    android:text="xxxx"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -142,6 +263,7 @@
             android:layout_margin="10dp">
 
             <LinearLayout
+                android:id="@+id/horas_livres"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -151,7 +273,7 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@drawable/circulodash"
-                    android:src="@drawable/money_10dp"
+                    android:src="@drawable/clock"
                     android:padding="10dp"/>
 
                 <TextView
@@ -159,7 +281,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
-                    android:text="Contas a receber"/>
+                    android:text="Horarios livres no dia"/>
 
                 <View
                     android:layout_width="wrap_content"
@@ -168,11 +290,12 @@
                     android:background="@color/lightGrey">
                 </View>
                 <TextView
+                    android:id="@+id/total_livres"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
-                    android:text="R$ 200,00"/>
+                    android:text="xxxx"/>
 
             </LinearLayout>
 
@@ -187,6 +310,7 @@
             android:layout_margin="10dp">
 
             <LinearLayout
+                android:id="@+id/horas_agendadas"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -197,13 +321,13 @@
                     android:layout_height="64dp"
                     android:background="@drawable/circulodash"
                     android:padding="10dp"
-                    android:src="@drawable/money_10dp" />
+                    android:src="@drawable/check" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Contas a receber"
+                    android:text="Horários Agendados"
                     android:textStyle="bold" />
 
                 <View
@@ -213,113 +337,14 @@
                     android:background="@color/lightGrey"></View>
 
                 <TextView
+                    android:id="@+id/total_agendado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="R$ 200,00"
+                    android:text="xxxx"
                     android:textStyle="bold" />
 
             </LinearLayout>
-
-
-        </android.support.v7.widget.CardView>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:clipToPadding="false"
-        android:gravity="center"
-        >
-
-        <android.support.v7.widget.CardView
-            android:layout_width="160dp"
-            android:layout_height="190dp"
-            android:layout_margin="10dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:background="@drawable/circulodash"
-                    android:src="@drawable/money_10dp"
-                    android:padding="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp"
-                    android:text="Contas a receber"/>
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:background="@color/lightGrey">
-                </View>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp"
-                    android:text="R$ 200,00"/>
-
-            </LinearLayout>
-
-
-
-        </android.support.v7.widget.CardView>
-
-
-        <android.support.v7.widget.CardView
-            android:layout_width="160dp"
-            android:layout_height="190dp"
-            android:layout_margin="10dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:background="@drawable/circulodash"
-                    android:padding="10dp"
-                    android:src="@drawable/money_10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Contas a receber"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:background="@color/lightGrey"></View>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="R$ 200,00"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
 
         </android.support.v7.widget.CardView>
 
@@ -329,6 +354,8 @@
 
     </LinearLayout>
 
+        </ScrollView>
+    </LinearLayout>
 
 
     <android.support.design.widget.NavigationView
