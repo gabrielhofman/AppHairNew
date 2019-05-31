@@ -31,6 +31,7 @@ import com.example.apphairnew.response.GetCtsReceberResponse;
 import com.example.apphairnew.response.GetDetalheAgendaResponse;
 import com.example.apphairnew.web.ApiControler;
 
+import java.text.NumberFormat;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -142,7 +143,9 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
         {
 
             campoVencimento.setText(resp.recebVencimento);
-            campoValor.setText(resp.recebValor.toString());
+            NumberFormat formatado = NumberFormat.getInstance();
+            formatado.setMinimumFractionDigits(2);
+            campoValor.setText(formatado.format(resp.recebValor));
             botaoCadastroReceb.setText("Alterar Contas a Receber");
 
 

@@ -31,6 +31,7 @@ import com.example.apphairnew.response.GetCtsPagarResponse;
 import com.example.apphairnew.response.GetDetalheAgendaResponse;
 import com.example.apphairnew.web.ApiControler;
 
+import java.text.NumberFormat;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -140,7 +141,10 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
             campoVencimento.setText(resp.pagarVencimento);
 
           //  campoValor.setText(String.valueOf(campoValor));
-            campoValor.setText(resp.pagarValor.toString());
+
+            NumberFormat formatado = NumberFormat.getInstance();
+            formatado.setMinimumFractionDigits(2);
+            campoValor.setText(formatado.format(resp.pagarValor));
 
             this.modelDetalhe = new GetAgendaDetalhe();
             this.modelDetalhe.setContato(resp.getPagarContato());

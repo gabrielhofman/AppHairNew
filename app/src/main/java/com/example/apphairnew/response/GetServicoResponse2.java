@@ -8,7 +8,7 @@ public class GetServicoResponse2 implements Serializable {
     public String nomeServico;
     public float tempoServico;
     public String descServico;
-    public float precoServico;
+    public double precoServico;
 
     public int getIdServico() {
         return idServico;
@@ -42,7 +42,7 @@ public class GetServicoResponse2 implements Serializable {
         this.descServico = descServico;
     }
 
-    public float getPrecoServico() {
+    public double getPrecoServico() {
         return precoServico;
     }
 

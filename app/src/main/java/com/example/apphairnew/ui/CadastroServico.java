@@ -25,6 +25,8 @@ import com.example.apphairnew.response.CadServicoResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.web.ApiControler;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -107,7 +109,14 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
         if(serv != null) {
             campoNomeServico.setText(serv.getDescServico());
             campoDescServico.setText(serv.getNomeServico());
-            campoPrecoServico.setText(String.valueOf(serv.getPrecoServico()));
+            Double valor = serv.precoServico;
+
+            BigDecimal valorD = new BigDecimal(serv.precoServico);
+            NumberFormat formatado = NumberFormat.getInstance();
+            formatado.setMinimumFractionDigits(2);
+
+            campoPrecoServico.setText(String.valueOf(formatado.format(serv.getPrecoServico())));
+
             botaoCadastro.setText("Alterar Serviço");
             this.alterando = true;
 

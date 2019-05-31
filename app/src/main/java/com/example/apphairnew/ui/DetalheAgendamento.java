@@ -31,6 +31,7 @@ import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.response.HorarioResponse;
 import com.example.apphairnew.web.ApiControler;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -195,7 +196,10 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
             campoHoraInicio.setText(detalhe.horaInicio);
             campoHoraFim.setText(detalhe.horaFim);
             campoDataAgenda.setText(detalhe.dataAgenda);
-            campoPrecoServico.setText(String.valueOf(detalhe.precoServico));
+
+            NumberFormat formatado = NumberFormat.getInstance();
+            formatado.setMinimumFractionDigits(2);
+            campoPrecoServico.setText(String.valueOf(formatado.format(detalhe.precoServico)));
 
 
       //      Toast.makeText(getApplicationContext(),  "Contato:  " + detalhe.dataAgenda, Toast.LENGTH_SHORT).show();
