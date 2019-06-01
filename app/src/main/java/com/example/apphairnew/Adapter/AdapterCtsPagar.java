@@ -31,7 +31,7 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
         this.inflater = LayoutInflater.from(context);
         this.context = context;
     }
-//
+    //
     @NonNull
     @Override ///
     public AdapterCtsPagar.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,34 +49,7 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
         holder.pagarValor.setText(String.valueOf(formatado.format(ctsPagarModel.getPagarValor())));
         holder.pagarVencimento.setText(String.valueOf(ctsPagarModel.getPagarVencimento()));
 
-        holder.opcoesMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(context, holder.opcoesMenu);
-                popupMenu.inflate(R.menu.op_menu_cts_pag);
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()){
-                            case R.id.menu_item_apagar:
 
-
-                                CtsPagarLista recarrega = new CtsPagarLista();
-                                recarrega.ExcluirItem(ctsPagarModel.getIdCp());
-
-
-                              //  Toast.makeText(context, "Apagado" + position, Toast.LENGTH_LONG).show();
-                                break;
-
-
-
-                        }
-                        return false;
-                    }
-                });
-                popupMenu.show();
-            }
-        });
 
     }
 

@@ -53,20 +53,16 @@ public interface ApiService {
     @POST("auth/CadastroProf")
     Call<CadProfResponse> CadProf(@Body ProfModel body);
 
-    @POST("auth/AddGaleriaProf")
-    Call<AddGaleriaProfResponse> AddGaleriaProf(@Body GaleriaModel body);
-
     @POST("auth/CadastroContato")
     Call<CadContatoResponse> CadContato(@Body ContatoModel body);
-
-    @POST("auth/CadFotoContato")
-    Call<CadContatoResponse> CadFotoContato(@Body ContatoModel body);
 
     @POST("auth/CadastroServico")
     Call<CadServicoResponse> CadServico(@Body ServicoModel body);
 
     @GET("{CEP}/json")
     Call<CepResponse> getCEP(@Path("CEP") String CEP);
+
+
 
     @POST("auth/AddCtsReceber")
     Call<AddCtsReceberResponse> AddCtsReceb(@Body CtsReceberModel body);
@@ -85,9 +81,6 @@ public interface ApiService {
 
     @GET("auth/GetServico/{usuario}")
     Call <List<GetServicoResponse2>> getServico(@Path("usuario") int usuario);
-
-    @GET("auth/GetGaleriaProf/{usuario}")
-    Call <List<GetGaleriaProfResponse>> getGaleriaProg(@Path("usuario") int usuario);
 
     @GET("auth/GetContato/{usuario}")
     Call <List<GetContatoResponse>> getContato(@Path("usuario") int usuario);
@@ -119,17 +112,11 @@ public interface ApiService {
     @POST("auth/AlterarContato")
     Call<CadContatoResponse> AltContato(@Body ContatoModel body);
 
-    @POST("auth/AlterarProf")
-    Call<CadProfResponse> AlterarProf(@Body ProfModel body);
-
     @POST("auth/GetAgendaDetalhe")
     Call<GetDetalheAgendaResponse> GetDetalhe(@Body GetAgendaDetalhe body);
 
     @GET("auth/ExcluirContato/{id}")
     Call<CadContatoResponse> ExcluirContato(@Path("id") int id);
-
-    @GET("auth/ExcluirCP/{cpId}")
-    Call<AddCtsPagarResponse> ExcluirCtsPagar(@Path("cpId") int cpId);
 
     @GET("auth/ExcluirCR/{crId}")
     Call<AddCtsReceberResponse> ExcluirCR(@Path("crId") int crId);
@@ -169,6 +156,15 @@ public interface ApiService {
 
     @GET("auth/ExcluirServico/{servId}")
     Call<CadServicoResponse> ExcluirServico(@Path("servId") int servId);
+
+    @GET("auth/GetGaleriaProf/{usuario}")
+    Call <List<GetGaleriaProfResponse>> getGaleriaProg(@Path("usuario") int usuario);
+
+    @POST("auth/AddGaleriaProf")
+    Call<AddGaleriaProfResponse> AddGaleriaProf(@Body GaleriaModel body);
+
+    @POST("auth/AlterarProf")
+    Call<CadProfResponse> AlterarProf(@Body ProfModel body);
 
 
 

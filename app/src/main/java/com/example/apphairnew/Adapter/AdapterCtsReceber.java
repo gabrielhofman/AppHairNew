@@ -4,28 +4,22 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.apphairnew.R;
-import com.example.apphairnew.Service.ApiService;
-import com.example.apphairnew.model.CtsReceberModel;
 import com.example.apphairnew.response.GetCtsReceberResponse;
-import com.example.apphairnew.ui.CtsReceberLista;
-import com.example.apphairnew.web.ApiControler;
 
-import java.util.ArrayList;
+import java.text.NumberFormat;
 import java.util.List;
 
 public class AdapterCtsReceber extends RecyclerView.Adapter<AdapterCtsReceber.ViewHolder> {
+
     itemClicadoListener itemClicado;
     List<GetCtsReceberResponse> ctsReceberModels;
     private LayoutInflater inflater;
     private Context context;
-    private ApiService service = ApiControler.CreateController();
 
     public AdapterCtsReceber(List<GetCtsReceberResponse> ctsReceberModel, Context context) {
         this.ctsReceberModels = ctsReceberModel;
@@ -44,34 +38,13 @@ public class AdapterCtsReceber extends RecyclerView.Adapter<AdapterCtsReceber.Vi
 //asd
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        final GetCtsReceberResponse ctsReceberModel = ctsReceberModels.get(position);
-        holder.recebValor.setText(String.valueOf(ctsReceberModel.getRecebValor()));
+        GetCtsReceberResponse ctsReceberModel = ctsReceberModels.get(position);
+        NumberFormat formatado = NumberFormat.getInstance();
+        formatado.setMinimumFractionDigits(2);
+        holder.recebValor.setText(String.valueOf(formatado.format(ctsReceberModel.getRecebValor())));
         holder.recebVencimento.setText(String.valueOf(ctsReceberModel.getRecebVencimento()));
-
-        holder.opcoesMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(context, holder.opcoesMenu);
-                popupMenu.inflate(R.menu.op_menu_cts_receber);
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()){
-                            case R.id.menu_item_apagar:
-                                CtsReceberLista recarrega = new CtsReceberLista();
-                                recarrega.ExcluirItem(ctsReceberModel.getIdCr());
-                                break;
-                        }
-                        return false;
-                    }
-                });
-                popupMenu.show();
-            }
-        });
-
-
     }
 
     @Override
@@ -83,14 +56,12 @@ public class AdapterCtsReceber extends RecyclerView.Adapter<AdapterCtsReceber.Vi
 
         TextView recebValor;
         TextView recebVencimento;
-        TextView opcoesMenu;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             recebValor=itemView.findViewById(R.id.labelValorRecebLst);
             recebVencimento=itemView.findViewById(R.id.labelDataRecebLst);
-            opcoesMenu = itemView.findViewById(R.id.txtOpcaoCtsReceber);
             itemView.setOnClickListener(this);
         }
 
@@ -116,11 +87,4 @@ public class AdapterCtsReceber extends RecyclerView.Adapter<AdapterCtsReceber.Vi
     public GetCtsReceberResponse getItem(int position ) {
         return ctsReceberModels.get(position);
     }
-
-    public void updateList(List<GetCtsReceberResponse> newList){
-        ctsReceberModels = new ArrayList<>();
-        ctsReceberModels.addAll(newList);
-        notifyDataSetChanged();
-    }
-
 }
