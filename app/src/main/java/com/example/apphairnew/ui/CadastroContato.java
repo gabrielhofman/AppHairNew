@@ -327,8 +327,6 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
                                 Intent intent = new Intent(getApplicationContext(), ContatoLista.class);
                                 startActivity(intent);
 
-
-
                             }else{
                                 mensagem = "Falha no cadastro"+ response.body().getMessage();
                             }

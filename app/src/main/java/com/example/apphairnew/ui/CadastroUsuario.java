@@ -154,7 +154,7 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        profissional = (GetProfResponse) getIntent().getSerializableExtra("contato");
+        profissional = (GetProfResponse) getIntent().getSerializableExtra("profissional");
 
         if(profissional != null)
         {
@@ -175,7 +175,7 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             fotoProfissional.setImageBitmap(decodedByte);
 
-            this.alterando = true;
+           this.alterando = true;
 
         }else{
         this.alterando = false;
@@ -235,33 +235,58 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
             profModel.setComplemento(complemento);
             profModel.setBmFotoProfissional(bmFotoProfissional);
 
-            if(alterando) {
+            if (alterando) {
+                profModel.setProf_id(this.profissional.getProf_id());
 
-            }
+                service.AlterarProf(profModel).enqueue(new Callback<CadProfResponse>() {
+                    @Override
+                    public void onResponse(Call<CadProfResponse> call, Response<CadProfResponse> response) {
+                        String mensagem;
+                        if (response.body().isSuccess()){
+                            mensagem = "Alteração concluida com sucesso";
+                            Intent intent = new Intent(getApplicationContext(), CadastroUsuario.class);
+                            startActivity(intent);
+                        }else{
+                            mensagem = "Falha no cadastro"+ response.body().getMessage();
+                        }
+                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
 
-            service.CadProf(profModel).enqueue(new Callback<CadProfResponse>() {
-                @Override
-                public void onResponse(Call<CadProfResponse> call, Response<CadProfResponse> response) {
-                    String mensagem;
-                    if (response.body().isSuccess()) {
-                        mensagem = "Cadastro efetuado com sucesso";
-                    } else {
-                        mensagem = "Falha no cadastro:   " + response.body().getMessage();
+
                     }
 
-                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
-                }
+                    @Override
+                    public void onFailure(Call<CadProfResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    }
+                });
 
-                @Override
-                public void onFailure(Call<CadProfResponse> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                    t.printStackTrace();
+            } else {
 
-                }
-            });
+                service.CadProf(profModel).enqueue(new Callback<CadProfResponse>() {
+                    @Override
+                    public void onResponse(Call<CadProfResponse> call, Response<CadProfResponse> response) {
+                        String mensagem;
+                        if (response.body().isSuccess()) {
+                            mensagem = "Cadastro efetuado com sucesso";
+                        } else {
+                            mensagem = "Falha no cadastro:   " + response.body().getMessage();
+                        }
 
-           }
+                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<CadProfResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+
+                    }
+                });
+            }
         }
+           }
+        //}
 
         if(v==botaoCep)
         {

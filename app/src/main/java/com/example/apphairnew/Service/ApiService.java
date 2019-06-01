@@ -4,6 +4,7 @@ import com.example.apphairnew.model.ContatoModel;
 import com.example.apphairnew.model.CtsPagarModel;
 import com.example.apphairnew.model.CtsReceberModel;
 import com.example.apphairnew.model.FluxoModel;
+import com.example.apphairnew.model.GaleriaModel;
 import com.example.apphairnew.model.HorarioModel;
 import com.example.apphairnew.model.LiqPagarModel;
 import com.example.apphairnew.model.LiqRecebModel;
@@ -13,6 +14,7 @@ import com.example.apphairnew.model.ServicoModel;
 import com.example.apphairnew.response.AddCtsPagarResponse;
 import com.example.apphairnew.response.AddCtsReceberResponse;
 import com.example.apphairnew.response.AddFluxoResponse;
+import com.example.apphairnew.response.AddGaleriaProfResponse;
 import com.example.apphairnew.response.CadContatoResponse;
 import com.example.apphairnew.response.CadProfResponse;
 import com.example.apphairnew.response.CadServicoResponse;
@@ -26,6 +28,7 @@ import com.example.apphairnew.response.GetCtsPagarResponse;
 import com.example.apphairnew.response.GetCtsReceberResponse;
 import com.example.apphairnew.response.GetDetalheAgendaResponse;
 import com.example.apphairnew.response.GetFluxoCaixaResponse;
+import com.example.apphairnew.response.GetGaleriaProfResponse;
 import com.example.apphairnew.response.GetHorarioResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.response.GetTotalFluxoResponse;
@@ -49,6 +52,9 @@ public interface ApiService {
 
     @POST("auth/CadastroProf")
     Call<CadProfResponse> CadProf(@Body ProfModel body);
+
+    @POST("auth/AddGaleriaProf")
+    Call<AddGaleriaProfResponse> AddGaleriaProf(@Body GaleriaModel body);
 
     @POST("auth/CadastroContato")
     Call<CadContatoResponse> CadContato(@Body ContatoModel body);
@@ -80,6 +86,9 @@ public interface ApiService {
     @GET("auth/GetServico/{usuario}")
     Call <List<GetServicoResponse2>> getServico(@Path("usuario") int usuario);
 
+    @GET("auth/GetGaleriaProf/{usuario}")
+    Call <List<GetGaleriaProfResponse>> getGaleriaProg(@Path("usuario") int usuario);
+
     @GET("auth/GetContato/{usuario}")
     Call <List<GetContatoResponse>> getContato(@Path("usuario") int usuario);
 
@@ -109,6 +118,9 @@ public interface ApiService {
 
     @POST("auth/AlterarContato")
     Call<CadContatoResponse> AltContato(@Body ContatoModel body);
+
+    @POST("auth/AlterarProf")
+    Call<CadProfResponse> AlterarProf(@Body ProfModel body);
 
     @POST("auth/GetAgendaDetalhe")
     Call<GetDetalheAgendaResponse> GetDetalhe(@Body GetAgendaDetalhe body);
