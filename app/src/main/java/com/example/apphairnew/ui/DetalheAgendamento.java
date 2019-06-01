@@ -163,6 +163,8 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
 
 
 
+
+
         if(detalhe.getStatusAgenda().equals("F") )
         {
             checkOfertar.setVisibility(View.GONE);
@@ -496,7 +498,9 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
                  servicoResponse2 = (GetServicoResponse2) data.getSerializableExtra("servico");
 
                  nomeServicoFinal.setText(servicoResponse2.getNomeServico());
-
+                 NumberFormat formatado = NumberFormat.getInstance();
+                 formatado.setMinimumFractionDigits(2);
+                 campoPrecoServico.setText(formatado.format(servicoResponse2.getPrecoServico()));
                  this.servico = servicoResponse2.getIdServico();
 
              }
