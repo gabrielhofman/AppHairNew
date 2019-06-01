@@ -33,7 +33,7 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
     }
 //
     @NonNull
-    @Override
+    @Override ///
     public AdapterCtsPagar.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.row_lista_cts_pagar, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
