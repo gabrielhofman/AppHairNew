@@ -53,6 +53,9 @@ public interface ApiService {
     @POST("auth/CadastroContato")
     Call<CadContatoResponse> CadContato(@Body ContatoModel body);
 
+    @POST("auth/CadFotoContato")
+    Call<CadContatoResponse> CadFotoContato(@Body ContatoModel body);
+
     @POST("auth/CadastroServico")
     Call<CadServicoResponse> CadServico(@Body ServicoModel body);
 
@@ -110,9 +113,11 @@ public interface ApiService {
     @POST("auth/GetAgendaDetalhe")
     Call<GetDetalheAgendaResponse> GetDetalhe(@Body GetAgendaDetalhe body);
 
-    @GET("auth/ExcluirCP/{cpId}")
-    Call<AddCtsPagarResponse> ExcluirContato(@Path("cpId") int cpId);
+    @GET("auth/ExcluirContato/{id}")
+    Call<CadContatoResponse> ExcluirContato(@Path("id") int id);
 
+    @GET("auth/ExcluirCP/{cpId}")
+    Call<AddCtsPagarResponse> ExcluirCtsPagar(@Path("cpId") int cpId);
 
     @GET("auth/ExcluirCR/{crId}")
     Call<AddCtsReceberResponse> ExcluirCR(@Path("crId") int crId);

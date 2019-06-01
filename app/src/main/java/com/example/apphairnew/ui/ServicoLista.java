@@ -1,5 +1,6 @@
 package com.example.apphairnew.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,11 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.apphairnew.Adapter.AdapterSerico;
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
+import com.example.apphairnew.response.CadServicoResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.web.ApiControler;
 
@@ -28,13 +31,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ServicoLista extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, AdapterSerico.itemClicadoListener {
+public class ServicoLista extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, AdapterSerico.itemClicadoListener, SearchView.OnQueryTextListener {
 
     private Toolbar toolbar;
     private ActionBar actionBar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Button botaoCadastrar;
+    private SearchView campoBuscaServico;
+    private Context context;
 
 
     private RecyclerView recyclerView;
@@ -80,8 +85,46 @@ public class ServicoLista extends AppCompatActivity implements View.OnClickListe
 
         botaoCadastrar = (Button)findViewById(R.id.cadastrar_servico);
         botaoCadastrar.setOnClickListener(this);
+        campoBuscaServico = (SearchView) findViewById(R.id.campoBuscaServico);
+        campoBuscaServico.setOnQueryTextListener(this);
+
+        CarregarTela();
+        this.context = getApplicationContext();
 
 
+
+
+
+
+    }
+
+    public void GerarTela()
+    {
+        adapterSerico = new AdapterSerico(teste,this);
+        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setAdapter(adapterSerico);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        adapterSerico.setItemClicado(this);
+    }
+
+    //public void ExcluirItem(int idServico){
+      //  service.ExcluirServico(idServico).enqueue(new Callback<CadServicoResponse>() {
+        //    @Override
+          //  public void onResponse(Call<CadServicoResponse> call, Response<CadServicoResponse> response) {
+//
+  //          }
+//
+  ///          @Override
+     //       public void onFailure(Call<CadServicoResponse> call, Throwable t) {
+       //         Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
+         //       t.printStackTrace();
+           // }
+        //});
+
+    //}
+
+    public void CarregarTela(){
         final int usuario = 1;
 
 
@@ -101,19 +144,6 @@ public class ServicoLista extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
-
-
-    }
-
-    public void GerarTela()
-    {
-        adapterSerico = new AdapterSerico(teste,this);
-        linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setAdapter(adapterSerico);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-        adapterSerico.setItemClicado(this);
     }
 
     @Override
@@ -203,5 +233,27 @@ public class ServicoLista extends AppCompatActivity implements View.OnClickListe
         startActivity(intent5);
 
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        GetServicoResponse2 getServicoResponse2 = new GetServicoResponse2();
+
+        String userInput = newText.toLowerCase();
+        List<GetServicoResponse2> newList = new ArrayList<>();
+
+        for (GetServicoResponse2 servico:teste){
+            if(servico.getNomeServico().contains(userInput)){
+                newList.add(servico);
+            }
+        }
+        adapterSerico.updateList(newList);
+        return true;
     }
 }

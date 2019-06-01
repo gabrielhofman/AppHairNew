@@ -29,6 +29,16 @@
             android:layout_centerHorizontal="true"
             android:theme="@style/AppTheme.Button"
             android:text="Cadastrar Servico"/>
+        <SearchView
+            android:id="@+id/campoBuscaServico"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:iconifiedByDefault="false"
+            android:hint="Buscar por: "
+            android:textSize="18dp"
+            android:layout_below="@id/cadastrar_servico"
+            />
 
 
         <android.support.v7.widget.RecyclerView

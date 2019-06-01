@@ -1,5 +1,6 @@
 package com.example.apphairnew.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,11 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.apphairnew.Adapter.AdapterCtsReceber;
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
+import com.example.apphairnew.response.AddCtsReceberResponse;
 import com.example.apphairnew.response.GetCtsReceberResponse;
 import com.example.apphairnew.web.ApiControler;
 
@@ -28,14 +31,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CtsReceberLista extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, AdapterCtsReceber.itemClicadoListener {
+public class CtsReceberLista extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, AdapterCtsReceber.itemClicadoListener, SearchView.OnQueryTextListener {
 
     private Toolbar toolbar;
     private ActionBar actionBar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Button botaoCadCtsReceb;
-
+    private SearchView campoBuscaCtsReceber;
+    private Context context;
 
     private RecyclerView recyclerView;
     private  AdapterCtsReceber adapterCtsReceber;
@@ -78,19 +82,28 @@ public class CtsReceberLista extends AppCompatActivity implements View.OnClickLi
 
         botaoCadCtsReceb = (Button)findViewById(R.id.botaoCadastrarNovoCtsReceb);
         botaoCadCtsReceb.setOnClickListener(this);
+        campoBuscaCtsReceber = (SearchView) findViewById(R.id.campoBuscaLstReceber);
+        campoBuscaCtsReceber.setOnQueryTextListener(this);
 
-        final int usuario = 1;
+        CarregarTela();
+        this.context = getApplicationContext();
 
-        service.getCtsReceber(usuario).enqueue(new Callback<List<GetCtsReceberResponse>>() {
+
+
+
+    }
+
+    public void ExcluirItem(int crId){
+        service.ExcluirCR(crId).enqueue(new Callback<AddCtsReceberResponse>() {
             @Override
-            public void onResponse(Call<List<GetCtsReceberResponse>> call, Response<List<GetCtsReceberResponse>> response) {
-                teste = response.body();
-                GerarTela();
+            public void onResponse(Call<AddCtsReceberResponse> call, Response<AddCtsReceberResponse> response) {
+               Toast.makeText(context, "Apagado com sucesso" , Toast.LENGTH_LONG).show();
+                CarregarTela();
             }
 
             @Override
-            public void onFailure(Call<List<GetCtsReceberResponse>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Houve um erro: "+t.getMessage(), Toast.LENGTH_LONG).show();
+            public void onFailure(Call<AddCtsReceberResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
                 t.printStackTrace();
             }
         });
@@ -104,6 +117,24 @@ public class CtsReceberLista extends AppCompatActivity implements View.OnClickLi
         recyclerView.setLayoutManager(linearLayoutManager);
 
         adapterCtsReceber.setItemClicado(this);
+    }
+
+    public void CarregarTela(){
+        final int usuario = 1;
+
+        service.getCtsReceber(usuario).enqueue(new Callback<List<GetCtsReceberResponse>>() {
+            @Override
+            public void onResponse(Call<List<GetCtsReceberResponse>> call, Response<List<GetCtsReceberResponse>> response) {
+                teste = response.body();
+                GerarTela();
+            }
+
+            @Override
+            public void onFailure(Call<List<GetCtsReceberResponse>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
+                t.printStackTrace();
+            }
+        });
     }
 
     @Override
@@ -187,5 +218,27 @@ public class CtsReceberLista extends AppCompatActivity implements View.OnClickLi
         intent7.putExtra("ctsReceb", ctsReceb);
         startActivity(intent7);
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        GetCtsReceberResponse getCtsReceberResponse = new GetCtsReceberResponse();
+
+        String userInput = newText.toLowerCase();
+        List<GetCtsReceberResponse> newList = new ArrayList<>();
+
+        for (GetCtsReceberResponse ctsReceber:teste){
+            if (ctsReceber.getRecebVencimento().contains(userInput)){
+                newList.add(ctsReceber);
+            }
+        }
+        adapterCtsReceber.updateList(newList);
+        return true;
     }
 }

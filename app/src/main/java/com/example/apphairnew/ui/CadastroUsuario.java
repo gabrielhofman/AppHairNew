@@ -2,6 +2,7 @@ package com.example.apphairnew.ui;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -153,6 +154,33 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
             }
         });
 
+        profissional = (GetProfResponse) getIntent().getSerializableExtra("contato");
+
+        if(profissional != null)
+        {
+            //campoNomeContato.setText(contato.getNomeContato());
+            campoEmail.setText(profissional.getEmail());
+            campoSenha.setText(profissional.getSenha());
+            campoNomeEstab.setText(profissional.getNomeEstab());
+            campoDescEstab.setText(profissional.getDescEstab());
+            campoCEP.setText(profissional.getCEP());
+            campoCidade.setText(profissional.getCidade());
+            campoUF.setText(profissional.getUf());
+            campoBairro.setText(profissional.getBairro());
+            campoLogradouro.setText(profissional.getLogradouro());
+            campoNumero.setText(profissional.getNumero());
+            campoComplemento.setText(profissional.getComplemento());
+            byte[] decodedString = Base64.decode(profissional.getBmFotoProfissional(), Base64.DEFAULT);
+            // System.out.println(contatoModel.getFotoContato());
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            fotoProfissional.setImageBitmap(decodedByte);
+
+            this.alterando = true;
+
+        }else{
+        this.alterando = false;
+    }
+
     }
 
     @Override
@@ -207,7 +235,9 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
             profModel.setComplemento(complemento);
             profModel.setBmFotoProfissional(bmFotoProfissional);
 
+            if(alterando) {
 
+            }
 
             service.CadProf(profModel).enqueue(new Callback<CadProfResponse>() {
                 @Override

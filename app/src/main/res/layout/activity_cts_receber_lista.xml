@@ -34,11 +34,12 @@
             android:theme="@style/AppTheme.Button"
             android:text="Cadastrar conta para receber"/>
 
-        <EditText
-            android:id="@+id/campoBusca"
+        <SearchView
+            android:id="@+id/campoBuscaLstReceber"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:iconifiedByDefault="false"
             android:hint="Buscar por: "
             android:textSize="18dp"
             android:layout_below="@id/botaoCadastrarNovoCtsReceb"
@@ -48,7 +49,7 @@
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/campoBusca">
+                android:layout_below="@+id/campoBuscaLstReceber">
 
             </android.support.v7.widget.RecyclerView>
             </RelativeLayout>

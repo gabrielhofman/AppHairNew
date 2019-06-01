@@ -173,8 +173,6 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
                     campoNomeContato.setText(response.body().contato);
 
 
-
-
                 }
 
                 @Override
@@ -182,15 +180,6 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
 
                 }
             });
-
-
-
-
-
-
-
-
-
 
         }else
                {

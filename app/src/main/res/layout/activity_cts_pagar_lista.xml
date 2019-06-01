@@ -36,11 +36,12 @@
                 android:theme="@style/AppTheme.Button"
                 android:text="Cadastrar Contas a Receber"/>
 
-            <EditText
+            <SearchView
                 android:id="@+id/campoBuscaLstPagar"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:iconifiedByDefault="false"
                 android:hint="Buscar por: "
                 android:textSize="18dp"
                 android:layout_below="@id/botaoCadastrarNovoCtsPagar"

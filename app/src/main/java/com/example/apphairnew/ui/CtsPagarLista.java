@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CtsPagarLista extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, AdapterCtsPagar.itemClicadoListener {
+public class CtsPagarLista extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, AdapterCtsPagar.itemClicadoListener, SearchView.OnQueryTextListener {
 
     private Toolbar toolbar;
     private ActionBar actionBar;
@@ -40,6 +41,7 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
     private NavigationView navigationView;
     private TextView botaoCadastrarNovoCtsPagar;
     private Context context;
+    private SearchView campoBuscaCtsPagar;
 
 //aaa
     private RecyclerView recyclerView;
@@ -78,6 +80,8 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
      //   botaoCadastrarNovoCtsPagar  = (TextView) findViewById(R.id.txtOpcao);
       //  botaoCadastrarNovoCtsPagar.setOnClickListener(adapterCtsPagar.onMenu);
         botaoCadastrarNovoCtsPagar.setOnClickListener(this);
+        campoBuscaCtsPagar = (SearchView) findViewById(R.id.campoBuscaLstPagar);
+        campoBuscaCtsPagar.setOnQueryTextListener(this);
 
         CarregarTela();
 
@@ -96,11 +100,11 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
     }
 
     public void ExcluirItem(int cpId){
-        service.ExcluirContato(cpId).enqueue(new Callback<AddCtsPagarResponse>() {
+        service.ExcluirCtsPagar(cpId).enqueue(new Callback<AddCtsPagarResponse>() {
             @Override
             public void onResponse(Call<AddCtsPagarResponse> call, Response<AddCtsPagarResponse> response) {
-//                Toast.makeText(context, "Apagado com sucesso" , Toast.LENGTH_LONG).show();
-              //  CarregarTela();
+                Toast.makeText(context, "Apagado com sucesso" , Toast.LENGTH_LONG).show();
+                CarregarTela();
 
 
             }
@@ -217,5 +221,26 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
         intent8.putExtra("ctsPagar", ctsPagar);
         startActivity(intent8);
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        GetCtsPagarResponse getCtsPagarResponse = new GetCtsPagarResponse();
+
+        String userInput = newText.toLowerCase();
+        List<GetCtsPagarResponse> newList = new ArrayList<>();
+
+        for (GetCtsPagarResponse ctsPagar:teste){
+            if (ctsPagar.getPagarVencimento().contains(userInput)){
+                newList.add(ctsPagar);
+            }
+        }
+        adapterCtsPagar.updateList(newList);
+        return true;
     }
 }
