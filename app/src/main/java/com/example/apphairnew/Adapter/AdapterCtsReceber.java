@@ -41,7 +41,7 @@ public class AdapterCtsReceber extends RecyclerView.Adapter<AdapterCtsReceber.Vi
         return viewHolder;
     }
 
-
+//asd
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
