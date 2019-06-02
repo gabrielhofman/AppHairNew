@@ -1,6 +1,9 @@
 package com.example.apphairnew.ui;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -12,7 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +37,7 @@ import com.example.apphairnew.response.GetDetalheAgendaResponse;
 import com.example.apphairnew.web.ApiControler;
 
 import java.text.NumberFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -54,6 +60,7 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
     private Button botaoCancelarPagar;
     private Button botaoLiquidarPagar;
     private Button botaoNomeContato;
+    private ImageView calendario;
 
     private Toolbar toolbar;
     private ActionBar actionBar;
@@ -66,6 +73,8 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
     private int pagarContato;
     private Double pagarValor;
     private ApiService service = ApiControler.CreateController();
+
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
 
     private boolean alterando;
@@ -99,7 +108,7 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
         actionBar.setTitle("Adicionar contas a pagar");
 
         campoVencimento = (EditText) findViewById(R.id.campoDataVencimento);
-        campoVencimento.addTextChangedListener(MaskEditUtil.mask(campoVencimento, MaskEditUtil.FORMAT_DATE));
+      //  campoVencimento.addTextChangedListener(MaskEditUtil.mask(campoVencimento, MaskEditUtil.FORMAT_DATE));
 
         campoValor = (EditText) findViewById(R.id.campoValores);
         Locale mLocale = new Locale("pt","BR");
@@ -124,6 +133,67 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
         Button botaoLiquidarPagar = (Button)findViewById(R.id.botaoLiquidarPagar) ;
         this.botaoLiquidarPagar = botaoLiquidarPagar;
         botaoLiquidarPagar.setOnClickListener(this);
+
+        final ImageView calendario = (ImageView)findViewById(R.id.calendario);
+        this.calendario = calendario;
+   //     calendario.setOnClickListener(this);
+
+
+
+        calendario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                int month = cal.get(Calendar.MONTH);
+                int year = cal.get(Calendar.YEAR);
+
+                DatePickerDialog dialog = new DatePickerDialog(AddContasPagar.this,
+                        android.R.style.Theme_Holo_Dialog_MinWidth,
+                        mDateSetListener,
+                        year, month, day );
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                month = month + 1;
+                Toast.makeText(getApplicationContext(),"data" + dayOfMonth + month + year,Toast.LENGTH_SHORT).show();
+
+                String dia;
+                String mes;
+                String ano;
+
+                if(dayOfMonth <10)
+                {
+                    dia = "0" + dayOfMonth;
+                }else
+                {
+                    dia = String.valueOf(dayOfMonth);
+                }
+
+                if(month <10)
+                {
+                    mes = "0" + month;
+                }else
+                {
+                    mes = String.valueOf(month);
+                }
+
+
+
+
+                String data = (dia + "/" + mes + "/" + year);
+
+                campoVencimento.setText(data);
+
+            }
+        };
+
+
 
         resp = (GetCtsPagarResponse)getIntent().getSerializableExtra("ctsPagar");
 
@@ -234,6 +304,9 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+
+
+
         if(v==botaoNomeContato){
             Intent intent = new Intent(this, PesquisaContato.class);
             startActivityForResult(intent, 1);

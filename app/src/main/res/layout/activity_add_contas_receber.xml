@@ -55,6 +55,15 @@
                     android:layout_below="@id/labelNomeContato"
                     />
 
+                <TextView
+                    android:id="@+id/centralizador1"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/botaoNomeContato"
+                    android:layout_centerHorizontal="true"
+
+                    />
+
 
                 <TextView
                     android:id="@+id/campoNomeContato"
@@ -73,18 +82,30 @@
                     android:hint="Vencimento:"
                     android:textSize="18dp"
                     android:textColorHint="@color/colorPrimary"
-                    android:layout_below="@+id/botaoNomeContato"/>
+                    android:layout_below="@+id/centralizador1"/>
 
 
                 <EditText
                     android:id="@+id/campoDataVencimento"
-                    android:layout_width="300dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:hint="Digite a data de vencimento"
+                    android:hint="Selecione ao lado a data"
                     android:textSize="18dp"
+                    android:layout_alignLeft="@+id/campoValores"
                     android:layout_below="@id/labelDataVencimento"
+                    android:editable="false"
+
                     />
+
+                <ImageView
+                    android:id="@+id/calendario"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/icons8_calendario_64dp"
+                    android:padding="10dp"
+                    android:layout_alignBottom="@+id/campoDataVencimento"
+                    android:layout_toRightOf="@+id/campoDataVencimento"/>
                 <TextView
                     android:id="@+id/labelValores"
                     android:layout_width="wrap_content"

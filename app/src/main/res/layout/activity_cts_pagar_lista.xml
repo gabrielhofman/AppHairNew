@@ -34,7 +34,7 @@
                 android:textSize="18dp"
                 android:layout_centerHorizontal="true"
                 android:theme="@style/AppTheme.Button"
-                android:text="Cadastrar Contas a Receber"/>
+                android:text="Cadastrar Contas a Pagar"/>
 
             <SearchView
                 android:id="@+id/campoBuscaLstPagar"

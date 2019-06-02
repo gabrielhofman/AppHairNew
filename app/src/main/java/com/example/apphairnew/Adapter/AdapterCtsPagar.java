@@ -71,7 +71,7 @@ public class AdapterCtsPagar extends RecyclerView.Adapter<AdapterCtsPagar.ViewHo
 
             pagarValor = itemView.findViewById(R.id.labelValorPagarLst);
             pagarVencimento = itemView.findViewById(R.id.labelDataPagarLst);
-            opcoesMenu = itemView.findViewById(R.id.txtOpcao);
+
             itemView.setOnClickListener(this);
         }
 

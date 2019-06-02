@@ -111,7 +111,7 @@ public class CadastroServico extends AppCompatActivity implements View.OnClickLi
             campoDescServico.setText(serv.getNomeServico());
             Double valor = serv.precoServico;
 
-            BigDecimal valorD = new BigDecimal(serv.precoServico);
+
             NumberFormat formatado = NumberFormat.getInstance();
             formatado.setMinimumFractionDigits(2);
 

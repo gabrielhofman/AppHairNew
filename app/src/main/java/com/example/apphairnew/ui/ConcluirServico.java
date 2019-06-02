@@ -143,7 +143,23 @@ public class ConcluirServico extends AppCompatActivity implements View.OnClickLi
         });
 
 
+        grupoForma.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton radioBtnParcela = (RadioButton)group.findViewById(checkedId);
+                boolean isChecked = radioBtnParcela.isChecked();
 
+                if(isChecked) {
+                    Toast.makeText(getApplicationContext(), "CHUP:" , Toast.LENGTH_SHORT).show();
+                    RadioButton radioBtn30ddias = (RadioButton)group.findViewById(R.id.dias_30);
+                    radioBtn30ddias.setChecked(true);
+
+                }
+
+
+
+            }
+        });
 
     }
 
