@@ -501,7 +501,7 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
             }
             if(resultCode == RESULT_CANCELED)
             {
-          //      nomeContatoFinal.setText("Não selecionado");
+          //      nomeContatoFinal.setText("Não selecionado");   cc
             }
 
         }

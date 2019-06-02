@@ -512,7 +512,7 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
                  nomeServicoFinal.setText("Não selecionado");
 
 
-             }
+             }//l
 
          }
 
