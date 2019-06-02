@@ -320,7 +320,7 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
             fluxoModel.setMovFluxo("S");
             fluxoModel.setUsuarioFluxo(1);
             fluxoModel.setDataFluxo(campoVencimento.getText().toString());
-            fluxoModel.setValorFluxo(Double.valueOf(campoValor.getText().toString().replace("R$","").replace(".","").replace(",",".")));
+            fluxoModel.setValorFluxo(Double.valueOf(campoValor.getText().toString().replace("R$","").replace(".","").replace(",",".").replace(" ","")));
 
             service.CadFluxo(fluxoModel).enqueue(new Callback<AddFluxoResponse>() {
                 @Override
@@ -388,7 +388,8 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
 
         if (v==botaoCadastroPagar){
             pagarVencimento = campoVencimento.getText().toString();
-            pagarValor = Double.valueOf(campoValor.getText().toString().replace("R$","").replace(".","").replace(",","."));
+            pagarValor = Double.valueOf(campoValor.getText().toString().replace("R$","").replace(".","").replace(",",".").replace(" ",""));
+
             pagarContato = contato;
 
                       if(pagarVencimento.isEmpty()){

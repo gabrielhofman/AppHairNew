@@ -300,7 +300,7 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
         if(v== botaoConcluirHorario)
         {
 
-            detalhe.setPrecoServico(Double.valueOf(campoPrecoServico.getText().toString().replace("R$","").replace(".","").replace(",",".")));
+            detalhe.setPrecoServico(Double.valueOf(campoPrecoServico.getText().toString().replace("R$","").replace(".","").replace(",",".").replace(" ","")));
             detalhe.setServico(modelDetalhe.getServico());
             detalhe.setContato(modelDetalhe.getContato());
 
@@ -358,7 +358,7 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
             horaInicio = campoHoraInicio.getText().toString();
             horaFim = campoHoraFim.getText().toString();
 
-            precoServico =  Double.valueOf(campoPrecoServico.getText().toString().replace("R$","").replace(".","").replace(",","."));
+            precoServico =  Double.valueOf(campoPrecoServico.getText().toString().replace("R$","").replace(".","").replace(",",".").replace(" ",""));
 
 
 

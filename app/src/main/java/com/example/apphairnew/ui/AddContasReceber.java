@@ -355,7 +355,7 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
             fluxoModel.setMovFluxo("E");
             fluxoModel.setUsuarioFluxo(1);
             fluxoModel.setDataFluxo(campoVencimento.getText().toString());;
-            fluxoModel.setValorFluxo(Double.valueOf(campoValor.getText().toString().replace("R$","").replace(".","").replace(",",".")));
+            fluxoModel.setValorFluxo(Double.valueOf(campoValor.getText().toString().replace("R$","").replace(".","").replace(",",".").replace(" ","")));
 
 
             service.CadFluxo(fluxoModel).enqueue(new Callback<AddFluxoResponse>() {
@@ -397,7 +397,7 @@ public class AddContasReceber extends AppCompatActivity implements View.OnClickL
         if (v==botaoCadastroReceb){
 
             recebVencimento = campoVencimento.getText().toString();
-            recebValor = Double.valueOf(campoValor.getText().toString().replace("R$","").replace(".","").replace(",","."));
+            recebValor = Double.valueOf(campoValor.getText().toString().replace("R$","").replace(".","").replace(",",".").replace(" ",""));
             recebContato = contato;
 
 

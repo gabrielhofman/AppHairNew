@@ -126,6 +126,7 @@
                     android:hint="Digite o valor"
                     android:textSize="18dp"
                     android:layout_below="@id/labelValores"
+                    android:inputType="numberDecimal"
                     />
 
 
