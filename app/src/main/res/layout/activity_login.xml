@@ -79,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:hint="Crie uma nova conta"
+            android:hint="Crie uma nova conta!"
             android:textColorHint="@color/colorPrimary"
             android:layout_below="@id/campoSenha"
             />

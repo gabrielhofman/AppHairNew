@@ -1,6 +1,7 @@
 package com.example.apphairnew.model;
 
 public class ProfModel {
+    private static String id_final_prof;
     private int prof_id;
     private String email;
     private String senha;
@@ -14,6 +15,15 @@ public class ProfModel {
     private String numero;
     private String CEP;
     private String bmFotoProfissional;
+
+
+    public static String getId_final_prof() {
+        return id_final_prof;
+    }
+
+    public static void setId_final_prof(String id_final_prof) {
+        ProfModel.id_final_prof = id_final_prof;
+    }
 
     public int getProf_id() {
         return prof_id;

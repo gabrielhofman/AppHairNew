@@ -30,6 +30,7 @@ import com.example.apphairnew.model.UsuarioModel;
 import com.example.apphairnew.response.CadProfResponse;
 import com.example.apphairnew.response.CepResponse;
 import com.example.apphairnew.response.GetProfResponse;
+import com.example.apphairnew.response.LoginResponse;
 import com.example.apphairnew.web.ApiControler;
 
 import java.io.ByteArrayOutputStream;
@@ -154,10 +155,11 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        int usuario = 1;
 
 
-        service.getProf(usuario).enqueue(new Callback<GetProfResponse>() {
+
+
+        service.getProf(LoginResponse.getIdProf()).enqueue(new Callback<GetProfResponse>() {
 
             @Override
             public void onResponse(Call<GetProfResponse> call, Response<GetProfResponse> response) {

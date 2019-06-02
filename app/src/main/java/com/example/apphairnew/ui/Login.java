@@ -13,11 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
-import com.example.apphairnew.model.FluxoModel;
 import com.example.apphairnew.model.LoginModel;
 import com.example.apphairnew.response.LoginResponse;
 import com.example.apphairnew.web.ApiControler;
@@ -31,6 +31,8 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
     private Login login;
     private EditText campoEmail;
     private EditText campoSenha;
+    private Button botaoLogin;
+    private TextView criarConta;
     private String loginUsuario;
     private String senhaUsuario;
     private String ReturnResult;
@@ -74,8 +76,11 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
 
         campoEmail = (EditText) findViewById(R.id.campoEmail);
         campoSenha = (EditText) findViewById(R.id.campoSenha);
+        criarConta = (TextView)findViewById(R.id.labelCriarConta);
+        criarConta.setOnClickListener(this);
 
         Button botaoLogin = (Button) findViewById(R.id.botaoLogin);
+        this.botaoLogin = botaoLogin;
         botaoLogin.setOnClickListener(this);
 
 
@@ -83,37 +88,55 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
 
     @Override
     public void onClick(View v) {
-        email = campoEmail.getText().toString();
-        senha = campoSenha.getText().toString();
-        if (email.isEmpty() || senha.isEmpty()) {
-            Toast.makeText(Login.this, "Digite e-mail e senha", Toast.LENGTH_LONG).show();
-        } else {
 
-            LoginModel loginModel = new LoginModel();
-            loginModel.setLogin(email);
-            loginModel.setSenha(senha);
+        if(v==botaoLogin) {
+            email = campoEmail.getText().toString();
+            senha = campoSenha.getText().toString();
+            if (email.isEmpty() || senha.isEmpty()) {
+                Toast.makeText(Login.this, "Digite e-mail e senha", Toast.LENGTH_LONG).show();
+            } else {
 
-            service.Login(loginModel).enqueue(new Callback<LoginResponse>() {
-                @Override
-                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                LoginModel loginModel = new LoginModel();
+                loginModel.setLogin(email);
+                loginModel.setSenha(senha);
 
-                    String mensagem;
-                    if(response.body().isSuccess()){
-                        mensagem = "Login efetuado com sucesso!";
-                    }else{
-                        mensagem = "Usuário ou senha inválidos, tente novamente!";
+                service.Login(loginModel).enqueue(new Callback<LoginResponse>() {
+                    @Override
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+
+                        String mensagem;
+                        if (response.body().isSuccess()) {
+                            mensagem = "Login efetuado com sucesso!";
+                            //  LoginResponse.setIdProf(response.body().getIdProf());
+
+                            LoginResponse.setIdProf(response.body().getId());
+                            Intent intent = new Intent(getApplicationContext(), DashBoard.class);
+                            startActivity(intent);
+
+
+
+                        } else {
+                            mensagem = "Usuário ou senha inválidos, tente novamente!";
+                        }
+
+
+                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+
                     }
 
-                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    }
+                });
 
-                }
-
-                @Override
-                public void onFailure(Call<LoginResponse> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(),"Houve um erro:"+t.getMessage(),Toast.LENGTH_SHORT).show();
-                    t.printStackTrace();
-                }
-            });
+            }
+        }
+        if(v==criarConta)
+        {
+            Intent intent = new Intent(this, CadastroUsuario.class);
+            startActivity(intent);
 
         }
 
@@ -185,7 +208,7 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
 
 
             case R.id.fluxo_caixa:
-                Intent intent9 = new Intent(this, Agenda.class);
+                Intent intent9 = new Intent(this, CadastroUsuario.class);
                 startActivity(intent9);
                 return true;
 

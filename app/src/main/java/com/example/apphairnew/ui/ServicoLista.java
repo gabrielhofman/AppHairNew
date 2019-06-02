@@ -22,6 +22,7 @@ import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.response.CadServicoResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
+import com.example.apphairnew.response.LoginResponse;
 import com.example.apphairnew.web.ApiControler;
 
 import java.util.ArrayList;
@@ -90,6 +91,8 @@ public class ServicoLista extends AppCompatActivity implements View.OnClickListe
 
         CarregarTela();
         this.context = getApplicationContext();
+
+
 
 
 

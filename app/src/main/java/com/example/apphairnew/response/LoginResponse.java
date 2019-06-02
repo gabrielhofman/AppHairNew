@@ -2,8 +2,26 @@ package com.example.apphairnew.response;
 
 public class LoginResponse {
 
+    private static int idProf;
+    private int id;
     private boolean success;
     private String message;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public static int getIdProf() {
+        return idProf;
+    }
+
+    public static void setIdProf(int idProf) {
+        LoginResponse.idProf = idProf;
+    }
 
     public boolean isSuccess() {
         return success;
