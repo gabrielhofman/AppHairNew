@@ -26,9 +26,9 @@ public class AdapterGaleria extends RecyclerView.Adapter<AdapterGaleria.ViewHold
     private Context context;
     private ApiService service = ApiControler.CreateController();
 
-    public AdapterGaleria(List<GetGaleriaProfResponse> galeriaModels, Context context) {
-        this.galeriaModels = galeriaModels;
-        this.inflater = inflater;
+    public AdapterGaleria(List<GetGaleriaProfResponse> galeriaModel, Context context) {
+        this.galeriaModels = galeriaModel;
+        this.inflater = LayoutInflater.from(context);
         this.context = context;
 
     }
@@ -37,7 +37,7 @@ public class AdapterGaleria extends RecyclerView.Adapter<AdapterGaleria.ViewHold
 
     @NonNull
     @Override
-    public AdapterGaleria.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+    public AdapterGaleria.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.row_lista_fotos_prof, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
@@ -48,10 +48,7 @@ public class AdapterGaleria extends RecyclerView.Adapter<AdapterGaleria.ViewHold
     final GetGaleriaProfResponse galeriaModel = galeriaModels.get(position);
 
         byte[] decodedString = Base64.decode(galeriaModel.getBmFotoGaleria(), Base64.DEFAULT);
-        // System.out.println(contatoModel.getFotoContato());
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        //holder.nomeServico.setText(String.valueOf(servicoModel.getNomeServico()));
-        //fotoContato.setImageBitmap(decodedByte);
 
     holder.bmFotoProfissional.setImageBitmap(decodedByte);
     }

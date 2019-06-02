@@ -2,6 +2,10 @@ package com.example.apphairnew.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -11,14 +15,24 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.apphairnew.Adapter.AdapterGaleria;
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
+import com.example.apphairnew.model.GaleriaModel;
+import com.example.apphairnew.response.AddGaleriaProfResponse;
 import com.example.apphairnew.response.GetGaleriaProfResponse;
 import com.example.apphairnew.web.ApiControler;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,12 +40,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GaleriaProf extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class GaleriaProf extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private Toolbar toolbar;
     private ActionBar actionBar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Context context;
+
+    private ImageView fotoGaleria;
+    private String bmFotoGaleria;
+    private static final int PICK_IMAGE = 100;
+    Uri fotoUri;
+
+    //private Button botaoCadastrar;
+    private Button botaoAddFoto;
 
     private RecyclerView recyclerView;
     private AdapterGaleria adapterGaleria;
@@ -39,7 +61,8 @@ public class GaleriaProf extends AppCompatActivity implements NavigationView.OnN
 
     public List<GetGaleriaProfResponse> teste = new ArrayList<>();
 
-
+    //botaoCadastrar = (Button)findViewById(R.id.cadastrar_servico);
+    // botaoCadastrar.setOnClickListener(this);
     private ApiService service = ApiControler.CreateController();
 
     @Override
@@ -65,6 +88,11 @@ public class GaleriaProf extends AppCompatActivity implements NavigationView.OnN
 
         actionBar.setTitle("Cadastrar Lista teste");
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        botaoAddFoto = (Button) findViewById(R.id.btn_add_foto);
+        botaoAddFoto.setOnClickListener(this);
+
+        //botaoCadastrar = (Button)findViewById(R.id.cadastrar_servico);
+        // botaoCadastrar.setOnClickListener(this);
 
         CarregarTela();
         this.context = getApplicationContext();
@@ -77,22 +105,25 @@ public class GaleriaProf extends AppCompatActivity implements NavigationView.OnN
         recyclerView.setAdapter(adapterGaleria);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        //adapteraSerico.setItemClicado(this);
+       // adapterGaleria.setItemClicado(this);
     }
 
     public void CarregarTela() {
         final int usuario = 1;
 
         //service.getServico(usuario).enqueue(new Callback<List<GetServicoResponse2>>() {
-        service.getGaleriaProg(usuario).enqueue(new Callback<List<GetGaleriaProfResponse>>() {
+        service.getGaleriaProf(usuario).enqueue(new Callback<List<GetGaleriaProfResponse>>() {
             @Override
             public void onResponse(Call<List<GetGaleriaProfResponse>> call, Response<List<GetGaleriaProfResponse>> response) {
+                teste = response.body();
 
+                GerarTela();
             }
 
             @Override
             public void onFailure(Call<List<GetGaleriaProfResponse>> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
+                t.printStackTrace();
             }
         });
 
@@ -156,5 +187,81 @@ public class GaleriaProf extends AppCompatActivity implements NavigationView.OnN
         }
 
         return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v==botaoAddFoto){
+            abrirGaleria();
+
+
+            //GaleriaModel galeriaModel = new GaleriaModel();
+           // galeriaModel.setBmFotoGaleria(bmFotoGaleria);
+            if (bmFotoGaleria == null){
+                Toast.makeText(getApplicationContext(), "FOTO NA GALERIA NULO", Toast.LENGTH_SHORT).show();
+            }else{
+
+            //service.CadContato(contatoModel).enqueue(new Callback<CadContatoResponse>()
+                Toast.makeText(getApplicationContext(), "FOTO NA GALERIA selecionada", Toast.LENGTH_SHORT).show();
+        }}
+    }
+
+    public void abrirGaleria(){
+        Intent galeriam = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(galeriam, PICK_IMAGE);
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+            fotoUri = data.getData();
+            //fotoGaleria.to;
+            //Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), fotoUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG,0,bos);
+            byte[] bb = bos.toByteArray();
+            bmFotoGaleria = Base64.encodeToString(bb,1);
+
+            if(fotoUri == null) {
+                Toast.makeText(getApplicationContext(), "Nulaço", Toast.LENGTH_SHORT).show();
+            }else{
+
+                GaleriaModel galeriaModel = new GaleriaModel();
+                galeriaModel.setBmFotoGaleria(bmFotoGaleria);
+
+                Toast.makeText(getApplicationContext(),"n nulo", Toast.LENGTH_SHORT).show();
+                service.AddGaleriaProf(galeriaModel).enqueue(new Callback<AddGaleriaProfResponse>() {
+                    @Override
+                    public void onResponse(Call<AddGaleriaProfResponse> call, Response<AddGaleriaProfResponse> response) {
+                        String mensagem;
+                        if (response.body().isSuccess()){
+                            mensagem = "Cadastro efetuado com sucesso";
+                            Intent intent = new Intent(getApplicationContext(), GaleriaProf.class);
+                            startActivity(intent);
+                        }else{
+                            mensagem = "Falha no cadastro" + response.body().getMessage();
+                        }
+                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddGaleriaProfResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    }
+                });
+            }
+        }
     }
 }

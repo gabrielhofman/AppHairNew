@@ -26,11 +26,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Buscar Agendas Ofetadas"/>
+            android:text="Buscar Agendas Ofetadas"
+            android:theme="@style/AppTheme.Button"/>
 
             <TextView
                 android:id="@+id/centralizador"
-                android:layout_width="50dp"
+                android:layout_width="20dp"
                 android:layout_height="10dp"
                 android:layout_centerHorizontal="true"
                 />
@@ -42,10 +43,10 @@
             android:layout_height="wrap_content"
             android:hint="Clique para Selecionar Data: "
             android:id="@+id/tvDate"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/centralizador"
-            android:textSize="30dp"/>
+            android:textSize="20dp"/>
 
 
         <android.support.v7.widget.RecyclerView

@@ -52,6 +52,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
    // private Spinner spinnerSexoContato;
    private Context context;
 
+
     private RadioGroup rbSexoContato;
     private RadioGroup rbFreqContato;
     private RadioButton radioBtnSexo;

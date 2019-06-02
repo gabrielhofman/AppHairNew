@@ -20,6 +20,14 @@
             android:theme="@style/Widget.AppCompat.Toolbar"
             android:id="@+id/toolbar"></android.support.v7.widget.Toolbar>
 
+        <Button
+            android:id="@+id/btn_add_foto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:layout_centerHorizontal="true"
+            android:theme="@style/AppTheme.Button"
+            android:text="Adicionar foto"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"

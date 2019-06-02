@@ -3,6 +3,7 @@ package com.example.apphairnew.Adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,28 +99,34 @@ public class AdapterAgenda extends RecyclerView.Adapter<AdapterAgenda.ViewHolder
 
 
 
-        if(horarioModel.getStatusAgenda().equals("A"))   // AGENDADA
+        if(horarioModel.getStatusAgenda().equals("A"))   // AGENDADA vermelho
         {
-            holder.dataAgenda.setTextColor(Color.RED);
-            holder.horaInicio.setTextColor(Color.RED);
-            holder.horaFim.setTextColor(Color.RED);
-            holder.nomeContato.setTextColor(Color.RED);
-        }
+            //.parseColor("#FFFFFF")
+            holder.dataAgenda.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.horaInicio.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.horaFim.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.nomeContato.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#FF7F50"));
+            //FF7F50 FF6347
 
-        if(horarioModel.getStatusAgenda().equals("D"))  //DISPONIVEL
+    }
+
+        if(horarioModel.getStatusAgenda().equals("D"))  //DISPONIVEL verde
         {
-            holder.dataAgenda.setTextColor(Color.GREEN);
-            holder.horaInicio.setTextColor(Color.GREEN);
-            holder.horaFim.setTextColor(Color.GREEN);
-            holder.nomeContato.setTextColor(Color.GREEN);
+            holder.dataAgenda.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.horaInicio.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.horaFim.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.nomeContato.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#32CD32"));
 
         }
-        if(horarioModel.getStatusAgenda().equals("O"))  //OFERTADA
+        if(horarioModel.getStatusAgenda().equals("O"))  //OFERTADA azul
         {
-            holder.dataAgenda.setTextColor(Color.BLUE);
-            holder.horaInicio.setTextColor(Color.BLUE);
-            holder.horaFim.setTextColor(Color.BLUE);
-            holder.nomeContato.setTextColor(Color.BLUE);
+            holder.dataAgenda.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.horaInicio.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.horaFim.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.nomeContato.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#1E90FF"));
 
         }
         if(horarioModel.getStatusAgenda().equals("F"))  //FECHADA
@@ -147,6 +154,7 @@ public class AdapterAgenda extends RecyclerView.Adapter<AdapterAgenda.ViewHolder
         TextView horaFim;
         TextView nomeContato;
         TextView nomeServico;
+        CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -154,6 +162,7 @@ public class AdapterAgenda extends RecyclerView.Adapter<AdapterAgenda.ViewHolder
             horaInicio = itemView.findViewById(R.id.labelHorarioInicio);
             horaFim = itemView.findViewById(R.id.labelHorarioFim);
             nomeContato = itemView.findViewById(R.id.labelNomeContato);
+            cardView = itemView.findViewById(R.id.card_id);
 
 
             itemView.setOnClickListener(this);
