@@ -18,17 +18,17 @@ android:orientation="vertical"
             android:layout_height="20dp"
             android:text="Nome servico:"
             android:textStyle="bold"
-            android:textSize="18dp"
+            android:textSize="19dp"
             />
 
         <TextView
-            android:id="@+id/txtOpcaoServico"
+            android:id="@+id/valor_servico"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Opções"
+            android:text="desc servico"
             android:layout_toLeftOf="@+id/nome_servico"
             android:layout_centerHorizontal="true"
-            android:textSize="18dp" />
+            android:textSize="16dp" />
 
 
     </LinearLayout>

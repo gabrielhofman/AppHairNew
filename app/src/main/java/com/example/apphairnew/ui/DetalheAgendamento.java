@@ -300,6 +300,9 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
         if(v== botaoConcluirHorario)
         {
 
+            detalhe.setPrecoServico(Double.valueOf(campoPrecoServico.getText().toString().replace("R$","").replace(".","").replace(",",".")));
+            detalhe.setServico(modelDetalhe.getServico());
+            detalhe.setContato(modelDetalhe.getContato());
 
             Intent intent = new Intent(this, ConcluirServico.class);
             intent.putExtra("detalhe", detalhe);

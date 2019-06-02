@@ -15,6 +15,7 @@ import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.ui.ServicoLista;
 import com.example.apphairnew.web.ApiControler;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,11 @@ public class AdapterSerico extends RecyclerView.Adapter<AdapterSerico.ViewHolder
     private LayoutInflater inflater;
     private Context context;
     private ApiService service = ApiControler.CreateController();
+
+    private String cifrao = "R$ ";
+
+    NumberFormat formatado = NumberFormat.getInstance();
+    //
 
 
 
@@ -69,27 +75,12 @@ public class AdapterSerico extends RecyclerView.Adapter<AdapterSerico.ViewHolder
 
         final GetServicoResponse2 servicoModel = servicoModels.get(   position);
         holder.nomeServico.setText(String.valueOf(servicoModel.getNomeServico()));
-        holder.opcoesMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(context, holder.opcoesMenu);
-                popupMenu.inflate(R.menu.op_menu_servico);
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()){
-                            case R.id.menu_item_apagar_servico:
-                                ServicoLista recarrega = new ServicoLista();
-                               // recarrega.ExcluirItem(servicoModel.getIdServico());
-                                break;
-                        }
-                        return false;
-                    }
-                });
-                popupMenu.show();
-            }
-        });
 
+        formatado.setMinimumFractionDigits(2);
+
+        String total = cifrao + formatado.format(servicoModel.getPrecoServico());
+
+        holder.valorServico.setText(total);
     }
 
 
@@ -107,14 +98,15 @@ public class AdapterSerico extends RecyclerView.Adapter<AdapterSerico.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView nomeServico;
-        TextView opcoesMenu;
+        TextView valorServico;
+
 
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             nomeServico =itemView.findViewById(R.id.nome_servico);
-            opcoesMenu = itemView.findViewById(R.id.txtOpcaoServico);
+            valorServico =itemView.findViewById(R.id.valor_servico);
 
             itemView.setOnClickListener(this);
 

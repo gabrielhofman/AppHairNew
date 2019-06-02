@@ -106,22 +106,27 @@
                     android:orientation="vertical"
                     android:layout_below="@+id/labelSobrePagamento"
                     android:id="@+id/rbFormaPagamento"
+
                     >
 
                     <RadioButton android:id="@+id/radio_carteira"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Carteira"
+                        android:buttonTint="@color/colorPrimary"
+
                         />
                     <RadioButton android:id="@+id/radio_cartao_debito"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Cartão Débito"
+                        android:buttonTint="@color/colorPrimary"
                         />
                     <RadioButton android:id="@+id/radio_cartao_credito"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Cartão Crédito"
+                        android:buttonTint="@color/colorPrimary"
                         />
                 </RadioGroup>
                 <TextView
@@ -144,29 +149,34 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="A vista"
+                        android:buttonTint="@color/colorPrimary"
                         />
                     <RadioButton android:id="@+id/dias_7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="7 dias"
+                        android:buttonTint="@color/colorPrimary"
                         />
 
                     <RadioButton android:id="@+id/dias_7_14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="7/14 dias"
+                        android:buttonTint="@color/colorPrimary"
                         />
 
                     <RadioButton android:id="@+id/dias_30"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="30 dias"
+                        android:buttonTint="@color/colorPrimary"
                         />
 
                     <RadioButton android:id="@+id/dias_30_60"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="30/ 60 dias"
+                        android:buttonTint="@color/colorPrimary"
                         />
 
 

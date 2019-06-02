@@ -146,15 +146,61 @@ public class ConcluirServico extends AppCompatActivity implements View.OnClickLi
         grupoForma.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioButton radioBtnParcela = (RadioButton)group.findViewById(checkedId);
-                boolean isChecked = radioBtnParcela.isChecked();
+              //  RadioButton radioBtnParcela = (RadioButton)group.findViewById(checkedId); esse aqui é o generico
 
-                if(isChecked) {
-                    Toast.makeText(getApplicationContext(), "CHUP:" , Toast.LENGTH_SHORT).show();
-                    RadioButton radioBtn30ddias = (RadioButton)group.findViewById(R.id.dias_30);
-                    radioBtn30ddias.setChecked(true);
+
+                RadioButton radioBtnCarteira = (RadioButton)findViewById(R.id.radio_carteira);
+                RadioButton radioBtnDebito = (RadioButton)findViewById(R.id.radio_cartao_debito);
+                RadioButton radioBtnCredito = (RadioButton)findViewById(R.id.radio_cartao_credito);
+
+
+
+                RadioButton radioButtonAvista = (RadioButton)findViewById(R.id.dias_vista);
+                RadioButton radioBtn7dias = (RadioButton)findViewById(R.id.dias_7);
+                RadioButton radioBtn714dias = (RadioButton)findViewById(R.id.dias_7_14);
+                RadioButton radioBtn30dias = (RadioButton)findViewById(R.id.dias_30);
+                RadioButton radioBtn3060dias = (RadioButton)findViewById(R.id.dias_30_60);
+
+                boolean isCheckedCarteira = radioBtnCarteira.isChecked();
+                boolean isCheckedDebito = radioBtnDebito.isChecked();
+                boolean isCheckedCredito = radioBtnCredito.isChecked();
+
+
+
+                if(isCheckedDebito) {
+                 //   Toast.makeText(getApplicationContext(), "CHUP:" , Toast.LENGTH_SHORT).show();
+                    radioButtonAvista.setEnabled(true);
+                    radioBtn7dias.setEnabled(false);
+                    radioBtn714dias.setEnabled(false);
+                    radioBtn30dias.setEnabled(false);
+                    radioBtn3060dias.setEnabled(false);
+                    radioButtonAvista.setChecked(true);
 
                 }
+
+                if(isCheckedCredito) {
+                    //   Toast.makeText(getApplicationContext(), "CHUP:" , Toast.LENGTH_SHORT).show();
+
+                    radioButtonAvista.setEnabled(false);
+                    radioBtn7dias.setEnabled(true);
+                    radioBtn714dias.setEnabled(true);
+                    radioBtn30dias.setEnabled(true);
+                    radioBtn3060dias.setEnabled(true);
+                    radioBtn30dias.setChecked(true);
+
+                }
+
+                if(isCheckedCarteira) {
+                    //   Toast.makeText(getApplicationContext(), "CHUP:" , Toast.LENGTH_SHORT).show();
+                    radioButtonAvista.setEnabled(true);
+                    radioBtn7dias.setEnabled(true);
+                    radioBtn714dias.setEnabled(true);
+                    radioBtn30dias.setEnabled(true);
+                    radioBtn3060dias.setEnabled(true);
+                    radioButtonAvista.setChecked(true);
+                }
+
+
 
 
 
