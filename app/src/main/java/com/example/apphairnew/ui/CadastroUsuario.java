@@ -127,7 +127,7 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
         campoCEP.addTextChangedListener(MaskEditUtil.mask(campoCEP, MaskEditUtil.FORMAT_CEP));
 
 
-        Button botaoCadastro = (Button)findViewById(R.id.botaoCadastrar);
+        final Button botaoCadastro = (Button)findViewById(R.id.botaoCadastrar);
         this.botaoCadastro = botaoCadastro;
         botaoCadastro.setOnClickListener(this);
 
@@ -154,16 +154,43 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        profissional = (GetProfResponse) getIntent().getSerializableExtra("profissional");
+        int usuario = 1;
 
-        if(profissional != null)
+
+        service.getProf(usuario).enqueue(new Callback<GetProfResponse>() {
+
+            @Override
+            public void onResponse(Call<GetProfResponse> call, Response<GetProfResponse> response) {
+                profissional = new GetProfResponse();
+                profissional = response.body();
+                GerarTela();
+
+            }
+
+            @Override
+            public void onFailure(Call<GetProfResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
+
+
+
+    }
+
+
+    public void GerarTela()
+    {
+        if(profissional.getProf_id() != 0)
         {
+
+            botaoCadastro.setText("Alterar Usuário");
             //campoNomeContato.setText(contato.getNomeContato());
             campoEmail.setText(profissional.getEmail());
             campoSenha.setText(profissional.getSenha());
             campoNomeEstab.setText(profissional.getNomeEstab());
             campoDescEstab.setText(profissional.getDescEstab());
-            campoCEP.setText(profissional.getCEP());
+            campoCEP.setText(profissional.getCep());
             campoCidade.setText(profissional.getCidade());
             campoUF.setText(profissional.getUf());
             campoBairro.setText(profissional.getBairro());
@@ -172,15 +199,15 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
             campoComplemento.setText(profissional.getComplemento());
             byte[] decodedString = Base64.decode(profissional.getBmFotoProfissional(), Base64.DEFAULT);
             // System.out.println(contatoModel.getFotoContato());
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            fotoProfissional.setImageBitmap(decodedByte);
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                  fotoProfissional.setImageBitmap(decodedByte);
 
-           this.alterando = true;
+            this.alterando = true;
 
         }else{
-        this.alterando = false;
-    }
 
+            this.alterando = false;
+        }
     }
 
     @Override
@@ -244,7 +271,7 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
                         String mensagem;
                         if (response.body().isSuccess()){
                             mensagem = "Alteração concluida com sucesso";
-                            Intent intent = new Intent(getApplicationContext(), CadastroUsuario.class);
+                            Intent intent = new Intent(getApplicationContext(),DashBoard.class);
                             startActivity(intent);
                         }else{
                             mensagem = "Falha no cadastro"+ response.body().getMessage();
@@ -269,6 +296,8 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
                         String mensagem;
                         if (response.body().isSuccess()) {
                             mensagem = "Cadastro efetuado com sucesso";
+                            Intent intent = new Intent(getApplicationContext(),DashBoard.class);
+                            startActivity(intent);
                         } else {
                             mensagem = "Falha no cadastro:   " + response.body().getMessage();
                         }

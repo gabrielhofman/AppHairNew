@@ -15,7 +15,17 @@ public class GetProfResponse implements Serializable {
     public String bairro;
     public String complemento;
     public String numero;
-    public String CEP;
+    public String cep;
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+
     public String bmFotoProfissional;
 
     public int getProf_id() {
@@ -106,13 +116,7 @@ public class GetProfResponse implements Serializable {
         this.numero = numero;
     }
 
-    public String getCEP() {
-        return CEP;
-    }
 
-    public void setCEP(String CEP) {
-        this.CEP = CEP;
-    }
 
     public String getBmFotoProfissional() {
         return bmFotoProfissional;

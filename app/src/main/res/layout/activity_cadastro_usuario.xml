@@ -222,7 +222,7 @@
                     android:id="@+id/labelSobreFoto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Sua foto de perfil:"
+                    android:hint="Foto principal de perfil:"
                     android:textSize="18dp"
                     android:textColorHint="@color/colorPrimary"
                     android:layout_below="@+id/espacoVazio4"/>

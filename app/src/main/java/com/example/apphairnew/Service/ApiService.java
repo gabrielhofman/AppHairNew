@@ -30,6 +30,7 @@ import com.example.apphairnew.response.GetDetalheAgendaResponse;
 import com.example.apphairnew.response.GetFluxoCaixaResponse;
 import com.example.apphairnew.response.GetGaleriaProfResponse;
 import com.example.apphairnew.response.GetHorarioResponse;
+import com.example.apphairnew.response.GetProfResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.response.GetTotalFluxoResponse;
 import com.example.apphairnew.response.HorarioResponse;
@@ -61,8 +62,6 @@ public interface ApiService {
 
     @GET("{CEP}/json")
     Call<CepResponse> getCEP(@Path("CEP") String CEP);
-
-
 
     @POST("auth/AddCtsReceber")
     Call<AddCtsReceberResponse> AddCtsReceb(@Body CtsReceberModel body);
@@ -166,6 +165,9 @@ public interface ApiService {
     @POST("auth/AlterarProf")
     Call<CadProfResponse> AlterarProf(@Body ProfModel body);
 
+
+    @GET("auth/GetProf/{usuario}")
+    Call <GetProfResponse> getProf(@Path("usuario") int usuario);
 
 
 
