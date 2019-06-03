@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
+    android:orientation="vertical"
+    tools:context=".ui.cliente.CadastroCliente">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/Widget.AppCompat.Toolbar"
+            android:id="@+id/toolbar"></android.support.v7.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/centralizador"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"
+
+                    />
+                <TextView
+                    android:id="@+id/labelContaUsuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Sobre sua conta:"
+                    android:textSize="18dp"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_below="@+id/centralizador"/>
+
+
+                <EditText
+                    android:id="@+id/campoEmailCliente"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Digite seu e-mail"
+                    android:textSize="18dp"
+                    android:layout_below="@id/labelContaUsuario"
+                    android:inputType="textEmailAddress"
+                    />
+
+                <EditText
+                    android:id="@+id/campoSenhaCliente"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Digite sua senha"
+                    android:textSize="18dp"
+                    android:layout_below="@id/campoEmailCliente"
+                    android:inputType="textPassword"
+
+
+                    />
+
+
+
+
+                <TextView
+                    android:id="@+id/espacoVazio1"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/campoSenhaCliente"
+                    />
+
+
+                <TextView
+                    android:id="@+id/labelSobreEstabelecimento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Sobre Você:"
+                    android:textSize="18dp"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_below="@+id/espacoVazio1"/>
+
+
+                <EditText
+                    android:id="@+id/campoNomeCliente"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Nome: "
+                    android:textSize="18dp"
+                    android:layout_below="@id/labelSobreEstabelecimento"
+                    />
+
+                <EditText
+                    android:id="@+id/campoSobreNomeCliente"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Sobrenome: "
+                    android:textSize="18dp"
+                    android:layout_below="@id/campoNomeCliente"
+                    />
+
+
+
+                <EditText
+                    android:id="@+id/campoDataNascCliente"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Selecione  a data de nascimento: "
+                    android:textSize="18dp"
+                    android:layout_alignLeft="@+id/campoSobreNomeCliente"
+                    android:layout_below="@id/campoSobreNomeCliente"
+                    android:editable="false"
+                    />
+
+                <ImageView
+                    android:id="@+id/calendario"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/icons8_calendario_64dp"
+                    android:padding="10dp"
+                    android:layout_alignBottom="@+id/campoDataNascCliente"
+                    android:layout_toRightOf="@+id/campoDataNascCliente"/>
+
+
+                <EditText
+                    android:id="@+id/campoTelefoneCliente"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Telefone: "
+                    android:textSize="18dp"
+                    android:layout_below="@id/campoDataNascCliente"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:id="@+id/espacoVazio2"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/campoTelefoneCliente"
+                    />
+
+                <TextView
+                    android:id="@+id/labelSexoContato"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Selecione o sexo:"
+                    android:textSize="18dp"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_below="@+id/espacoVazio2"/>
+
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@+id/labelSexoContato"
+                    android:id="@+id/rbSexoContato"
+                    >
+
+                    <RadioButton android:id="@+id/radio_masculino"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Masculino"
+                        />
+                    <RadioButton android:id="@+id/radio_feminino"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Feminino"
+                        />
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/espacoVazio3"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/rbSexoContato"
+                    />
+
+
+
+
+
+                <Button
+                    android:id="@+id/botaoCadastrar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cadastrar-se"
+                    android:layout_below="@+id/espacoVazio3"
+                    android:textSize="18dp"
+                    android:layout_centerHorizontal="true"
+                    android:theme="@style/AppTheme.Button"
+                    />
+
+
+
+
+
+
+            </RelativeLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:id="@+id/navigation_view"
+        app:menu="@menu/menu_lateral"
+        app:headerLayout="@layout/drawer_header">
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>
+
+

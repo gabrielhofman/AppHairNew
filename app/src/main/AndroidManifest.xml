@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.GaleriaProf"></activity>
+        <activity android:name=".ui.cliente.CadastroCliente"></activity>
+        <activity android:name=".ui.cliente.LoginCliente" />
+        <activity android:name=".ui.GaleriaProf" />
         <activity android:name=".ui.FluxoCaixa" />
         <activity android:name=".ui.ListaHorario" />
         <activity android:name=".ui.PesquisaServico" />

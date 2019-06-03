@@ -1,13 +1,13 @@
-package com.example.apphairnew.ui;
+package com.example.apphairnew.ui.cliente;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,14 +20,23 @@ import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.model.LoginModel;
 import com.example.apphairnew.response.LoginResponse;
-import com.example.apphairnew.ui.cliente.CadastroCliente;
+import com.example.apphairnew.ui.Agenda;
+import com.example.apphairnew.ui.CadastroContato;
+import com.example.apphairnew.ui.CadastroServico;
+import com.example.apphairnew.ui.CadastroUsuario;
+import com.example.apphairnew.ui.ContatoLista;
+import com.example.apphairnew.ui.CtsPagarLista;
+import com.example.apphairnew.ui.CtsReceberLista;
+import com.example.apphairnew.ui.DashBoard;
+import com.example.apphairnew.ui.Login;
+import com.example.apphairnew.ui.ServicoLista;
 import com.example.apphairnew.web.ApiControler;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Login extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class LoginCliente extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private Login login;
     private EditText campoEmail;
@@ -51,11 +60,10 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
     private ApiService service = ApiControler.CreateController();
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_cliente);
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
@@ -83,18 +91,15 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
         Button botaoLogin = (Button) findViewById(R.id.botaoLogin);
         this.botaoLogin = botaoLogin;
         botaoLogin.setOnClickListener(this);
-
-
     }
 
     @Override
     public void onClick(View v) {
-
         if(v==botaoLogin) {
             email = campoEmail.getText().toString();
             senha = campoSenha.getText().toString();
             if (email.isEmpty() || senha.isEmpty()) {
-                Toast.makeText(Login.this, "Digite e-mail e senha", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginCliente.this, "Digite e-mail e senha", Toast.LENGTH_LONG).show();
             } else {
 
                 LoginModel loginModel = new LoginModel();
@@ -209,7 +214,7 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
 
 
             case R.id.fluxo_caixa:
-                Intent intent9 = new Intent(this, CadastroCliente.class);
+                Intent intent9 = new Intent(this, Agenda.class);
                 startActivity(intent9);
                 return true;
 
@@ -222,6 +227,6 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
 
 
 
-    }
+}
 
 

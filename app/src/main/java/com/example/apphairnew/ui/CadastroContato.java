@@ -298,7 +298,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
             byte[] bb = bos.toByteArray();
             bmFotoContato = Base64.encodeToString(bb,1);
 
-            if(nomeContato.isEmpty() || telContato.isEmpty() || nascContato.isEmpty()){
+            if(nomeContato.isEmpty()  || telContato.isEmpty() || nascContato.isEmpty()){
                 Toast.makeText(CadastroContato.this, "Complete todos os campos", Toast.LENGTH_LONG).show();
 
             }else {
@@ -310,6 +310,7 @@ public class CadastroContato extends AppCompatActivity implements View.OnClickLi
                 contatoModel.setSexoContato(escolhaSexo);
                 contatoModel.setExpFreqContato(escolhaFreq);
                 contatoModel.setFotoContato(bmFotoContato);
+
 
 
 //g
