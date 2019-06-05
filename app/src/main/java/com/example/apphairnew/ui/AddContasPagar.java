@@ -108,7 +108,7 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
         actionBar.setTitle("Adicionar contas a pagar");
 
         campoVencimento = (EditText) findViewById(R.id.campoDataVencimento);
-      //  campoVencimento.addTextChangedListener(MaskEditUtil.mask(campoVencimento, MaskEditUtil.FORMAT_DATE));
+        //  campoVencimento.addTextChangedListener(MaskEditUtil.mask(campoVencimento, MaskEditUtil.FORMAT_DATE));
 
         campoValor = (EditText) findViewById(R.id.campoValores);
         Locale mLocale = new Locale("pt","BR");
@@ -136,7 +136,7 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
 
         final ImageView calendario = (ImageView)findViewById(R.id.calendario);
         this.calendario = calendario;
-   //     calendario.setOnClickListener(this);
+        //     calendario.setOnClickListener(this);
 
 
 
@@ -210,7 +210,7 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
             botaoCadastroPagar.setText("Alterar Contas à Pagar"); //l
             campoVencimento.setText(resp.pagarVencimento);
 
-          //  campoValor.setText(String.valueOf(campoValor));
+            //  campoValor.setText(String.valueOf(campoValor));
 
             NumberFormat formatado = NumberFormat.getInstance();
             formatado.setMinimumFractionDigits(2);
@@ -365,15 +365,15 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
                 @Override
                 public void onResponse(Call<AddCtsReceberResponse> call, Response<AddCtsReceberResponse> response) {
                     String mensagem;
-                                        if (response.body().isSuccess()) {
-                                            mensagem = "Sucesso na Exclusão do Contas a Pagar";
-                                        } else {
-                                            mensagem = "Falhou" + response.body().getMessage();
-                                        }
+                    if (response.body().isSuccess()) {
+                        mensagem = "Sucesso na Exclusão do Contas a Pagar";
+                    } else {
+                        mensagem = "Falhou" + response.body().getMessage();
+                    }
 
                     Intent intent = new Intent(getApplicationContext(), CtsPagarLista.class);
-                                        startActivity(intent);
-                                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -392,7 +392,7 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
 
             pagarContato = contato;
 
-                      if(pagarVencimento.isEmpty()){
+            if(pagarVencimento.isEmpty()){
                 Toast.makeText(AddContasPagar.this, "Complete todos os campos corretamente", Toast.LENGTH_LONG).show();
             }
             CtsPagarModel  ctsPagarModel = new CtsPagarModel();

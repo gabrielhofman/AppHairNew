@@ -26,8 +26,11 @@ import com.example.apphairnew.Adapter.AdapterGaleria;
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.model.GaleriaModel;
+import com.example.apphairnew.model.ProfModel;
 import com.example.apphairnew.response.AddGaleriaProfResponse;
 import com.example.apphairnew.response.GetGaleriaProfResponse;
+import com.example.apphairnew.response.GetProfResponse;
+import com.example.apphairnew.response.LoginResponse;
 import com.example.apphairnew.web.ApiControler;
 
 import java.io.ByteArrayOutputStream;
@@ -88,9 +91,16 @@ public class GaleriaProf extends AppCompatActivity implements NavigationView.OnN
 
         actionBar.setTitle("Cadastrar Lista teste");
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        botaoAddFoto = (Button) findViewById(R.id.btn_add_foto);
-        botaoAddFoto.setOnClickListener(this);
 
+
+            botaoAddFoto = (Button) findViewById(R.id.btn_add_foto);
+            botaoAddFoto.setOnClickListener(this);
+            Toast.makeText(getApplicationContext(), "Entrou no loop id login :" + LoginResponse.getIdProf() , Toast.LENGTH_LONG).show();
+            if (LoginResponse.getIdProf() == 0) {
+
+                botaoAddFoto.setVisibility(View.INVISIBLE);
+
+        }
         //botaoCadastrar = (Button)findViewById(R.id.cadastrar_servico);
         // botaoCadastrar.setOnClickListener(this);
 
@@ -109,23 +119,42 @@ public class GaleriaProf extends AppCompatActivity implements NavigationView.OnN
     }
 
     public void CarregarTela() {
-        final int usuario = 1;
 
-        //service.getServico(usuario).enqueue(new Callback<List<GetServicoResponse2>>() {
-        service.getGaleriaProf(usuario).enqueue(new Callback<List<GetGaleriaProfResponse>>() {
-            @Override
-            public void onResponse(Call<List<GetGaleriaProfResponse>> call, Response<List<GetGaleriaProfResponse>> response) {
-                teste = response.body();
+        if(LoginResponse.getIdProf() >= 1) {
 
-                GerarTela();
-            }
+            //service.getServico(usuario).enqueue(new Callback<List<GetServicoResponse2>>() {
+            service.getGaleriaProf(LoginResponse.getIdProf()).enqueue(new Callback<List<GetGaleriaProfResponse>>() {
+                @Override
+                public void onResponse(Call<List<GetGaleriaProfResponse>> call, Response<List<GetGaleriaProfResponse>> response) {
+                    teste = response.body();
 
-            @Override
-            public void onFailure(Call<List<GetGaleriaProfResponse>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
-                t.printStackTrace();
-            }
-        });
+
+                    GerarTela();
+                }
+
+                @Override
+                public void onFailure(Call<List<GetGaleriaProfResponse>> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
+                    t.printStackTrace();
+                }
+            });
+        }else{
+            service.getGaleriaProf(1).enqueue(new Callback<List<GetGaleriaProfResponse>>() {
+                @Override
+                public void onResponse(Call<List<GetGaleriaProfResponse>> call, Response<List<GetGaleriaProfResponse>> response) {
+                    teste = response.body();
+
+                    GerarTela();
+                }
+
+                @Override
+                public void onFailure(Call<List<GetGaleriaProfResponse>> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
+                    t.printStackTrace();
+                }
+            });
+
+        }
 
     }
 
@@ -239,6 +268,7 @@ public class GaleriaProf extends AppCompatActivity implements NavigationView.OnN
 
                 GaleriaModel galeriaModel = new GaleriaModel();
                 galeriaModel.setBmFotoGaleria(bmFotoGaleria);
+                galeriaModel.setProf_id(LoginResponse.getIdProf());
 
                 Toast.makeText(getApplicationContext(),"n nulo", Toast.LENGTH_SHORT).show();
                 service.AddGaleriaProf(galeriaModel).enqueue(new Callback<AddGaleriaProfResponse>() {

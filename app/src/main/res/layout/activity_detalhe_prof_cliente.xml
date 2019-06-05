@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.cliente.DetalheProfCliente"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/Widget.AppCompat.Toolbar"
+            android:id="@+id/toolbar"></android.support.v7.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/fotoProfDetCliente"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/saloon" />
+
+                <TextView
+                    android:id="@+id/centralizador"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/fotoProfDetCliente"
+                    />
+
+                <TextView
+                    android:id="@+id/labelSobreEstabProfDetCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Sobre o estabelecimento:"
+                    android:textSize="18dp"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_below="@+id/centralizador"/>
+
+
+                <TextView
+                    android:id="@+id/labelNomeEstabDetCliente"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Nome do estabelecimento"
+                    android:textSize="18dp"
+                    android:layout_below="@id/labelSobreEstabProfDetCliente"
+                    />
+
+                <TextView
+                    android:id="@+id/labelDescEstabProfDetCliente"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Descrição do estabelecimento"
+                    android:textSize="18dp"
+                    android:layout_below="@id/labelNomeEstabDetCliente"
+                    />
+
+                <TextView
+                    android:id="@+id/espacoVazio3"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/labelDescEstabProfDetCliente"
+                    />
+
+
+                <TextView
+                    android:id="@+id/labelEnderecoProfDetCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Endereço:"
+                    android:textSize="18dp"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_below="@+id/espacoVazio3"/>
+
+                <TextView
+                    android:id="@+id/labelCEPProfDetCliente"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="CEP"
+                    android:textSize="18dp"
+                    android:layout_below="@id/labelEnderecoProfDetCliente"
+                    />
+
+
+                <TextView
+                    android:id="@+id/labelCidadeProfDetCliente"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Cidade"
+                    android:textSize="18dp"
+                    android:layout_below="@id/labelCEPProfDetCliente"/>
+
+                <TextView
+                    android:id="@+id/labelUFProfDetCliente"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Estado"
+                    android:textSize="18dp"
+                    android:layout_below="@id/labelCidadeProfDetCliente"
+                    />
+
+                <TextView
+                    android:id="@+id/labelBairroProfDetCliente"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Bairro"
+                    android:textSize="18dp"
+                    android:layout_below="@id/labelUFProfDetCliente"
+                    />
+
+                <TextView
+                    android:id="@+id/labelRuaProfDetCliente"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Rua"
+                    android:textSize="18dp"
+                    android:layout_below="@id/labelBairroProfDetCliente"
+                    />
+
+                <TextView
+                    android:id="@+id/labelNumeroProfDetCliente"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Número"
+                    android:textSize="18dp"
+                    android:layout_below="@id/labelRuaProfDetCliente"
+                    />
+
+                <TextView
+                    android:id="@+id/labelComplementoProfDetCliente"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Complemento"
+                    android:textSize="18dp"
+                    android:layout_below="@id/labelNumeroProfDetCliente"
+                    />
+
+
+                <TextView
+                    android:id="@+id/espacoVazio4"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/labelComplementoProfDetCliente"
+                    />
+
+
+
+                <Button
+                    android:id="@+id/botaoAbrirFotoGaleiraProfDetCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Abrir galeria de fotos"
+                    android:layout_below="@+id/espacoVazio4"
+                    android:textSize="18dp"
+                    android:layout_centerHorizontal="true"
+                    android:theme="@style/AppTheme.Button"
+                    />
+
+                <Button
+                    android:id="@+id/botaoMarcarHrProfDetCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Marcar horário"
+                    android:layout_below="@+id/botaoAbrirFotoGaleiraProfDetCliente"
+                    android:textSize="18dp"
+                    android:layout_centerHorizontal="true"
+                    android:theme="@style/AppTheme.Button"
+                    />
+
+
+
+
+
+
+            </RelativeLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:id="@+id/navigation_view"
+        app:menu="@menu/menu_lateral"
+        app:headerLayout="@layout/drawer_header">
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>

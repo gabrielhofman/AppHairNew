@@ -130,34 +130,34 @@ public class LiqContasPagar extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(LiqContasPagar.this, "Complete todos os campos corretamente", Toast.LENGTH_LONG).show();
             }else{
 
-            LiqPagarModel liqPagarModel = new LiqPagarModel();
+                LiqPagarModel liqPagarModel = new LiqPagarModel();
 
-            liqPagarModel.setLiqPagarVencimento(liqPagarVencimento);
-            liqPagarModel.setLiqPagarValor(liqPagarValor);
-            liqPagarModel.setLiqPagarObservacao(liqPagarObservacao);
+                liqPagarModel.setLiqPagarVencimento(liqPagarVencimento);
+                liqPagarModel.setLiqPagarValor(liqPagarValor);
+                liqPagarModel.setLiqPagarObservacao(liqPagarObservacao);
 
-            service.LiqCtsPagar(liqPagarModel).enqueue(new Callback<LiqCtsPagarResponse>() {
-                @Override
-                public void onResponse(Call<LiqCtsPagarResponse> call, Response<LiqCtsPagarResponse> response) {
-                    String mensagem;
-                    if (response.body().isSuccess()) {
-                        mensagem = "Cadastro efetuado com sucesso";
-                    } else {
-                        mensagem = "Falha no cadastro:   " + response.body().getMessage();
+                service.LiqCtsPagar(liqPagarModel).enqueue(new Callback<LiqCtsPagarResponse>() {
+                    @Override
+                    public void onResponse(Call<LiqCtsPagarResponse> call, Response<LiqCtsPagarResponse> response) {
+                        String mensagem;
+                        if (response.body().isSuccess()) {
+                            mensagem = "Cadastro efetuado com sucesso";
+                        } else {
+                            mensagem = "Falha no cadastro:   " + response.body().getMessage();
+                        }
+
+                        Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+
                     }
 
-                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onFailure(Call<LiqCtsPagarResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    }
+                });
+            }
 
-                }
-
-                @Override
-                public void onFailure(Call<LiqCtsPagarResponse> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                    t.printStackTrace();
-                }
-            });
         }
-
-    }
-}}
+    }}
 //

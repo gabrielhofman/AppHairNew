@@ -62,6 +62,7 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
     private Button botaoCadastro;
     private Button botaoTirarFoto;
     private Button botaoCarregarFoto;
+    private Button botaoAddFotoGaleira;
 
     private String cepEnviar;
 
@@ -154,6 +155,10 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
 
             }
         });
+
+        Button botaoAddFotoGaleira = (Button)findViewById(R.id.botaoAddFotoGaleira);
+        this.botaoAddFotoGaleira = botaoAddFotoGaleira;
+        botaoAddFotoGaleira.setOnClickListener(this);
 
 
 
@@ -349,6 +354,11 @@ public class CadastroUsuario extends AppCompatActivity implements View.OnClickLi
 
 
 
+        }
+
+        if(v== botaoAddFotoGaleira){
+            Intent addGaleria = new Intent(this, GaleriaProf.class);
+            startActivity(addGaleria);
         }
 
 
