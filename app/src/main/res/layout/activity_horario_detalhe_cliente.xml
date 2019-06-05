@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.cliente.HorarioDetalheCliente">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/Widget.AppCompat.Toolbar"
+            android:id="@+id/toolbar"></android.support.v7.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+
+                <TextView
+                    android:id="@+id/centralizador"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"
+
+                    />
+
+
+
+
+                <TextView
+                    android:id="@+id/espacoVazio1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/labelSobreCliente"
+                    />
+
+                <TextView
+                    android:id="@+id/labelSobreServico"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Sobre o serviço:"
+                    android:textSize="18dp"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_below="@+id/espacoVazio1"/>
+
+
+                <TextView
+                    android:id="@+id/nome_servico"
+                    android:text="xxxxxxxxxxxx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/labelSobreServico"
+                    android:textSize="18dp"
+                    android:layout_alignBottom="@+id/labelSobreServico"
+                    />
+
+                <Button
+                    android:id="@+id/botaoBuscarServico"
+                    android:layout_width="270dp"
+                    android:layout_height="wrap_content"
+                    android:text="Buscar Servico"
+                    android:layout_below="@id/labelSobreServico"
+                    android:theme="@style/AppTheme.Button"
+                    android:layout_centerHorizontal="true"/>
+
+
+
+                <EditText
+                    android:id="@+id/campoDataAgenda"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Data da agenda:"
+                    android:textSize="18dp"
+                    android:layout_below="@id/botaoBuscarServico"
+                    android:editable="false"
+                    />
+
+                <EditText
+                    android:id="@+id/campoHoraInicio"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Hora de início: XX:XX"
+                    android:textSize="18dp"
+                    android:layout_below="@id/campoDataAgenda"
+                    android:editable="false"
+                    />
+
+                <EditText
+                    android:id="@+id/campoHoraFim"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Hora de fim: XX:XX"
+                    android:textSize="18dp"
+                    android:layout_below="@id/campoHoraInicio"
+                    android:editable="false"
+                    />
+
+                <EditText
+                    android:id="@+id/campoPrecoServico"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Valor: R$00,00"
+                    android:textSize="18dp"
+                    android:layout_below="@id/campoHoraFim"
+                    android:editable="false"
+                    />
+
+                <TextView
+                    android:id="@+id/espacoVazio3"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/campoPrecoServico"
+                    />
+
+
+                <TextView
+                    android:id="@+id/espacoVazio2"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/espacoVazio3"
+                    />
+
+                <Button
+                    android:id="@+id/botaoSalvarHorario"
+                    android:layout_width="270dp"
+                    android:layout_height="wrap_content"
+                    android:text="Salvar"
+                    android:layout_below="@+id/espacoVazio2"
+                    android:textSize="18dp"
+                    android:layout_centerHorizontal="true"
+                    android:theme="@style/AppTheme.Button"
+                    />
+
+
+
+                <Button
+                    android:id="@+id/botaoCancelarHorario"
+                    android:layout_width="270dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cancelar serviço"
+                    android:layout_below="@+id/botaoSalvarHorario"
+                    android:textSize="18dp"
+                    android:layout_centerHorizontal="true"
+                    android:theme="@style/AppTheme.Button"
+
+                    />
+
+
+
+
+
+
+            </RelativeLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:id="@+id/navigation_view"
+        app:menu="@menu/menu_lateral"
+        app:headerLayout="@layout/drawer_header">
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>

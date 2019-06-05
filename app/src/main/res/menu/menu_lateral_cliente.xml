@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/login_cliente"
+        android:title="Salões de Beleza "
+        />
+
+    <item
+        android:id="@+id/salao"
+        android:title="Salões de Beleza "
+        />
+    <item
+        android:id="@+id/meus_horarios"
+        android:title="Meus Horários Agendados"
+        />
+    <item
+        android:id="@+id/perfil"
+        android:title="Meu Perfil"
+        />
+    <item
+        android:id="@+id/profissional"
+        android:title="App Profissional" />
+
+</menu>

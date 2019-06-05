@@ -27,6 +27,7 @@ import com.example.apphairnew.Util.MaskEditUtil;
 import com.example.apphairnew.Util.Validacao;
 import com.example.apphairnew.model.ClienteModel;
 import com.example.apphairnew.response.CadContatoResponse;
+import com.example.apphairnew.response.LoginResponse;
 import com.example.apphairnew.ui.AddContasPagar;
 import com.example.apphairnew.ui.CadastroContato;
 import com.example.apphairnew.ui.CadastroServico;
@@ -56,8 +57,11 @@ public class CadastroCliente extends AppCompatActivity implements NavigationView
     private RadioGroup rbSexoContato;
     private RadioButton radioBtnSexo;
     private ImageView calendario;
-    private Button  botaoCadastrar;
+    private Button botaoCadastrar;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+
+
+    private boolean alterando;
 
 
     private ClienteModel clienteModel;
@@ -70,7 +74,6 @@ public class CadastroCliente extends AppCompatActivity implements NavigationView
     private DrawerLayout drawerLayout;
 
 
-
     private ApiService service = ApiControler.CreateController();
 
 
@@ -80,7 +83,7 @@ public class CadastroCliente extends AppCompatActivity implements NavigationView
         setContentView(R.layout.activity_cadastro_cliente);
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        drawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         //  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -105,18 +108,18 @@ public class CadastroCliente extends AppCompatActivity implements NavigationView
         //    private EditText campoTelefone;
         //    private EditText campoNascimento;
 
-        campoNome = (EditText)findViewById(R.id.campoNomeCliente);
-        campoSobrenome = (EditText)findViewById(R.id.campoSobreNomeCliente);
-        campoEmail = (EditText)findViewById(R.id.campoEmailCliente);
-        campoSenha = (EditText)findViewById(R.id.campoSenhaCliente);
-        campoTelefone = (EditText)findViewById(R.id.campoTelefoneCliente);
+        campoNome = (EditText) findViewById(R.id.campoNomeCliente);
+        campoSobrenome = (EditText) findViewById(R.id.campoSobreNomeCliente);
+        campoEmail = (EditText) findViewById(R.id.campoEmailCliente);
+        campoSenha = (EditText) findViewById(R.id.campoSenhaCliente);
+        campoTelefone = (EditText) findViewById(R.id.campoTelefoneCliente);
         campoTelefone.addTextChangedListener(MaskEditUtil.mask(campoTelefone, MaskEditUtil.FORMAT_FONE));
-        campoNascimento = (EditText)findViewById(R.id.campoDataNascCliente);
+        campoNascimento = (EditText) findViewById(R.id.campoDataNascCliente);
         //private RadioGroup rbFreqContato;
-        rbSexoContato = (RadioGroup)findViewById(R.id.rbSexoContato);
-        this.calendario = (ImageView)findViewById(R.id.calendario);
+        rbSexoContato = (RadioGroup) findViewById(R.id.rbSexoContato);
+        this.calendario = (ImageView) findViewById(R.id.calendario);
         calendario.setOnClickListener(this);
-        this.botaoCadastrar = (Button)findViewById(R.id.botaoCadastrar);
+        this.botaoCadastrar = (Button) findViewById(R.id.botaoCadastrar);
         botaoCadastrar.setOnClickListener(this);
 
 
@@ -131,7 +134,7 @@ public class CadastroCliente extends AppCompatActivity implements NavigationView
                 DatePickerDialog dialog = new DatePickerDialog(CadastroCliente.this,
                         android.R.style.Theme_Holo_Dialog_MinWidth,
                         mDateSetListener,
-                        year, month, day );
+                        year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -141,29 +144,23 @@ public class CadastroCliente extends AppCompatActivity implements NavigationView
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
                 month = month + 1;
-                Toast.makeText(getApplicationContext(),"data" + dayOfMonth + month + year,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "data" + dayOfMonth + month + year, Toast.LENGTH_SHORT).show();
 
                 String dia;
                 String mes;
                 String ano;
 
-                if(dayOfMonth <10)
-                {
+                if (dayOfMonth < 10) {
                     dia = "0" + dayOfMonth;
-                }else
-                {
+                } else {
                     dia = String.valueOf(dayOfMonth);
                 }
 
-                if(month <10)
-                {
+                if (month < 10) {
                     mes = "0" + month;
-                }else
-                {
+                } else {
                     mes = String.valueOf(month);
                 }
-
-
 
 
                 String data = (dia + "/" + mes + "/" + year);
@@ -173,13 +170,28 @@ public class CadastroCliente extends AppCompatActivity implements NavigationView
             }
         };
 
+        service.getCliente(LoginResponse.getIdCliente()).enqueue(new Callback<ClienteModel>() {
+            @Override
+            public void onResponse(Call<ClienteModel> call, Response<ClienteModel> response) {
+                clienteModel = new ClienteModel();
+                clienteModel = response.body();
+                GerarTela();
+            }
+
+            @Override
+            public void onFailure(Call<ClienteModel> call, Throwable t) {
+
+            }
+        });
+
     }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         //drawerLayout.closeDrawers();
 
-        switch (menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.login:
                 Intent intent = new Intent(this, Login.class);
                 startActivity(intent);
@@ -235,6 +247,28 @@ public class CadastroCliente extends AppCompatActivity implements NavigationView
         return false;//
     }
 
+
+    public void GerarTela() {
+        if (clienteModel.getIdCliente() != 0) {
+            campoNome.setText(clienteModel.getNomeCliente());
+            campoSobrenome.setText(clienteModel.getSobrenomeCliente());
+            campoEmail.setText(clienteModel.getEmailCliente());
+            campoTelefone.setText(clienteModel.getTelefCliente());
+            campoNascimento.setText(clienteModel.getDataNascCliente());
+
+
+            this.alterando = true;
+
+        }else {
+
+            this.alterando = false;
+        }
+    }
+
+
+
+
+
     @Override
     public void onClick(View v) {
 
@@ -242,14 +276,7 @@ public class CadastroCliente extends AppCompatActivity implements NavigationView
         if(v==botaoCadastrar)
         {
 
-            //    private int idCliente;
-            //    private String nomeCliente;
-            //    private String sobrenomeCliente;
-            //    private String telefCliente;
-            //    private String dataNascCliente;
-            //    private String emailCliente ;
-            //    private String sexoCliente ;
-            //    private String senhaCliente ;
+
 
             //   campoNome = (EditText)findViewById(R.id.campoNomeCliente);
             //        campoSobrenome = (EditText)findViewById(R.id.campoSobreNomeCliente);

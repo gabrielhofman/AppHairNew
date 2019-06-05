@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    card_view:cardElevation="5dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data da agenda Alterada:"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            />
+
+
+        <TextView
+            android:id="@+id/data_alteracao"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Nome data_alteracao:"
+            android:textSize="18dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hora da Agenda:"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            />
+
+
+        <TextView
+            android:id="@+id/hora_inicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hora inicio"
+            android:layout_toLeftOf="@+id/nome_servico"
+            android:layout_centerHorizontal="true"
+            android:textSize="18dp" />
+
+
+
+
+        <TextView
+            android:id="@+id/hora_fim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hora inicio"
+            android:layout_toLeftOf="@+id/nome_servico"
+            android:layout_centerHorizontal="true"
+            android:textSize="18dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do cliente:"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            />
+
+        <TextView
+            android:id="@+id/nome_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nome log"
+            android:layout_toLeftOf="@+id/nome_servico"
+            android:layout_centerHorizontal="true"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telefone do cliente:"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            />
+
+        <TextView
+            android:id="@+id/telef_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="telefone log"
+            android:layout_toLeftOf="@+id/nome_servico"
+            android:layout_centerHorizontal="true"
+            android:textSize="18dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data da alteração no log:"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            />
+
+        <TextView
+            android:id="@+id/data_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hora inicio"
+            android:layout_toLeftOf="@+id/nome_servico"
+            android:layout_centerHorizontal="true"
+            android:textSize="18dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipo de Alteração:"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            />
+
+
+        <TextView
+            android:id="@+id/tipo_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tipo"
+            android:layout_toLeftOf="@+id/nome_servico"
+            android:layout_centerHorizontal="true"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

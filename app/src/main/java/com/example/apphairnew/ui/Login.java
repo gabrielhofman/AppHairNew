@@ -21,6 +21,9 @@ import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.model.LoginModel;
 import com.example.apphairnew.response.LoginResponse;
 import com.example.apphairnew.ui.cliente.CadastroCliente;
+import com.example.apphairnew.ui.cliente.HorariosAgendadosCliente;
+import com.example.apphairnew.ui.cliente.HorariosSalaoCliente;
+import com.example.apphairnew.ui.cliente.LoginCliente;
 import com.example.apphairnew.web.ApiControler;
 
 import retrofit2.Call;
@@ -203,13 +206,13 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
                 return true;
 
             case R.id.lista_contas_pagar:
-                Intent intent8 = new Intent(this, CtsPagarLista.class);
+                Intent intent8 = new Intent(this, HorariosAgendadosCliente.class);
                 startActivity(intent8);
                 return true;
 
 
             case R.id.fluxo_caixa:
-                Intent intent9 = new Intent(this, CadastroCliente.class);
+                Intent intent9 = new Intent(this, LoginCliente.class);
                 startActivity(intent9);
                 return true;
 

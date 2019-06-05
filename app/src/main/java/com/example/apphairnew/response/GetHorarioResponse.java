@@ -23,6 +23,8 @@ public class GetHorarioResponse implements Serializable {
     public String statusAgenda;
 
 
+
+
     public String getStatusAgenda() {
         return statusAgenda;
     }

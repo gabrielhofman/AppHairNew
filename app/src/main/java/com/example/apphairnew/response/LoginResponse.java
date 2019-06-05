@@ -3,6 +3,7 @@ package com.example.apphairnew.response;
 public class LoginResponse {
 
     private static int idProf;
+    private static int idCliente;
     private int id;
     private boolean success;
     private String message;
@@ -21,6 +22,14 @@ public class LoginResponse {
 
     public static void setIdProf(int idProf) {
         LoginResponse.idProf = idProf;
+    }
+
+    public static int getIdCliente() {
+        return idCliente;
+    }
+
+    public static void setIdCliente(int idCliente) {
+        LoginResponse.idCliente = idCliente;
     }
 
     public boolean isSuccess() {

@@ -106,7 +106,7 @@ public class LoginCliente extends AppCompatActivity implements NavigationView.On
                 loginModel.setLogin(email);
                 loginModel.setSenha(senha);
 
-                service.Login(loginModel).enqueue(new Callback<LoginResponse>() {
+                service.LoginCliente(loginModel).enqueue(new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
@@ -115,8 +115,8 @@ public class LoginCliente extends AppCompatActivity implements NavigationView.On
                             mensagem = "Login efetuado com sucesso!";
                             //  LoginResponse.setIdProf(response.body().getIdProf());
 
-                            LoginResponse.setIdProf(response.body().getId());
-                            Intent intent = new Intent(getApplicationContext(), DashBoard.class);
+                            LoginResponse.setIdCliente(response.body().getId());
+                            Intent intent = new Intent(getApplicationContext(), HorariosSalaoCliente.class);
                             startActivity(intent);
 
 
@@ -141,7 +141,7 @@ public class LoginCliente extends AppCompatActivity implements NavigationView.On
         }
         if(v==criarConta)
         {
-            Intent intent = new Intent(this, CadastroUsuario.class);
+            Intent intent = new Intent(this, CadastroCliente.class);
             startActivity(intent);
 
         }
@@ -167,56 +167,33 @@ public class LoginCliente extends AppCompatActivity implements NavigationView.On
         //drawerLayout.closeDrawers();
 
         switch (item.getItemId()) {
-            case R.id.login:
-                Intent intent = new Intent(this, Login.class);
+            case R.id.login_cliente:
+                Intent intent = new Intent(this, LoginCliente.class);
                 startActivity(intent);
                 return true;
 
-            case R.id.dashboard:
+            case R.id.salao:
                 Intent intent3 = new Intent(this,DashBoard.class);
                 startActivity(intent3);
                 return true;
 
-            case R.id.cadastrar_usuario:
-                Intent intent1 = new Intent(this, CadastroUsuario.class);
+            case R.id.meus_horarios:
+                Intent intent1 = new Intent(this, HorariosAgendadosCliente.class);
                 startActivity(intent1);
                 return true;
 
-            case R.id.listar_contatos:
-                Intent intent2 = new Intent(this, ContatoLista.class);
+            case R.id.perfil:
+                Intent intent2 = new Intent(this, CadastroCliente.class);
                 startActivity(intent2);
                 return true;
 
-            case R.id.novo_contato:
-                Intent intent4 = new Intent(this, CadastroContato.class);
+            case R.id.profissional:
+                Intent intent4 = new Intent(this, Login.class);
                 startActivity(intent4);
                 return true;
 
-            case R.id.cadastrar_servico:
-                Intent intent5 = new Intent(this, CadastroServico.class);
-                startActivity(intent5);
-                return true;
-
-            case R.id.listar_servicos:
-                Intent intent6 = new Intent(this, ServicoLista.class);
-                startActivity(intent6);
-                return true;
-
-            case R.id.lista_contas_receber:
-                Intent intent7 = new Intent(this, CtsReceberLista.class);
-                startActivity(intent7);
-                return true;
-
-            case R.id.lista_contas_pagar:
-                Intent intent8 = new Intent(this, CtsPagarLista.class);
-                startActivity(intent8);
-                return true;
 
 
-            case R.id.fluxo_caixa:
-                Intent intent9 = new Intent(this, Agenda.class);
-                startActivity(intent9);
-                return true;
 
 
         }
