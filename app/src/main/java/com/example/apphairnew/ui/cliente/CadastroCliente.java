@@ -200,6 +200,8 @@ public class CadastroCliente extends AppCompatActivity implements NavigationView
         return super.onOptionsItemSelected(item);
     }
 
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
