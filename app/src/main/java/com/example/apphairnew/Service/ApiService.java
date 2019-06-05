@@ -1,5 +1,6 @@
 package com.example.apphairnew.Service;
 
+import com.example.apphairnew.model.ClienteModel;
 import com.example.apphairnew.model.ContatoModel;
 import com.example.apphairnew.model.CtsPagarModel;
 import com.example.apphairnew.model.CtsReceberModel;
@@ -11,6 +12,7 @@ import com.example.apphairnew.model.LiqRecebModel;
 import com.example.apphairnew.model.LoginModel;
 import com.example.apphairnew.model.ProfModel;
 import com.example.apphairnew.model.ServicoModel;
+import com.example.apphairnew.model.cliente.LogModel;
 import com.example.apphairnew.response.AddCtsPagarResponse;
 import com.example.apphairnew.response.AddCtsReceberResponse;
 import com.example.apphairnew.response.AddFluxoResponse;
@@ -30,6 +32,7 @@ import com.example.apphairnew.response.GetDetalheAgendaResponse;
 import com.example.apphairnew.response.GetFluxoCaixaResponse;
 import com.example.apphairnew.response.GetGaleriaProfResponse;
 import com.example.apphairnew.response.GetHorarioResponse;
+import com.example.apphairnew.response.GetLogResponse;
 import com.example.apphairnew.response.GetProfResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.response.GetTotalFluxoResponse;
@@ -37,6 +40,7 @@ import com.example.apphairnew.response.HorarioResponse;
 import com.example.apphairnew.response.LiqCtsPagarResponse;
 import com.example.apphairnew.response.LiqCtsRecebResponse;
 import com.example.apphairnew.response.LoginResponse;
+import com.example.apphairnew.ui.cliente.CadastroCliente;
 
 import java.util.List;
 
@@ -169,8 +173,32 @@ public interface ApiService {
     @GET("auth/GetProf/{usuario}")
     Call <GetProfResponse> getProf(@Path("usuario") int usuario);
 
+    @GET("auth/GetGaleriaProf/{usuario}")
+    Call <List<GetGaleriaProfResponse>> getGaleriaProf(@Path("usuario") int usuario);
 
+    @POST("auth/CadastroCliente")
+    Call<CadContatoResponse> addCliente(@Body ClienteModel body);
 
+    @POST("auth/SignInCliente")
+    Call<LoginResponse> LoginCliente(@Body LoginModel body);
+
+    @GET("auth/GetCliente/{usuario}")
+    Call <ClienteModel> getCliente(@Path("usuario") int usuario);
+
+    @GET("auth/GetProfCliente")
+    Call <List<GetProfResponse>> getProfCliente();
+
+    @GET("auth/GetAgendaCliente/{usuario}")
+    Call <List<GetHorarioResponse>> getAgendaCliente(@Path("usuario") int usuario);
+
+    @POST("auth/LimparHorarioCliente")
+    Call<HorarioResponse> LimpHorarioCliente(@Body HorarioModel body);
+
+    @POST("auth/AgendamentoLog")
+    Call<HorarioResponse> AgendamentoLog(@Body LogModel body);
+
+    @GET("auth/GetLogAgenda")
+    Call <List<GetLogResponse>> getLogAgenda();
 
 
 
