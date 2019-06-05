@@ -297,7 +297,7 @@ public class HorarioDetalheCliente extends AppCompatActivity implements View.OnC
 
             horarioModel.setIdAgenda(detalhe.getIdAgenda());
             horarioModel.setDataAgenda(dataAgenda);
-            horarioModel.setContato(2);
+
 
             if(contato == 0)
             {
@@ -312,7 +312,7 @@ public class HorarioDetalheCliente extends AppCompatActivity implements View.OnC
             } else {
                 horarioModel.setServico(servico);
             }
-
+            horarioModel.setContato(2);
 
             horarioModel.setDataAgenda(dataAgenda);
             horarioModel.setHoraInicio(horaInicio);
