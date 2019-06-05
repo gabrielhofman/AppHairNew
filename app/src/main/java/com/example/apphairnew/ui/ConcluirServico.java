@@ -25,6 +25,7 @@ import com.example.apphairnew.response.AddCtsReceberResponse;
 import com.example.apphairnew.response.AddFluxoResponse;
 import com.example.apphairnew.response.GetDetalheAgendaResponse;
 import com.example.apphairnew.response.GetHorarioResponse;
+import com.example.apphairnew.ui.cliente.LoginCliente;
 import com.example.apphairnew.web.ApiControler;
 
 import retrofit2.Call;
@@ -218,13 +219,18 @@ public class ConcluirServico extends AppCompatActivity implements View.OnClickLi
                 return true;
 
             case R.id.dashboard:
-                Intent intent3 = new Intent(this, DashBoard.class);
+                Intent intent3 = new Intent(this,DashBoard.class);
                 startActivity(intent3);
                 return true;
 
             case R.id.cadastrar_usuario:
                 Intent intent1 = new Intent(this, CadastroUsuario.class);
                 startActivity(intent1);
+                return true;
+
+            case R.id.agenda:
+                Intent intent10 = new Intent(this, Agenda.class);
+                startActivity(intent10);
                 return true;
 
             case R.id.listar_contatos:
@@ -235,11 +241,6 @@ public class ConcluirServico extends AppCompatActivity implements View.OnClickLi
             case R.id.novo_contato:
                 Intent intent4 = new Intent(this, CadastroContato.class);
                 startActivity(intent4);
-                return true;
-
-            case R.id.cadastrar_servico:
-                Intent intent5 = new Intent(this, CadastroServico.class);
-                startActivity(intent5);
                 return true;
 
             case R.id.listar_servicos:
@@ -259,8 +260,18 @@ public class ConcluirServico extends AppCompatActivity implements View.OnClickLi
 
 
             case R.id.fluxo_caixa:
-                Intent intent9 = new Intent(this, CtsReceberLista.class);
+                Intent intent9 = new Intent(this, FluxoCaixa.class);
                 startActivity(intent9);
+                return true;
+
+            case R.id.log:
+                Intent intent11 = new Intent(this, LogLista.class);
+                startActivity(intent11);
+                return true;
+
+            case R.id.app_cliente:
+                Intent intent12 = new Intent(this, LoginCliente.class);
+                startActivity(intent12);
                 return true;
         }
 

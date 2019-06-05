@@ -23,6 +23,7 @@ import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.response.AddCtsPagarResponse;
 import com.example.apphairnew.response.GetCtsPagarResponse;
+import com.example.apphairnew.ui.cliente.LoginCliente;
 import com.example.apphairnew.web.ApiControler;
 
 import java.util.ArrayList;
@@ -137,6 +138,11 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
                 startActivity(intent1);
                 return true;
 
+            case R.id.agenda:
+                Intent intent10 = new Intent(this, Agenda.class);
+                startActivity(intent10);
+                return true;
+
             case R.id.listar_contatos:
                 Intent intent2 = new Intent(this, ContatoLista.class);
                 startActivity(intent2);
@@ -145,11 +151,6 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
             case R.id.novo_contato:
                 Intent intent4 = new Intent(this, CadastroContato.class);
                 startActivity(intent4);
-                return true;
-
-            case R.id.cadastrar_servico:
-                Intent intent5 = new Intent(this, CadastroServico.class);
-                startActivity(intent5);
                 return true;
 
             case R.id.listar_servicos:
@@ -169,10 +170,19 @@ public class CtsPagarLista extends AppCompatActivity implements View.OnClickList
 
 
             case R.id.fluxo_caixa:
-                Intent intent9 = new Intent(this, CtsReceberLista.class);
+                Intent intent9 = new Intent(this, FluxoCaixa.class);
                 startActivity(intent9);
                 return true;
 
+            case R.id.log:
+                Intent intent11 = new Intent(this, LogLista.class);
+                startActivity(intent11);
+                return true;
+
+            case R.id.app_cliente:
+                Intent intent12 = new Intent(this, LoginCliente.class);
+                startActivity(intent12);
+                return true;
 
         }
 

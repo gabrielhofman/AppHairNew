@@ -11,38 +11,47 @@
         />
     <item
         android:id="@+id/cadastrar_usuario"
-        android:title="Cadastrar usuário"
+        android:title="Meu cadastro"
+        />
+    <item
+        android:id="@+id/agenda"
+        android:title="Agenda"
         />
     <item
         android:id="@+id/listar_contatos"
-        android:title="Listar Contatos" />
+        android:title="Meus contatos" />
 
     <item
         android:id="@+id/novo_contato"
-        android:title="Cadastrar Contatos"
-        />
-    <item
-        android:id="@+id/cadastrar_servico"
-        android:title="Cadastrar Serviço"
+        android:title="Adicionar contato"
         />
     <item
         android:id="@+id/listar_servicos"
-        android:title="Listar Serviços"
+        android:title="Meus serviços"
         />
 
     <item
         android:id="@+id/lista_contas_receber"
-        android:title="Listar Contas a Receber"
+        android:title="Minhas contas a receber"
         />
     <item
         android:id="@+id/lista_contas_pagar"
-        android:title="Listar Contas a Pagar"
+        android:title="Minhas contas a pagar"
         />
 
     <item
         android:id="@+id/fluxo_caixa"
         android:title="Fluxo de caixa"
         />
+    <item
+        android:id="@+id/log"
+        android:title="Movimentação da agenda"
+        />
+    <item
+        android:id="@+id/app_cliente"
+        android:title="App Cliente"
+        />
+
 
 
 </menu>

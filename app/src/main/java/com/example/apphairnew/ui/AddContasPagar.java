@@ -34,6 +34,7 @@ import com.example.apphairnew.response.AddFluxoResponse;
 import com.example.apphairnew.response.GetContatoResponse;
 import com.example.apphairnew.response.GetCtsPagarResponse;
 import com.example.apphairnew.response.GetDetalheAgendaResponse;
+import com.example.apphairnew.ui.cliente.LoginCliente;
 import com.example.apphairnew.web.ApiControler;
 
 import java.text.NumberFormat;
@@ -262,6 +263,11 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
                 startActivity(intent1);
                 return true;
 
+            case R.id.agenda:
+                Intent intent10 = new Intent(this, Agenda.class);
+                startActivity(intent10);
+                return true;
+
             case R.id.listar_contatos:
                 Intent intent2 = new Intent(this, ContatoLista.class);
                 startActivity(intent2);
@@ -270,11 +276,6 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
             case R.id.novo_contato:
                 Intent intent4 = new Intent(this, CadastroContato.class);
                 startActivity(intent4);
-                return true;
-
-            case R.id.cadastrar_servico:
-                Intent intent5 = new Intent(this, CadastroServico.class);
-                startActivity(intent5);
                 return true;
 
             case R.id.listar_servicos:
@@ -294,8 +295,18 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
 
 
             case R.id.fluxo_caixa:
-                Intent intent9 = new Intent(this, CtsReceberLista.class);
+                Intent intent9 = new Intent(this, FluxoCaixa.class);
                 startActivity(intent9);
+                return true;
+
+            case R.id.log:
+                Intent intent11 = new Intent(this, LogLista.class);
+                startActivity(intent11);
+                return true;
+
+            case R.id.app_cliente:
+                Intent intent12 = new Intent(this, LoginCliente.class);
+                startActivity(intent12);
                 return true;
 
         }

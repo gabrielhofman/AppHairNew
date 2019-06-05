@@ -1,6 +1,7 @@
 package com.example.apphairnew.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -20,6 +21,7 @@ import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.response.GetLogResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
+import com.example.apphairnew.ui.cliente.LoginCliente;
 import com.example.apphairnew.web.ApiControler;
 
 import java.util.ArrayList;
@@ -92,6 +94,8 @@ public class LogLista extends AppCompatActivity implements NavigationView.OnNavi
     }
 
 
+
+
     public void CarregarTela(){
 
 
@@ -118,6 +122,70 @@ public class LogLista extends AppCompatActivity implements NavigationView.OnNavi
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()){
+            case R.id.login:
+                Intent intent = new Intent(this, Login.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.dashboard:
+                Intent intent3 = new Intent(this,DashBoard.class);
+                startActivity(intent3);
+                return true;
+
+            case R.id.cadastrar_usuario:
+                Intent intent1 = new Intent(this, CadastroUsuario.class);
+                startActivity(intent1);
+                return true;
+
+            case R.id.agenda:
+                Intent intent10 = new Intent(this, Agenda.class);
+                startActivity(intent10);
+                return true;
+
+            case R.id.listar_contatos:
+                Intent intent2 = new Intent(this, ContatoLista.class);
+                startActivity(intent2);
+                return true;
+
+            case R.id.novo_contato:
+                Intent intent4 = new Intent(this, CadastroContato.class);
+                startActivity(intent4);
+                return true;
+
+            case R.id.listar_servicos:
+                Intent intent6 = new Intent(this, ServicoLista.class);
+                startActivity(intent6);
+                return true;
+
+            case R.id.lista_contas_receber:
+                Intent intent7 = new Intent(this, CtsReceberLista.class);
+                startActivity(intent7);
+                return true;
+
+            case R.id.lista_contas_pagar:
+                Intent intent8 = new Intent(this, CtsPagarLista.class);
+                startActivity(intent8);
+                return true;
+
+
+            case R.id.fluxo_caixa:
+                Intent intent9 = new Intent(this, FluxoCaixa.class);
+                startActivity(intent9);
+                return true;
+
+            case R.id.log:
+                Intent intent11 = new Intent(this, LogLista.class);
+                startActivity(intent11);
+                return true;
+
+            case R.id.app_cliente:
+                Intent intent12 = new Intent(this, LoginCliente.class);
+                startActivity(intent12);
+                return true;
+        }
+
+
         return false;
     }
 }
