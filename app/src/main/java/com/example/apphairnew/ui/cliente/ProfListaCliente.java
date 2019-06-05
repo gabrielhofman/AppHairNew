@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -120,9 +121,55 @@ public class ProfListaCliente extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId()==android.R.id.home)
+        {
+            drawerLayout.openDrawer(GravityCompat.START);
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
+        //drawerLayout.closeDrawers();
+
+        switch (item.getItemId()) {
+            case R.id.login_cliente:
+                Intent intent = new Intent(this, LoginCliente.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.salao:
+                Intent intent3 = new Intent(this,ProfListaCliente.class);
+                startActivity(intent3);
+                return true;
+
+            case R.id.meus_horarios:
+                Intent intent1 = new Intent(this, HorariosAgendadosCliente.class);
+                startActivity(intent1);
+                return true;
+
+            case R.id.perfil:
+                Intent intent2 = new Intent(this, CadastroCliente.class);
+                startActivity(intent2);
+                return true;
+
+            case R.id.profissional:
+                Intent intent4 = new Intent(this, Login.class);
+                startActivity(intent4);
+                return true;
+
+
+
+        }
         return false;
     }
+
 
     @Override
     public void noItemClicado(View view, int position) {

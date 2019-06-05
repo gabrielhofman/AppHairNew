@@ -123,7 +123,6 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
                 month = month + 1;
-                Toast.makeText(getApplicationContext(),"data" + dayOfMonth + month + year,Toast.LENGTH_SHORT).show();
                 String data = (month + "-" + dayOfMonth + "-" + year);
             
                 BuscarAgenda(data);

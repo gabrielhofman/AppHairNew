@@ -318,12 +318,15 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
 
 
 
+
         if(v==botaoNomeContato){
             Intent intent = new Intent(this, PesquisaContato.class);
             startActivityForResult(intent, 1);
 
 
         }
+
+
 
         if(v==botaoLiquidarPagar)
         {
@@ -332,6 +335,8 @@ public class AddContasPagar extends AppCompatActivity implements View.OnClickLis
             fluxoModel.setUsuarioFluxo(1);
             fluxoModel.setDataFluxo(campoVencimento.getText().toString());
             fluxoModel.setValorFluxo(Double.valueOf(campoValor.getText().toString().replace("R$","").replace(".","").replace(",",".").replace(" ","")));
+
+           
 
             service.CadFluxo(fluxoModel).enqueue(new Callback<AddFluxoResponse>() {
                 @Override

@@ -210,8 +210,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:id="@+id/navigation_view"
-        app:menu="@menu/menu_lateral"
+        app:menu="@menu/menu_lateral_cliente"
         app:headerLayout="@layout/drawer_header">
+
+
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

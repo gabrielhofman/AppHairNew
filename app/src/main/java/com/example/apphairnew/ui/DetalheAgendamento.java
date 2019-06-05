@@ -337,15 +337,27 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
         }
 
         if(v== botaoBuscarContato){
+
+            if(detalhe.getStatusAgenda().equals("O"))
+            {
+                Toast.makeText(getApplicationContext(),"Horario Ofertado! desmarque o campo 'Horario Ofertado' e grave para retirar oferta", Toast.LENGTH_SHORT).show();
+            } else{
+
             Intent intent = new Intent(this, PesquisaContato.class);
             startActivityForResult(intent, 1);
+
+            }
 
         }
 
         if(v== botaoBuscarServico){
-
-            Intent intent = new Intent(this, PesquisaServico.class);
-            startActivityForResult(intent, 2);
+            if(detalhe.getStatusAgenda().equals("O"))
+            {
+                Toast.makeText(getApplicationContext(),"Horario Ofertado! desmarque o campo 'Horario Ofertado' e grave para retirar oferta", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(this, PesquisaServico.class);
+                startActivityForResult(intent, 2);
+            }
         }
         if(v == botaoCancelarHorario)
         {

@@ -217,6 +217,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId()==android.R.id.home)
@@ -231,6 +232,8 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        drawerLayout.closeDrawers();
 
         switch (item.getItemId()) {
             case R.id.login:

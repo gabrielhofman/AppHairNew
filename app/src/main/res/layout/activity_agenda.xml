@@ -42,10 +42,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Clique para Selecionar Data: "
+            android:hint="Clique no texto para Selcionar data: "
             android:id="@+id/tvDate"
             android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"
             android:layout_below="@id/centralizador"
             android:textSize="20dp"/>
 
