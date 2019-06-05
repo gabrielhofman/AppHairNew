@@ -328,7 +328,7 @@ public class HorarioDetalheCliente extends AppCompatActivity implements View.OnC
             logModel.setLogStatus("A");
 //            logModel.setProfId(modelDetalhe.ge.);
 
-            //nova
+            //nova jknkjn
 
             service.AgendamentoLog(logModel).enqueue(new Callback<HorarioResponse>() {
                 @Override
