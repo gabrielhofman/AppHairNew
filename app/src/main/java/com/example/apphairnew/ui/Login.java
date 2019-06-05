@@ -196,12 +196,12 @@ public class Login extends AppCompatActivity implements  NavigationView.OnNaviga
                 return true;
 
             case R.id.listar_servicos:
-                Intent intent6 = new Intent(this, ServicoLista.class);
+                Intent intent6 = new Intent(this, Agenda.class);
                 startActivity(intent6);
                 return true;
 
             case R.id.lista_contas_receber:
-                Intent intent7 = new Intent(this, CtsReceberLista.class);
+                Intent intent7 = new Intent(this, LogLista.class);
                 startActivity(intent7);
                 return true;
 

@@ -116,7 +116,7 @@ public class LoginCliente extends AppCompatActivity implements NavigationView.On
                             //  LoginResponse.setIdProf(response.body().getIdProf());
 
                             LoginResponse.setIdCliente(response.body().getId());
-                            Intent intent = new Intent(getApplicationContext(), HorariosSalaoCliente.class);
+                            Intent intent = new Intent(getApplicationContext(), ProfListaCliente.class);
                             startActivity(intent);
 
 
@@ -173,7 +173,7 @@ public class LoginCliente extends AppCompatActivity implements NavigationView.On
                 return true;
 
             case R.id.salao:
-                Intent intent3 = new Intent(this,DashBoard.class);
+                Intent intent3 = new Intent(this,ProfListaCliente.class);
                 startActivity(intent3);
                 return true;
 

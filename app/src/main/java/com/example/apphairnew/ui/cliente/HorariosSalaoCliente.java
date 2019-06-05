@@ -18,6 +18,7 @@ import com.example.apphairnew.Adapter.AdapterAgenda;
 import com.example.apphairnew.R;
 import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.response.GetHorarioResponse;
+import com.example.apphairnew.response.GetProfResponse;
 import com.example.apphairnew.ui.Agenda;
 import com.example.apphairnew.ui.CadastroContato;
 import com.example.apphairnew.ui.CadastroServico;
@@ -47,7 +48,7 @@ public class HorariosSalaoCliente extends AppCompatActivity implements Navigatio
     private RecyclerView recyclerView;
     private AdapterAgenda adapterAgenda;
     private LinearLayoutManager linearLayoutManager;
-
+    private GetProfResponse profissional;
 
     public List<GetHorarioResponse> teste = new ArrayList<>();
 
@@ -84,7 +85,8 @@ public class HorariosSalaoCliente extends AppCompatActivity implements Navigatio
 
 
 
-
+        // detalhe = (GetHorarioResponse)getIntent().getSerializableExtra("horario") ;
+        profissional = (GetProfResponse)getIntent().getSerializableExtra("profissional");
 
 
 

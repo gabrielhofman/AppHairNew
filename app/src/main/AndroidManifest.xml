@@ -13,14 +13,16 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.cliente.CadastroCliente">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity android:name=".ui.cliente.LoginCliente" />
+        <activity android:name=".ui.cliente.ProfListaCliente" />
+        <activity android:name=".ui.cliente.DetalheProfCliente" />
+        <activity android:name=".ui.cliente.HorariosSalaoCliente" />
+        <activity android:name=".ui.cliente.HorariosAgendadosCliente" />
+        <activity android:name=".ui.cliente.HorarioDetalheCliente" />
+        <activity android:name=".ui.LogLista" />
         <activity android:name=".ui.GaleriaProf" />
         <activity android:name=".ui.FluxoCaixa" />
         <activity android:name=".ui.ListaHorario" />
@@ -47,7 +49,14 @@
         <activity android:name=".ui.NovoContato" />
         <activity android:name=".ui.CadastroUsuario" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ui.Login"/>
+        <activity android:name=".ui.Login">
+
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
 
     </application>
 

@@ -28,6 +28,7 @@ import com.example.apphairnew.model.cliente.LogModel;
 import com.example.apphairnew.response.GetContatoResponse;
 import com.example.apphairnew.response.GetDetalheAgendaResponse;
 import com.example.apphairnew.response.GetHorarioResponse;
+import com.example.apphairnew.response.GetProfResponse;
 import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.response.HorarioResponse;
 import com.example.apphairnew.response.LoginResponse;
@@ -87,6 +88,8 @@ public class HorarioDetalheCliente extends AppCompatActivity implements View.OnC
     private GetContatoResponse contatoResponse;
     private GetServicoResponse2 servicoResponse2;
     private GetAgendaDetalhe modelDetalhe;
+
+    private GetProfResponse profissional;
 
 
     private GetHorarioResponse detalhe;
@@ -149,6 +152,8 @@ public class HorarioDetalheCliente extends AppCompatActivity implements View.OnC
         //  contato = (GetContatoResponse)getIntent().getSerializableExtra("contato");
 
         detalhe = (GetHorarioResponse)getIntent().getSerializableExtra("horario") ;
+
+
 
 
 
@@ -342,7 +347,7 @@ public class HorarioDetalheCliente extends AppCompatActivity implements View.OnC
                     } else {
                         mensagem = "Falha no cadastro:   " + response.body().getMessage();
                     }
-                    Intent intent5 = new Intent(getApplicationContext(), Agenda.class);
+                    Intent intent5 = new Intent(getApplicationContext(), HorariosAgendadosCliente.class);
                     startActivity(intent5);
                     Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
                 }
@@ -402,7 +407,7 @@ public class HorarioDetalheCliente extends AppCompatActivity implements View.OnC
                     } else {
                         mensagem = "Falha no cadastro:   " + response.body().getMessage();
                     }
-                    Intent intent5 = new Intent(getApplicationContext(), Agenda.class);
+                    Intent intent5 = new Intent(getApplicationContext(), HorariosAgendadosCliente.class);
                     startActivity(intent5);
                     Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
 

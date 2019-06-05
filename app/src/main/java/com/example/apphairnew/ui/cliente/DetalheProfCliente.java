@@ -102,7 +102,7 @@ public class DetalheProfCliente extends AppCompatActivity implements View.OnClic
 
         Button botaoMarcarHorarioCliente = (Button) findViewById(R.id.botaoMarcarHrProfDetCliente);
         this.botaoMarcarHorarioCliente = botaoMarcarHorarioCliente;
-        botaoMarcarHorarioCliente.setOnClickListener(this);
+        this.botaoMarcarHorarioCliente.setOnClickListener(this);
 
         profissional = (GetProfResponse) getIntent().getSerializableExtra("profissional") ;
         this.profModel = new ProfModel();
@@ -138,6 +138,14 @@ public class DetalheProfCliente extends AppCompatActivity implements View.OnClic
         if(v== botaoFotosProfCliente){
             Intent addGaleria = new Intent(this, GaleriaProf.class);
             startActivity(addGaleria);
+        }
+
+        if(v == botaoMarcarHorarioCliente)
+        {
+            Intent intent = new Intent(this, HorariosSalaoCliente.class);
+            intent.putExtra("profissional", profissional);
+            startActivity(intent);
+
         }
 
     }
