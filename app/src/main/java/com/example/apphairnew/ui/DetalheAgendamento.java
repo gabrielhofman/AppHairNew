@@ -25,6 +25,7 @@ import com.example.apphairnew.Util.MaskEditUtil;
 import com.example.apphairnew.Util.MoneyTextWatcher;
 import com.example.apphairnew.model.GetAgendaDetalhe;
 import com.example.apphairnew.model.HorarioModel;
+import com.example.apphairnew.response.ContatoDetalheResponse;
 import com.example.apphairnew.response.GetContatoResponse;
 import com.example.apphairnew.response.GetDetalheAgendaResponse;
 import com.example.apphairnew.response.GetHorarioResponse;
@@ -32,6 +33,8 @@ import com.example.apphairnew.response.GetServicoResponse2;
 import com.example.apphairnew.response.HorarioResponse;
 import com.example.apphairnew.ui.cliente.LoginCliente;
 import com.example.apphairnew.web.ApiControler;
+
+import org.w3c.dom.Text;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -54,6 +57,7 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
 
     private TextView nomeContatoFinal;
     private TextView nomeServicoFinal;
+    private TextView nomeExterno;
 
     private CheckBox checkOfertar;
 
@@ -110,6 +114,7 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         actionBar.setTitle("Detalhes do horário");
 
+        nomeExterno = (TextView) findViewById(R.id.nome_externo);
         campoNomeContato = (EditText) findViewById(R.id.campoNomeContato);
         campoHoraInicio = (EditText) findViewById(R.id.campoHoraInicio);
         campoHoraFim = (EditText) findViewById(R.id.campoHoraFim);
@@ -201,6 +206,7 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
             campoHoraFim.setText(detalhe.horaFim);
             campoDataAgenda.setText(detalhe.dataAgenda);
 
+
             NumberFormat formatado = NumberFormat.getInstance();
             formatado.setMinimumFractionDigits(2);
             campoPrecoServico.setText(String.valueOf(formatado.format(detalhe.precoServico)));
@@ -232,6 +238,25 @@ public class DetalheAgendamento extends AppCompatActivity implements View.OnClic
                 }
             });
 
+            service.getDetalheCliente(detalhe.getIdCliente()).enqueue(new Callback<ContatoDetalheResponse>() {
+                @Override
+                public void onResponse(Call<ContatoDetalheResponse> call, Response<ContatoDetalheResponse> response) {
+
+                    if (response.body().clienteNome == null || response.body().clienteSobrenome == null)
+                    {
+
+                    }else {
+
+                    String nome = ("Cliente Externo:  " + response.body().clienteNome + " " + response.body().clienteSobrenome);
+                    nomeExterno.setText(nome);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ContatoDetalheResponse> call, Throwable t) {
+
+                }
+            });
 
 
 

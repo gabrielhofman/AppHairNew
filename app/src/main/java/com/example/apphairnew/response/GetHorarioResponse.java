@@ -21,9 +21,15 @@ public class GetHorarioResponse implements Serializable {
     public int servico;
     public double precoServico;
     public String statusAgenda;
+    public int idCliente;
 
+    public int getIdCliente() {
+        return idCliente;
+    }
 
-
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
 
     public String getStatusAgenda() {
         return statusAgenda;

@@ -176,7 +176,7 @@ public class ProfListaCliente extends AppCompatActivity implements View.OnClickL
         GetProfResponse profissional;
         profissional = adapterProfCliente.getItem(position);
 
-        Toast.makeText(getApplicationContext(), String.valueOf(profissional.getProf_id()), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getApplicationContext(), String.valueOf("id desse prof:  " +profissional.getProf_id()), Toast.LENGTH_SHORT).show();
 
 
         Intent intent = new Intent(this, DetalheProfCliente.class);

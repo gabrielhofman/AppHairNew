@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.apphairnew.R;
 import com.example.apphairnew.model.ProfModel;
@@ -106,8 +107,12 @@ public class DetalheProfCliente extends AppCompatActivity implements View.OnClic
         this.botaoMarcarHorarioCliente = botaoMarcarHorarioCliente;
         this.botaoMarcarHorarioCliente.setOnClickListener(this);
 
-        profissional = (GetProfResponse) getIntent().getSerializableExtra("profissional") ;
         this.profModel = new ProfModel();
+        this.profissional = (GetProfResponse) getIntent().getSerializableExtra("profissional") ;
+
+
+
+
 
 
        // this.modelDetalhe = new GetAgendaDetalhe();
@@ -144,6 +149,7 @@ public class DetalheProfCliente extends AppCompatActivity implements View.OnClic
 
         if(v == botaoMarcarHorarioCliente)
         {
+
             Intent intent = new Intent(this, HorariosSalaoCliente.class);
             intent.putExtra("profissional", profissional);
             startActivity(intent);

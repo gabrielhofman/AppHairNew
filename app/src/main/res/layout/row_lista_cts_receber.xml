@@ -14,11 +14,32 @@
         >
 
         <TextView
+            android:id="@+id/labelDataRecebLst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="XX/XX/XXXX"
+            android:textSize="18dp"
+            />
+
+        <TextView
+            android:id="@+id/espacoVazio1"
+            android:layout_width="90dp"
+            android:layout_height="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/labelDataRecebLst"
+            />
+
+
+        <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="R$  "
             android:textSize="18dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_below="@id/espacoVazio1"
+
+            />
 
         <TextView
             android:id="@+id/labelValorRecebLst"
@@ -28,21 +49,8 @@
             android:textSize="18dp"
             android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/espacoVazio1"
-            android:layout_width="50dp"
-            android:layout_height="20dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/labelValorRecebLst"
-            />
 
-        <TextView
-            android:id="@+id/labelDataRecebLst"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="XX/XX/XXXX"
-            android:textSize="18dp"
-            android:layout_below="@+id/espacoVazio1"/>
+
 
 
 

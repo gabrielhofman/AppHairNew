@@ -86,7 +86,7 @@
                 android:theme="@style/AppTheme.Button"
                 android:layout_toRightOf="@+id/botaoFluxo30dias"
                 android:layout_below="@+id/labelData"
-                android:text="Completo"/>
+                android:text="Total"/>
 
             <TextView
                 android:id="@+id/espaco_vazio1"

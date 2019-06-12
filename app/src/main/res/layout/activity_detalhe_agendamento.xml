@@ -160,11 +160,29 @@
             />
 
         <TextView
-            android:id="@+id/espacoVazio3"
+            android:id="@+id/espacoVazioExterno"
             android:layout_width="50dp"
             android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/campoPrecoServico"
+            />
+
+
+        <TextView
+            android:id="@+id/nome_externo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:layout_alignLeft="@+id/campoPrecoServico"
+            android:layout_below="@id/espacoVazioExterno"
+            />
+
+        <TextView
+            android:id="@+id/espacoVazio3"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/nome_externo"
             />
 
         <CheckBox

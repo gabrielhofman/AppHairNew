@@ -50,6 +50,7 @@ public class HorariosSalaoCliente extends AppCompatActivity implements Navigatio
     private AdapterAgenda adapterAgenda;
     private LinearLayoutManager linearLayoutManager;
     private GetProfResponse profissional;
+    private int id;
 
     public List<GetHorarioResponse> teste = new ArrayList<>();
 
@@ -77,28 +78,33 @@ public class HorariosSalaoCliente extends AppCompatActivity implements Navigatio
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
 
-        actionBar.setTitle("Agenda");
+        actionBar.setTitle("Agenda do salão");
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_agenda);
 
-        BuscarAgendasOfertadas();
 
 
+        this.profissional = new GetProfResponse();
 
         // detalhe = (GetHorarioResponse)getIntent().getSerializableExtra("horario") ;
-        profissional = (GetProfResponse)getIntent().getSerializableExtra("profissional");
+        this.profissional = (GetProfResponse)getIntent().getSerializableExtra("profissional");
 
+    //    this.id = profissional.getProf_id();
 
+      //  Toast.makeText(getApplicationContext(), "id1:    " + profissional.getProf_id(), Toast.LENGTH_LONG).show();
 
+        BuscarAgendasOfertadas();
     }
 
 
     public void BuscarAgendasOfertadas()
     {
+
+
         final int usuario = 1;
 
-        service.getAgendaOfertada(usuario).enqueue(new Callback<List<GetHorarioResponse>>() {
+        service.getAgendaOfertada(profissional.getProf_id()).enqueue(new Callback<List<GetHorarioResponse>>() {
             @Override
             public void onResponse(Call<List<GetHorarioResponse>> call, Response<List<GetHorarioResponse>> response) {
                 teste = response.body();

@@ -1,11 +1,13 @@
 package com.example.apphairnew.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.apphairnew.R;
@@ -55,10 +57,12 @@ public class AdapterLog extends  RecyclerView.Adapter<AdapterLog.ViewHolder> {
         if(logResponse.getTipoLog().equals("A"))
         {
             tipoLog = "Agendamento";
+            holder.linearLayout.setBackgroundColor(Color.parseColor("#e6ffcc"));
         }
         if(logResponse.getTipoLog().equals("C"))
         {
             tipoLog = "Cancelamento";
+            holder.linearLayout.setBackgroundColor(Color.parseColor("#ffcccc"));
         }
 
         holder.tipoLog.setText(tipoLog);
@@ -79,11 +83,13 @@ public class AdapterLog extends  RecyclerView.Adapter<AdapterLog.ViewHolder> {
             TextView horaInicio;
             TextView horaFim;
             TextView tipoLog;
+            LinearLayout linearLayout;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            linearLayout = itemView.findViewById(R.id.linearLayout);
             nomeLog = itemView.findViewById(R.id.nome_log);
             dataLog = itemView.findViewById(R.id.data_log);
             dataAgenda = itemView.findViewById(R.id.data_alteracao);

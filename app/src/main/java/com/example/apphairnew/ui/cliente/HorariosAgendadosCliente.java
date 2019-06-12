@@ -73,7 +73,7 @@ public class HorariosAgendadosCliente extends AppCompatActivity implements Navig
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
 
-        actionBar.setTitle("Agenda");
+        actionBar.setTitle("Horarios Agendados");
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_agenda);

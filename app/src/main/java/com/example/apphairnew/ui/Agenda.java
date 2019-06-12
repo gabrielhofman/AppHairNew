@@ -92,9 +92,15 @@ public class Agenda extends AppCompatActivity implements View.OnClickListener, N
 
 
 
+        Calendar cal = Calendar.getInstance();
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
 
+        month = month + 1;
+        String data = (month + "-" + day + "-" + year);
 
-
+        BuscarAgenda(data);
 
 
         botaoOfertada = (Button) findViewById(R.id.botao_ofertadas);
