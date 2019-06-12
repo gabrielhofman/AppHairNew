@@ -1,5 +1,6 @@
 package com.example.apphairnew.ui.cliente;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +13,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.MenuItem;
@@ -22,15 +24,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apphairnew.Adapter.AdapterGaleria;
 import com.example.apphairnew.R;
+import com.example.apphairnew.Service.ApiService;
 import com.example.apphairnew.model.ProfModel;
 import com.example.apphairnew.model.UsuarioModel;
+import com.example.apphairnew.response.GetGaleriaProfResponse;
 import com.example.apphairnew.response.GetProfResponse;
+import com.example.apphairnew.response.LoginResponse;
 import com.example.apphairnew.ui.GaleriaProf;
 import com.example.apphairnew.ui.Login;
+import com.example.apphairnew.web.ApiControler;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DetalheProfCliente extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener{
 
@@ -44,6 +55,13 @@ public class DetalheProfCliente extends AppCompatActivity implements View.OnClic
     private TextView labelLogradouroCliente;
     private TextView labelNumeroCliente;
     private TextView labelComplementoCliente;
+    private Context context;
+
+    private RecyclerView recyclerView;
+    private AdapterGaleria adapterGaleria;
+    private LinearLayoutManager linearLayoutManager;
+
+    public List<GetGaleriaProfResponse> teste2 = new ArrayList<>();
 
     private ImageView fotoProfissional;
     private String bmFotoProfissional;
@@ -53,7 +71,7 @@ public class DetalheProfCliente extends AppCompatActivity implements View.OnClic
     private Button botaoFotosProfCliente;
     private Button botaoMarcarHorarioCliente;
 
-    private LinearLayoutManager linearLayoutManager;
+
     public List<GetProfResponse> teste = new ArrayList<>();
 
 
@@ -65,6 +83,7 @@ public class DetalheProfCliente extends AppCompatActivity implements View.OnClic
     private ProfModel profModel;
 
     private GetProfResponse profissional;
+    private ApiService service = ApiControler.CreateController();
 
 
 
@@ -99,9 +118,10 @@ public class DetalheProfCliente extends AppCompatActivity implements View.OnClic
         labelComplementoCliente = (TextView) findViewById(R.id.labelComplementoProfDetCliente);
         fotoProfissional = (ImageView) findViewById(R.id.fotoProfDetCliente);
 
-        Button botaoFotosProfCliente = (Button) findViewById(R.id.botaoAbrirFotoGaleiraProfDetCliente);
-        this.botaoFotosProfCliente = botaoFotosProfCliente;
-        botaoFotosProfCliente.setOnClickListener(this);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+
+
 
         Button botaoMarcarHorarioCliente = (Button) findViewById(R.id.botaoMarcarHrProfDetCliente);
         this.botaoMarcarHorarioCliente = botaoMarcarHorarioCliente;
@@ -136,16 +156,47 @@ public class DetalheProfCliente extends AppCompatActivity implements View.OnClic
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         fotoProfissional.setImageBitmap(decodedByte);
 
+        CarregarTela();
+        this.context = getApplicationContext();
+
 
     }
+
+    public void GerarTela()
+    {
+
+        adapterGaleria = new AdapterGaleria(teste2,this);
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setAdapter(adapterGaleria);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        // adapterGaleria.setItemClicado(this);
+    }
+
+    public void CarregarTela() {
+
+        service.getGaleriaProf(1).enqueue(new Callback<List<GetGaleriaProfResponse>>() {
+                @Override
+                public void onResponse(Call<List<GetGaleriaProfResponse>> call, Response<List<GetGaleriaProfResponse>> response) {
+                    teste2 = response.body();
+
+                    GerarTela();
+                }
+
+                @Override
+                public void onFailure(Call<List<GetGaleriaProfResponse>> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Houve um erro:" + t.getMessage(), Toast.LENGTH_LONG).show();
+                    t.printStackTrace();
+                }
+            });
+
+        }
+
 
     @Override
     public void onClick(View v) {
 
-        if(v== botaoFotosProfCliente){
-            Intent addGaleria = new Intent(this, GaleriaProf.class);
-            startActivity(addGaleria);
-        }
+
 
         if(v == botaoMarcarHorarioCliente)
         {
